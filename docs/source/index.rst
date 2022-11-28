@@ -10,5 +10,5 @@ News
 
 .. toctree::
 
-   usage
+   KalliopePBX v4
    api
