@@ -13,5 +13,3 @@ News
    KalliopePBX v4
    api
    
-.. image:: images/get_started_sphinx.png
-   :width: 600
