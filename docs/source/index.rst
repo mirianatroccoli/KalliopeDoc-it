@@ -4,7 +4,7 @@ La documentazione tecnica è dedicata agli utenti ed ai partner Kalliope.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
    
    numeric
