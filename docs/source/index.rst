@@ -19,8 +19,30 @@ KalliopePBX v4
 Getting Started
 -----------
 
+Manuale di Amministrazione
+-----------
+
+Manuale Utente
+-----------
+
+Getting Started
+-----------
+
+
+Aggiornamenti Firmware
+Changelog e Release Notes
+==========
+
+
+
 
 Applicazioni Kalliope
 ==========
 
    
+Prodotti complementari
+==========
+
+   
+Kalliope Nexus
+==========
