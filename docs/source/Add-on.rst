@@ -1,4 +1,4 @@
-Usage
+Add-on
 =====
 
 .. _installation:
