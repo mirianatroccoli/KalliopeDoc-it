@@ -2,14 +2,16 @@ Benvenuti nella documentazione tecnica Kalliope
 ==========================
 La documentazione tecnica è dedicata agli utenti ed ai partner Kalliope.
 
+Contents
+--------
 
 .. toctree::
-   :maxdepth: 3
-   :caption: Contents:
-   
-   numeric
-   network
-   in_out
+
+   News <self>
+   KalliopePBX v4
+   Manuali
+   Add-on
+
    
 News
 ==========
