@@ -275,8 +275,7 @@ Ricezione FAX
 
    Vediamo di seguito un esempio in caso di ricezione della notifica email di un FAX inviato dal numero 0501234567.
 
-   .. prompt:: bash $
-
+   
     Oggetto: [KPBX40299999] FAX ricevuto correttamente da 050123456
     
 dove 0501234567 è il numero da cui proviene il FAX.
