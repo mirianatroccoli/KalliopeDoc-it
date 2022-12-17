@@ -17,9 +17,23 @@ Configurazione del servizio
 Per la configurazione del servizio è necessario definire le impostazioni generali in termini di contemporaneità di utilizzo e archiviazione dei file ricevuti / inviati (inclusi report). Questa configurazione viene effettuata nel pannello FAX → Impostazioni FAX.
 
 Impostazioni FAX
-Nel pannello di modifica impostazioni FAX è possibile impostare le configurazioni comuni a tutte le istanze FAX presenti nel sistema.
+   Nel pannello di modifica impostazioni FAX è possibile impostare le configurazioni comuni a tutte le istanze FAX presenti nel sistema.
+   
+   +-----------------------------+-------------------------------------------------------+-------------------------+
+   | Parametro                   | Descrizione                                           | Tipo valore             |
+   +=============================+=======================================================+=========================+
+   | Impostazioni account                                                                                          |
+   +-----------------------------+-------------------------------------------------------+-------------------------+
+   | Contemporaneità in ingresso | Numero massimo consentito di FAX in ingresso nel PBX  | Numerico (0 = infinito) |
+   +-----------------------------+-------------------------------------------------------+-------------------------+
 
-
++------+---------------+---------------+
+| Item | Character     | Prova         |
++======+===============+===============+
+| 1    | Prova         | Prova         |
++------+---------------+---------------+
+| 2    | Prova         | Prova         |
++------+---------------+---------------+
 
 
 To use Lumache, first install it using pip:
