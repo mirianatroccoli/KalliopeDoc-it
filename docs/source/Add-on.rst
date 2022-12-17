@@ -267,7 +267,6 @@ Invio MAIL2FAX
    Se l’invio va a buon fine, nel pannello Registro Fax sarà visibile l’esito della transizione ed una mail di ricevuta verrà inviata al mittente.
 
 Ricezione FAX
-
    Ogni utente a cui è stato assegnato il permesso di ricezione su una istanza FAX riceverà la notifica di ricezione del fax con il documento in allegato.
    La ricezione avviene con una email che ha come allegato il file pdf del fax ricevuto e come oggetto una stringa formattata nel seguente formato:
    **Oggetto: [SERIAL NUMBER] FAX ricevuto correttamente da 0XXXXXXXX**
