@@ -260,12 +260,11 @@ Invio MAIL2FAX
    E’ ora possibile inviare da una casella di posta, la mail con il fax allegato. La mail deve avere:
       - nel campo OGGETTO il numero di telefono a cui inviare il fax. E’ possibile anche inserire l’istanza a cui inviare il Fax compilando l’oggetto con
    NumeroTelefono@istanza
-      - nel campo DESTINATARIO l'indirizzo della casella mail2fax; la linea fax utilizzata per l'invio è (salvo che sia specificata esplicitamente nel campo OGGETTO) la
-   prima a cui la casella mail2FAX è associata
+      - nel campo DESTINATARIO l'indirizzo della casella mail2fax; la linea fax utilizzata per l'invio è (salvo che sia specificata esplicitamente nel campo OGGETTO)           la prima a cui la casella mail2FAX è associata
       - nel CORPO della mail eventuale PIN associato all'istanza FAX, se si è scelta questa modalità di autenticazione
             - Il corpo della mail (in formato solo testo) deve contenere la sola stringa "FAXPIN:12345" (dove 12345 è il PIN assegnato in questo esempio)
       - come ALLEGATO il file del fax (supportati i formati pdf, doc, docx, odt)
-     Se l’invio va a buon fine, nel pannello Registro Fax sarà visibile l’esito della transizione ed una mail di ricevuta verrà inviata al mittente.
+   Se l’invio va a buon fine, nel pannello Registro Fax sarà visibile l’esito della transizione ed una mail di ricevuta verrà inviata al mittente.
 
 
 
