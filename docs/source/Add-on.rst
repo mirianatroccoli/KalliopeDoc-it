@@ -46,21 +46,7 @@ Impostazioni FAX
 Istanze FAX
    Successivamente è necessario configurare la specifica istanza FAX nel pannello FAX → Istanze FAX. Nel pannello Istanza FAX sono definiti gli attributi associati ad    un’entità FAX. Un’istanza FAX deve corrispondere ad una selezione del piano di numerazione (come un interno), deve avere un nome e impegnare un canale di una          licenza Kalliope FAX Module.
    *jpg*
-
-+-----------------------------+----------------------------------------------------------------------------------------+-------------------------------------------+
-| Parametro                   | Descrizione                                                                            | Tipo valore                               |  +=============================+========================================================================================+===========================================+
-| Abilitato                                                                                                            | Checkbox                                  |
-+-----------------------------+----------------------------------------------------------------------------------------+-------------------------------------------+
-| Selezione                   | Selezione del piano di numerazione corrispondente all’istanza FAX                      | Numerico                                  |
-+-----------------------------+----------------------------------------------------------------------------------------+-------------------------------------------+
-| Nome                        | Nome dell’istanza                                                                      | Alfanumerico                              |
-+-----------------------------+----------------------------------------------------------------------------------------+-------------------------------------------+
-| Utenti abilitati (lista)                                                                                                                                         |
-+-----------------------------+----------------------------------------------------------------------------------------+-------------------------------------------+
-| Utente                      | Utente a cui assegnare un permesso                                                     | Dropdown                                  | 
-+-----------------------------+----------------------------------------------------------------------------------------+-------------------------------------------+
-| Permesso                    | Permesso da assegnare all’utente                                                       | Solo ricezione / Solo invio / Invio e ricezione | 
-+-----------------------------+----------------------------------------------------------------------------------------+-------------------------------------------+
+---------------------------+----------------------------------------------------------------------------------------+-------------------------------------------+
 
 
 .. list-table::  
@@ -69,10 +55,10 @@ Istanze FAX
 
    * - Parametro
      - Descrizione
-     - Valore
+     - Tipo valore
    * - Abilitato
      -
      - Checkbox
-   * - Row 2, column 1
-     - Row 2, column 2
-     - Row 2, column 3
+   * - Selezione
+     - Selezione del piano di numerazione corrispondente all’istanza FAX
+     - Numerico
