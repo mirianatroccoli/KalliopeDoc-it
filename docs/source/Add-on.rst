@@ -45,9 +45,8 @@ Impostazioni FAX
 
 Istanze FAX
    Successivamente è necessario configurare la specifica istanza FAX nel pannello FAX → Istanze FAX. Nel pannello Istanza FAX sono definiti gli attributi associati ad    un’entità FAX. Un’istanza FAX deve corrispondere ad una selezione del piano di numerazione (come un interno), deve avere un nome e impegnare un canale di una          licenza Kalliope FAX Module.
+   
    *jpg*
----------------------------+----------------------------------------------------------------------------------------+-------------------------------------------+
-
 
 .. list-table::  
    :widths: 25 25 50
@@ -158,3 +157,93 @@ Istanze FAX
    * - Archiviazione separata ingresso/uscita
      - Se e come archiviare separatamente i documenti in ingresso e in uscita
      - Prima del prefisso / Dopo il suffisso                         
+
+**Nota**: Ricordarsi sempre di selezionare la Classe di instradamento in uscita.
+
+
+Mail2Fax
+   Se si vuole configurare anche il servizio MAIL2FAX è necessario selezionare dal pannello FAX → Istanze FAX, lista delle caselle Mail2Fax e aggiungere una nuova        casella Mail2Fax.
+   
+   *jpg*
+   
+   
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Descrizione
+     - Tipo valore
+   * - Abilitato
+     - Abilitazione della casella Mail2FAX
+     - Checkbox
+   * - Nome
+     - Nome della casella Mail2FAX
+     - Alfanumerico  
+   * - Indirizzo email
+     - Indirizzo email associato alla casella
+     - Alfanumerico  
+   * - **Importazioni casella**
+     - 
+     - 
+   * - Protocollo
+     - Protocollo della casella di posta
+     - Dropdown
+   * - Abilita SSL
+     - Abilitazione SSL	
+     - Checkbox  
+   * - Indirizzo del Server
+     - Indirizzo del server di posta della casella mail
+     - Alfanumerico  
+   * - Porta del Server
+     - Numero della porta del server di posta
+     - Numerico
+   * - Timeout
+     - 	
+     - Numerico  
+   * - Nome Utente
+     - Indirizzo mail dell'utente
+     - Alfanumerico  
+   * - Password
+     - 	Password associata all'indirizzo mail dell'utente
+     - Alfanumerico   
+   * - **Chiave PGP Privata**
+     -
+     -
+   * Da inserire solo nel caso di invio FAX con crittografia
+     -
+     -
+     
+Salvare le impostazioni e Applicare le modifiche.
+
+Registro FAX
+
+   Ogni utente a cui è stato assegnato il permesso di invio / ricezione su una istanza FAX visualizza il pannello FAX -> Registro FAX
+
+   In questo registro è possibile:
+
+   - visualizzare lo stato di avanzamento di tutti i fax ricevuti e scaricare il documento ricevuto.
+   - visualizzare lo stato di avanzamento di tutti i fax inviati e scaricare il documento inviato e il report di invio
+   
+   *jpg*
+
+Invio FAX
+   *jpg*
+   
+   Ogni utente a cui è stato assegnato il permesso di invio su una o più istanze FAX visualizza sul proprio portale utente il pannello FAX -> Invia FAX
+
+   Accedendo a questo pannello è possibile impostare le opzioni di invio del FAX:
+
+   - la linea di origine (corrispondente all’istanza creata)
+   - l’orario di invio qualora volessimo programmarlo, altrimenti l’invio sarà istantaneo
+   - il destinatario
+   - file da inviare (supportati i formati **pdf, doc, docx, odt**)
+
+   Selezionando Invia il fax viene inviato.
+
+   Per ogni fax inviato riceverà l’email di notifica dell’esito dell’invio del fax con il report di invio allegato.
+
+
+   
+
+     
