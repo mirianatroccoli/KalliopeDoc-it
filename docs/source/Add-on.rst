@@ -247,7 +247,6 @@ Invio FAX
 
 
 Invio MAIL2FAX
-
    E’ necessario associare ad una istanza FAX la casella Mail2Fax. Nel pannello di modifica dell’istanza Fax, quindi selezionare in Impostazioni Mail2Fax:  
    - **Casella Mail2FAX**: nome della casella creata in precedenza
    - **Metodo di autenticazione**:
@@ -256,11 +255,7 @@ Invio MAIL2FAX
       - Firma PGP: l'identità del mittente della mail è autenticata tramite chiave PGP
    - **Richiedi cifratura messaggi**: è richiesto che l'allegato alla mail sia cifrato mediante la chiave PGP del mittente; è necessario in questo caso caricare le        chiavi pubbliche PGP nelle impostazioni di ciascun utente autorizzato all'uso del servizio.
   
-  L'invio FAX tramite il servizio mail2fax richiede che, affinché il mittente venga riconosciuto ed il fax non scartato dal sistema, la mail mittente sia quella di
-  uno degli utenti abilitati all'uso del servizio (NOTA: il controllo della e-mail del mittente è case-sensitive, come quello della casella mail utilizzata per
-  raccogliere le mai lcon la richiesta di invio FAX) Quindi dal pannello Utenti e Ruoli, inserire per l’utente che gestisce l’istanza fax, l’indirizzo mail da cui
-  vengono inviate la mailFax. Selezionare modifica utente e inserire la mail nel campo apposito. E’ importante che che lo stesso indirizzo mail non sia presente per
-  più utenti (anche appartenenti a tenant diversi) per evitare che la mail non venga correttamente inviata e/o ricevuta.
+   L'invio FAX tramite il servizio mail2fax richiede che, affinché il mittente venga riconosciuto ed il fax non scartato dal sistema, la mail mittente sia quella di      uno degli utenti abilitati all'uso del servizio (NOTA: il controllo della e-mail del mittente è case-sensitive, come quello della casella mail utilizzata per          raccogliere le mai lcon la richiesta di invio FAX) Quindi dal pannello Utenti e Ruoli, inserire per l’utente che gestisce l’istanza fax, l’indirizzo mail da cui        vengono inviate la mailFax. Selezionare modifica utente e inserire la mail nel campo apposito. E’ importante che che lo stesso indirizzo mail non sia presente per      più utenti (anche appartenenti a tenant diversi) per evitare che la mail non venga correttamente inviata e/o ricevuta.
 
    E’ ora possibile inviare da una casella di posta, la mail con il fax allegato. La mail deve avere:
    - nel campo OGGETTO il numero di telefono a cui inviare il fax. E’ possibile anche inserire l’istanza a cui inviare il Fax compilando l’oggetto con
