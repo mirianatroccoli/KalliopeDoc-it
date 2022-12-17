@@ -245,7 +245,6 @@ Invio FAX
 
 Invio MAIL2FAX
    E’ necessario associare ad una istanza FAX la casella Mail2Fax. Nel pannello di modifica dell’istanza Fax, quindi selezionare in Impostazioni Mail2Fax:
-
    - **Casella Mail2FAX**: nome della casella creata in precedenza
    - **Metodo di autenticazione**:
       - Nessuno: il fax viene inviato e ricevuto solo controllando l'indirizzo mail del mittente
