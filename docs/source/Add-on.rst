@@ -282,10 +282,10 @@ dove 0501234567 è il numero da cui proviene il FAX.
 Inoltre riportiamo un esempio del corpo dell'email (contenente altre informazioni):
 
 .. prompt:: bash $
-Ricevuto FAX da 0501234567
-Data ed ora di ricezione: 12/03/2020 11:51:38
-Durata trasmissione: 34 secondi
-Num. pagine: 1 
+   Ricevuto FAX da 0501234567
+   Data ed ora di ricezione: 12/03/2020 11:51:38
+   Durata trasmissione: 34 secondi
+   Num. pagine: 1 
 
 
 Inoltre il file pdf allegato all'email ha il seguente pattern di naming:
