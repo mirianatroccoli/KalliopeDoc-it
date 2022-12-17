@@ -44,7 +44,9 @@ Impostazioni FAX
    +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
 
 Istanze FAX
-   Successivamente è necessario configurare la specifica istanza FAX nel pannello FAX → Istanze FAX. Nel pannello Istanza FAX sono definiti gli attributi associati ad    un’entità FAX. Un’istanza FAX deve corrispondere ad una selezione del piano di numerazione (come un interno), deve avere un nome e impegnare un canale di una          licenza Kalliope FAX Module.
+   Successivamente è necessario configurare la specifica istanza FAX nel pannello FAX → Istanze FAX. Nel pannello Istanza FAX sono definiti gli attributi associati ad
+   un’entità FAX. Un’istanza FAX deve corrispondere ad una selezione del piano di numerazione (come un interno), deve avere un nome e impegnare un canale di una
+   licenza Kalliope FAX Module.
    
    *jpg*
 
@@ -162,7 +164,8 @@ Istanze FAX
 
 
 Mail2Fax
-   Se si vuole configurare anche il servizio MAIL2FAX è necessario selezionare dal pannello FAX → Istanze FAX, lista delle caselle Mail2Fax e aggiungere una nuova        casella Mail2Fax.
+   Se si vuole configurare anche il servizio MAIL2FAX è necessario selezionare dal pannello FAX → Istanze FAX, lista delle caselle Mail2Fax e aggiungere una nuova
+   casella Mail2Fax.
    
    *jpg*
    
@@ -245,8 +248,7 @@ Invio FAX
 
 Invio MAIL2FAX
 
-   E’ necessario associare ad una istanza FAX la casella Mail2Fax. Nel pannello di modifica dell’istanza Fax, quindi selezionare in Impostazioni Mail2Fax:
-   
+   E’ necessario associare ad una istanza FAX la casella Mail2Fax. Nel pannello di modifica dell’istanza Fax, quindi selezionare in Impostazioni Mail2Fax:  
    - **Casella Mail2FAX**: nome della casella creata in precedenza
    - **Metodo di autenticazione**:
       - Nessuno: il fax viene inviato e ricevuto solo controllando l'indirizzo mail del mittente
@@ -254,11 +256,17 @@ Invio MAIL2FAX
       - Firma PGP: l'identità del mittente della mail è autenticata tramite chiave PGP
    - **Richiedi cifratura messaggi**: è richiesto che l'allegato alla mail sia cifrato mediante la chiave PGP del mittente; è necessario in questo caso caricare le          chiavi pubbliche PGP nelle impostazioni di ciascun utente autorizzato all'uso del servizio.
   
-  L'invio FAX tramite il servizio mail2fax richiede che, affinché il mittente venga riconosciuto ed il fax non scartato dal sistema, la mail mittente sia quella di uno   degli utenti abilitati all'uso del servizio (NOTA: il controllo della e-mail del mittente è case-sensitive, come quello della casella mail utilizzata per               raccogliere le mai lcon la richiesta di invio FAX) Quindi dal pannello Utenti e Ruoli, inserire per l’utente che gestisce l’istanza fax, l’indirizzo mail da cui       vengono inviate la mailFax. Selezionare modifica utente e inserire la mail nel campo apposito. E’ importante che che lo stesso indirizzo mail non sia presente per     più utenti (anche appartenenti a tenant diversi) per evitare che la mail non venga correttamente inviata e/o ricevuta.
+     L'invio FAX tramite il servizio mail2fax richiede che, affinché il mittente venga riconosciuto ed il fax non scartato dal sistema, la mail mittente sia quella di
+     uno degli utenti abilitati all'uso del servizio (NOTA: il controllo della e-mail del mittente è case-sensitive, come quello della casella mail utilizzata per
+     raccogliere le mai lcon la richiesta di invio FAX) Quindi dal pannello Utenti e Ruoli, inserire per l’utente che gestisce l’istanza fax, l’indirizzo mail da cui
+     vengono inviate la mailFax. Selezionare modifica utente e inserire la mail nel campo apposito. E’ importante che che lo stesso indirizzo mail non sia presente per
+     più utenti (anche appartenenti a tenant diversi) per evitare che la mail non venga correttamente inviata e/o ricevuta.
 
    E’ ora possibile inviare da una casella di posta, la mail con il fax allegato. La mail deve avere:
-   - nel campo OGGETTO il numero di telefono a cui inviare il fax. E’ possibile anche inserire l’istanza a cui inviare il Fax compilando l’oggetto con                      NumeroTelefono@istanza
-   - nel campo DESTINATARIO l'indirizzo della casella mail2fax; la linea fax utilizzata per l'invio è (salvo che sia specificata esplicitamente nel campo OGGETTO) la        prima a cui la casella mail2FAX è associata
+   - nel campo OGGETTO il numero di telefono a cui inviare il fax. E’ possibile anche inserire l’istanza a cui inviare il Fax compilando l’oggetto con
+   NumeroTelefono@istanza
+   - nel campo DESTINATARIO l'indirizzo della casella mail2fax; la linea fax utilizzata per l'invio è (salvo che sia specificata esplicitamente nel campo OGGETTO) la
+   prima a cui la casella mail2FAX è associata
    - nel CORPO della mail eventuale PIN associato all'istanza FAX, se si è scelta questa modalità di autenticazione
       - Il corpo della mail (in formato solo testo) deve contenere la sola stringa "FAXPIN:12345" (dove 12345 è il PIN assegnato in questo esempio)
    - come ALLEGATO il file del fax (supportati i formati pdf, doc, docx, odt)
