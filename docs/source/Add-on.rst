@@ -283,7 +283,6 @@ Inoltre riportiamo un esempio del corpo dell'email (contenente altre informazion
 
 .. prompt:: bash $
 Ricevuto FAX da 0501234567
-
 Data ed ora di ricezione: 12/03/2020 11:51:38
 Durata trasmissione: 34 secondi
 Num. pagine: 1 
