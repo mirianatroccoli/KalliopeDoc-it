@@ -254,8 +254,7 @@ Invio MAIL2FAX
       - Nessuno: il fax viene inviato e ricevuto solo controllando l'indirizzo mail del mittente
       - PIN: la richiesta di invio FAX è autenticata anche mediante un pin che deve essere inserito nel testo della mail.
       - Firma PGP: l'identità del mittente della mail è autenticata tramite chiave PGP
-   - **Richiedi cifratura messaggi**: è richiesto che l'allegato alla mail sia cifrato mediante la chiave PGP del mittente; è necessario in questo caso caricare le
-   chiavi pubbliche PGP nelle impostazioni di ciascun utente autorizzato all'uso del servizio.
+   - **Richiedi cifratura messaggi**: è richiesto che l'allegato alla mail sia cifrato mediante la chiave PGP del mittente; è necessario in questo caso caricare le        chiavi pubbliche PGP nelle impostazioni di ciascun utente autorizzato all'uso del servizio.
   
   L'invio FAX tramite il servizio mail2fax richiede che, affinché il mittente venga riconosciuto ed il fax non scartato dal sistema, la mail mittente sia quella di
   uno degli utenti abilitati all'uso del servizio (NOTA: il controllo della e-mail del mittente è case-sensitive, come quello della casella mail utilizzata per
