@@ -19,6 +19,8 @@ Per la configurazione del servizio è necessario definire le impostazioni genera
 Impostazioni FAX
    Nel pannello di modifica impostazioni FAX è possibile impostare le configurazioni comuni a tutte le istanze FAX presenti nel sistema.
    
+   *jpg*
+   
    +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
    | Parametro                   | Descrizione                                                                              | Tipo valore             |
    +=============================+==========================================================================================+=========================+
@@ -40,14 +42,36 @@ Impostazioni FAX
    +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
    | Cifratura                   | Algoritmo di cifratura da utilizzare per gli asset salvati su percorso di archiviazione  | Nessuna / Builtin       |   
    +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
-+------+---------------+---------------+
-| Item | Character     | Prova         |
-+======+===============+===============+
-| 1    | Prova         | Prova         |
-+------+---------------+---------------+
-| 2    | Prova         | Prova         |
-+------+---------------+---------------+
 
+Istanze FAX
+   Successivamente è necessario configurare la specifica istanza FAX nel pannello FAX → Istanze FAX. Nel pannello Istanza FAX sono definiti gli attributi associati ad    un’entità FAX. Un’istanza FAX deve corrispondere ad una selezione del piano di numerazione (come un interno), deve avere un nome e impegnare un canale di una          licenza Kalliope FAX Module.
+   *jpg*
+      
+   +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
+   | Parametro                   | Descrizione                                                                              | Tipo valore             |
+   +=============================+==========================================================================================+=========================+
+   | Abilitato                                                                                                              | Checkbox                |
+   +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
+   | Selezione                   | Selezione del piano di numerazione corrispondente all’istanza FAX                        | Numerico                |
+   +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
+   | Nome                        | Nome dell’istanza                                                                        | Alfanumerico            |
+   +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
+   | Utenti abilitati (lista)                                                                                                                         |
+   +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
+   | Utente                      | Utente a cui assegnare un permesso                                                       | Dropdown                |   
+   +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
+   | Permesso                    | Permesso da assegnare all’utente                                                         | Solo ricezione / Solo invio / Invio e ricezione |   
+   +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
+   | Storage remoto              | Nome dello storage                                                                       | Dropdown                |   
+   +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
+   | Cifratura                   | Algoritmo di cifratura da utilizzare per gli asset salvati su percorso di archiviazione  | Nessuna / Builtin       |   
+   +-----------------------------+------------------------------------------------------------------------------------------+-------------------------+
+
+   
+   
+   
+   
+   
 
 To use Lumache, first install it using pip:
 
