@@ -62,3 +62,22 @@ Istanze FAX
    * - Selezione
      - Selezione del piano di numerazione corrispondente all’istanza FAX
      - Numerico
+   * - Nome
+     - Nome dell’istanza
+     - Alfanumerico
+   * - Utenti abilitati (lista)
+     -  
+     -  
+   * - Utente
+     - Utente a cui assegnare un permesso
+     - Dropdown 
+   * - Permesso
+     - Permesso da assegnare all’utente
+     - Solo ricezione / Solo invio / Invio e ricezione
+   * - Template
+     -  
+     -  
+   * - Template istanza FAX
+     - Template da utilizzare per la configurazione dell’istanza
+     - Dropdown
+
