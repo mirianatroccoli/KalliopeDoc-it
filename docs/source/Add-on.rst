@@ -417,3 +417,47 @@ Lista Storico Prenotazioni
 Documentazione addebiti (Servizio Billing)
    Il servizio di Documentazione Addebiti presente su KalliopePBX (attualmente disponibile come componente inclusa nella licenza del Modulo Hotel), permette il calcolo dei costi delle chiamate effettuate da ogni interno associato ad una camera, tramite la definizione di un profilo di costo differenziabile in base alla destinazione (con un certo prefisso, numeri esatti, tutti gli altri numeri) ed alla linea di uscita utilizzata. Per maggiori informazioni clicca qui
 
+Kalliope LAM
+-------------
+
+Descrizione del servizio
++++++++++++
+Il modulo Kalliope LAM (Look At Me) è un add-on di KalliopePBX, attivabile tramite apposita licenza, che offre un set di funzioni specifiche per favorire la continuità operativa di un’azienda, indipendentemente dalla posizione in cui si trovino i propri dipendenti e clienti. KalliopeLAM permette infatti di organizzare delle riunioni virtuali proprio come avverrebbe in sale riunioni fisiche. Basata su motore open-source e completamente in cloud, è una piattaforma web based (click and go); i partecipanti alle riunioni accedono al meeting tramite il proprio browser web, semplicemente cliccando sul link contenuto nell’email di invito. Disponibile anche la versione app mobile per i sistemi operativi Android e iOS scaricabile gratuitamente da Google Play e App Store. Per maggiori informazioni sull'app mobile KLAM (clicca qui).
+
+Configurazione del Servizio
+++++++++++++
+La gestione della piattaforma KalliopeLAM da parte degli utenti, ad esempio per la creazione eventi o l’assegnazione dei permessi, è completamente integrata nell’interfaccia web del PBX.La soluzione KalliopeLAM non è licenziata per utenti ma per stanze, ciascuna licenza abilita una stanza di videoconference, una vera e propria sala riunioni virtuale per la quale sarà possibile:
+
+- Assegnare un nome alla stanza
+- Definire le ownership della stanza: ovvero assegnarne l’uso ad uno o più utenti. Non ci sono limiti al numero di amministratori per stanza, basta che siano interni del PBX. L’utente che ha i permessi di gestione dell’intero servizio KalliopeLAM, ha la panoramica completa delle sale riunioni virtuali; può scegliere una stanza.
+
+*jpg*
+
+L’utente può:
+
+- Accedere al calendario di "pianificazioni riunioni" di una determinata stanza e scegliere tra organizzare una riunione.
+*jpg*
+
+- Creare una nuova riunione inserendo i seguenti campi: nome della riunione, orario, password di accesso (opzionale), elenco dei partecipanti.
+*jpg*
+
+- Spedire gli inviti e i calendar a tutti i partecipanti dei una riunione cliccando sul pulsante “Salva e invia”.
+
+Principali funzionalità
+   - Videoconference web.
+   - Protezione della riunione con password.
+   - Waiting-room.
+   - Desktop sharing
+   - Chat
+   - Alzata di mano
+   - Statistiche interlocutore
+   - Condivisione video YouTube
+   
+Protezione della privacy delle tue riunioni
+   Sono stati implementati diversi meccanismi per garantire la privacy e la protezione tue riunioni sulla piattaforma KalliopeLAM.
+
+- Nuove istanze di videoconference per ciascuna nuova riunione: Le diverse istanze saranno valide solo nel periodo indicato per la prenotazione, inizio e fine della riunione. Tali istanze (rappresentate nell’URL di condivisione della riunione) sono composte da 42 caratteri alfanumerici e nel caso di un invito come moderatore, sarà presente in coda all’URL un ulteriore token di 493 caratteri.
+- Waiting room abilitata di default: Il moderatore viene avvisato del fatto che ci sia un guest che ha fatto richiesta di entrare e può decidere di accettarlo o meno. La waiting room è disabilitabile dal moderatore riunione per riunione.
+- Definizione di una password di protezione per l’accesso alla riunione : La password può essere definita in due diversi momenti: o in fase di programmazione della riunione e durante lo svolgimento della riunione stessa.
+- Se il moderatore esce dalla riunione i guest vengono disconnessi
+- Il moderatore può eleggere a “moderatore” altri utenti
