@@ -303,7 +303,7 @@ Inoltre è possibile visualizzare lo stato di avanzamento di tutti i fax ricevut
 
 
 Kalliope Hotel
------------------
+--------------
 
 Descrizione del servizio
 ++++++++++++++
@@ -317,8 +317,8 @@ Il modulo Kalliope Hotel è un add-on di KalliopePBX, attivabile tramite apposit
 - **Servizio “pulizia camera”**: questo servizio permette di marcare la stanza come pulita/sporca e di commutarne lo stato sia dal pannello Receptionist della GUI, che telefonicamente tramite un codice di servizio dalla persona che effettua la pulizia della camera. Lo stato di pulizia di tutte le camere occupate viene automaticamente impostato al valore “sporca” durante la notte, per poi poter essere riportato a “pulita” in modo manuale.
 
 
- Configurazione del servizio
- +++++++++++++
+Configurazione del servizio
++++++++++++++
  
 Il Modulo Hotel viene configurato nel pannello “Modulo Hotel” “Configurazione”. La visibilità del pannello e dei relativi tab è condizionata all’attivazione della Licenza. Il pannello di configurazione prevede quattro tab:
 
@@ -328,7 +328,6 @@ Il Modulo Hotel viene configurato nel pannello “Modulo Hotel” “Configurazi
 - Impostazioni globali
 
 Impostazioni globali
-
    In questo pannello è possibile impostare il prefisso della selezione numerica da eseguire per impostare telefonicamente una stanza a pulita/sporca. Dall’interno di    ciascuna camera è possibile quindi effettuare una chiamata a tale prefisso seguito dal numero 0 per marcare la stanza come pulita o dal numero 1 per marcare la        stanza come sporca. Ad esempio nel caso di configurare come prefisso il codice *33, per marcare la stanza pulita è sufficiente chiamare la selezione *330 dal          telefono della camera. All’abilitazione del servizio, nel piano di numerazione verrà esposta in modalità sola lettura la relativa selezione. L’altra opzione            presente permette di abilitare o disabilitare il blocco delle chiamate dirette tra camere. Con il blocco attivo, non sarà possibile effettuare chiamate da una          camera all’altra in modo diretto; le camere potranno comunque chiamare gli altri interni della centrale (o essere chiamate da questi) o altre selezioni del            piano di numerazione.
  
  
