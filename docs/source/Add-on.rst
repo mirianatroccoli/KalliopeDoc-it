@@ -318,7 +318,20 @@ Il modulo Kalliope Hotel è un add-on di KalliopePBX, attivabile tramite apposit
 
 
  Configurazione del servizio
- +++++++++++++++++
+ +++++++++++++
+ 
+Il Modulo Hotel viene configurato nel pannello “Modulo Hotel” “Configurazione”. La visibilità del pannello e dei relativi tab è condizionata all’attivazione della Licenza. Il pannello di configurazione prevede quattro tab:
+
+- Lista Camere
+- Lista Template delle Camere
+- Valori predefiniti dei template delle camere
+- Impostazioni globali
+
+Impostazioni globali
+
+   In questo pannello è possibile impostare il prefisso della selezione numerica da eseguire per impostare telefonicamente una stanza a pulita/sporca. Dall’interno di    ciascuna camera è possibile quindi effettuare una chiamata a tale prefisso seguito dal numero 0 per marcare la stanza come pulita o dal numero 1 per marcare la        stanza come sporca. Ad esempio nel caso di configurare come prefisso il codice *33, per marcare la stanza pulita è sufficiente chiamare la selezione *330 dal          telefono della camera. All’abilitazione del servizio, nel piano di numerazione verrà esposta in modalità sola lettura la relativa selezione. L’altra opzione            presente permette di abilitare o disabilitare il blocco delle chiamate dirette tra camere. Con il blocco attivo, non sarà possibile effettuare chiamate da una          camera all’altra in modo diretto; le camere potranno comunque chiamare gli altri interni della centrale (o essere chiamate da questi) o altre selezioni del            piano di numerazione.
+ 
+ 
  
  
     
