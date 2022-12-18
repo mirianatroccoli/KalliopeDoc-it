@@ -330,9 +330,50 @@ Il Modulo Hotel viene configurato nel pannello “Modulo Hotel” “Configurazi
 Impostazioni globali
    In questo pannello è possibile impostare il prefisso della selezione numerica da eseguire per impostare telefonicamente una stanza a pulita/sporca. Dall’interno di    ciascuna camera è possibile quindi effettuare una chiamata a tale prefisso seguito dal numero 0 per marcare la stanza come pulita o dal numero 1 per marcare la        stanza come sporca. Ad esempio nel caso di configurare come prefisso il codice *33, per marcare la stanza pulita è sufficiente chiamare la selezione *330 dal          telefono della camera. All’abilitazione del servizio, nel piano di numerazione verrà esposta in modalità sola lettura la relativa selezione. L’altra opzione            presente permette di abilitare o disabilitare il blocco delle chiamate dirette tra camere. Con il blocco attivo, non sarà possibile effettuare chiamate da una          camera all’altra in modo diretto; le camere potranno comunque chiamare gli altri interni della centrale (o essere chiamate da questi) o altre selezioni del            piano di numerazione.
  
+ *jpg*
  
+Configurazione delle camere
+   La configurazione delle camere è effettuata in modo analogo a quanto viene fatto per la configurazione degli interni standard. Anche in questo caso è previsto un      meccanismo di configurazione basato su template (o modelli) per gestire le impostazioni comuni a più camere, ed un pannello in cui specificare i valori predefiniti    che saranno utilizzati ogni volta che viene creato un nuovo template di camera. Il flusso di lavoro quindi prevede prima di configurare i valori predefiniti dei        template, quindi creare uno o più template di camere, ed infine creare le vere e proprie camere, con i relativi numeri di interno. Come per gli interni standard,      anche a quelli delle camere è possibile assegnare uno o più account SIP, da utilizzare su uno o più terminali di camera; a differenza degli interni, non esiste una    distinzione particolare per gli account SIP utilizzati negli interni delle camere, per cui prima di procedere alla creazione delle camere è possibile creare gli        account necessari tramite il consueto pannello di gestione degli account SIP, nel menù “PBX” > “Interni ed account”. Come per gli interni, al fine di agevolare la      creazione di un numero elevato di camere è possibile ricorrere alla procedura di importazione massiva mediante file XLS/CSV, utilizzando come modello il file          disponibile cliccando sul link “Importazione massiva delle camere”.
+
+*jpg*
+
+Selezionando “Aggiungi nuova camera” è possibile aggiungere una camera alla lista e configurarla. Come indicato in precedenza, la configurazione delle camere ricalca la configurazione degli interni replicando il principio di configurazione mediante modelli (o template); i parametri disponibili per la configurazione delle camere sono un sottoinsieme di quelli degli interni standard. I parametri di configurazione di una camera sono:
+
+- **Interno**: numero telefonico associato alla camera;
+- **Nome**: Il nome della camera. Non necessariamente coincidente con il numero della camera, viene riportato insieme all’interno nella dashboard del receptionist;
+- **Aggiungi account esistente/Crea account**: Consente di associare all’interno uno o più account SIP precedentemente creati, o di crearne uno in linea alla configurazione della camera;
+- **Template dell’interno**: Indica il modello contenente i parametri di default da utilizzare per la tipologia di interno prescelta. Tutti gli attributi successivamente presenti nel pannello importano i valori di default ma è possibile sovrascriverli se necessario.
+
  
- 
-    
-    
-     
+Le impostazioni successive sono ereditate dal template assegnato (modificabile dal pannello “Lista dei Template delle camere”, omologo a quello usato per i template degli interni standard) con possibilità di effettuare override per singola impostazione. In fase di creazione di un nuovo template di camera i valori di default sono inizializzati a quelli specificati nel pannello “Valori predefiniti dei template delle camere”. I parametri di configurazione della camera ereditabili da template sono:
+
+- **Mostra nella rubrica locale**: Abilita o disabilita la visualizzazione dell’interno nella rubrica degli interni;
+- **Modalità di pubblicazione LDAP**: Indica la modalità di pubblicazione dell’interno in LDAP tra le varie opzioni disponibili, in modo analogo a quanto previsto per gli interni;
+- **Ente/Reparto**: questi due attributi di configurazione sono utilizzati come parametri di filtraggio all’interno della dashboard Receptionist, nel quale vengono interpretati con l’etichetta “Edificio” e “Piano”;
+- **Classe di instradamento in uscita standard e ristretta**: come per gli interni, queste due classi determinano la tipologia (e l’instradamento) delle chiamate esterne permesse. Quando una camera si trova nello stato “libera” (quindi non occupata) viene assegnata al suo interno la classe ristretta mentre quando si trova nello stato “occupata” (e quindi è associata ad un ospite, a seguito di check-in) è possibile selezionare dal widget di gestione della camera quale delle 2 classi utilizza. In questo modo è possibile impedire le chiamate uscenti ai telefoni delle camere, anche se occupate, ed eventualmente sbloccarle su richiesta dell’ospite;
+- **Limite chiamate contemporanee e livello di occupato**: identici alle omonime impostazioni dell’interno, permettono di definire rispettivamente il numero massimo di chiamate contemporanee possibili per l’interno e il numero di chiamate in corso su un interno al raggiungimento del quale questo deve essere considerato occupato (e quindi un eventuale ulteriore tentativo di chiamata a tale interno terminerà con tale esito);
+- **Trabocchi**: come nel caso degli interni standard, indicano come deve essere gestita una chiamata destinata all’interno che termina per uno dei tre possibili esisti (non risposta, occupato, non disponibile) per ciascuna delle tre possibili origini (interna, esterna o trasferimento all’interno).
+
+
+*jpg*
+
+Servizio sveglia
+   La licenza del modulo Hotel include l’abilitazione del servizio sveglia. Prima di poter utilizzare il servizio sveglia all’interno del modulo Hotel è necessario        effettuarne una preventiva configurazione, dal pannello “Applicazioni PBX” > “Servizio sveglia”. Il servizio sveglia permette di impostare una o più sveglie per        ciascuna camera, sotto forma di data e ora. AL momento previsto KalliopePBX si occuperà di effettuare una o più chiamate verso l’interno della camera ed                opzionalmente raccogliere la conferma di ricezione da parte dell’ospite.
+
+   La configurazione generale del servizio viene effettuata nel Tab “Impostazioni servizio sveglia”; queste includono:
+
+   - L’abilitazione esplicita del servizio;
+   - L’assegnazione di un Nome (che sarà utilizzato come Display Name per le chiamate effettuate dal servizio;
+   - Il file audio da riprodurre all’ospite nel momento in cui risponde alla chiamata del servizio sveglia;
+   
+   Oltre a queste impostazioni necessarie sono presenti altri parametri con cui personalizzare le modalità di fruizione del servizio. Queste sono:
+
+   - Numero di tentativi di chiamata: è il numero massimo di chiamate che il PBX effettuerà verso l’interno per ciascuna sveglia impostata, nel caso in cui l’ospite      non dia conferma di aver risposto. Come impostazione predefinita la semplice risposta alla chiamata costituisce conferma di risposta, ma è possibile richiedere la      conferma mediante digitazione di un tasto prima o dopo la riproduzione del messaggio audio di sveglia;
+   - Timeout: è il tempo per il quale viene fatto squillare l’interno di destinazione prima di considerare il tentativo di sveglia fallito. Il sistema ripeterà la           chiamata un numero massimo di volte pari al valore impostato al punto precedente;
+   - Richiedi conferma di risposta: prima di riprodurre il messaggio audio viene chiesto di premere il tasto 1. La mancata digitazione del tasto impedisce il              proseguire della chiamata; in caso di riaggancio la sveglia viene considerata come “non confermata” ed un ulteriore tentativo di chiamata (se ve ne sono di residui)    viene eseguito dalla centrale;
+   - Richiedi conferma di ascolto: analogo al precedente, ma al termine della riproduzione del messaggio di sveglia (in questo caso viene chiesto di premere il tasto      9)
+   
+   Al termine del numero di tentativi di chiamata senza che sia data conferma (secondo le modalità configurate esposte sopra) la sveglia risulterà “non risposta” e comparirà un avviso nella dashboard del receptionist a fini informativi. Tali avvisi potranno essere riscontrati (e quindi cancellati) dal receptionist dopo che questi abbia effettuato le necessarie azioni (chiamata manuale alla stanza, ecc.). I due tab presenti nel pannello “Lista di istanze di sveglie” e “Lista di istanze svegli terminate” contengono l’elenco delle sveglie attive e di quelle terminate. Il primo pannello contiene quelle programmate nel futuro, correntemente attive oppure terminate senza conferma di ricezione; il secondo pannello contiene invece l’elenco delle sveglie completate con risposta oppure quelle non risposte ma prese in carico manualmente dal receptionist (a seguito dell’annullamento dell’avviso sul pannello receptionist). In entrambi i casi per ciascuna sveglia è possibile visualizzare l’elenco completo degli eventi relativi a ciascun tentativo di chiamata con i relativi timestamp.
+
+
+
