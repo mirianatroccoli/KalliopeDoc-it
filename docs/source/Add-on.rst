@@ -373,7 +373,47 @@ Oltre a queste impostazioni necessarie sono presenti altri parametri con cui per
 - Richiedi conferma di risposta: prima di riprodurre il messaggio audio viene chiesto di premere il tasto 1. La mancata digitazione del tasto impedisce il              proseguire della chiamata; in caso di riaggancio la sveglia viene considerata come “non confermata” ed un ulteriore tentativo di chiamata (se ve ne sono di residui)    viene eseguito dalla centrale;
 - Richiedi conferma di ascolto: analogo al precedente, ma al termine della riproduzione del messaggio di sveglia (in questo caso viene chiesto di premere il tasto      9)
    
-   Al termine del numero di tentativi di chiamata senza che sia data conferma (secondo le modalità configurate esposte sopra) la sveglia risulterà “non risposta” e comparirà un avviso nella dashboard del receptionist a fini informativi. Tali avvisi potranno essere riscontrati (e quindi cancellati) dal receptionist dopo che questi abbia effettuato le necessarie azioni (chiamata manuale alla stanza, ecc.). I due tab presenti nel pannello “Lista di istanze di sveglie” e “Lista di istanze svegli terminate” contengono l’elenco delle sveglie attive e di quelle terminate. Il primo pannello contiene quelle programmate nel futuro, correntemente attive oppure terminate senza conferma di ricezione; il secondo pannello contiene invece l’elenco delle sveglie completate con risposta oppure quelle non risposte ma prese in carico manualmente dal receptionist (a seguito dell’annullamento dell’avviso sul pannello receptionist). In entrambi i casi per ciascuna sveglia è possibile visualizzare l’elenco completo degli eventi relativi a ciascun tentativo di chiamata con i relativi timestamp.
+Al termine del numero di tentativi di chiamata senza che sia data conferma (secondo le modalità configurate esposte sopra) la sveglia risulterà “non risposta” e comparirà un avviso nella dashboard del receptionist a fini informativi. Tali avvisi potranno essere riscontrati (e quindi cancellati) dal receptionist dopo che questi abbia effettuato le necessarie azioni (chiamata manuale alla stanza, ecc.). I due tab presenti nel pannello “Lista di istanze di sveglie” e “Lista di istanze svegli terminate” contengono l’elenco delle sveglie attive e di quelle terminate. Il primo pannello contiene quelle programmate nel futuro, correntemente attive oppure terminate senza conferma di ricezione; il secondo pannello contiene invece l’elenco delle sveglie completate con risposta oppure quelle non risposte ma prese in carico manualmente dal receptionist (a seguito dell’annullamento dell’avviso sul pannello receptionist). In entrambi i casi per ciascuna sveglia è possibile visualizzare l’elenco completo degli eventi relativi a ciascun tentativo di chiamata con i relativi timestamp.
 
+Pannello Receptionist
+   Questo pannello raccoglie tutte le camere e viene utilizzato dai receptionist dell’hotel per la gestione ordinaria delle camere e dei servizi relativi. E’diviso in due parti, la colonna di destra che contiene le notifiche per le sveglie non risposte dagli ospiti, l’area principale a sinistra in cui sono visualizzate in forma di matrice tutte le camere raggruppate in base agli attributi “edificio” e “piano” di collocazione. Gli avvisi di “sveglia non risposta” compaiono automaticamente nel momento in cui terminano senza successo tutti i tentativi di chiamata associati alla sveglia di una camera; l’avviso riporta il nome e numero della camera, e l’orario a cui la sveglia era programmata. Cliccando sulla X all’interno dell’avviso questo viene cancellato; parallelamente la sveglia corrispondente viene spostata dal pannello di quelle attive a quello delle sveglie terminate (vedi sezione precedente relativa al servizio sveglia). Ciascuna camera configurata nella centrale compare all’interno della sezione di sinistra della dashboard sotto forma di widget (o riquadro); il colore del widget indica lo stato di occupazione della camera: una camera “verde” è libera mentre una camera “rossa” è occupata da un ospite. In quest’ultimo caso i 4 campi testuali presenti all’interno del riquadro della camera indicano nell’ordine:
 
+- Il nominativo dell’ospite (o degli ospiti);
+- Eventuali note associate alla camera;
+- La prima sveglia programmata per quella camera;
+- Il costo complessivo delle chiamate effettuate dalla camera a partire dall’istante di check-in al momento attuale (disponibile a partire dal firmware 4.9.6).
+
+La barra superiore permette di applicare in tempo reale un filtraggio nella visualizzazione delle camere in base a:
+
+- Edificio e/o piano;
+- Stato di pulizia;
+- Corrispondenza di un testo libero sui campi “nominativi ospiti” e “note” della camera;
+- All’interno del widget è infine presente un pulsante con l’icona di un’aspirapolvere; questo pulsante ha la duplice funzione di indicare e poter commutare lo stato di pulizia della camera.
+
+In caso di camera sporca il pulsante è acceso (in colore giallo); cliccando sul bottone il receptionist ha inoltre la possibilità di commutare lo stato da “sporca” a “pulita” e viceversa. Lo stato di pulizia delle camere è aggiornato ogni 10 secondi; una eventuale modifica dello stato mediante codice telefonico dalla stanza si riflette in tempo praticamente reale sullo stato visualizzato sul pannello.
+
+*jpg*
+
+Cliccando all’interno del widget di una camera si accede al pannello di stato di dettaglio, in cui è possibile eseguire le operazioni di check-in e check-out e visualizzare in modo più esteso i dati della stanza. 
+
+*jpg*
+
+Selezionando una stanza libera è possibile effettuare il check-in cliccando sul pulsante omonimo; in fase di check-in è necessario indicare il nominativo di almeno un ospite della camera, ma è possibile aggiungere anche i nominativi degli ospiti addizionali, così come eventuali note testuali. Contestualmente al check-in si può scegliere quale delle due classi di abilitazione (alle chiamate esterne) attribuire alla camera; tale impostazione è poi modificabile in seguito tornando nel pannello di dettaglio della camera.
+
+In maggior dettaglio, durante l’operazione di check-in è possibile inserire i seguenti dati associati alla camera:
+
+- **Intestatario (obbligatorio)**: nome della persona a cui è intestata la camera. È possibile aggiungere ospiti addizionali selezionando “Aggiungi addizionale”. In fase di filtraggio delle camere dalla dashboard, la ricerca a testo libero opera su tutti i nominativi inseriti.
+- **Sveglie**: Data e ora a cui impostare la sveglia per la stanza se richiesta dall’intestatario. È possibile aggiungere una o più sveglie selezionando aggiungi. Questo servizio può essere impostato soltanto dall’operatore.
+- **Chiamate esterne**: abilitare le chiamate esterne dalle camere con classe standard o ristretta. Questo servizio prevede la generazione di un reporter dettagliato delle chiamate effettuate dal telefono di una camera a partire dal momento del check-in comprensivo del costo calcolato a partire dalla durata in base ad una specifica tariffa, configurabile.
+- **Note**: testo libero, permette di inserire dei promemoria. In fase di filtraggio delle camere dalla dashboard, la ricerca a testo libero opera anche sul contenuto di questo campo.
+
+Completata la configurazione, cliccando su “Salva” viene effettuato il check-in (il widget passa da verde a rosso), ed il relativo timestamp viene associato alla camera per il calcolo della competenza delle chiamate. Oltre a queste impostazioni, nel pannello di dettaglio della camera è possibile visualizzare lo stato di pulizia della camera e (dal firmware 4.9.6) il conteggio cumulativo del costo delle chiamate effettuate dall’interno della camera a partire dall’istante di check-in fino all’istante corrente. Selezionando invece una stanza occupata, è possibile cliccare sul pulsante “Check out” per eseguire l’azione corrispondente (previa conferma), a seguito della quale lo stato della camera torna a disponibile (“libera”).
+
+Lista Storico Prenotazioni
+   In questo pannello è possibile visualizzare lo storico delle prenotazioni per ogni singola camera, visualizzando data ed ora del check-in e check-out, nome degli ospiti ed eventuali note. Per ogni camera è inoltre possibile scaricare il report XLSX con l’elenco delle chiamate effettuate dagli ospiti di quella camera all’interno del periodo di occupazione. Il pannello contiene sia le occupazioni correnti (per le quali quindi il timestamp di check-out è vuoto che quelle passate. Le informazioni relativi agli ospiti e le note presenti al momento del check-out vengono salvate nello storico prenotazioni.
+
+*jpg*
+
+Documentazione addebiti (Servizio Billing)
+   Il servizio di Documentazione Addebiti presente su KalliopePBX (attualmente disponibile come componente inclusa nella licenza del Modulo Hotel), permette il calcolo dei costi delle chiamate effettuate da ogni interno associato ad una camera, tramite la definizione di un profilo di costo differenziabile in base alla destinazione (con un certo prefisso, numeri esatti, tutti gli altri numeri) ed alla linea di uscita utilizzata. Per maggiori informazioni clicca qui
 
