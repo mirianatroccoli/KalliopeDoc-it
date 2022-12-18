@@ -302,9 +302,24 @@ Inoltre è possibile visualizzare lo stato di avanzamento di tutti i fax ricevut
 
 
 
+Kalliope Hotel
+-----------------
+
+Descrizione del servizio
+++++++++++++++
+
+Il modulo Kalliope Hotel è un add-on di KalliopePBX, attivabile tramite apposita licenza, che offre un set di funzioni specifiche per l’hospitality. Le funzioni incluse sono:
 
 
+- **Pannello receptionist**: questo pannello è utilizzato dai receptionist dell’hotel per la gestione ordinaria delle camere e dei servizi relativi, inclusi lo stato di occupazione, il nome dell’ospite, eventuali annotazioni e la prossima tra le sveglie impostate. Per ciascuna stanza è possibile accedere ad un pannello di stato di dettaglio, in cui visualizzare in modo più esteso i dati della stanza ed effettuare le operazioni relative (attivazione di una sveglia, check-in/check-out, impostazione del nominativo dell’ospite principale, ecc.)
+- **Servizio check-in/check-out**: questo servizio modifica lo stato di occupazione di una determinata camera da “libera” a “occupata” e viceversa. Gli eventi di cambio stato sono marcati temporalmente e vengono utilizzati per generare il rapporto di documentazione addebiti per le chiamate effettuate dal telefono della camera, in accordo alle tariffe configurate (disponibile a partire dal firmware 4.9.6). È possibile inoltre differenziare l’accesso ai servizi telefonici in ciascuno degli stati “libera” e “occupata” della camera, utilizzando il meccanismo delle Classi di abilitazione.
+- **Servizio sveglia**: questo servizio permette di generare una chiamata ad un orario predeterminato verso l’interno associato ad una camera; il riscontro da parte dell’ospite può avvenire semplicemente rispondendo alla chiamata, oppure mediante conferma esplicita prima o dopo l’ascolto del messaggio di sveglia; in caso di mancata conferma, il sistema può ripetere la chiamata più volte, secondo la configurazione effettuata per il servizio. La programmazione della sveglia può essere effettuata via web tramite il pannello receptionist; Per ciascuna camera possono essere attive più sveglie, anche ad orari diversi per ciascun giorno.
+- **Servizio “pulizia camera”**: questo servizio permette di marcare la stanza come pulita/sporca e di commutarne lo stato sia dal pannello Receptionist della GUI, che telefonicamente tramite un codice di servizio dalla persona che effettua la pulizia della camera. Lo stato di pulizia di tutte le camere occupate viene automaticamente impostato al valore “sporca” durante la notte, per poi poter essere riportato a “pulita” in modo manuale.
 
+
+ Configurazione del servizio
+ +++++++++++++++++
+ 
  
     
     
