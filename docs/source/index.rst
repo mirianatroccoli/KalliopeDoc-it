@@ -38,18 +38,6 @@ Manuale Utente
 -----------
 
 
-Applicazioni Kalliope
-==========
-
-   
-Prodotti complementari
-==========
-
-   
-Kalliope Nexus
-==========
-
-
 
 Aggiornamenti Firmware Changelog e Release Notes
 ==========
