@@ -8,7 +8,16 @@ KalliopeCTI 4
 .. warning::
     È disponibile il manuale KalliopeCTI 4 versione 4.5.23 per l'installazione e la configurazione del client al seguente `link <https://www.kalliope.com/downloads/>`_.
     Per scaricare il client riferito al proprio sistema operativo, visitare il sito `<www.kalliope.com>`_, nel menù in alto troveremo Support --> Documenti e Downloads e di conseguenza la sezione Applicazioni
+    
+Descrizione del servizio
++++++++
+KalliopeCTI 4 (d’ora in poi denominato semplicemente come KCTI 4) è un’applicazione accessoria del centralino VoIP KalliopePBX V4 che consente di facilitarne la fruizione dei servizi telefonici e l’accesso alle informazioni in esso contenute.
 
+KCTI 4 (nelle versioni “Free”, “Pro” e “Phone”) è disponibile per sistemi operativi Windows e macOS. Con l’acquisto di ogni licenza KCTI 4 Pro e Phone è inclusa una licenza KCTI Mobile per l’utilizzo dell’app mobile KCTI su dispositivi Android.
+
+Il manuale utente dell’app KalliopeCTI mobile è disponibile al seguente link.
+
+Di seguito riassumiamo la lista delle principali funzionalità delle diverse versioni.
 
 KalliopeCTI Mobile
 ------------
