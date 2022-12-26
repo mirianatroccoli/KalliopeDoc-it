@@ -23,7 +23,7 @@ Di seguito riassumiamo la lista delle principali funzionalità delle diverse ver
    :widths: 25 25 50
    :header-rows: 1
    
-   * -
+   * - vuoto
      - KCTI 4 Free
      - KCTI 4 Pro
      - KCTI 4 Phone
