@@ -19,6 +19,18 @@ Il manuale utente dell’app KalliopeCTI mobile è disponibile al seguente link.
 
 Di seguito riassumiamo la lista delle principali funzionalità delle diverse versioni.
 
+   * -
+     - KCTI 4 Free
+     - KCTI 4 Pro
+     - KCTI 4 Phone
+     - KCTI 4 Mobile
+   * - Rubrica interni
+     - ✓
+     - ✓
+     - ✓
+     - ✓
+
+
 KalliopeCTI Mobile
 ------------
 
