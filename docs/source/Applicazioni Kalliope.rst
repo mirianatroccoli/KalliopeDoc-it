@@ -33,7 +33,134 @@ Di seguito riassumiamo la lista delle principali funzionalità delle diverse ver
      - ✓
      - ✓
      - ✓
+   * - Rubrica condivisa
+     - ✓
+     - ✓
+     - ✓
+     - ✓   
+   * - Storico chiamate
+     - ✓
+     - ✓
+     - ✓
+     - ✓      
+   * - Click-to-call
+     - ✓
+     - ✓
+     - ✓
+     - ✓   
+   * - Avviso chiamate in ingresso
+     - ✓
+     - ✓
+     - ✓
+     - ✓   
+   * - Istant Messaging
+     - ✓
+     - ✓
+     - ✓
+     - ✓        
+   * - Presence
+     - ✓
+     - ✓
+     - ✓
+     - ✓        
+   * - Apertura URL persoanlzizati
+     - ✓
+     - ✓
+     - ✓
+     - -
+   * - Accesso VoiceMail
+     - ✓
+     - ✓
+     - ✓
+     - ✓   
+   * - Servizio Copy-to-call
+     - ✓
+     - ✓
+     - ✓
+     - -
+   * - Sincornizzazione contatti Outlook
+     - -
+     - ✓
+     - ✓
+     - -     
+   * - BLF
+     - -
+     - ✓
+     - ✓
+     - ✓
+   * - Composizione numero
+     - -
+     - ✓
+     - ✓
+     - ✓
+   * - Trasferimento senza offerta
+     - -
+     - ✓2
+     - ✓
+     - ✓
+   * - Trasferimento con offerta
+     - -
+     - ✓2
+     - ✓
+     - ✓
+   * - Do not Disturb
+     - -
+     - ✓2
+     - ✓
+     - -
+   * - Registro chiamata
+     - -
+     - ✓2
+     - ✓
+     - -
+   * - Inoltro incondizionato chiamata
+     - -
+     - ✓2
+     - ✓
+     - -
+   * - Parcheggio chiamata
+     - -
+     - ✓2
+     - ✓
+     - -
+   * - Prelievo chiamata
+     - -
+     - ✓2
+     - ✓
+     - -
+   * - Forking to Mobile
+     - -
+     - ✓2
+     - ✓
+     - ✓
+   * - Statistiche code di attesa
+     - ✓2
+     - ✓2
+     - ✓
+     - -
+   * - Modalità Supervisor
+     - ✓2
+     - ✓2
+     - ✓2
+     - -
+    * - Messa in pausa selettiva
+     - ✓2
+     - ✓2
+     - ✓2
+     - -    
+   * - Supporti schermi touch
+     - -
+     - -
+     - -
+     - ✓
+    * - Integrazione rubrica tmobile
+     - -
+     - -
+     - -
+     - ✓    
 
+1 Disponibile solo in abbinamento con un telefono Snom o Yealink
+2 Disponibile solo in abbinamento con il modulo Kalliope Call Center
 
 KalliopeCTI Mobile
 ------------
