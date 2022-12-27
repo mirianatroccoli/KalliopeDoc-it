@@ -20,7 +20,7 @@ Il manuale utente dell’app KalliopeCTI mobile è disponibile al seguente link.
 Di seguito riassumiamo la lista delle principali funzionalità delle diverse versioni.
 
 .. list-table::  
-   :widths: 25 25 50
+   :widths: 25 25 25 50
    :header-rows: 1
    
    * - vuoto
@@ -160,6 +160,7 @@ Di seguito riassumiamo la lista delle principali funzionalità delle diverse ver
      - ✓    
 
 1 Disponibile solo in abbinamento con un telefono Snom o Yealink
+
 2 Disponibile solo in abbinamento con il modulo Kalliope Call Center
 
 KalliopeCTI Mobile
