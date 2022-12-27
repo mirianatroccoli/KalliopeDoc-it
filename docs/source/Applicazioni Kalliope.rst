@@ -120,8 +120,50 @@ Manuale Utente
 ++++++
 Il manuale KalliopeCTI 4 versione 4.5.23 per l'installazione e la configurazione del client è disponibile al seguente `link <https://www.kalliope.com/downloads/>`_.
 
+Parametri speciali del file INI del KalliopeCTI
+++++++
+A partire dalla **4.5.18** del KalliopeCTI possono essere aggiunti o modificati direttamente nel **kcti.ini** i seguenti parametri. Nella tabella seguente sono riportati i parametri modificabili con indicata la versione del KalliopeCTI a partire dalla quale il parametro è presente e modificabile.
 
 
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Valore di esempio
+     - Descrizione
+     - A partire da (versione KCTI Desktop)
+   * - Abilitato
+     - Abilitazione della casella Mail2FAX
+     - Checkbox
+     -
+   * - Nome
+     - Nome della casella Mail2FAX
+     - Alfanumerico  
+     -
+   * - Indirizzo email
+     - Indirizzo email associato alla casella
+     - Alfanumerico  
+     -
+   * - **Importazioni casella**
+     - 
+     - 
+     -
+   * - Protocollo
+     - Protocollo della casella di posta
+     - Dropdown
+     -
+
+
+
+
+
+
+
+kcti.ini si trova nella stessa directory dei trace (quindi AppData\Roaming\KCTI4 sotto il percorso d'utente).
+
+Si ricorda poi che il kcti.ini va modificato manualmente quando il Kcti non è in esecuzione
 
 KalliopeCTI Mobile
 ------------
