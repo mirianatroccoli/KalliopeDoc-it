@@ -75,156 +75,51 @@ Di seguito riassumiamo la lista delle principali funzionalità delle diverse ver
    +-------------------------------------+----------------+-------------+----------------+-----------------+
    | Integrazione rubrica mobile         | No             | No          | No             | Si              |
    +-------------------------------------+----------------+-------------+----------------+-----------------+
-               
    
-   
-   
-   
-   
-   
-.. list-table::  
-   :widths: 25 25 25 25 25
-   :header-rows: 1
-   
-   * - 
-     - KCTI 4 Free
-     - KCTI 4 Pro
-     - KCTI 4 Phone
-     - KCTI 4 Mobile
-   * - Rubrica interni
-     - ✓
-     - ✓
-     - ✓
-     - ✓
-   * - Rubrica condivisa
-     - ✓
-     - ✓
-     - ✓
-     - ✓   
-   * - Storico chiamate
-     - ✓
-     - ✓
-     - ✓
-     - ✓      
-   * - Click-to-call
-     - ✓
-     - ✓
-     - ✓
-     - ✓   
-   * - Avviso chiamate in ingresso
-     - ✓
-     - ✓
-     - ✓
-     - ✓   
-   * - Istant Messaging
-     - ✓
-     - ✓
-     - ✓
-     - ✓        
-   * - Presence
-     - ✓
-     - ✓
-     - ✓
-     - ✓        
-   * - Apertura URL persoanlzizati
-     - ✓
-     - ✓
-     - ✓
-     - -
-   * - Accesso VoiceMail
-     - ✓
-     - ✓
-     - ✓
-     - ✓   
-   * - Servizio Copy-to-call
-     - ✓
-     - ✓
-     - ✓
-     - -
-   * - Sincornizzazione contatti Outlook
-     - -
-     - ✓
-     - ✓
-     - -     
-   * - BLF
-     - -
-     - ✓
-     - ✓
-     - ✓
-   * - Composizione numero
-     - -
-     - ✓
-     - ✓
-     - ✓
-   * - Trasferimento senza offerta
-     - -
-     - ✓2
-     - ✓
-     - ✓
-   * - Trasferimento con offerta
-     - -
-     - ✓2
-     - ✓
-     - ✓
-   * - Do not Disturb
-     - -
-     - ✓2
-     - ✓
-     - -
-   * - Registro chiamata
-     - -
-     - ✓2
-     - ✓
-     - -
-   * - Inoltro incondizionato chiamata
-     - -
-     - ✓2
-     - ✓
-     - -
-   * - Parcheggio chiamata
-     - -
-     - ✓2
-     - ✓
-     - -
-   * - Prelievo chiamata
-     - -
-     - ✓2
-     - ✓
-     - -
-   * - Forking to Mobile
-     - -
-     - ✓2
-     - ✓
-     - ✓
-   * - Statistiche code di attesa
-     - ✓2
-     - ✓2
-     - ✓
-     - -
-   * - Modalità Supervisor
-     - ✓2
-     - ✓2
-     - ✓2
-     - -
-    * - Messa in pausa selettiva
-     - ✓2
-     - ✓2
-     - ✓2
-     - -    
-   * - Supporti schermi touch
-     - -
-     - -
-     - -
-     - ✓
-    * - Integrazione rubrica tmobile
-     - -
-     - -
-     - -
-     - ✓    
 
 1 Disponibile solo in abbinamento con un telefono Snom o Yealink
 
 2 Disponibile solo in abbinamento con il modulo Kalliope Call Center
+
+Download e installazione
++++++
+KCTI 4 è scaricabile liberamente dall'area `Download<https://www.kalliope.com/downloads/>`_ del sito ufficiale di KalliopePBX.
+
+Tramite il Pannello di Configurazione sarà cura dell’utente selezionare quale modalità di utilizzo attivare di volta in volta, previa verifica della disponibilità sul centralino KalliopePBX V4 della relativa licenza. Per questo motivo KCTI 4 Free, Pro e Phone non sono altro che tre modalità applicative dello stesso software.
+
+**Nota**: L’installazione non prevede l’inserimento di alcun codice di attivazione. L’applicazione verifica in automatico la presenza sul centralino KalliopePBX della corretta licenza di utilizzo a ciascun avvio.
+
+
+Ad eccezione della modalità applicativa KCTI 4 Free, che non richiede alcuna licenza, KCTI 4 Pro e Phone richiedono l’installazione sul centralino KalliopePBX V4 di una specifica licenza per ciascuna postazione. La licenza per KCTI 4 Phone consente di utilizzare anche la modalità applicativa KCTI 4 Pro. Dal pannello di Configurazione, l’utente ha la possibilità di selezionare la modalità applicativa desiderata.
+
+Per la procedura di configurazione delle licenze KCTI 4 Pro o KCTI 4 Phone sul centralino KalliopePBX V4 si faccia riferimento alla sezione __Licenze__.
+
+**Requisiti di Sistema**:
+
+Windows:
+
+- Sistema operativo Windows 8 o successivo
+- Scheda audio presente (per la modalità KCTI Phone)
+- 2 GB di RAM
+- 100 MB di spazio per l’installazione
+
+MAC:
+- macOS: BigSur (11.0), Catalina (10.15), Mojave (10.14)
+- recommended: apple hardware from 2013 and later
+
+Linux:
+- Ubuntu 18.04 o 20.04
+
+Per installare l’applicazione in ambiente Windows è sufficiente lanciare l’eseguibile e seguire le istruzioni.
+
+**NOTA**: Nel caso in cui il servizio SIP della centrale sia esposto su un IP diverso da quello di connessione CTI, o su una porta diversa da quella standard (5060) è necessario impostare sul KalliopePBX uno o entrambi i seguenti placeholder personalizzati all'interno del pannello di Provisioning: **%%_KPHONE_SIP_REGISTRAR_IP%%** e **%%_KPHONE_SIP_REGISTRAR_PORT%%**. Questa configurazione è normalmente necessaria quando il servizio SIP viene esposto al pubblico tramite un Session Border Controller che utilizza un IP diverso da quello su cui è raggiungibile la centrale, mentre è non necessario se PBX e SBC sono nattati sullo stesso IP pubblico, ciascuno per le porte di sua competenza (TCP/5039 e TCP/5222 per le componenti CTI e Chat, verso Kalliope, e SIP + RTP per la fonia, verso l'SBC).
+
+Manuale Utente
+++++++
+Il manuale KalliopeCTI 4 versione 4.5.23 per l'installazione e la configurazione del client è disponibile al seguente `link<https://www.kalliope.com/downloads/>`_.
+
+
+
 
 KalliopeCTI Mobile
 ------------
