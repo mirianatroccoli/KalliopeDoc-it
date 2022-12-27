@@ -83,7 +83,7 @@ Di seguito riassumiamo la lista delle principali funzionalità delle diverse ver
 
 Download e installazione
 +++++
-KCTI 4 è scaricabile liberamente dall'area `Download<https://www.kalliope.com/downloads/>`_ del sito ufficiale di KalliopePBX.
+KCTI 4 è scaricabile liberamente dall'area `Download <https://www.kalliope.com/downloads/>`_ del sito ufficiale di KalliopePBX.
 
 Tramite il Pannello di Configurazione sarà cura dell’utente selezionare quale modalità di utilizzo attivare di volta in volta, previa verifica della disponibilità sul centralino KalliopePBX V4 della relativa licenza. Per questo motivo KCTI 4 Free, Pro e Phone non sono altro che tre modalità applicative dello stesso software.
 
@@ -92,7 +92,7 @@ Tramite il Pannello di Configurazione sarà cura dell’utente selezionare quale
 
 Ad eccezione della modalità applicativa KCTI 4 Free, che non richiede alcuna licenza, KCTI 4 Pro e Phone richiedono l’installazione sul centralino KalliopePBX V4 di una specifica licenza per ciascuna postazione. La licenza per KCTI 4 Phone consente di utilizzare anche la modalità applicativa KCTI 4 Pro. Dal pannello di Configurazione, l’utente ha la possibilità di selezionare la modalità applicativa desiderata.
 
-Per la procedura di configurazione delle licenze KCTI 4 Pro o KCTI 4 Phone sul centralino KalliopePBX V4 si faccia riferimento alla sezione __Licenze__.
+Per la procedura di configurazione delle licenze KCTI 4 Pro o KCTI 4 Phone sul centralino KalliopePBX V4 si faccia riferimento alla sezione Licenze_.
 
 **Requisiti di Sistema**:
 
@@ -104,10 +104,12 @@ Windows:
 - 100 MB di spazio per l’installazione
 
 MAC:
+
 - macOS: BigSur (11.0), Catalina (10.15), Mojave (10.14)
 - recommended: apple hardware from 2013 and later
 
 Linux:
+
 - Ubuntu 18.04 o 20.04
 
 Per installare l’applicazione in ambiente Windows è sufficiente lanciare l’eseguibile e seguire le istruzioni.
@@ -116,7 +118,7 @@ Per installare l’applicazione in ambiente Windows è sufficiente lanciare l’
 
 Manuale Utente
 ++++++
-Il manuale KalliopeCTI 4 versione 4.5.23 per l'installazione e la configurazione del client è disponibile al seguente `link<https://www.kalliope.com/downloads/>`_.
+Il manuale KalliopeCTI 4 versione 4.5.23 per l'installazione e la configurazione del client è disponibile al seguente `link <https://www.kalliope.com/downloads/>`_.
 
 
 
