@@ -20,7 +20,7 @@ Il manuale utente dell’app KalliopeCTI mobile è disponibile al seguente link.
 Di seguito riassumiamo la lista delle principali funzionalità delle diverse versioni.
 
 .. list-table::  
-   :widths: 25 25 25 50
+   :widths: 25 25 25 25 25
    :header-rows: 1
    
    * - Vuoto
