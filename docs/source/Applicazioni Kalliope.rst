@@ -130,116 +130,69 @@ A partire dalla **4.5.18** del KalliopeCTI possono essere aggiunti o modificati 
    :header-rows: 1
 
    * - Parametro
+     - Valore di esempio
      - Descrizione
-     - Tipo valore
-   * - Abilitato
-     -
-     - Checkbox
-   * - Selezione
-     - Selezione del piano di numerazione corrispondente all’istanza FAX
-     - Numerico
-   * - Nome
-     - Nome dell’istanza
-     - Alfanumerico
-   * - **Utenti abilitati (lista)**
-     -  
-     -  
-   * - Utente
-     - Utente a cui assegnare un permesso
-     - Dropdown 
-   * - Permesso
-     - Permesso da assegnare all’utente
-     - Solo ricezione / Solo invio / Invio e ricezione
-   * - **Template**
-     -  
-     -  
-   * - Template istanza FAX
-     - Template da utilizzare per la configurazione dell’istanza
-     - Dropdown
-   * - **Impostazioni generali**
-     -  
-     -  
-   * - Local station ID
-     - Identificatore del FAX da inviare al dispositivo remoto
-     - Alfanumerico
-   * - Header info
-     - Stringa di testo da includere nel margine superiore di ogni pagina inviata
-     - Alfanumerico
-   * - Contemporaneità totali
-     - Numero massimo consentito di FAX in entrambe le direzioni
-     - Numerico 
-   * - ECM abilitata
-     - Abilitazione Error Correction Mode
-     - Checkbox      
-   * - Rate minimo
-     - Velocità minima di trasmissione
-     - Numerico     
-   * - Rate massimo
-     - Velocità massima di trasmissione
-     - Numerico     
-   * - Modem
-     - Standard modem supportati
-     - Alfanumerico     
-   * - **Impostazioni di ricezione**
-     - 
-     -
-   * - Abilita ricezione
-     - Abilitazione fax in ingresso
-     - Checkbox      
-   * - Contemporaneità in ingresso
-     - Numero massimo consentito di FAX in ingresso
-     - Numerico     
-   * - **Impostazioni di trasmissione**
-     - 
-     -    
-   * - Abilita invio
-     - Abilitazione fax in uscita
-     - Checkbox     
-   * - Contemporaneità in uscita
-     - Numero massimo consentito di FAX in uscita
-     - Numerico     
-   * - Classe di instradamento in uscita
-     - Classe di instradamento da utilizzare per i FAX in uscita
-     - Dropdown      
-   * - Numero massimo di tentativi di trasmissione
-     - Numero massimo di tentativi di trasmissione al termine dei quali il FAX viene dichiarato fallito
-     - Numerico     
-   * - Intervallo di ritrasmissione (minuti)
-     - Intervallo di tempo tra un tentativo di ritrasmissione e il successivo
-     - Numerico     
-   * - **Impostazioni MAIL2FAX**
-     - 
-     -      
-   * - Casella Mail2Fax
-     - Nome della casella mail2fax
-     - Alfanumerico     
-   * - Metodo di autenticazione
-     - Metodo di autenticazione con cui il Fax viene salvato e ricevuto
-     - Dropdown      
-   * - Pin di autenticazione
-     - Pin con cui il Fax è autenticato da inserire anche nel testo della mail
-     - Numerico     
-   * - **Impostazioni di archiviazione**
-     - 
-     -     
-   * - Prefisso del percorso
-     - Prefisso da anteporre al percorso personalizzato del file archiviare
-     - Dropdown     
-   * - Percorso personalizzato
-     - Percorso personalizzato in cui salvare il file da archiviare
-     - Alfanumerico     
-   * - Suffisso del percorso
-     - Suffisso da posporre al percorso personalizzato del file archiviare
-     - Dropdown     
-   * - Archiviazione separata ingresso/uscita
-     - Se e come archiviare separatamente i documenti in ingresso e in uscita
-     - Prima del prefisso / Dopo il suffisso                         
-
-
-
-
-
-
+     - A partire da (versione KCTI Desktop)
+   * - echoCanceller
+     - on
+     - per abilitare (on) o meno (off) l'echo cancel. Default: on
+     - 4.5.23
+   * - echoCancellerLmsFilter
+     - off
+     - Per abilitare (on) o meno (off) il filtro LMS sull'echo cancel. Default: off
+     - 4.5.23
+   * - echoSuppressor
+     - on
+     - Per abilitare (on) o meno (off) l'echo suppression. Default: on
+     - 4.5.23
+   * - suppressorLowerThreshold	
+     - 10
+     - Per impostare la soglia minima (percentuale) dell'echo suppression. Range valori ammessi: [0, 100]. Default: 10
+     - 4.5.23
+   * - suppressorUpperThreshold
+     - 40
+     - Per impostare la soglia massima (percentuale) dell'echo suppression. Range valori ammessi: [0, 100]. Default: 40
+     - 4.5.23
+   * - suppressorDivider
+     - 15
+     - Per impostare il divisore dell'echo suppression. Range valori ammessi: [2, 50]. Default: 15
+     - 4.5.23
+   * - suppressorConvergenceMillis
+     - 4000
+     - Per impostare la convergenza (millisecondi) dell'echo suppression. Range valori ammessi: [1000, 120000]. Default: 4000
+     - 4.5.23
+   * - chatKeepAliveSendIntervalSecs
+     - 120
+     - per i messaggi di ping XMPP, default 2 minuti
+     - 4.5.19
+   * - contactsRefreshTimeoutSecs
+     - 600
+     - per l'aggiornamento del phonebook, default 10 minuti
+     - 4.5.18
+   * - cdrRefreshTimeoutSecs
+     - 90
+     - per l'aggiornamento del cdr/voicemail, default 1 minuto e mezzo
+     - 4.5.18
+   * - identitiesRefreshTimeoutSecs
+     - 300
+     - per l'aggiornamento degli account, default 5 minuti
+     - 4.5.18
+   * - queueStatsRefreshTimeoutSecs
+     - 300
+     - per l'aggiornamento delle code, default 5 minuti
+     - 4.5.18
+   * - codecOrderRefreshTimeoutSecs
+     - 30
+     - per l'aggiornamento dei codec, default 30 secondi
+     - 4.5.18   
+   * - excludedOutlookFolders
+     - Cartelle pubbliche;Public folders;Cache;Lync;Skype
+     - elenco stringhe contenute nelle folders di Outlook da escludere comprese le relative subfolders dall'import dei contatti, come separatore va usato il ;
+     - 4.5.18    
+   * - queueNames
+     - Coda1;Coda2
+     - elenco dei nomi esatti delle code da visualizzare nel Supervisor Panel, come separatore va usato il ;
+     - 4.5.15
 
 
 kcti.ini si trova nella stessa directory dei trace (quindi AppData\Roaming\KCTI4 sotto il percorso d'utente).
