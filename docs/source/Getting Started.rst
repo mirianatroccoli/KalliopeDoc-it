@@ -67,3 +67,85 @@ Le credenziali di accesso sono riportate sull'etichetta presente sull'apparato. 
 **NOTA**: questo utente manager non ha alcun legame con l'utente manager che si utilizza per accedere alla CLI di Kalliope in modalità bootloader.
 
 Una volta effettuata la connessione tramite console seriale, o tramite ssh (qualora si conosca l'IP acquisito da ATOS, ad esempio grazie ai log del server DCP eventualmente presente nella rete), si procede con il login usando l'utente "manager" e la password riportata sull'etichetta presente sull'apparato:
+
+.. code-block:: console
+
+   login as: manager
+   manager@192.168.23.60's password: *******
+   ATOSNT Remote CLI
+
+   CTRL+d to exit
+
+   Init Command Line Interface...
+   ATOS Version: 7.2.7 (mcccfvitbkovsc)
+   ATOS Date: 06/10/2022 13:34
+   ATOS License: NFVSBC
+   Hardware: XV8800 - 4C8R120D - 2518D
+   Product Code: 708190501
+   Serial Number: xxxxxx
+   MAC Address: 00:D0:D6:xx:xx:xx
+   BARCODE: AE70819050110204xxxxxx
+
+   User name :manager
+   Password :*******
+   <manager> logged at MANAGER level
+   KPBXv4_kvm>  
+   
+Digitando "?" seguito dal tasto invio, il sistema presenta le voci di configurazione ed i comandi disponibili:
+
+.. code-block:: console
+
+   KPBXv4_kvm>?
+
+   Available nodes:
+                           system
+                           interfaces
+                           dns
+                           nfv
+   Available commands:
+   up                      Move one step up from the current node
+   top                     Back to the root of the tree
+   quit                    Exit from CLI session
+   set                     Set node options
+   add                     Add a new option
+   del                     Remove an added option
+   show                    Show 'KPBXv4_kvm' settings
+   help                    Help of item
+   info                    Show the system informations
+   date                    Show or setting system date and time
+   save                    Save configuration data
+   restart                 Restart device
+   ping                    Send an ICMP ECHO request
+   tracert                 Display a trace of packet
+   show-logging-level      Show logged level
+
+   password                Set user/others password on node KPBXv4_kvm\system>>
+
+
+Di seguito si riportano i comandi di visualizzazione delle impostazioni correnti, seguite poi dai comandi dispositivi, con cui effettuare le modifiche alla configurazione di ATOS.
+
+Nota: tutti i comandi dispongono di un aiuto in linea, è sufficiente completare il comando in corso con il carattere "?" per avere dal sistema l'informazione di tutte le possibili opzioni disponibili per quel comando. Ad esempio:
+
+.. code-block:: console
+
+   KPBXv4_kvm>set interfaces vswitch-0 ip ?
+ 
+   Set command parameters:
+   ip address          [address]             Current value: 0.0.0.0
+   default router      [defaultrouter]       Current value: 0.0.0.0
+   dhcp client         [dhcp-client]         Current value: on
+
+
+Inoltre, il tasto "Tab" effettua il completamento del comando inserito:
+
+.. code-block:: console
+
+   KPBXv4_kvm>set interfaces vswitch-0 ip dh<tab>
+   
+produce l'autocompletamento
+
+.. code-block:: console
+
+  KPBXv4_kvm>set interfaces vswitch-0 ip dhcp-client
+
+In caso di più possibilità di autocompletamento, la pressione ripetuta del tasto "Tab" causa il ciclare attraverso tutte le possibili opzioni.
