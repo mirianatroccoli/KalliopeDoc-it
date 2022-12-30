@@ -218,12 +218,69 @@ Per le versioni dalla 4.5.0 in su è disponibile una collection `Postman <https:
 
 
 
-
-
-
 KalliopeCTI Mobile
 ------------
 
+Introduzione
++++++++
+Per chi ha la necessità di essere sempre reperibile, Kalliope ha pensato l’app KalliopeCTI mobile per sistemi Android e iOS.
+
+KalliopeCTI mobile app è un prodotto opzionale che permette di accedere ai servizi telefonici e di UC anche fuori dall'ufficio, semplicemente tramite il tuo numero di interno e utilizzando le linee aziendali.
+
+Per garantire la stabilità e la migliore qualità della conversazione, KalliopeCTI mobile ti offre l’opportunità di scegliere come gestire le tue chiamate: in base alla disponibilità del traffico dati potrai decidere se utilizzare per la conversazione la rete GSM o usare l’app in modalità softphone.
+
+KalliopeCTI mobile permette quindi di telefonare in tre modalità diverse:
+
+- Click-to-call: la chiamata viene gestita attraverso il telefono fisso associato all’interno
+- Call-back: l’utente chiama da smartphone utilizzando le linee Kalliope
+- Softphone: grazie all’integrazione di un motore telefonico SIP, lo smartphone si registrerà direttamente su KalliopePBX come un qualsiasi client IP.
+
+È possibile scaricare KalliopeCTI mobile direttamente da `Playstore <https://play.google.com/store/apps/details?id=it.netresults.kalliopeservice&pli=1>`_ e `App Store <https://apps.apple.com/it/app/kalliope-cti/id1108203678>`_.
+
+Visualizza l'informativa sul `Trattamento dei dati personali degli utenti <https://www.kalliope.com/images/NetResults_GDPR_-_Informativa_APP.21.03.pdf>`_
+
+**Nota**: Ad ogni interno è possibile associare **un solo** account KCTI Mobile.
+
+*jpg*
+
+
+Configurazione preliminare
+++++++
+Per poter utilizzare l'app mobile KalliopeCTI è necessario predisporre le seguenti configurazioni:
+
+- Nelle impostazioni "Account" abilitare la voce "KCTI Mobile App".
+    - **NOTA**: deve essere abilitato all'uso dell'app mobile **un solo account per interno**.
+- Assegnare una licenza KalliopeCTI all'utente secondo questa logica:
+    - Licenza KalliopeCTI Pro -> abilita l'uso dell'app mobile KalliopeCTI solo in modalità callback (GSM™)
+    - Licenza KalliopeCTI Phone -> abilita l'uso dell'app mobile KalliopeCTI sia in modalità softphone che callback
+
+- Nello scenario in cui si voglia accedere con l'app mobile dall'esterno della rete aziendale è necessario pubblicare le seguenti porte del KalliopePBX (**NOTA BENE: Si raccomanda di non esporre il servizio SIP della centrale sul pubblico in modo diretto**, raggiungibile da IP arbitrari, ma di utilizzare un Session Border Controller in grado di proteggere adeguatamente la centrale dai tentativi di intrusione provenienti dall'esterno):
+    - Porta **TCP 5039** per i servizi CTI
+    - Porta **TCP 5222** per i servizi chat XMPP
+    - Porta **UDP per il servizio SIP** come configurata nel pannello "Impostazioni SIP" (solo nel caso di modalità softphone, valore di default '5060')
+    - Intervallo **porte UDP 10000-20000** per i flussi RTP (solo nel caso di modalità softphone)
+
+Inoltre **è indispensabile che il KalliopePBX possa inviare i messaggi i server di push notification di Apple e Google** e quindi dovrà essere garantita la raggiungibilità da parte del KalliopePBX dei seguenti indirizzi:
+
+- iOS: **api.push.apple.com** (HTTPS, porta TCP/443)
+- Android: **fcm.googleapis.com** (HTTPS, porta TCP/443)
+
+Visto che questi host possono risolvere nel tempo IP diversi, è raccomandato che non siano applicati filtri al traffico HTTPS uscente da KalliopePBX.
+
+Inoltre, affinché i dispositivi mobili su cui è in esecuzione l'APP KalliopeCTI Mobile possano ricevere le notifiche, è necessario che questi siano connessi e raggiungibili dai servizi di invio. Per ulteriori informazioni sui flussi che devono essere garantiti, fare riferimento alla documentazione ufficiale di:
+
+- Google: https://firebase.google.com/docs/cloud-messaging/concept-options#messaging-ports-and-your-firewall
+- Apple: https://support.apple.com/en-ph/HT203609
+
+
+**NOTA**: Per evitare comportamenti anomali nell'invio ai client delle notifiche di chiamata in arrivo/terminata è necessario che ciascun utente sia loggato su un solo device, perché ad ogni account SIP (e quindi utente associato) può essere associato un unico token Firebase (utilizzato per identificare il destinatario delle notifiche).
+
+**NOTA**: Nel caso in cui il servizio SIP della centrale sia esposto su un IP diverso da quello di connessione CTI, o su una porta diversa da quella standard (5060) è necessario impostare sul KalliopePBX uno o entrambi i seguenti placeholder personalizzati all'interno del pannello di Provisioning: **%%_KPHONE_SIP_REGISTRAR_IP%%** e **%%_KPHONE_SIP_REGISTRAR_PORT%%** . Questa configurazione è normalmente necessaria quando il servizio SIP viene esposto al pubblico tramite un Session Border Controller che utilizza un IP diverso da quello su cui è raggiungibile la centrale, mentre è non necessario se PBX e SBC sono nattati sullo stesso IP pubblico, ciascuno per le porte di sua competenza (TCP/5039 e TCP/5222 per le componenti CTI e Chat, verso Kalliope, e SIP + RTP per la fonia, verso l'SBC).
+
+Le informazioni dettagliate specifiche riguardo la configurazione e l'uso dell'app KalliopeCTI Mobile nei due sistemi operativi Android e IOS sono disponibili sulle seguenti pagine dedicate:
+
+- Manuale KalliopeCTI Mobile app Android
+- Manuale KalliopeCTI Mobile app IOS
 
 Kalliope Attendant Console
 ------------
