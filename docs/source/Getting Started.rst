@@ -24,3 +24,46 @@ Prima installazione
 
 **V4R/V4R+**
 ++++
+
+KalliopePBX v4 Rackmount (Hw rev. 3)
+++++
+Gli apparati KalliopePBX v4 rackmount (nelle diverse varianti -R, -R+, -R-OPT-FO e -R-OPT-FO+) in hw rev. 3 sono basati su una piattaforma hardware headless che mette a disposizione:
+
+- una interfaccia di rete Gigabit Ethernet equipaggiata con uno switch hardware 8 porte, tutte Gigabit Ethernet autosensing (ETH0)
+- due interfacce di rete Gigabit Ethernet (ciascuna dual mode RJ45 e SFP 1GbE) a porta singola (ETH1 e ETH2).
+
+  - **NOTA**: in caso di utilizzo di GBIC nello slot SFP di una di queste interfacce, se viene lasciato inserito il cavo di rete nella porta RJ45, quest'ultima avrà la precedenza.
+  - **NOTA 2**: nel caso di utilizzo di GBIC 100 Mbps, il sistema non le riconosce in automatico ed è necessaria un'operazione di abilitazione da parte del nostro supporto tecnico.
+  
+Una volta collegato l'apparato tramite l'alimentatore in dotazione, il sistema si avvia in automatico ed entro pochi secondi sarà possibile accedere al KalliopePBX.
+
+Il primo accesso a KalliopePBX avviene tramite una delle porte switch dell'interfaccia ETH0, puntando il browser all'indirizzo predefinito http://192.168.0.100:10080.
+
+**NOTA**: Alcuni browser hanno iniziato a bloccare per impostazione predefinita l'accesso a pagine su porte diverse da quelle standard. In caso di visualizzazione di un errore che indica "ERR_UNSAFE_PORT", è necessario effettuare lo sblocco della porta 10080, mediante la procedura indicata alla pagina *Gestione errore ERR_UNSAFE_PORT*
+
+Come per le VM e gli altri apparati fisici, è possibile modificare l'indirizzo IP di KalliopePBX collegando all'interfaccia ETH0 un PC configurato con un indirizzo IP sulla subnet 192.168.0.0/24 e accedendo al pannello "Impostazioni di rete" dal menu Strumenti, accessibile in alto a destra della GUI di Kalliope.
+
+In alternativa, è possibile accedere alla console di KalliopePBX (operativa solo in modalità "recovery" o "console di ripristino", in cui il sistema è avviato quindi su bootloader e non su un firmware) e effettuare la configurazione utilizzando la CLI integrata (a cui si accede con le credenziali predefinite manager/manager). A differenza delle precedenti versioni hardware, l'accesso alla console di KalliopePBX non avviene direttamente tramite la porta seriale presente sull'apparato, ma tramite il servizio VNC.
+
+In questa revision hardware, difatti, KalliopePBX gira come macchina virtuale all'interno di un ambiente di virtualizzazione basato su KVM. L'accesso a KalliopePBX è quindi mediato dal sistema operativo nativo che gira sull'apparato fisico, tramite il quale è possibile effettuare alcune semplici operazioni di configurazione, come dettagliato di seguito.
+
+Nel caso sia possibile accedere all'interfaccia web di KalliopePBX con le impostazioni di rete predefinite (192.168.0.100/24), la procedura di prima attivazione segue quella standard comune alle altre versioni, ed è composta dai seguenti passi:
+
+1. Configurazione dell'indirizzo IP, default gateway e DNS tramite web GUI e nuovo accesso al nuovo indirizzo IP assegnato. Verifica della corretta impostazione data/ora e eventuale sincronizzazione forzata usando i server NTP di sistema (o quelli personali eventualmente configurati).
+2. Attivazione della licenza della VM KalliopePBX. In questo caso, a differenza delle VM tradizionali, non è necessario inserire una chiave di attivazione perché questa sarà disponibile a bordo dell'apparato, pertanto l'attivazione consiste solamente nel premere il corrispondente pulsante dall'interfaccia web
+3. Registrazione del prodotto. Analogamente agli altri sistemi Kalliope, questa operazione sblocca la possibilità di procedere con l'installazione dei firmware, e determina l'inizio del periodo previsto per la garanzia sull'apparato e per l'accesso agli aggiornamenti
+4. Aggiornamento bootloader, se necessario, ed installazione firmware. Al termine dell'installazione firmware sarà necessario effettuare il riavvio da GUI di KalliopePBX e, terminato il boot, verrà automaticamente effettuata la redirezione verso la pagina di login (su porta standard 80)
+
+Nel caso in cui non sia possibile effettuare l'accesso all'IP predefinito 192.168.0.100 e si debba o voglia procedere con la sua modifica utilizzando la CLI di KalliopePBX, è necessario comunque avere accesso al sistema operativo nativo dell'apparato, per poter configurare l'accesso VNC alla console di KalliopePBX. Nello specifico, una volta effettuata la configurazione di un IP al sistema operativo nativo, in base alle indicazioni presenti nella sezione successiva, è sufficiente avviare un client VNC (es. TightVNC Viewer) configurando la connessione verso l'host <IP_OS_nativo:5900>, per ottenere accesso alla CLI di KalliopePBX su cui poter effettuare login (utilizzando l'utente cablato manager/manager)
+
+Accesso al sistema operativo nativo ATOS dell'apparato
+++++
+L'accesso al sistema operativo nativo dell'apparato (ATOS) può essere necessario per configurarne le impostazioni di rete al fine di poter accedere tramite VNC alla console di KalliopePBX, oltre che per poter effettuare, laddove necessario, l'arresto forzato e il riavvio di KalliopePBX.
+
+L'accesso ad ATOS può avvenire tramite la porta seriale ("Console") presente sul fronte del dispositivo (con impostazioni 115200/8/N/1), oppure mediante accesso ssh. In modo simile a quanto avviene con i sistemi di gestione fuori banda di molti server (iLO per HP, DRAC per Dell, ecc.) ATOS ha un proprio stack di rete, che per impostazione predefinita è configurato come DHCP client sull'interfaccia ETH0 (con un MAC della famiglia 00:D0:D6:xx:xx:xx, come riportato sull'etichetta presente sull'apparato).
+
+Le credenziali di accesso sono riportate sull'etichetta presente sull'apparato. L'utente è "manager" e la password è univocamente assegnata a ciascun apparato (in seguito modificabile previo accesso ad ATOS).
+
+**NOTA**: questo utente manager non ha alcun legame con l'utente manager che si utilizza per accedere alla CLI di Kalliope in modalità bootloader.
+
+Una volta effettuata la connessione tramite console seriale, o tramite ssh (qualora si conosca l'IP acquisito da ATOS, ad esempio grazie ai log del server DCP eventualmente presente nella rete), si procede con il login usando l'utente "manager" e la password riportata sull'etichetta presente sull'apparato:
