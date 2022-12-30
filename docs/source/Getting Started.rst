@@ -1,2 +1,2 @@
-Prova Getting Started
+Getting Started
 ----------
