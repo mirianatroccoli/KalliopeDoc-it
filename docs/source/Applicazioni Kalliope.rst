@@ -126,7 +126,7 @@ A partire dalla **4.5.18** del KalliopeCTI possono essere aggiunti o modificati 
 
 
 .. list-table::  
-   :widths: 25 25 50
+   :widths: 25 25 25 50
    :header-rows: 1
 
    * - Parametro
