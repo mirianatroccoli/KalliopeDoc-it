@@ -275,6 +275,7 @@ Ricezione FAX
    Vediamo di seguito un esempio in caso di ricezione della notifica email di un FAX inviato dal numero 0501234567.
 
 .. prompt:: bash $
+
    Oggetto: [KPBX40299999] FAX ricevuto correttamente da 050123456
 
 dove 0501234567 è il numero da cui proviene il FAX.
@@ -282,6 +283,7 @@ dove 0501234567 è il numero da cui proviene il FAX.
 Inoltre riportiamo un esempio del corpo dell'email (contenente altre informazioni):
 
 .. prompt:: bash $
+
    Ricevuto FAX da 0501234567
    Data ed ora di ricezione: 12/03/2020 11:51:38
    Durata trasmissione: 34 secondi
@@ -294,6 +296,7 @@ F<0numero_chiamante>_T<numero_chiamato>_YYYY-MM-DD_HH_MM_SS_FAXID.pdf
 A titolo esemplificativo riportiamo il nome che assumerebbe il file pdf allegato all'email di ricezione del FAX nel caso dell'esempio sopra citato.
 
 .. prompt:: bash $
+
    F00501234567_T0509655637_2020-03-12_11_51_38_211.pdf
 
 Inoltre è possibile visualizzare lo stato di avanzamento di tutti i fax ricevuti e scaricare il documento ricevuto nel registro FAX.
