@@ -285,6 +285,42 @@ Le informazioni dettagliate specifiche riguardo la configurazione e l'uso dell'a
 Kalliope Attendant Console
 ------------
 
+Introduzione
++++++
+KalliopeATC (d’ora in poi denominato semplicemente KATC) è un’applicazione accessoria del centralino VoIP KalliopePBX che affianca alle funzionalità del KalliopePhone quelle del posto operatore.
+KATC è disponibile per S.O. Windows.
+Di seguito riassumiamo la lista delle principali funzionalità:
+
+.. list-table::  
+   :widths: 25
+   :header-rows: 1
+
+   * - Parametro     
+   * - Funzionalità Kalliope Attendant Console
+   * - Rubrica interni
+   * - Rubrica condivisa
+   * - CDR
+   * - Avviso chiamate in ingresso
+   * - Chat
+   * - Presence
+   * - Apertura URL personalizzati sulle chiamate in ingresso
+   * - Accesso Voice Mail
+   * - Copy to Call
+   * - Drop to Call
+   * - BLF
+   * - Trasferimento senza offerta
+   * - Trasferimento con offerta
+   * - Statistiche code d'attesa
+   * - Classificazione chiamate in ingresso
+   * - Do Not Disturb
+   * - Registrazione chiamata
+   * - Inoltro incondizionato chiamata
+   * - Parcheggio della chiamata
+   * - Prelievo di chiamata
+   * - Prelievo con invito
+   * - Forking to Mobile
+   * - Supporto schermi touch
+   * - Trasferimento chiamate Drag&Drop
 
 Kalliope Call Center
 ------------
