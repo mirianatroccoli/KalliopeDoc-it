@@ -149,3 +149,198 @@ produce l'autocompletamento
   KPBXv4_kvm>set interfaces vswitch-0 ip dhcp-client
 
 In caso di più possibilità di autocompletamento, la pressione ripetuta del tasto "Tab" causa il ciclare attraverso tutte le possibili opzioni.
+
+Comandi di visualizzazione informazioni di stato ATOS
++++++
+
+Visualizzazione indirizzo IP assegnato e stato interfacce
+++++
+
+.. code-block:: console
+
+   KPBXv4_kvm>show interfaces status
+
+   Show status of KPBXv4_kvm interfaces
+   INTERFACES      IPV4-ADDRESS    MAC-ADDRESS        STATUS     PROTOCOL  STATUS-DETAILS                            VRF
+   eth0            unassigned      00:D0:D6:xx:xx:xx  up         up        operational/running/bundled               global
+   eth1            unassigned      00:D0:D6:xx:xx:xx  down       down      operational/not running                   global
+   eth2            unassigned      00:D0:D6:xx:xx:xx  down       down      operational/not running                   global
+   tap-vdev0       unassigned      02:09:C0:17:8C:24  up         up        operational/running/bundled               global
+   tap-vdev1       unassigned      02:09:C0:CE:2D:08  up         up        operational/running/bundled               global
+   tap-vdev2       unassigned      02:09:C0:FA:F0:9E  up         up        operational/running/bundled               global
+   vswitch-0       192.168.23.60   00:D0:D6:xx:xx:xx  up         up        operational/running/ip4 address assigned  global
+
+In questo output, le interfacce eth0-1-2 sono le porte fisiche dell'apparato (eth1 e eth2 sono "not running" in quanto non ci sono cavi di rete connessi), le tap-vdev0-1-2 sono porte logiche usate internamente per interconnettere le interfacce di rete della VM Kalliope con le porte fisiche. La vswitch-0 è l'interfaccia di rete di accesso ad ATOS, che in questo esempio ha ricevuto l'indirizzo 192.168.23.60 tramite DHCP.
+
+Visualizzazione server DNS impostato su ATOS
++++++
+.. code-block:: console
+
+   KPBXv4_kvm>show dns work
+   Show of KPBXv4_kvm dns
+   Enable                : on
+   Level of log          : 1
+   Max retries           : 3
+   Timeout retries (sec) : 20
+   Local resolution      : preferred-v4
+
+   LIST OF DOMAIN NAME SERVERS
+   VRF                : global
+   Domain Name        : anydomain
+   Interface          : vswitch-0
+   Primary address    : 8.8.8.8
+   Secondary address  : 4.4.4.4
+   Priority           : 1
+   
+I DNS preimpostati in ATOS sono 8.8.8.8 e 4.4.4.4
+
+Visualizzazione server NTP per sincronizzazione orario ATOS
+++++
+
+
+.. code-block:: console
+
+   KPBXv4_kvm>show system timesync work
+   Show of KPBXv4_kvm system timesync
+   Level of log                 : 1
+   Enable                       : on
+   Sync frequency (sec)         : 300
+   GMT offset (min)             : 60
+   Daylight saving time period  : last Sun Mar 02:00 last Sun Oct 03:00
+   Local IP Address             : 0.0.0.0
+   Local IPv6 Address           : ::
+   VRF                          : global
+
+   LIST OF SERVERS
+   Server                                   Type
+   it.pool.ntp.org                          sntp
+   
+   
+Visualizzazione stato di esercizio della VM KalliopePBX
++++++
+
+.. code-block:: console
+
+   KPBXv4_kvm>show nfv kpbxv4 status
+
+   Show status of KPBXv4_kvm nfv kpbxv4
+   Status     : on
+   UUID       : 614c20db-8219-4804-b27b-ca9afe91398c
+   Huge pages : 4096
+   Nic model  : virtio-net-pci
+   
+
+Comandi dispositivi e di modifica configurazione
++++++
+
+
+.. warning::
+   Per rendere persistenti al riavvio i comandi seguenti è necessario eseguire, al termine delle modifiche, il comando "save".
+   
+Arresto/avvio della VM KalliopePBX
+++++
+
+.. code-block:: console
+   KPBXv4_kvm> set nfv kpbxv4 off
+   KPBXv4_kvm> set nfv kpbxv4 on
+
+Gestione indirizzo IP interfaccia vswitch-0 di ATOS
++++++
+Disabilitazione/abilitazione DHCP client (**attenzione**, se si è connessi via ssh e non via seriale, la disattivazione del client DHCP causa il rilascio dell'indirizzo e quindi la disconnessione!)
+
+.. code-block:: console
+   KPBXv4_kvm>set interfaces vswitch-0 ip dhcp-client off 
+   KPBXv4_kvm>set interfaces vswitch-0 ip dhcp-client on
+
+**Impostazione indirizzo IP statico**
+
+
+.. code-block:: console
+
+   KPBXv4_kvm>set interfaces vswitch-0 ip address ?
+
+     ip address  [aa.bb.cc.dd[/0-32]]
+
+     Current value:    0.0.0.0
+     Default fw value: 0.0.0.0
+     
+es:
+
+.. code-block:: console
+   
+   KPBXv4_kvm>set interfaces vswitch-0 ip address 192.168.55.200/24
+   
+**Impostazione default gateway (per eventuale accesso da remoto):**
+
+.. code-block:: console
+   KPBXv4_kvm>set interfaces vswitch-0 ip defaultrouter ?
+ 
+   default router  [aa.bb.cc.dd]
+ 
+   Current value:    0.0.0.0
+   Default fw value: 0.0.0.0
+   
+es:
+.. code-block:: console
+
+   KPBXv4_kvm>set interfaces vswitch-0 ip defaultrouter 192.168.55.1   
+   
+Modifica server DNS utilizzati da ATOS (utilizzati per risoluzione dei server NTP configurati)
+++++
+In questo caso si utilizza il comando "del" per rimuovere il set di DNS configurati, ed il comando "add" per aggiungere un nuovo set di server:
+
+.. code-block:: console
+
+   KPBXv4_kvm>del dns SERVER anydomain 1
+
+Questo comando rimuove il set a priorità 1 (l'unico presente di default) a cui sono associati i DNS con IP 8.8.8.8 e 4.4.4.4. L'informazione delle priorità definite e dei relativi server associati sono ottenibili con il comando "show dns work"
+
+Per aggiungere un nuovo set di server DNS, si utilizza invece il comando
+
+.. code-block:: console
+
+   KPBXv4_kvm>add dns SERVER anydomain 8.8.8.8 4.4.4.4 1
+
+Modifica server NTP utilizzati da ATOS
+++++
+Anche in questo caso si utilizza il comando "add" per aggiungere un nuovo server e il comando "del" per rimuovere quello da cancellare:
+
+.. code-block:: console
+
+   KPBXv4_kvm>del system timesync it.pool.ntp.org
+ 
+.. code-block:: console
+
+   KPBXv4_kvm>add system timesync ntp1.inrim.it
+   
+   
+Qualora desiderato, è possibile aggiungere più server NTP, senza necessariamente cancellare l'esistente.
+
+Descrizione porte
+++++
+
+*jpg*
+
+- Power (12v, 5A)
+- VGA (unused)
+- USB 2.0/USB 3.0
+- Gigabit Ethernet (eth0)
+- Gigabit Ethernet (eth1)
+- HDMI (unused)
+- Audio jack (unused)
+- COM1 (Console 115200 8/n/1)
+
+Prima installazione
++++++
+
+- Collegate KalliopePBX alla vostra rete utilizzando l’interfaccia eth0
+- Opzionale: collegate la porta seriale COM1 di KalliopePBX al vostro PC usando un cavo seriale (non incluso - impostazioni: 115200 8/n/1)
+- Collegate l’alimentatore incluso a KalliopePBX e successivamente collegate l’alimentatore ad una presa di corrente (100-240V AC, 50-60 Hz)
+- Avviare KalliopePBX premendo il tasto di accensione posto sul frontale; in caso di interruzione imprevista dell’alimentazione, al ripristino dell’alimentazione il sistema si avvia automaticamente
+- Puntate il vostro browser all’indirizzo http://192.168.0.100:10080 per effettuare la prima registrazione. È richiesto l’accesso da parte di KalliopePBX all’indirizzo
+https://license.kalliopepbx.it; la configurazione di rete può essere modificata attraverso il menu “Impostazioni” ). Nel caso compaia l'errore UNSAFE_PORT seguire questa procedura (Clicca qui)
+- Dopo la registrazione, installare il firmware desiderato tra quelli disponibili. È richiesto l’accesso da parte di KalliopePBX all’indirizzo https://updates.kalliopepbx.it. Il processo può richiedere alcuni minuti, in base alla dimensione del firmware e della velocità di download della vostra rete
+- Seguite il progresso dell’installazione firmware; al termine, riavviate KalliopePBX ed accedete all’interfaccia di configurazione puntando il vostro browser all’indirizzo http://<Configured_ip> (porta standard http 80). Le credenziali di default per l'accesso sono: admin/admin.
+   
+   
+   
