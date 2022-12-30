@@ -393,10 +393,12 @@ In questo pannello è possibile gestire il comportamento sulle chiamate in ingre
 - Chiusura di una chiamata: l’evento si innesca quando la chiamata viene conclusa (sia dall’utente locale che da quello remoto)
 
 A ciascuno di questi eventi è possibile associare una o più azioni automatiche che possono essere di due tipi:
+
 - Apertura di un URL personalizzato
 - Esecuzione di un processo esterno
 
 In entrambi casi è possibile inserire nelle azioni i seguenti parametri dinamici:
+
 - <callername>: se presente in rubrica, questo parametro viene sostituito automaticamente con il nome associato al numero dell’interlocutore
 - <callernum>: questo parametro viene sostituito automaticamente con il nome associato al numero dell’interlocutore
 - <extenNum>: questo parametro viene sostituito automaticamente con numero di interno associato all’utente locale
