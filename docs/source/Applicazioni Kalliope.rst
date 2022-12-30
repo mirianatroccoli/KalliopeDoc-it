@@ -417,8 +417,158 @@ Il manuale utente KATC v4 è disponibile in formato pdf al seguente `link <https
 
 
 
-
-
-
 Kalliope Call Center
 ------------
+
+Introduzione
++++++
+Kalliope Call Center è un modulo opzionale di KalliopePBX che aggiunge una serie di funzionalità avanzate specificatamente progettate per le realtà call-center.
+
+Di seguito la lista dei principali servizi compresi nel modulo Kalliope Call Center:
+
+- Kalliope Supervisor Panel
+- CDR CallCenter
+- Call Tagging
+- Servizio di Ascolto/Intrusione/Suggerimento
+- Prenotazione del posizionamento in coda e richiamata automatica
+
+A continuazione viene descritto in dettaglio l'applicativo Kalliope Supervisor Panel. Per maggiori informazioni sulle altre funzionalità incluse nel modulo Kalliope Call Center si faccia riferimento al manuale utente disponibile in pdf al seguente link <https://www.kalliope.com/downloads/>.
+
+Kalliope Supervisor Panel
++++++
+Il software Kalliope Supervisor Panel permette l’accesso alle statistiche relative a tutte le code, in base al ruolo assegnato all’utente loggato, oltre a dare la possibilità di monitorare e cambiare lo stato degli operatori e a gestire gli operatori dinamici.
+Al primo avvio dell’applicativo sarà necessario inserire, tramite il pannello Impostazioni, le credenziali dell’interno registrato sul centralino. Il sistema verifica automaticamente la presenza della licenza Call Center ed il ruolo assegnato all’utente (Supervisor o Operatore).
+
+**Nota**: L’installazione non prevede l’inserimento di alcun codice di attivazione. L’applicazione verifica in automatico la presenza sul centralino KalliopePBX della licenza Call Center a ciascun avvio.
+
+Barra dei Menu
++++++
+La barra dei menu permette di accedere al sotto-menu Impostazioni.
+Il menu Impostazioni presenta le seguenti voci:
+
+- Connetti a KalliopePBX: avvia la connessione con il centralino KalliopePBX
+- Disconnetti da KalliopePBX: interrompe la connessione con il centralino KalliopePBX
+- Mostra schermo intero: avvia la visualizzazione dell’applicazione in modalità schermo intero (shorcut F11)
+- Impostazioni: permette di accedere alla schermata di Impostazioni dell’applicativo
+- Esci (shortcut CTRL+Q): chiude l’applicazione.
+- Pannello delle Impostazioni
+
+Tramite la barra dei menu è possibile accedere alla schermata di configurazione dell’applicazione che si compone di due riquadri: Credenziali e Personalizzazione Logo.
+
+Credenziali
+I parametri configurabili in questa sezione sono i seguenti:
+
+- Indirizzo IP KalliopePBX: l’indirizzo IP assegnato al centralino KalliopePBX a cui si desidera connettersi
+- Username: il nome utente assegnato
+- Password: la password associata all’utente.
+
+**Nota**: Username e password corrispondono alle credenziali configurabili sul centralino KalliopePBX nel pannello “Sistema -> Utenti KCTI/Web”.
+
+
+**Personalizzazione logo**
+In questa sezione è possibile caricare un file immagine contenente un logo personalizzato che verrà visualizzato nella schermata principale dell’applicazione al posto del logo KalliopeCC, come riportato nella figura in basso.
+
+*jpg*
+
+
+Schermata principale
++++++
+La schermata principale di Kalliope Supervisor Panel può essere suddivisa in tre sezioni:
+
+- Barra logo e ora
+- Pannello statistiche
+- Pannello operatore
+
+La prima ha dimensioni fisse e non può essere nascosta, mentre le restanti due hanno un layout modificabile e possono essere ingrandite o ridotte fino ad occupare completamente la schermata principale.
+
+Ciò può risultare comodo, per esempio, quando si voglia mostrare pubblicamente solo la parte riguardante i dati aggregati senza visualizzare i nomi dei singoli operatori. La schermata principale visualizzata cambia a seconda che l’utente loggato abbia il ruolo di Supervisor o di Operatore.
+
+L’utente Supervisor visualizzerà le informazioni relative a tutte le code attive sul centralino e avrà i diritti di messa in pausa e di assegnazione alle code su tutti gli operatori. L’utente operatore, al contrario, visualizzerà solo le code e le statistiche di sua competenza.
+Vediamo, di seguito, le singole le sezioni in dettaglio.
+
+**Barra del logo e ora**
+Come detto in precedenza, questa sezione può essere parzialmente personalizzata, è infatti possibile visualizzare il proprio logo caricandolo nel pannello Impostazioni.
+
+*jpg*
+
+Le informazioni riportate in questa sezione comprendono:
+
+- il logo KalliopeCCenter (o il logo personalizzato scelto dall’utente)
+- Data e ora
+- Il numero totale di chiamate su tutte le code
+- Selezione dell’intervallo temporale: tramite il menu a tendina è possibile scegliere il periodo al quale riferire parte dei dati aggregati contenuti nella sezione sottostante.
+
+
+Pannello statistiche
+++++
+
+Questa schermata fornisce informazioni utili riguardo alle code attive sul centralino (colonne).
+
+I dati riportati nelle singole righe sono:
+
+- Utenti in coda, si aggiorna dinamicamente quando un utente entra o esce da una coda
+- Chiamata più antica, riporta, in secondi, il tempo di permanenza nella coda della chiamata più antica
+- Tempo media di attesa, questa statistica si riferisce sempre all’ultima ora e si aggiorna ogni 5 minuti scaricando e analizzando automaticamente il CDR del mese. Non varia al cambiare dell’intervallo temporale selezionato
+- Operatori attivi, è riportato real-time lo stato degli operatori assegnati alle code: il primo numero si riferisce agli operatori registrati ed attivi (BLF verde), il secondo agli operatori registrati ma in conversazione (BLF rosso), il terzo agli operatori registrati ma in pausa (BLF arancione) ed il quarto agli operatori il cui stato non è disponibile (BLF grigio)
+- Chiamate perse (nel periodo selezionato), varia al cambiare della selezione del periodo di riferimento nel menu a tendina
+- Chiamate servite (nel periodo selezionato), varia al cambiare della selezione del periodo di riferimento nel menu a tendina
+- Tempo medio di attesa (nel periodo selezionato), varia al cambiare della selezione del periodo di riferimento nel menu a tendina
+- Tempo medio di conversazione (nel periodo selezionato), varia al cambiare della selezione del periodo di riferimento nel menu a tendina
+
+
+
+Pannello operatore
++++++
+
+Come per il pannello statistiche, ad ogni colonna è associata una coda d’attesa, mentre le prime due colonne riportano gli operatori registrati sul centralino ed il relativo stato BLF.
+Ad ogni riga corrisponde, invece, un operatore ed i relativi dati per ogni coda alla quale è assegnato (staticamente o dinamicamente).
+Questa matrice permette di avere immediatamente un’idea grafica dello stato delle code.
+La cella che si trova all’intersezione tra un operatore ed una coda sul quale è registrato fornisce al Supervisor importanti informazioni.
+
+*jpg*
+
+
+Il colore della cella cambia a seconda dello stato dell’operatore. Quando l’operatore è attivo la cella sarà verde, mentre sarà arancione se l’operatore è in pausa. Allo stesso modo il pulsante passerà da Pausa a Riattiva a seconda dei casi.
+
+**Nota**: In modalità Operatore il servizio Pausa e Riattiva è disponibile solo relativamente all’operatore stesso, mentre il Supervisor può intervenire su tutti gli operatori.
+
+Oltre allo stato dell’operatore, in ogni cella sono riportate le seguenti informazioni:
+
+- Chiamate servite nel periodo selezionato, in alto a destra
+- Operatore statico o dinamico per quella coda, quest’ultimo caso è indicato dalla presenza della lettera D affianco al numero delle chiamate servite
+- Tempo di operatività sulla coda, indica da quanto tempo lo stato dell’operatore non subisce variazioni, si azzera alla messa in pausa o al ritorno dalla pausa
+- Orario dell’ultima chiamata servita.
+
+
+Aggiunta operatori dinamici
++++++
+Un operatore dinamico è un utente assegnato temporaneamente dal Supervisor, in caso di necessità, ad una o più code.
+A differenza degli operatori statici, gli operatori dinamici non sono assegnati alle code a livello di centrale ma solo a livello dell’applicativo.
+Un operatore dinamico può essere sia un operatore già assegnato ad una coda, che un qualsiasi interno registrato sul centralino e non assegnato a nessuna coda.
+Nel primo caso, il Supervisor può aggiungere l’operatore dinamico cliccando con il tasto destro sulla cella vuota in corrispondenza della coda interessata e selezionando la voce **Aggiungi** dal menu contestuale.
+Allo stesso modo, cliccando con il tasto destro sulla cella interessata, il Supervisor può rimuovere l’operatore dinamico dalla coda.
+
+*jpg*
+
+Nel secondo caso, l’aggiunta avviene utilizzando i menu a tendina che si trovano nell’ultima riga in basso in corrispondenza di ogni coda.
+Tramite questi menu è possibile scegliere un interno registrato sul centralino e non ancora assegnato a nessuna coda.
+Cliccando sul pulsante Aggiungi operatore, l’interno selezionato viene assegnato come operatore dinamico a quella specifica coda, e compare una nuova riga con le informazioni relative al nuovo operatore.
+
+*jpg*
+
+Così come per gli altri operatori dinamici, è sufficiente cliccare con il tasto destro sulla corrispondente cella per rimuovere l’interno da quella coda.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
