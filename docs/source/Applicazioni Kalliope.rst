@@ -334,7 +334,7 @@ Per la procedura di configurazione delle licenze KATC sul centralino KalliopePBX
 
 **Requisiti di Sistema:**
 
-- Sistema operativo Windows 7 o successivo
+- Sistema operativo Windows 7 o successiv
 - Scheda audio presente (per la modalità KATC Phone)
 - 2 GB di RAM
 - 40 MB di spazio per l’installazione
@@ -413,7 +413,7 @@ Impostazioni audio
 Questo pannello è disponibile solo in modalità KATC Phone, e permette di modificare i device audio da utilizzare per il microfono (l’ingresso audio), per l’ascolto (l’uscita audio per ascoltare la conversazione) e per le notifiche (l’uscita audio per la suoneria e le altre notifiche).
 
 Manuale Utente
-Il manuale utente KATC v4 è disponibile in formato pdf al seguente `link <https://www.kalliope.com/downloads/>`.
+Il manuale utente KATC v4 è disponibile in formato pdf al seguente `link <https://www.kalliope.com/downloads/>`_.
 
 
 
@@ -432,7 +432,7 @@ Di seguito la lista dei principali servizi compresi nel modulo Kalliope Call Cen
 - Servizio di Ascolto/Intrusione/Suggerimento
 - Prenotazione del posizionamento in coda e richiamata automatica
 
-A continuazione viene descritto in dettaglio l'applicativo Kalliope Supervisor Panel. Per maggiori informazioni sulle altre funzionalità incluse nel modulo Kalliope Call Center si faccia riferimento al manuale utente disponibile in pdf al seguente link <https://www.kalliope.com/downloads/>.
+A continuazione viene descritto in dettaglio l'applicativo Kalliope Supervisor Panel. Per maggiori informazioni sulle altre funzionalità incluse nel modulo Kalliope Call Center si faccia riferimento al manuale utente disponibile in pdf al seguente `link <https://www.kalliope.com/downloads/>`_.
 
 Kalliope Supervisor Panel
 +++++
