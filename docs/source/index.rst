@@ -12,7 +12,6 @@ Contents
    Manuali
    Add-on
    Applicazioni Kalliope
-   Getting Started
    
 News
 ==========
