@@ -294,8 +294,7 @@ Di seguito riassumiamo la lista delle principali funzionalità:
 .. list-table::  
    :widths: 25
    :header-rows: 1
-
-   * - Parametro     
+   
    * - Funzionalità Kalliope Attendant Console
    * - Rubrica interni
    * - Rubrica condivisa
@@ -321,6 +320,103 @@ Di seguito riassumiamo la lista delle principali funzionalità:
    * - Forking to Mobile
    * - Supporto schermi touch
    * - Trasferimento chiamate Drag&Drop
+
+
+Installazione
++++++
+KalliopeATC è un’applicazione acquistabile separatamente rispetto a KalliopePBX ed è attivabile attraverso l’assegnazione di un’apposita licenza.
+Tramite il Pannello di Configurazione è possibile inserire le credenziali dell’interno registrato sul centralino, il sistema verificherà automaticamente la presenza della rispettiva licenza.
+
+
+**Nota**: L’installazione non prevede l’inserimento di alcun codice di attivazione. L’applicazione verifica in automatico la presenza sul centralino KalliopePBX della corretta licenza di utilizzo a ciascun avvio.
+
+Per la procedura di configurazione delle licenze KATC sul centralino KalliopePBX V4 si faccia riferimento alla sezione Licenze.
+
+**Requisiti di Sistema:**
+
+- Sistema operativo Windows 7 o successivo
+- Scheda audio presente (per la modalità KATC Phone)
+- 2 GB di RAM
+- 40 MB di spazio per l’installazione
+
+Per installare l’applicazione in ambiente Windows è sufficiente lanciare l’eseguibile e seguire le istruzioni.
+
+Configurazione
+++++
+Al primo avvio dell’applicazione comparirà un messaggio che segnala la necessità di inserire i parametri di configurazione.
+
+*jpg*
+
+Successivamente si aprirà automaticamente la schermata di configurazione. Il menu di configurazione è raggruppato per categorie funzionali, ciascuna delle quali dispone di uno o più parametri configurabili.
+
+Modalità applicativa
++++++
+In questa sezione è possibile selezionare la modalità con cui si vuole che venga eseguita l’applicazione: Kalliope Attendant Console CTI oppure Kalliope Attendant Console Phone. Inoltre è possibile selezionare la lingua (Italiano, Inglese o Spagnolo).
+
+Impostazioni KATC
++++++
+I parametri configurabili in questa sezione sono i seguenti:
+
+- Indirizzo IP KalliopePBX: l’indirizzo IP assegnato al centralino KalliopePBX a cui si desidera connettersi
+- Username KCTI: il nome utente assegnato
+- Password KCTI: la password associata all’utente.
+
+**Nota**: Username e password corrispondono alle credenziali configurabili sul centralino KalliopePBX V4 nel pannello Impostazioni di sistema → Gestione degli utenti
+
+Servizi
++++++
+I parametri configurabili in questa sezione sono i seguenti:
+
+- Servizio Copy-to-Call: permette l’abilitazione/disabilitazione del servizio Copy-to-Call. Se abilitato è possibile richiedere l’avvio di una chiamata semplicemente selezionando la stringa contenente il numero e copiandola nella clipboard (ad esempio in ambiente Windows usando la combinazione di tasti CTRL + V). Una volta copiata la stringa l’applicazione provvede in automatico a rimuovere spazi e altri caratteri speciali (# + , : () . /\) e chiede all’utente conferma prima di avviare la chiamata.
+ Avvia minimizzato come icona di sistema: se selezionato fa sì che l’applicazione si avvii minimizzato come icona di sistema.
+- Importa contatti Microsoft Outlook: se selezionato KATC sincronizzerà automaticamente all’avvio i contatti Microsoft Outlook. I contatti importati appariranno nella rubrica contrassegnati dall’icona.
+- Abilita popup di ricezione chiamata: permette di abilitare o disabilitare il popup di notifica di ricezione chiamata.
+- Metti in pausa su tutte le code al logout
+- Metti in pausa su tutte le code alla risposta di una chiamata di coda
+- Abilita aggiornamenti automatici: scarica automaticamente ad ogni avvio gli aggiornamenti Kalliope Attendant Console disponibili.
+
+Integrazione telefono
++++++
+In modalità Kalliope Attendant Console CTI è possibile pilotare l'apparato telefonico associato, tramite le API native. Questa funzionalità è disponibile, al momento, solo con telefoni Snom e Yealink.
+
+Lista account
+++++++
+In questo riquadro vengono riportati tutti gli account associati all’utente con informazioni su marca, modello, firmware e MAC address dell’account. Sarà cura dell’utente selezionare l’account da associare a KATC.
+
+Azioni automatiche
+++++++++
+
+In questo pannello è possibile gestire il comportamento sulle chiamate in ingresso attraverso la configurazione di azioni da innescare al verificarsi dei seguenti eventi:
+
+- Arrivo di una chiamata (equivalente allo squillo)
+- Risposta ad una chiamata: l’evento si innesca quando la chiamata in ingresso viene risposta
+- Chiusura di una chiamata: l’evento si innesca quando la chiamata viene conclusa (sia dall’utente locale che da quello remoto)
+
+A ciascuno di questi eventi è possibile associare una o più azioni automatiche che possono essere di due tipi:
+- Apertura di un URL personalizzato
+- Esecuzione di un processo esterno
+
+In entrambi casi è possibile inserire nelle azioni i seguenti parametri dinamici:
+- <callername>: se presente in rubrica, questo parametro viene sostituito automaticamente con il nome associato al numero dell’interlocutore
+- <callernum>: questo parametro viene sostituito automaticamente con il nome associato al numero dell’interlocutore
+- <extenNum>: questo parametro viene sostituito automaticamente con numero di interno associato all’utente locale
+- <uid>: questo parametro viene sostituito automaticamente con un id univoco di chiamata
+
+In figura è riportata la schermata di configurazione degli eventi automatici. La tabella posta nella parte superiore del pannello contiene la lista delle azioni configurate, indicando per ciascuna di esse la tipologia di evento (“IN” = chiamata in arrivo, “RIS” = risposta ad una chiamata, “FIN” = chiusura di una chiamata), la tipologia di azione (“EXE” = esecuzione di un processo esterno, “URL” = apertura di un url dinamico) e il dettaglio dell’azione.
+
+Una volta salvata un’azione, è sempre possibile modificarla o eliminarla semplicemente selezionandola nella tabella e cliccando sull’apposito tasto (Modifica azione/Elimina azione). Per ciascuna azione è possibile indicare se deve essere applicata anche nel caso di chiamate tra interni o solo quando l’utente remoto è una utenza esterna e, inoltre, se deve essere applicata anche per le chiamate uscenti.
+
+
+Impostazioni audio
+Questo pannello è disponibile solo in modalità KATC Phone, e permette di modificare i device audio da utilizzare per il microfono (l’ingresso audio), per l’ascolto (l’uscita audio per ascoltare la conversazione) e per le notifiche (l’uscita audio per la suoneria e le altre notifiche).
+
+Manuale Utente
+Il manuale utente KATC v4 è disponibile in formato pdf al seguente `link <https://www.kalliope.com/downloads/>`.
+
+
+
+
+
 
 Kalliope Call Center
 ------------
