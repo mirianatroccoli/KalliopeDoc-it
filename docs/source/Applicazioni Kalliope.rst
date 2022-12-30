@@ -165,6 +165,28 @@ kcti.ini si trova nella stessa directory dei trace (quindi AppData\Roaming\KCTI4
 
 Si ricorda poi che il kcti.ini va modificato manualmente quando il Kcti non è in esecuzione
 
+
+
+API
++++++
+Il client mette a disposizione all'utente delle API per poter effettuare delle azioni in maniera programmatica senza l'utilizzo dell'interfaccia grafica.
+Le azioni disponibili sono:
+
+- chiamare un numero
+- chiudere la chiamata corrente
+- trasferire con o senza offerta di una chiamata in corso
+- mettersi/togliersi dalla pausa su tutte le code
+- abilitare/disabilitare il DND
+- recuperare i dati della chiamata attiva
+
+Per le versioni dalla 4.5.0 in su è disponibile una collection `Postman <https://www.postman.com/>`_ per testare le API del KalliopeCTI client scaricabile dal seguente link: KalliopeCTI Client (vers.4.5.x) postman collection È possibile inoltre scaricare in formato pdf un manuale operativo delle API del Kalliope CTI client dal questo `link <https://www.kalliope.com/wiki/kcti4_client_api_4.5.pdf/>`_.
+
+
+
+
+
+
+
 KalliopeCTI Mobile
 ------------
 
