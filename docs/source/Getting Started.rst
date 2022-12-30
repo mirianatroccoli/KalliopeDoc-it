@@ -1,8 +1,8 @@
 Getting Started
-----------
+=====
 
 **Mini/Lite**
-++++
+----
 
 1. COM1 ( Console 115200 8/n/1)
 2. Gigabit Ethernet (eth0)
@@ -23,7 +23,7 @@ Prima installazione
 
 
 **V4R/V4R+**
-++++
+-----
 
 KalliopePBX v4 Rackmount (Hw rev. 3)
 ++++
