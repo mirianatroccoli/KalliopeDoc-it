@@ -1,4 +1,4 @@
-.. image:: ../KalliopeDoc/kalliope_monitoring.png
+.. image:: KalliopeDoc/docs/source/kalliope_monitoring.png
   :width: 400
   :alt: Alternative text
 
