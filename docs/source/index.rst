@@ -1,5 +1,5 @@
 
-.. image:: ../docs/source/kalliope_monitoring.png
+.. image:: ../docs/images/kalliope_monitoring.png
   :width: 400
 
 Benvenuti nella documentazione tecnica Kalliope
