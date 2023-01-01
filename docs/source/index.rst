@@ -1,3 +1,9 @@
+.. image:: mirianatroccoli/KalliopeDoc/kalliope_monitoring.png
+  :width: 400
+  :alt: Alternative text
+
+
+
 Benvenuti nella documentazione tecnica Kalliope
 ==========================
 La documentazione tecnica è dedicata agli utenti ed ai partner Kalliope.
