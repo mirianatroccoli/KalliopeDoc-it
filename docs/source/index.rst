@@ -1,4 +1,4 @@
-.. image:: mirianatroccoli/KalliopeDoc/kalliope_monitoring.png
+.. image:: ../KalliopeDoc/kalliope_monitoring.png
   :width: 400
   :alt: Alternative text
 
