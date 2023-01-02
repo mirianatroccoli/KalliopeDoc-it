@@ -20,7 +20,7 @@ Il servizio di registrazione delle chiamate è disponibile solo all’utente spe
 - Visualizza registro (delle chiamate registrate)
 - Modifica Impostazioni (del servizio di registrazione)
 
-1. Visualizzazione registro delle chiamate
+Visualizzazione registro delle chiamate
 +++++
 
 Nel registro delle chiamate registrate il privacyadmin (così come gli utenti eventualmente da lui delegati) può accedere alla lista delle registrazioni delle chiamate, effettuare ricerche avanzate, ascoltare le registrazioni direttamente dal browser web (cliccando sul simbolo Play.png ) oppure scaricarle sul proprio PC (cliccando sul simbolo Download.png).
@@ -39,7 +39,7 @@ Ogni mese viene creato automaticamente un nuovo tab per rendere la consultazione
 - Tipo di destinazione
 - Nome destinazione
 
-2. Impostazioni servizio di registrazione delle chiamate
+Impostazioni servizio di registrazione delle chiamate
 +++++
 
 In questa pagina è possibile impostare le entità che regolano il comportamento del servizio di registrazione delle chiamate. Per prima cosa è possibile impostare uno o più percorsi di archiviazione su cui andare a salvare le registrazioni. Oltre allo storage locale è infatti possibile selezionare percorsi di registrazione remoti (se opportunamente configurati). Nel riquadro "Entità abilitate alla registrazione delle chiamate" è possibile invece impostare le varie regole di registrazione desiderate.
