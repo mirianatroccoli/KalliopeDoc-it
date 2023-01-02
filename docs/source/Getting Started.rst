@@ -343,3 +343,30 @@ Prima installazione
    
    
    
+Virtual Machine
+-----
+
+VMWare
+++++++++++
+
+1. Scaricare l'immagine virtuale di KalliopePBX. KalliopePBX VM è disponibile in ambiente VMWare ESXi 5.x o superiore ai link seguenti. Le due immagini differiscono per il numero massimo di virtual CPU che sono visibili dal kernel (fino a 8 per la seconda, e oltre le 8 fino ad un massimo teorico di 128 per la prima) e per la dimensione del disco di sistema, che per la prima è 120 GB mentre per la seconda è limitato a 40GB (valori incrementabili con una semplice procedura eseguibile da console VMWare).
+
+.. list-table::  
+   :widths: 25 25
+   :header-rows: 1
+
+   * - Immagine
+     - Link Download
+   * - KalliopePBX v4 (supporta oltre le 8vCPU)
+     - https://areaclienti.vianova.it/drive/download/BeWHIH36hbF12cM1/ (KalliopePBXv4_esxi5_128vcpu_120GB.ova)
+   * - KalliopePBX v4 (supporta un massimo di 8 vCPU)
+     - https://areaclienti.vianova.it/drive/download/bmOBoFRXDaSlcH2K/ (KalliopePBXv4_esxi5_bl-1.0.5-7156.ova)
+   
+   
+2. Importare l'immagine scaricata nell'ambiente di virtualizzazione. Al primo avvio la macchina viene avviata in modalità recovery, ossia con il solo bootloader e senza firmware telefonico.
+
+3. Accedere alla GUI all'indirizzo predefinito 192.168.0.100:10080 . Nel caso compaia l'errore UNSAFE_PORT seguire questa procedura (Clicca qui).
+
+NOTA: E' disponibile un accesso console (con credenziali manager/manager, accessibile solo nella modalità recovery) che permette di effettuare la modifica dell'indirizzo IP dell'interfaccia eth0, nel caso in cui non sia possibile accedere all'indirizzo predefinito viq web browser.
+
+4. Cambiare la configurazione di rete dal Menu Strumenti (cliccare sul simbolo Menu tools button.png) in alto a destra in modo che la centrale possa uscire su internet e quindi raggiungere il license server.
