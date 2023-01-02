@@ -36,6 +36,10 @@ Sezione per iniziare
 Manuale di Amministrazione
 -----------
 
+.. toctree::
+
+   Manuale di Amministrazione.rst
+
 
 Privacy Admin
 -----------
