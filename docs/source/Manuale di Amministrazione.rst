@@ -435,8 +435,334 @@ Cliccando su **Attiva nuova licenza G729** si accede alla procedura di attivazio
 Una volta inserite le informazioni richieste è possibile cliccare sul pulsante Attiva per completare la procedura.
 
 
+Linee di uscita e di ingresso
+------
+Le "linee di uscita e di ingresso" sono tutte le linee SIP attraverso le quali il PBX può effettuare e ricevere chiamate a/da numeri esterni, cioè non non un servizio o un interno (account SIP locale).
+
+Chiamate a numeri esterni
++++++
+Le chiamate a numeri esterni non vengono inoltrate direttamente alle linee di uscita, ma sono presentate al motore di instradamento in uscita. Questo motore decide se l'utente/entità chiamante è autorizzato ad effettuare la chiamata al numero di destinazione e quali linee di uscita possono essere usate.
+
+Le chiamate possono raggiungere il motore di instradamento in uscita dal piano di numerazione o direttamente attraverso un'azione di trabocco di una destinazione precedente (per esempio, una chiamata ad un interno può essere inoltrata ad un numero esterno in caso di non risposta). In entrambi i casi, la chiamata in uscita richiesta ha due parametri associati: l'identità di uscita e la classe di instradamento in uscita.
 
 
+Identità di uscita
++++++
+L'identità di uscita è il numero di interno usato per derivare il CLID per le chiamate esterne (secondo la relativa tabella di manipolazione). L'identità di uscita può essere impostata esplicitamente in caso di azioni di trabocco, mentre è assegnata automaticamente in caso di chiamate eseguite da un account SIP o chiamate trasferite o inoltrate:
+
+- **Chiamate eseguite da un account SIP**: L'identità di uscita assegnata è l'interno a cui è assegnato l'account SIP.
+- **Chiamate inoltrate da un dispositivo**: Come sopra.
+- **Chiamate inoltrate usando il servizio di inoltro di chiamata (incondizionato) di KalliopePBX**: L'identità di uscita assegnata è il numero dell'interno inoltrante.
+- **Chiamate trasferite (usando i codici di KalliopePBX o le funzionalità del telefono)**: L'identità di uscita assegnata è il numero dell'interno trasferente.
+
+In tutti questi casi, se il chiamante richiede di presentarsi anonimamente (secondo i diversi metodi CLIR supportati), l'identità di uscita mantiene il numero di interno per la durata della chiamata, e la restrizione del numero chiamante viene effettivamente eseguita quando la chiamata raggiunge la linea di uscita (o l'account SIP di destinazione in caso di chiamate interne).
+
+Classe di instradamento in uscita
++++++
+La classe di instradamento in uscita definisce l'effettiva gestione della chiamate, cioè se è permessa, e, se sì, la sequenza di linee di uscita da usare per eseguire a chiamata.
+
+Tranne se esplicitamente assegnata da un'azione di trabocco, la scelta di classe di instradamento in uscita è derivata automaticamente dall'identità di uscita.
+
+Configurazione del servizio
++++++
+Le linee possono essere configurate nel pannello Gateway e Domini VoIP.
+
+
+*jpg*
+
+La schermata "Gateway e domini VoIP" raccoglie la configurazione di tutte le linee di ingresso/uscita dal PBX.
+
+KalliopePBX supporta sia gateway fisici (che interconnettono la rete telefonica interna a linee analogiche, ISDN o GSM) che terminazioni e trunk VoIP, in entrambi i casi sfruttando il protocollo standard SIP.
+
+Possono essere configurati più gateway e più terminazioni o trunk VoIP contemporaneamente. Tramite questa schermata è possibile effettuare le seguenti operazioni:
+
+- Aggiungere un dominio VoIP (o modificarne uno esistente)
+- Aggiungere un gateway fisico (o modificarne uno esistente)
+- Aggiungere una terminazione VoIP (o modificarne uno esistente)
+- Aggiungere un trunk VoIP (o modificarne uno esistente)
+
+La differenza tra terminazione VoIP e trunk è data dal fatto che nel primo caso, ad ogni account di registrazione/autenticazione corrisponde un unico numero telefonico, mentre nel secondo caso si ha che a fronte di una unica credenziale di autenticazione, è possibile utilizzare un arco di numeri che solitamente condividono un radicale comune.
+
+**NOTA**: Per poter creare una terminazione VoIP o un trunk è necessario prima creare un dominio VoIP a cui associarlo.
+
+Nella tabella seguente sono descritte le colonne della lista delle linee di uscita.
+
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Colonna
+     - Descrizione
+     - Valore
+   * - Abilitato
+     - Indica se la linea di uscita risulta abilitata o no
+     - Abilitato / Non abilitato
+   * - Nome
+     - Il nome simbolico assegnato alla linea
+     -
+   * - Identificativo
+     - Identificativo univoco assegnato alla linea. Nel caso di trunk o terminazioni VoIP è lo username di autenticazione
+     -
+   * - Tipo
+     - Se non si tratta di un gateway fisico indica il tipo di linea
+     - Trunk / Terminazione VoIP
+   * - Stato
+     - **Nel caso di gateway fisici con registrazione in ingresso disabilitata** lo stato raggiungibile / non raggiungibile indica se il peer risponde o meno ai messaggi SIP OPTIONS. Se la registrazione è abilitata indica invece se la registrazione da parte del gateway è stata completata con successo.
+**Nel caso di domini VoIP** lo stato raggiungibile / non raggiungibile indica se il peer risponde o meno ai messaggi SIP OPTIONS.
+**Nel caso di trunk e terminazioni VoIP con abilitata registrazione remota** lo stato raggiungibile / non raggiungibile indica se la registrazione ha avuto successo. Se la registrazione remota è disabilitata viene visualizzato lo stato Statico.
+Lo stato in sospeso compare solo se un elemento è stato aggiunto ma la configurazione non è stata ancora applicata
+     - 
+   * - RTT
+     - Round-Trip Time di un pacchetto SIP tra centralino e gateway o tra centralino e dominio/server VoIP dell’operatore
+     - Valore espresso in ms
+   * - Mostra
+     - Visibile se NON è acquisito il lock. Cliccando sul simbolo si possono visualizzare in sola lettura le impostazioni della linea
+     - Icona Ingrandimento
+   * - Modifica
+     - Visibile solo se acquisito il lock. Cliccando sul simbolo si entra nella pagina di modifica della linea
+     - Icona matita
+   * - Elimina
+     - Visibile solo se acquisito il lock. Cliccando sul simbolo si elimina la linea
+     - Icona cestino
+ 
+ 
+Utenti e ruoli
+----
+
+Utenti
+++++
+
+L'accesso all'interfaccia utenti di KalliopePBX (insieme ai servizi CTI, la rubrica LDAP, ecc.) è assegnato agli utenti. Esistono due tipi di utenti: predefiniti e custom. Gli utenti predefiniti includono utenti dedicati a funzioni amministrative o riguardati i servizi, i cui ruoli sono normalmente predefiniti e non modificabili, mentre gli utenti custom sono utenti aggiuntivi che possono essere creati e assegnati a ruoli personalizzati.
+
+Ad ogni utente sono assegnati permessi riguardanti la GUI, i clienti CTI e le API.
+
+- **GUI**: gli utenti con accesso GUI possono accedere all'interfaccia web di KalliopePBX; l'accesso GUI permette anche l'accesso al server LDAP integrato.
+- **CTI**: gli utenti con accesso CTI possono usare le applicazioni di Kalliope (CTI, Logger, Supervisor Panel) che si connettono al PBX usando il socket e protocollo CTI.
+- **API**: gli utenti con accesso API possono invocare le API REST di KalliopePBX disponibili su http[s]://<indirizzo IP del PBX>/rest/ (vedi API REST).
+
+Utenti predefiniti
++++++
+
+Il primo esempio di utente predefinito è l'admin (la cui password di default è "admin"). L'admin è la figura tecnica primaria, usata solitamente per la configurazione di sistema. Utenti aggiuntivi possono avere permessi di configurazione, ma possono essere limitati a specifici pannelli della GUI, secondo il loro Ruolo assegnato.
+
+Nella tabella seguente sono descritti gli utenti predefiniti con i relativi permessi di accesso. (Nota: il simbolo (+) indica che il permesso è assegnato di default e non può essere revocato; il simbolo (-) indica che è e possibile scegliere se assegnare o meno i permessi.)
+   
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Username
+     - Permessi di accesso
+     - Note
+   * - **admin**
+     - GUI (+), CTI (+), API (+)
+     - L'utente tecnico primario. Ha permessi completi per la configurazione del PBX, sia del sistema (network, servizi network) che della telefonia (entità, servizi, ecc.). Ha pieno accesso ai log e registri, ma ha alcune limitazioni per quanto riguarda aspetti relativi alla privacy degli utenti. Prima di tutto, non può visualizzare in pieno i numeri di telefono esterni nel CDR, ma gli verranno mostrati solo con le ultime tre cifre oscurate da "xxx"; in più, l'utente admin non ha accesso alla configurazione e i file di registrazione di chiamata, a cui può solo accedere l'utente privacyadmin (e utenti da lui delegati).
+   * - **privacyadmin**
+     - GUI (-), API (-)
+     - Questo utente ha pieno accesso ai numeri di telefono esterni nel CDR ed è l'unico a poter configurare l'autorizzazione alla registrazione di chiamata. Può anche accedere ai registri di registrazione chiamate, ascoltare e scaricare le chiamate registrate e delegare i suoi poteri ad altri utenti, assegnandogli l'accesso ai numeri completi nel CDR e alla lista delle chiamate registrate con i relativi file.
+   * - **phonebook**
+     - GUI (-), API (-)
+     - Questo utente ha accesso in lettura alla rubrica del KalliopePBX. Deve essere attivato dal pannello "Impostazioni di sistema" -> "Gestione utenti", assegnandogli una password e i relativi permessi di accesso. NOTA: l'accesso GUI include l'accesso al server LDAP integrato, dove viene pubblicata la rubrica di KalliopePBX (secondo le impostazioni definite nel pannello "Rubrica" -> "Impostazioni LDAP". L'utente "phonebook" è utile per avere una singola identità (configurabile con provisioning) usata dai telefoni per accedere alla rubrica di KalliopePBX con LDAP.
+   * - **click2call**
+     - GUI (-), API (-)
+     - Questo utente è utile se si vuole usare applicazioni third party per mandare comandi click-to-call (usando l'API REST /rest/phoneServices/c2c/{dest_exten}/{source_exten}) usando un singolo utente con permessi limitati.
+     
+Multitenant
++++++
+In fase di attivazione della licenza multitenant, il PBX e le entità dei tenant, che erano prima raggruppate in una singola entità amministrativa, vengono separate, creando un nuovo utente predefinito **pbxadmin** (la cui password di default è "admin").
+
+La gestione del PBX come sistema viene assegnata al nuovo utente "pbxadmin", che ha sia accesso GUI che accesso CTI, mentre l'utente "admin" mantiene il controllo dei servizi telefonici del tenant. Dato che è possibile creare più di un tenant, ognuno con il proprio utente "admin", è necessario estendere lo username in modo da specificare il proprio dominio. Il dominio predefinito del tenant preesistente è "default", quindi gli utenti predefiniti predefiniti diventano admin@default, privacyadmin@default, ecc.
+
+Per ogni nuovo tentant creato (con dominio "sampledomain") vengono generati i relativi utenti predefiniti, admin@sampledomain, privacyadmin@sampledomain, phonebook@sampledomain, ecc.
+
+Gli utenti admin@default e admin@sampledomain sono completamente indipendenti tra loro e ciascuno può solo gestire il proprio tenant.
+
+**NOTA**: se un utente non specifica il proprio dominio durante il login (per esempio, usando "admin" invece che "admin@somedomain"), viene preso come appartenente al dominio di default e autenticato di conseguenza.
+
+   
+Utenti custom
+++++
+
+È possibile creare altri utenti. Per ora, gli utenti custom devono essere associati ad un **Interno**. Gli utenti custom possono essere creati nel pannello "Modifica Interno", definendo un username unico per il tenant e assegnando permessi di accesso GUI, CTI e/o API. Ogni utente viene creato con il ruolo di "Tenant User", ma è successivamente possibile selezionare un altro ruolo fra quelli disponibili. Come spiegato sotto, i ruoli sono gestiti attraverso il pannello "Impostazioni di sistema" -> "Gestione ruoli", dove si può assegnare permessi di accesso ad ogni pannello della GUI, permettendo all'admin di delegare specifiche mansioni di configurazione ad altri utenti.
+
+Configurazione utenti
++++++
+*jpg*
+
+Quando, durante la creazione di un interno, viene selezionata la casella Crea utente locale, viene automaticamente generato un **utente** GUI con le credenziali impostate in fase di creazione.
+
+Per la modifica e la gestione di tali utenti è necessario accedere alla sezione Gestione utenti e ruoli nel menu Impostazioni di sistema.
+
+Accedendo alla configurazione degli utenti è possibile:
+
+- Modificare le credenziali (nome utente e password) di accesso alla GUI e ai client
+- Assegnare un ruolo ed i relativi permessi di lettura / scrittura della configurazione
+- Abilitare / Disabilitare l'accesso alla GUI e ai client
+- Assegnare le seguenti licenze: KalliopeCTI Pro, KalliopeCTI Phone, Kalliope Attendant Console CTI, Kalliope Attendant Console Phone
+
+Una volta creati, gli utenti custom non possono essere modificati dal pannello "Modifica interno" ma appariranno nel pannello "Impostazioni di sistema" -> "Gestione utenti" insieme agli utenti predefiniti.
+     
+     
+Autenticazione
+++++
+Gli utenti vengono autenticati con un controllo password, usando uno dei due metodi di autenticazione disponibili.
+
+Il primo è "Local Authentication": la password viene gestita dal centralino, e la sua hash è salvato sul database interno per l'autenticazione. Questo è l'unico metodo disponibile per l'utente "admin".
+
+KalliopePBX può anche autenticare gli utenti attraverso servizi esterni; i servizi supportati sono Microsoft Active Directory e server LDAP. I servizi esterni di autenticazione sono definiti a livello di tenant, quindi devono gestire username della forma "user@tenant_domain".
+     
+     
+Ruoli
++++++
+Ad ogni utente è assegnato un ruolo che determina i suoi permessi di accesso ai vari pannelli. Gli utenti predefiniti hanno ruoli predefiniti (che per ora non sono assegnabili a utenti custom), dato che i loro permessi sono fissi.
+
+Gli utenti custom hanno come ruolo predefinito quello di "Tenant User" (o semplicemente "User"). Gli utenti con questo ruolo hanno accesso al proprio CDR e alle varie rubriche (locale, condivisa, personale).
+
+È possibile creare altri ruoli (detti ruoli "Power User") e assegnarli agli utenti custom. Ogni ruolo ha un attributo di priorità (un valore intero da 1 a 99; gli utenti standard hanno priorità 0, mentre il tenant admin ha priorità 100) che viene usato per risolvere la contesa del lock della configurazione. Gli utenti possono acquisire il lock anche se è già stato acquisito da un altro utente, ammesso che il suo ruolo abbia priorità più alta di quello dell'altro utente. Nota: acquisire il lock da un altro utente annullerà tutti i cambiamenti effettuati da quest'ultimo.     
+     
+     
+     
+Configurazione ruoli
++++++
+La prima configurazione consiste nell'assegnare al ruolo una priorità, le priorità possono avere un valore compreso tra 0 e 99. Gli utenti con priorità più alta possono togliere il lock agli utenti con priorità più bassa e le modifiche non salvate verranno perse. Il campo Descrizione richiede un identificativo in modo da poter riconoscere ed assegnare velocemente il ruolo agli utenti desiderati.
+
+I ruoli personalizzati possono essere configurati selezionando il livello di accesso a ciascun pannello fra quelli disponibili:
+
+I ruoli personalizzati possono essere configurati selezionando il livello di accesso a ciascun pannello fra quelli disponibili:
+
+- "nessuno": l'utente non può accedere al pannello e il link al pannello non sarà visualizzato nel menù di navigazione (è bloccato anche l'accesso diretto all'URL del pannello)
+- "elenco": l'utente ha accesso in lettura al pannello con l'elenco delle relative entità (per esempio, la lista degli interni) ma non può accedere ai dettagli di ciascuna voce o eseguire azioni su di esse
+- "lettura": l'utente può accedere sia al pannello di elenco che a quelli delle singole voci, ma solo in lettura
+- "scrittura": l'utente ha pieno accesso di lettura/scrittura alle relative entità
+Nella tabella seguente sono illustrati i parametri che è possibile definire per ogni ruolo.
+     
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Priorità
+     - Abilitare o disabilitare un interno senza perderne la configurazione
+     - Numerico (tra 0 e 99)
+   * - Descrizione
+     - Scegliere quale template utilizzare per quell’interno
+     - Alfa-numerico
+
+**Permessi**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Gestione degli interni
+     - Abilita gli utenti a gestire gli interni in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione dei template degli interni
+     - Abilita gli utenti a gestire i template degli interni in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura 
+   * - Gestione degli account
+     - Abilita gli utenti a gestire gli account in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura     
+   * - Gestione dei template degli account
+     - Abilita gli utenti a gestire i template degli account in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione delle code
+     - Abilita gli utenti a gestire le code in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione dei gruppi	
+     - Abilita gli utenti a gestire i gruppi in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione delle classi di musica di attesa
+     - Abilita gli utenti a gestire le classi di musica di attesa in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione dei domini VoIP
+     - Abilita gli utenti a gestire i domini VoIP in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura     
+   * - Gestione delle linee di uscita
+     - Abilita gli utenti a gestire le linee di uscita in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione dei file audio
+     - Abilita gli utenti a gestire i file audio in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione delle regole LCR
+     - Abilita gli utenti a gestire le regole LCR in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione delle classi LCR
+     - Abilita gli utenti a gestire le classi LCR in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione dei controlli orari
+     - Abilita gli utenti a gestire i controlli orari in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura     
+   * - Gestione del piano di numerazione
+     - Abilita gli utenti a gestire il piano di numerazione in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione delle selezioni personalizzate nel piano di numerazione
+     - Abilita gli utenti a gestire le selezioni personalizzate in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione della configurazione di rete
+     - Abilita gli utenti a gestire la configurazione di rete in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione delle impostazioni SIP
+     - Abilita gli utenti a gestire le impostazioni SIP in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione dei menu IVR
+     - Abilita gli utenti a gestire i menu IVR in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione delle stanze di audioconferenza
+     - Abilita gli utenti a gestire le stanze di audioconferenza in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione operativa delle stanze di audioconferenza
+     - Abilita gli utenti a gestire le oprazioni delle stanze di audioconferenza in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione dei ruoli
+     - Abilita gli utenti a gestire i ruoli in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Servizi in chiamata
+     - Abilita gli utenti a gestire i servizi in chiamata in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione delle impostazioni generali
+     - Abilita gli utenti a gestire le impostazioni generali in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura     
+   * - Gestione degli utenti GUI
+     - Abilita gli utenti a gestire gli utenti GUI in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura
+   * - Gestione delle licenze
+     - Abilita gli utenti a gestire le licenze in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura     
+   * - Gestione impostazioni audio
+     - Abilita gli utenti a gestire le impostazioni audio in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura     
+   * - Gestione degli interruttori
+     - Abilita gli utenti a gestire gli interruttori in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura     
+   * - Gestione dei template di provisioning
+     - Abilita gli utenti a gestire i template di provisioning in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura   
+   * - Gestione dei device di provisioning
+     - Abilita gli utenti a gestire i device di provisioning in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura     
+   * - Strumenti di diagnostica
+     - Abilita gli utenti a gestire gli strumenti di diagnostica in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura        
+   * - Gestione della rubrica condivisa
+     - Abilita gli utenti a gestire la rubrica condivisa in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura     
+   * - Visualizzazione del registro delle chiamate
+     - Abilita gli utenti a visualizzare il registro delle chiamate
+     - Nessuno / Elenco / Lettura / Scrittura        
+   * - Impostazioni SSL
+     - Abilita gli utenti a gestire le impostazioni SSL in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura        
+   * - Gestione delle impostazioni LDAP
+     - Abilita gli utenti a gestire le impostazioni LDAP in base al permesso configurato
+     - Nessuno / Elenco / Lettura / Scrittura        
 
 Descrizione interfaccia
 =====
