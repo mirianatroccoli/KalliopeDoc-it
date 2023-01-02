@@ -50,6 +50,12 @@ Privacy Admin
 
    Privacy Admin
 
+Procedure Guidate
+======
+
+.. toctree::
+
+   Procedure guidate.rst
 
 
 Aggiornamenti Firmware Changelog e Release Notes
