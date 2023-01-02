@@ -87,6 +87,9 @@ Per creare un nuovo interno procedere cliccando su "Aggiungi interno".
    :widths: 25 25 50
    :header-rows: 1
    
+   * - Parametro
+     - Descrizione
+     - Valore   
    * - Crea casella vocale
      - Consente di creare la casella vocale dell’interno
      - Si / No
@@ -111,7 +114,10 @@ Per creare un nuovo interno procedere cliccando su "Aggiungi interno".
 .. list-table::  
    :widths: 25 25 50
    :header-rows: 1
-   
+
+   * - Parametro
+     - Descrizione
+     - Valore
    * - Crea utente locale
      - Consente di creare un utente locale sul KalliopePBX nel caso in cui sia necessario abilitare l’accesso GUI o CTI
      - Si / No
@@ -133,7 +139,10 @@ Per creare un nuovo interno procedere cliccando su "Aggiungi interno".
 .. list-table::  
    :widths: 25 25 50
    :header-rows: 1
-   
+
+   * - Parametro
+     - Descrizione
+     - Valore
    * - Template dell’interno
      - Indica il template contenente i parametri di default da utilizzare per la tipologia di interno prescelta. Tutti gli attributi successivamente presenti nel pannello importano i valori di default ma è possibile sovrascriverli se necessario
      - Template Interni
@@ -144,7 +153,10 @@ Per creare un nuovo interno procedere cliccando su "Aggiungi interno".
 .. list-table::  
    :widths: 25 25 50
    :header-rows: 1
-   
+
+   * - Parametro
+     - Descrizione
+     - Valore
    * - Mostra nella rubrica locale
      - Abilita o disabilita la visualizzazione dell’interno nella rubrica degli interni
      - Si / No
@@ -171,6 +183,9 @@ Per creare un nuovo interno procedere cliccando su "Aggiungi interno".
    :widths: 25 25 50
    :header-rows: 1
    
+   * - Parametro
+     - Descrizione
+     - Valore   
    * - Classe di instradamento in uscita standard
      - Indica la classe di instradamento associata all'utente quando il lucchetto elettronico è sbloccato. Nel caso in cui la modalità di sblocco del lucchetto elettronico sia impostata ad Aperto questa è la classe applicata a tutte le chiamate.
      - Classi di instradamento in uscita
@@ -184,7 +199,10 @@ Per creare un nuovo interno procedere cliccando su "Aggiungi interno".
 .. list-table::  
    :widths: 25 25 50
    :header-rows: 1
-   
+
+   * - Parametro
+     - Descrizione
+     - Valore
    * - Limite chiamate contemporanee
      - Numero massimo di chiamate contemporanee (in ingresso e in uscita) su tutti gli account associati all'interno ammesse per l’interno. Impostare questo limite ad 1 impedisce all'interno di utilizzare servizi quali il trasferimento con offerta poiché la chiamata in attesa di essere trasferita risulta comunque come chiamata attiva.
      - Numerico (0 = nessun limite)
@@ -198,29 +216,170 @@ Per creare un nuovo interno procedere cliccando su "Aggiungi interno".
 .. list-table::  
    :widths: 25 25 50
    :header-rows: 1
-   
+
+   * - Parametro
+     - Descrizione
+     - Valore
    * - Modalità di sblocco
-     - Consente di scegliere la modalità di sblocco per l’interno.
-       Aperto – Il lucchetto elettronico è sempre sbloccato
-       Codice – Il lucchetto elettronico può essere sbloccato con il codice di sblocco definito nel piano di numerazione
-       Password - Il lucchetto elettronico può essere sbloccato utilizzando il codice di sblocco e digitando successivamente il PIN dei servizi per l’interno
-       - Aperto / Codice / Password
-    * - Politica di sblocco
-      - Consente di scegliere la politica di sblocco per l’interno.
-Per chiamata – Il lucchetto deve essere sbloccato prima di effettuare ogni chiamata
-
-Blocca automaticamente dopo il numero di minuti sottoindicato – Il lucchetto viene bloccato automaticamente allo scadere dell’intervallo indicato
-
-Sbloccato finché l’utente lo blocca nuovamente – Il lucchetto una volta sbloccato deve essere bloccato esplicitamente dall'utente
-      - Per chiamata / Blocca automaticamente dopo il numero di minuti sottoindicato /
-Sbloccato finché l’utente lo blocca nuovamente
-    * - Durata dello sblocco (sec.)
-      - Tempo dopo il quale l’interno viene bloccato. Applicabile solo se la politica di sblocco è Blocca automaticamente dopo il numero di minuti sottoindicato
-      - Numerico
+     - Consente di scegliere la modalità di sblocco per l’interno. **Aperto** –> Il lucchetto elettronico è sempre sbloccato **Codice** –> Il lucchetto elettronico può essere sbloccato con il codice di sblocco definito nel piano di numerazione **Password** -> Il lucchetto elettronico può essere sbloccato utilizzando il codice di sblocco e digitando successivamente il PIN dei servizi per l’interno
+     - Aperto / Codice / Password
+   * - Politica di sblocco
+     - Consente di scegliere la politica di sblocco per l’interno. **Per chiamata** –> Il lucchetto deve essere sbloccato prima di effettuare ogni chiamata **Blocca automaticamente dopo il numero di minuti sottoindicato** –> Il lucchetto viene bloccato automaticamente allo scadere dell’intervallo indicato **Sbloccato finché l’utente lo blocca nuovamente** –> Il lucchetto una volta sbloccato deve essere bloccato esplicitamente dall'utente
+     - Per chiamata / Blocca automaticamente dopo il numero di minuti sottoindicato / Sbloccato finché l’utente lo blocca nuovamente
+   * - Durata dello sblocco (sec.)
+     - Tempo dopo il quale l’interno viene bloccato. Applicabile solo se la politica di sblocco è Blocca automaticamente dopo il numero di minuti sottoindicato      -
+     - Numerico
 
 **Prelievo di chiamata di gruppo**
 
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
 
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Gruppi di appartenenza
+     - Elenco dei gruppi autorizzati a prelevare le chiamate dirette all’interno (le chiamate dirette a questo interno possono essere prelevate da tutti gli interni con autorizzazione al prelievo su uno di questi gruppi).
+     - Gruppo di prelievo
+   * - Autorizzazione al prelievo
+     - Elenco dei gruppi su cui l’interno è autorizzato a prelevare chiamate (l’interno può prelevare le chiamate dirette ad interni che hanno tra i gruppi di appartenenza un gruppo su cui l’interno è autorizzato al prelievo)
+     - Gruppo di prelievo
+
+
+**Trabocchi**
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Interno
+     - Azione di trabocco su chiamate provenienti da un interno (anche remoto)
+     - 
+   * - Esterno
+     - Azione di trabocco sulle chiamate provenienti dall’esterno
+     - 
+   * - Trasferimento
+     - Azione di trabocco sui trasferimenti di chiamata
+     - 
+   * - Timeout (sec.)
+     - Tempo alla scadenza del quale viene eseguita l’azione di trabocco configurata in caso di nessuna risposta
+     - Numerico
+   * - Nessuna risposta
+     - La chiamata è considerata senza risposta alla scadenza del timeout
+     - Riaggancia / Selezione personalizzata / Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
+   * - Occupato
+     - L’interno è considerato occupato se è stato raggiunto il Busy Level impostato per l’interno oppure se il terminale invia il SIP Response 486 Busy Here
+     - Riaggancia / Selezione personalizzata / Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
+   * - Non disponibile
+     - L’interno è considerato non disponibile se il terminale non è registrato o non è raggiungibile a livello IP oppure se il terminale invia il SIP Response 480 Temporarily Unavailable
+     - L’interno è considerato occupato se è stato raggiunto il Busy Level impostato per l’interno oppure se il terminale invia il SIP Response 486 Busy Here
+     - Riaggancia / Selezione personalizzata / Chiedi selezione / Numero esterno / 
+     
+Configurazione Account
++++++
+Nel pannello Account sono definite le credenziali SIP utilizzabili da un dispositivo per registrarsi ed effettuare / ricevere chiamate tramite il KalliopePBX. A queste credenziali sono associati attributi per incrementare la sicurezza e modifiche del comportamento del KalliopePBX in termini di segnalazione e flussi audio da associare ad uno specifico dispositivo. Questi attributi sono definiti a livello di account e non di interno perché due account associati allo stesso interno ma a dispositivi differenti possono avere requisiti differenti.
+
+**Esempio**: ad un interno posso associare un account utilizzato su un telefono fisico ed uno utilizzato su un softphone. Mentre per il telefono fisico posso utilizzare codec con maggior consumo di banda ad es. G711a per il softphone che viene utilizzato ad esempio in telelavoro posso scegliere di utilizzare codec quali il G729 che ottimizzano l’utilizzo della banda.
+
+Per configurare gli account basta aprire il menu operativo e cliccare su PBX > Interni e Account. Per creare un nuovo account procedere cliccando su "Account" nella barra in alto e successivamente su "Aggiungi Account SIP"
+
+- **Abilitato**: Consente di disabilitare un account senza perderne la configurazione
+- **KCTI Mobile App**: Consente di utilizzare questo account con l'app mobile KalliopeCTI abilitando l'invio dei messaggi push per la segnalazione delle chiamate
+- **Nome utente**: Username utilizzato per l’autenticazione SIP del dispositivo || Alfa-numerico
+- **Password**: Password utilizzata per l’autenticazione SIP del dispositivo || Alfa-numerico
+- **Template dell'account**: Indica il template account contenente i parametri di default da utilizzare per la tipologia di interno prescelta
+- **Abilita verifica di registrazione**: Quando questa opzione è abilitata il KalliopePBX verifica che la richiesta di setup di chiamata (SIP INVITE) provenga dallo stesso IP: porta da cui ha ricevuto la richiesta di registrazione (SIP REGISTER)
+- **Indirizzo abilitato**: Indica l’indirizzo ip o la subnet da cui il KalliopePBX accetta richieste di registrazione e setup di chiamata
+- **Maschera di sottorete abilitata**: Completa l’informazione della ACL su base IP per le richieste di registrazione e setup di chiamata
+- **Abilita NAT**: Quando questa opzione è abilitata il KalliopePBX ignora gli indirizzi IP presenti negli header SIP e SDP e risponde sempre all'indirizzo IP e porta da cui ha ricevuto la richiesta . Questa opzione deve essere abilitata solo per dispositivi si trovano dietro un NAT rispetto al KalliopePBX e che non risolvono il problema dell’attraversamento NAT (tramite STUN / ICE / ALG SIP).
+- **Abilita direct media**: Questa opzione consente di instaurare dei flussi audio tra 2 PBX che si trovano in condizioni di visibilità diretta (no NAT). Se questa funzione è abilitata i servizi che richiedono il monitoraggio del flusso RTP (ad es. registrazione chiamate, trasferimento di chiamata e parcheggio con codici di servizio del KalliopePBX) sono disabilitati.
+- **Abilita SRTP**: Questa opzione consente di abilitare il supporto alla cifratura dei flussi RTP. Poiché lo scambio delle chiavi avviene all’interno dei messaggi SIP / SDP in plaintext è opportuno utilizzare SRTP insieme alla cifratura della segnalazione mediante TLS. (vedi Configurazione TLS/SRTP)
+
+**Impostazioni di outbound proxy**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Indirizzo dell'outbound proxy
+     - Consente di impostare l'indirizzo IP/hostname dell'outbound proxy da utilizzare
+     - Alfa-numerico
+   * - Porta dell'outbound proxy
+     - Consente di impostare la porta dell'outbound proxy da utilizzare
+     - Numerico
+   * - Protocollo dell'outbound proxy
+     - Consente di impostare il protocollo da utilizzare per comunicare con l'outbound proxy. È possibile impostare solamente protocolli abilitati nelle Impostazioni SIP
+     - UDP / TCP / TLS / WS / WSS
+
+**Impostazioni di trasporto**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Abilita trasporto UDP
+     - Consente di abilitare il protocollo di trasporto UDP per la segnalazione SIP. Questa opzione non è presente se il trasporto UDP non è abilitato nelle Impostazioni SIP
+     - Si / No
+   * - Abilita trasporto TCP
+     - Consente di abilitare il protocollo di trasporto TCP per la segnalazione SIP. Questa opzione non è presente se il trasporto TCP non è abilitato nelle Impostazioni SIP
+     - Si / No
+   * - Abilita trasporto TLS
+     - Consente di abilitare il protocollo di trasporto TLS per la segnalazione SIP. Questa opzione non è presente se il trasporto TLS non è abilitato nelle Impostazioni SIP
+     - Si / No
+   * - Abilita trasporto Web Socket
+     - Consente di abilitare il protocollo di trasporto Web Socket (HTTP) per la segnalazione SIP. Questa opzione non è presente se il trasporto Web Socket (HTTP) non è abilitato nelle Impostazioni SIP
+     - Si / No
+   * - Abilita trasporto Web Socket sicuro
+     - Consente di abilitare il protocollo di trasporto Web Socket sicuro (HTTPS) per la segnalazione SIP. Questa opzione non è presente se il trasporto Web Socket sicuro (HTTPS) non è abilitato nelle Impostazioni SIP
+     - Si / No
+
+**Codec audio**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Descrizione
+     - Valore
+     - Aggiungi codec
+     - In questa sezione è possibile selezionare e ordinare i codec audio utilizzabili dall'account (e che quindi verranno inseriti nella media description del protocollo SDP)
+     - PCM a-law / G.722 / G.726 / G.729 / GSM / Opus / PCM u-law
+
+**Codec video**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Aggiungi codec
+     - In questa sezione è possibile selezionare e ordinare i codec video utilizzabili dall'account (e che quindi verranno inseriti nella media description del protocollo SDP)
+     - H.261 / H.263 / H.263+ / H.264 /VP8
+
+**Interno**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Interno
+     - In questa sezione è possibile selezionare l'interno al quale associare l'account SIP
+     - Interno
 
 
 
