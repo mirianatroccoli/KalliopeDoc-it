@@ -381,15 +381,69 @@ Per configurare gli account basta aprire il menu operativo e cliccare su PBX > I
      - In questa sezione è possibile selezionare l'interno al quale associare l'account SIP
      - Interno
 
+Licenze
+-----
+
+*jpg*
+
+La pagina licenze si divide in tre sezioni: Lista delle licenze, Recupera le licenze dal server e Lista delle licenze G.729.
+
+Lista delle licenze
++++++
+
+In questa sezione è mostrata una lista delle licenze già attivate con le seguenti informazioni:
+
+- ID
+- Chiave di attivazione
+- Prodotto
+- Data di attivazione
+- Data di scadenza
+- Canali
+
+Cliccando su **Attiva nuova licenza** si accede ad una schermata dove è possibile introdurre la chiave di attivazione valida per il prodotto acquistato.
+
+In questa sezione è possibile caricare le licenze relative a: Kalliope Multi-Tenant, KalliopeCTI Pro, KalliopeCTI Phone, Kalliope Attendant Console CTI, Kalliope Attendant Console Phone, Kalliope Call Center, Upgrade Mini to Lite.
+
+Recupera le licenze dal server
++++++
+Qui è possibile visualizzare quali licenze sono state attivate in precedenza su un determinato seriale.
+Questa sezione si divide in:
+
+- Licenze prodotto aggiornate sul server
+- Licenze prodotto importabili automaticamente
+- Licenze prodotto importabili manualmente
+
+
+Lista delle licenze G729
++++++
+
+*jpg*
+
+Analogamente, la sezione dedicata alle licenze G729 mostra una lista delle licenze già attivate con le seguenti informazioni:
+
+- Chiave di licenza
+- Canali
+- Data di scadenza
+- Scarica
+
+Cliccando su **Attiva nuova licenza G729** si accede alla procedura di attivazione delle licenze G729 divisa in tre fasi:
+
+1. Inserimento della chiave di licenza G729
+2. Accettazione delle condizioni d'uso
+3. Inserimento dei dati personali
+
+Una volta inserite le informazioni richieste è possibile cliccare sul pulsante Attiva per completare la procedura.
+
+
+
 
 
 Descrizione interfaccia
-------------
+=====
 
 
 
 
 Configurazione servizi
-------------
-
+=====
 
