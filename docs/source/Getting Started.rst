@@ -427,8 +427,7 @@ Per installare KalliopPBX su ambiente Proxmox è necessario per prima cosa scari
    * - KalliopePBX v4 (max 128 vCPU)
      - https://areaclienti.vianova.it/drive/download/6qmKASR4EfpHbG11/ (vzdump-qemu-100-2020_05_10-23_03_40.vma.lzo - 1,4 GB)                       https://areaclienti.vianova.it/drive/download/F9zgxpv8UAhcJerD/ (vzdump-qemu-100-2020_05_10-23_03_40.log)
    * - KalliopePBX v4 (max 8 vCPU)
-     - 	https://areaclienti.vianova.it/drive/download/0hh0XCroc9AOsFzt/ (vzdump-qemu-200-2017_06_28-10_06_39.vma.lzo - 1,0 GB)
-https://areaclienti.vianova.it/drive/download/vcZYocwlyIeqoHHd/ (vzdump-qemu-200-2017_06_28-10_06_39.log)
+     - 	https://areaclienti.vianova.it/drive/download/0hh0XCroc9AOsFzt/ (vzdump-qemu-200-2017_06_28-10_06_39.vma.lzo - 1,0 GB)     https://areaclienti.vianova.it/drive/download/vcZYocwlyIeqoHHd/ (vzdump-qemu-200-2017_06_28-10_06_39.log)
 
 Una volta copiati i due file relativi all'immagine che si intende installare all'interno della cartella /var/lib/vz/dump della macchina host (mantenendo i nomi originali, indicati sopra), deve essere eseguito il comando di ripristino in una nuova VM:
 
