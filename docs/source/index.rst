@@ -40,8 +40,8 @@ Manuale di Amministrazione
 
 .. toctree::
 
-   Manuale di Amministrazione.rst
-
+   Manuale di Amministrazione
+   
 
 Privacy Admin
 -----------
@@ -55,8 +55,8 @@ Procedure Guidate
 
 .. toctree::
 
-   Procedure guidate.rst
-
+   Procedure guidate
+   
 
 Aggiornamenti Firmware Changelog e Release Notes
 ==========
