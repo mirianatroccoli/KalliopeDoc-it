@@ -248,6 +248,7 @@ Per creare un nuovo interno procedere cliccando su "Aggiungi interno".
 
 
 **Trabocchi**
+
 .. list-table::  
    :widths: 25 25 50
    :header-rows: 1
