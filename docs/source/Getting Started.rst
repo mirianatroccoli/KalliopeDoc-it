@@ -367,6 +367,91 @@ VMWare
 
 3. Accedere alla GUI all'indirizzo predefinito 192.168.0.100:10080 . Nel caso compaia l'errore UNSAFE_PORT seguire questa procedura (Clicca qui).
 
-NOTA: E' disponibile un accesso console (con credenziali manager/manager, accessibile solo nella modalità recovery) che permette di effettuare la modifica dell'indirizzo IP dell'interfaccia eth0, nel caso in cui non sia possibile accedere all'indirizzo predefinito viq web browser.
+**NOTA**: E' disponibile un accesso console (con credenziali manager/manager, accessibile solo nella modalità recovery) che permette di effettuare la modifica dell'indirizzo IP dell'interfaccia eth0, nel caso in cui non sia possibile accedere all'indirizzo predefinito viq web browser.
 
 4. Cambiare la configurazione di rete dal Menu Strumenti (cliccare sul simbolo Menu tools button.png) in alto a destra in modo che la centrale possa uscire su internet e quindi raggiungere il license server.
+
+5. Attivare la licenza KalliopePBX VM con la chiave di attivazione fornita.
+
+*jpg*
+
+6. Una volta accettata la licenza cliccare sul pulsante "Esegui registrazione prodotto" per accedere alla Console di Ripristino.
+
+*jpg*
+
+7. Aggiornare per prima cosa il bootloader all'ultima versione disponibile. Seguire la seguente procedura per l'aggiornamento del bootloader.
+
+8. Una volta completato l'aggiornamento cliccare sul pulsante "Riavvia bootloader" per riavviare la macchina.
+La macchina verrà riavviata sempre in modalità recovery.
+
+9. Cliccare nuovamente sul bottone "Cerca aggiornamenti" per scaricare la lista degli aggiornamenti firmware disponibili e selezionare la versione firmware desiderata.
+
+*jpg*
+
+10. Cliccare sul bottone "Installa sulla partizione primaria (p5)". Il KalliopePBX avviserà che tale operazione resetta la partizione cancellando tutti i dati e quindi chiederà conferma dell'operazione.
+
+Trattandosi di una prima installazione confermare la richiesta per avviare l'installazione.
+**NOTA**: L'installazione di un firmware dalla console di ripristino equivale ad un ripristino alle condizioni di fabbrica. Quindi tale operazione può essere utile per resettare completamente una macchina.
+
+11. Una volta completata l'installazione del firmware selezionato verificare nella console di ripristino la versione firmware installata.
+
+*jpg*
+
+12. Tramite il menu tools selezionare la voce "Menu di spegnimento->Riavvia", scegliere la voce "Firmware primario" dal menu di riavvio e cliccare sul pulsante "Riavvia".
+
+*jpg*
+
+13. Al riavvio si è ridiretti al login principale (sulla porta 80).
+
+Le credenziali di login di default sono:
+Username: **admin**
+Password: **admin**
+
+Si consiglia di modificare la password di default al primo avvio.
+
+
+Promox
++++++
+
+**Aggiornamento del 10/05/2020**: E' disponibile una nuova immagine Kalliope per ambiente Proxmox VE, che supera i limiti della precedente immagine di poter utilizzare un massimo di 8 vCPU e di avere un disco di dimensioni predefinite pari a 22GB. La nuova immagine, predisposta su ambiente Proxmox VE versione 6.1 e che dispone di un disco di 120 GB, gestisce fino ad un massimo di 128 vCPU. 
+**NOTA**: Non è possibile aggiornare la VM con 8vCPU a quella che ne supporta oltre 8, per cui in caso di nuove installazioni si raccomanda comunque di installare la nuova immagine, anche se le saranno assegnate un numero di vCPU pari o inferiore a 8.
+
+Per installare KalliopPBX su ambiente Proxmox è necessario per prima cosa scaricare i due file .vma.lzo e .log nella cartella /var/lib/vz/dump/
+
+.. list-table::  
+   :widths: 25 25
+   :header-rows: 1
+
+   * - Immagine
+     - Link Download
+   * - KalliopePBX v4 (max 128 vCPU)
+     - https://areaclienti.vianova.it/drive/download/6qmKASR4EfpHbG11/ (vzdump-qemu-100-2020_05_10-23_03_40.vma.lzo - 1,4 GB)                       https://areaclienti.vianova.it/drive/download/F9zgxpv8UAhcJerD/ (vzdump-qemu-100-2020_05_10-23_03_40.log)
+   * - KalliopePBX v4 (max 8 vCPU)
+     - 	https://areaclienti.vianova.it/drive/download/0hh0XCroc9AOsFzt/ (vzdump-qemu-200-2017_06_28-10_06_39.vma.lzo - 1,0 GB)
+https://areaclienti.vianova.it/drive/download/vcZYocwlyIeqoHHd/ (vzdump-qemu-200-2017_06_28-10_06_39.log)
+
+Una volta copiati i due file relativi all'immagine che si intende installare all'interno della cartella /var/lib/vz/dump della macchina host (mantenendo i nomi originali, indicati sopra), deve essere eseguito il comando di ripristino in una nuova VM:
+
+.. code-block:: console
+
+   # qmrestore vzdump-qemu-<versione>.vma.lzo <nnn> --storage <storage_name>
+   
+dove:
+
+- **<nnn>** è l'id da assegnare alla VM (non deve essere già assegnato ad altre VM del nodo/cluster Proxmox).
+- **<storage_name>** è il nome dello storage su cui ripristinare la VM (normalmente è "local" o "storage").
+A questo punto la VM è operativa, è possibile avviarla e accedere alla console per effettuare la configurazione dell'indirizzo di rete.
+
+**NOTA IMPORTANTE**: prima di avviare la macchina virtuale è necessario modificare le impostazioni della VM abilitando il flag **"KVM hardware virtualization"** che nell'immagine esportata è disabilitato, altrimenti le prestazioni sono estremamente rallentate. La nuova immagine ha già questo flag attivo di default, per cui non è più necessario effettuare la modifica di tale impostazione; si raccomanda comuqnue di controllarne l'effettivo valore.
+
+**NOTA**: la VM viene distribuita con un modello di vCPU generico, che emula un processore Pentium 4, per la massima compatibilità. Nel caso in cui si utilizzi la VM su singolo nodo, o si disponga di nodi Proxmox VE omogenei in termini di CPU fisiche, è possibile modificare il modello del processore al valore "host", che rimappa direttamente le funzioni del processore fisico, rendendo quindi disponibili al S.O. della VM tutte le estensioni hardware presenti sulle CPU del server. A tale proposito si rimanda alla pagina di documentazione Proxmox, sezione "CPU Type": https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines#_emulated_devices_and_paravirtualized_devices
+
+
+A questo punto si opera come per le altre VM, ossia si accede con credenziali manager/manager, e un wizard permette di effettuare le impostazioni di rete.
+
+Una volta in rete, l'attivazione e la configurazione avviene tramite interfaccia web (inizialmente sulla porta 10080, e dopo l'installazione del firmware telefonico sulla porta standard 80). Nel caso compaia l'errore UNSAFE_PORT seguire questa procedura (Clicca qui).
+
+E' necessario che la VM abbia la raggiungibilità in HTTPS dei nostri server di licenza e di aggiornamenti (license.kalliopepbx.it e updates.kalliopepbx.it) che attualmente risolvono entrambi l'IP 77.72.27.4
+
+   
+   
