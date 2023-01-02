@@ -37,8 +37,11 @@ Sezione per iniziare
 Manuale di Amministrazione
 -----------
 
-Manuale Utente
+
+Privacy Admin
 -----------
+
+  Privacy Admin
 
 
 
