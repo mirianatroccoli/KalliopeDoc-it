@@ -337,8 +337,7 @@ Prima installazione
 - Opzionale: collegate la porta seriale COM1 di KalliopePBX al vostro PC usando un cavo seriale (non incluso - impostazioni: 115200 8/n/1)
 - Collegate l’alimentatore incluso a KalliopePBX e successivamente collegate l’alimentatore ad una presa di corrente (100-240V AC, 50-60 Hz)
 - Avviare KalliopePBX premendo il tasto di accensione posto sul frontale; in caso di interruzione imprevista dell’alimentazione, al ripristino dell’alimentazione il sistema si avvia automaticamente
-- Puntate il vostro browser all’indirizzo http://192.168.0.100:10080 per effettuare la prima registrazione. È richiesto l’accesso da parte di KalliopePBX all’indirizzo
-https://license.kalliopepbx.it; la configurazione di rete può essere modificata attraverso il menu “Impostazioni” ). Nel caso compaia l'errore UNSAFE_PORT seguire questa procedura (Clicca qui)
+- Puntate il vostro browser all’indirizzo http://192.168.0.100:10080 per effettuare la prima registrazione. È richiesto l’accesso da parte di KalliopePBX all’indirizzo https://license.kalliopepbx.it; la configurazione di rete può essere modificata attraverso il menu “Impostazioni”. Nel caso compaia l'errore UNSAFE_PORT seguire questa procedura (Clicca qui)
 - Dopo la registrazione, installare il firmware desiderato tra quelli disponibili. È richiesto l’accesso da parte di KalliopePBX all’indirizzo https://updates.kalliopepbx.it. Il processo può richiedere alcuni minuti, in base alla dimensione del firmware e della velocità di download della vostra rete
 - Seguite il progresso dell’installazione firmware; al termine, riavviate KalliopePBX ed accedete all’interfaccia di configurazione puntando il vostro browser all’indirizzo http://<Configured_ip> (porta standard http 80). Le credenziali di default per l'accesso sono: admin/admin.
    
