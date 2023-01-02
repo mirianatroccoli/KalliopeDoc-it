@@ -11,14 +11,13 @@ News
 
 
 Getting Started
------------
+=====
 Sezione per iniziare
    
 
 .. toctree::
 
    Getting Started
-
 
 
 
