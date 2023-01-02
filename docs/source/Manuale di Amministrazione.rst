@@ -500,18 +500,15 @@ Nella tabella seguente sono descritte le colonne della lista delle linee di usci
      - Abilitato / Non abilitato
    * - Nome
      - Il nome simbolico assegnato alla linea
-     -
+     - 
    * - Identificativo
      - Identificativo univoco assegnato alla linea. Nel caso di trunk o terminazioni VoIP è lo username di autenticazione
-     -
+     - 
    * - Tipo
      - Se non si tratta di un gateway fisico indica il tipo di linea
      - Trunk / Terminazione VoIP
    * - Stato
-     - **Nel caso di gateway fisici con registrazione in ingresso disabilitata** lo stato raggiungibile / non raggiungibile indica se il peer risponde o meno ai messaggi SIP OPTIONS. Se la registrazione è abilitata indica invece se la registrazione da parte del gateway è stata completata con successo.
-**Nel caso di domini VoIP** lo stato raggiungibile / non raggiungibile indica se il peer risponde o meno ai messaggi SIP OPTIONS.
-**Nel caso di trunk e terminazioni VoIP con abilitata registrazione remota** lo stato raggiungibile / non raggiungibile indica se la registrazione ha avuto successo. Se la registrazione remota è disabilitata viene visualizzato lo stato Statico.
-Lo stato in sospeso compare solo se un elemento è stato aggiunto ma la configurazione non è stata ancora applicata
+     - **Nel caso di gateway fisici con registrazione in ingresso disabilitata** lo stato raggiungibile / non raggiungibile indica se il peer risponde o meno ai messaggi SIP OPTIONS. Se la registrazione è abilitata indica invece se la registrazione da parte del gateway è stata completata con successo. **Nel caso di domini VoIP** lo stato raggiungibile / non raggiungibile indica se il peer risponde o meno ai messaggi SIP OPTIONS. **Nel caso di trunk e terminazioni VoIP con abilitata registrazione remota** lo stato raggiungibile / non raggiungibile indica se la registrazione ha avuto successo. Se la registrazione remota è disabilitata viene visualizzato lo stato Statico. Lo stato in sospeso compare solo se un elemento è stato aggiunto ma la configurazione non è stata ancora applicata
      - 
    * - RTT
      - Round-Trip Time di un pacchetto SIP tra centralino e gateway o tra centralino e dominio/server VoIP dell’operatore
