@@ -41,7 +41,9 @@ Manuale di Amministrazione
 Privacy Admin
 -----------
 
-  Privacy Admin
+.. toctree::
+
+   Privacy Admin
 
 
 
