@@ -10,6 +10,18 @@ News
 ==========
 
 
+Getting Started
+-----------
+Sezione per iniziare
+   
+
+.. toctree::
+
+   Getting Started
+
+
+
+
 Add-on e Applicazioni Kalliope
 ==========
 
@@ -22,15 +34,6 @@ Add-on e Applicazioni Kalliope
 
 KalliopePBX v4
 =====
-
-Getting Started
------------
-Sezione per iniziare
-   
-
-.. toctree::
-
-   Getting Started
 
 
 Manuale di Amministrazione
