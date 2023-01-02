@@ -276,7 +276,7 @@ Per creare un nuovo interno procedere cliccando su "Aggiungi interno".
      - Riaggancia / Selezione personalizzata / Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
    * - Non disponibile
      - L’interno è considerato non disponibile se il terminale non è registrato o non è raggiungibile a livello IP oppure se il terminale invia il SIP Response 480 Temporarily Unavailable
-     - Riaggancia / Selezione personalizzata / Chiedi selezione / Numero esterno 
+     - Riaggancia / Selezione personalizzata / Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
      
 Configurazione Account
 +++++
