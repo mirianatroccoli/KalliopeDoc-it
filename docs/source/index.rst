@@ -58,5 +58,14 @@ Procedure Guidate
    Procedure guidate
    
 
+Documentazione API Rest
+==========
+
+.. toctree::
+
+   API Rest.rst
+   
+
 Aggiornamenti Firmware Changelog e Release Notes
 ==========
+
