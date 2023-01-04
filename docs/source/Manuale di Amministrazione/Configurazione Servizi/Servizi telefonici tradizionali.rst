@@ -339,14 +339,66 @@ Si consideri il seguente esempio:
 - assegnare il ruolo di Supervisore all’utente preposto
 
 All’apertura del software Kalliope CTI si avrà a disposizione:
+
 - Un nuovo tab che consente di visualizzare le code a cui appartiene ed eventualmente mettersi in pausa.
 - Nel caso di ruolo di supervisore è possibile accedere al Super visor panel
 
 
+Piano di numerazione
+-----
+
+Descrizione del servizio
+++++++++
+Il piano di numerazione interno regola l’instradamento di una chiamata internamente al KalliopePBX. Il piano di numerazione viene impegnato dalle chiamate generate da un interno, e anche da quelle provenienti dall’esterno.
+Per discriminare i diversi permessi associati a queste due tipologie di chiamata, il Piano di numerazione prevede due colonne, una con le selezioni abilitate per le chiamate originate da interni (locali e remoti) ed una per quelle provenienti da una linea esterna.
+La selezione viene riscontrata sul piano di numerazione secondo l’ordinamento visualizzato, instradando la chiamata secondo la seguente priorità di matching:
+
+1. Servizi
+2. Selezioni personalizzate
+3. Lista degli interni
+4. Interni remoti
+5. Altre selezioni
+
+
+Servizi
++++++
+Cliccando sulla matita, si apre il pannello di modifica delle selezioni e di abilitazione/disabilitazione dei vari servizi. I servizi abilitati ma a cui non è assegnata una selezione risultano inattivi.
+*jpg*
+Di seguito si riporta una descrizione dei singoli servizi attivabili:
+
+- Prelievo di chiamata (di gruppo)
+- Prelievo di chiamata diretto
+- Prenotazione di chiamata
+- Servizio eco
+- Casella Vocale
+- Audioconferenza
+- Inoltro incondizionato
+- Fork to Mobile
+- Interruttori
+- Ascolto passivo (servizio SPY)
+- Codice commessa
+- Pausa sulle code
+- Parcheggio di chiamata
+
+Riportiamo di seguito i valori di default dei servizi attivabili a livello di piano di numerazione.
 
 
 
+Selezioni personalizzate
++++++
+La seconda parte del Piano di numerazione permette di personalizzare l’instradamento associati a selezioni specifiche o archi di numerazione.
+*jpg*
+E' possibile manipolare il numero di selezione (togliere un certo numero di cifre in testa ed aggiunge un determinato prefisso) prima di inoltrarlo ad una delle destinazioni messe a disposizione dai menu a tendina contestuali.
+Come destinazione di inoltro della chiamata è possibile scegliere tra:
 
+- numero esterno
+- un interno
+- un gruppo di chiamata (tenendo conto o meno dell'eventuale controllo orario associato)
+- una coda (tenendo conto o meno dell'eventuale controllo orario associato)
+- un controllo orario
+- un menu IVR
+- una casella vocale
+- una particolare stanza di audioconferenza MeetMe
+- un'API esterna
 
-
-
+La modifica di queste impostazioni viene effettuata cliccando sull’icona della matita sulla destra; il pannello di modifica elenca le regole di inoltro personalizzate che sono definite, ne permette la modifica, cancellazione e creazione. Si noti che le regole vengono automaticamente ordinate in fase di salvataggio (numericamente), ponendo come prime quelle esatte e successivamente quelle a range e a prefisso.
