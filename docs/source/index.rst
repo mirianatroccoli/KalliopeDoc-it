@@ -1,6 +1,6 @@
-
-.. image:: ../docs/images/kalliope_monitoring.png
+.. image:: ../source/kalliope_monitoring.png
   :width: 400
+  :alt: immagine
 
 Benvenuti nella documentazione tecnica Kalliope
 ==========================
