@@ -772,5 +772,5 @@ Configurazione servizi
 
 .. toctree::
 
-   Configurazione Servizi
+   Manuale di Amministrazione/Configurazione Servizi
 
