@@ -601,3 +601,233 @@ Per inoltrare una chiamata in ingresso al gruppo di chiamata possono essere util
 - definire nel piano di numerazione una selezione personalizzata associata al gruppo di chiamata
 - definire in un gateway o dominio VoIP una numerazione che abbia come destinazione il gruppo di chiamata
 
+
+Inoltro di chiamata incondizionato
+-------
+
+Descrizione del servizio
++++++
+
+Il servizio Inoltro Incondizionato consente di deviare la chiamata diretta ad un interno verso una differente destinazione (interna od esterna). Questa funzione può essere utilizzata per deviare le chiamate ricevute verso il numero di un collega o di un'altra qualsiasi selezione del piano di numerazione (e quindi anche verso gruppi o code, oppure sul proprio cellulare quando si è lontani dalla propria postazione di lavoro).
+
+**NOTA**: il servizio opera solo sulle chiamate dirette all'interno e non per le chiamate destinate a gruppi di chiamata a cui l'interno appartiene, o a code di cui uno o più account dell'interno sono membri.
+
+Ogni volta che viene attivato il servizio è necessario indicare verso quale numero deve essere programmato l’inoltro. Il KalliopePBX inoltrerà la chiamata in ingresso esclusivamente a questa numerazione. In caso di fallimento della chiamata non viene eseguita l’azione di trabocco dell’interno originale ma quella del destinatario dell’inoltro.
+
+La chiamata inoltrata verso un numero interno presenterà sempre il chiamante originale mentre la chiamata inoltrata verso un numero esterno segue le regole di instradamento in uscita associate all’interno originale ed il numero presentato coinciderà sempre con quello che utilizza l’interno quando comunica verso la rete telefonica pubblica.
+
+Operativamente l’attivazione/disattivazione del servizio Inoltro Incondizionato può essere effettuata in 3 modalità:
+
+- **Da telefono**: il servizio viene attivato digitando il codice di attivazione (default 811) seguito dal numero verso il quale si vuole programmare l’inoltro. Il KalliopePBX conferma l’attivazione del servizio riproducendo il file audio “Salvato”. Nel caso in cui si voglia trasferire la chiamata verso un numero esterno deve essere anteposto il prefisso per le chiamate in uscita. Analogamente la disattivazione avviene digitando il codice relativo (default 810). In questo caso il KalliopePBX conferma la disattivazione con il messaggio “Grazie”. Questi codici possono essere utilizzati esclusivamente da un dispositivo associato all’interno su cui deve essere effettuata l’attivazione / disattivazione.
+- **Da KalliopeCTI Desktop (in tutte le modalità)**: sotto la casella di composizione del numero appare l’icona Inoltro disattivato.png che identifica il Servizio Inoltro Incondizionato. Cliccando sull’icona il servizio viene attivato e l’icona diventa Inoltro attivo.png . La disattivazione viene effettuata cliccando nuovamente sull’icona. Posizionando il puntatore del mouse sull’icona è anche possibile visualizzare il numero verso il quale è configurato l’inoltro.
+- **Da KalliopeCTI Mobile**: l’attivazione viene effettuata cliccando sul simbolo della ruota dentata Mobile tools.png nell’angolo in basso a destra e quindi cliccando sull’icona Mobile ufrwd off.png che identifica il Servizio Inoltro Incondizionato. Quando il servizio è attivo l’icona si modifica e accanto all’icona compare il numero verso il quale è stato programmato l’inoltro. Mobile ufrwd on.png Per disattivare il servizio è sufficiente cliccare nuovamente sull’icona.
+Quando è attivo il servizio l’interno sui è abilitato l’inoltro non riceve la chiamata ma squilla unicamente il destinatario della deviazione. Tutti gli inoltri associati all’interno non sono pertanto applicati.
+
+Configurazione del servizio
+++++
+
+Il servizio Inoltro Incondizionato è sempre attivo a livello globale.
+
+L’abilitazione dei codici di attivazione / disattivazione da telefono e l’eventuale modifica sono gestiti nel Piano di Numerazione.
+
+Interoperabilità con dispositivi di terze parti
++++++++++
+Quando l’attivazione / disattivazione del servizio viene effettuata da telefono può essere molto utile avere a disposizione un tasto (con campo lampade) che consenta di verificare lo stato del servizio.
+
+Per quanto riguarda il monitoraggio, il KalliopePBX invia dei messaggi SIP NOTIFY per comunicare i cambi di stato del servizio. Il telefono dovrà inviare una SIP SUBSCRIBE per richiedere l’invio delle informazioni di stato.
+
+Questa operazione è normalmente effettuata configurando un tasto funzione di tipo BLF. L’oggetto da monitorare è ufwd<interno>.
+
+Esempi di configurazione
++++++
+
+**Su SNOM**
+
+- Operando tramite la web gui di configurazione configurare Function keys con:
+
+.. code-block:: console
+
+   Account: selezionare dalla tendina l’account che stiamo utilizzando (se c’è un solo account configurato sul telefono è il primo della lista)
+   Type: BLF
+   value: ufwd<interno>
+
+- Oppure modificando direttamente il file di configurazione o il template in questo modo:
+
+.. code-block:: console
+   
+   <fkey idx="%%id%%" context="%%line_id%%" label="" perm="">blf sip:ufwd<interno>@%%KPBX_IP_ADDRESS%%;user=phone</fkey>
+
+Dove %%id%% è l’identificativo del tasto da configurare E %%line_id%% è l’identificativo dell’account associato (il valore è 1 se sul telefono è presente un solo account)
+
+Esempio:
+
+.. code-block:: console
+   
+   <fkey idx="0" context="1" label="Stato Inoltro 105" perm="">blf sip:ufwd105@192.168.23.112</fkey>
+
+**Su YEALINK**
+
+- Operando tramite la web gui di configurazione configurare DSS Key con
+
+.. code-block:: console
+
+   Type BLF
+   Value: ufwd<interno>
+   Line: La linea associata all’account che stiamo utilizzando (Line 1 se sul telefono è presente un solo account)
+
+- Oppure modificando direttamente il file di configurazione o il template in questo modo:
+
+.. code-block:: console
+
+   memorykey.%%id%%.line=%%line_id%%>
+   memorykey.%%id%%.value=ufwd<interno>
+   memorykey.%%id%%.type=16
+   
+Dove %%id%% è l’identificativo del tasto da configurare
+
+e %%line_id%% è l’identificativo dell’account associato il valore è 1 se sul telefono è presente un solo account)
+
+Esempio:
+
+.. code-block:: console
+   memorykey.1.line = 1
+   memorykey.1.value = ufwd105
+   memorykey.1.type = 16
+   memorykey.1.pickup_value = %NULL%
+   memorykey.1.xml_phonebook = %NULL%
+
+Parcheggio della chiamata
+-------
+
+Descrizione del servizio
++++++++++
+Questo servizio consente una volta che la comunicazione è stata instaurata di spostare la chiamata in uno slot di parcheggio.
+Quando la chiamata è nello slot di parcheggio l'altro interlocutore viene messo in attesa mentre chi ha parcheggiato la chiamata può recuperarla da un qualsiasi telefono (non necessariamente quello che ha parcheggiato la chiamata). Nella configurazione di default sono disponbili 10 slot di parcheggio (890-899).
+Se la chiamata non viene recuperata entro 90 secondi, viene automaticamente ripresentata al dispositivo (non all'interno) che l'ha parcheggiata.
+
+Operativamente il trasferimento diretto viene effettuato digitando il relativo codice di servizio in chiamata (default #8).
+Il KalliopePBX risponderà con il numero da chiamare per riprendere la comunicazione da un qualsiasi dispositivo.
+A questo punto l'utente che ha parcheggiato la chiamata può riagganciare e riprenderla successivamente digitando il codice comunicato dal KalliopePBX.
+Questa modalità di parcheggio richiede che non sia attivo il Direct Media per la chiamata in corso .
+E' possibile utilizzare il servizio di Call Parking anche con Direct Media attivo semplicemente effettuando un trasferimento ad un interno a cui corrisponde il servizio di Call Parking (default 888).
+In questo caso una volta effettuato il trasferimento con offerta, il KalliopePBX risponde con il numero da chiamare per riprendere la comunicazione.
+A questo l'utente può riagganciare e riprenderla digitando il codice comunicato dal KalliopePBX.
+
+
+Configurazione del servizio
++++++++
+
+Il servizio può essere abilitato / disabilitato nel pannello PBX -> Servizi in chiamata
+Il codice del servizio può essere modificato nel pannello PBX -> Servizi in chiamata
+Il numero di slot di parcheggio utilizzabili e i corrispondenti interni sono configurabili nel pannello PBX -> Piano di numerazione
+
+
+Interoperabilità
++++++++
+Quando si utilizza il servizio di Call Parking può essere utile avere a disposizione un tasto (con campo lampade) che consenta di visualizzare lo stato di occupazione di ciascuno slot di parcheggio ed eventualmente riprendere la chiamata parcheggiata.
+
+Per quanto riguarda il monitoraggio, il KalliopePBX invia dei messaggi SIP NOTIFY per comunicare i cambi di stato del servizio.
+Il telefono dovrà inviare una SIP SUBSCRIBE per richiedere l’invio delle informazioni di stato.
+
+Questa operazione è normalmente effettuata configurando un tasto funzione di tipo BLF.
+
+L’oggetto da monitorare è l'interno corrispondente allo slot di parcheggio.
+Oltre a monitorare lo stato di occupazione dello slot è possibile recuperare la chiamata parcheggiata cliccando sul tasto funzione corrispondente.
+
+
+**Su SNOM**
+
+- Operando tramite la web gui di configurazione configurare Function keys con:
+
+.. code-block:: console
+
+   Account: selezionare dalla tendina l’account che stiamo utilizzando (se c’è un solo account configurato sul telefono è il primo della lista)
+   Type: BLF
+   value: ufwd<interno>
+
+- Oppure modificando direttamente il file di configurazione o il template in questo modo:
+
+.. code-block:: console
+   
+   <fkey idx="%%id%%" context="%%line_id%%" label="" perm="">blf sip:<interno>@%%KPBX_IP_ADDRESS%%;user=phone</fkey>
+   
+Dove %%id%% è l’identificativo del tasto da configurare E %%line_id%% è l’identificativo dell’account associato (il valore è 1 se sul telefono è presente un solo account)
+
+Esempio:
+
+.. code-block:: console
+   
+   <fkey idx="0" context="1" label="Slot parcheggio 890" perm="">blf sip:890@192.168.23.190</fkey>
+
+**Su YEALINK**
+
+- Operando tramite la web gui di configurazione configurare DSS Key con
+
+.. code-block:: console
+
+   Type BLF
+   Value: <interno>
+   Line: La linea associata all’account che stiamo utilizzando (Line 1 se sul telefono è presente un solo account)
+
+- Oppure modificando direttamente il file di configurazione o il template in questo modo:
+
+.. code-block:: console
+
+   memorykey.%%id%%.line=%%line_id%%
+   memorykey.%%id%%.value=<interno>
+   memorykey.%%id%%.type=16
+   
+Dove %%id%% è l’identificativo del tasto da configurare
+
+e %%line_id%% è l’identificativo dell’account associato il valore è 1 se sul telefono è presente un solo account)
+
+Esempio:
+
+.. code-block:: console
+   memorykey.1.line = 1
+   memorykey.1.value = 890
+   memorykey.1.type = 16
+   memorykey.1.pickup_value = %NULL%
+   memorykey.1.xml_phonebook = %NULL%
+
+
+
+
+
+Servizio Echo
+--------
+
+
+
+
+
+
+
+
+Speed Dial
+----------
+
+
+
+
+
+
+
+Trasferimento di chiamata con offerta - conferenza a 3
+-----
+
+
+
+
+
+
+
+
+
+Trasferimento di chiamata senza offerta
+-----
+
+
+
+
+Voicemail
