@@ -791,20 +791,39 @@ Esempio:
 
 
 
-
-
 Servizio Echo
 --------
 
-
-
-
-
+Descrizione del servizio
+++++++
+Accedendo a questo servizio, accessibile chiamando un determinato numero del piano di numerazione (di default impostato su 800), dopo un breve messaggio iniziale, l’utente sentirà riprodotto il proprio audio, potendo quindi verificare il corretto funzionamento del suo terminale, oltre che avere una stima del ritardo introdotto dalla rete.
 
 
 
 Speed Dial
 ----------
+
+Descrizione del servizio
++++++++
+
+Questo servizio consente di definire dei numeri brevi associati a numeri telefonici in rubrica sia condivisa (locale) che personale.
+
+Operativamente il servizio speed dial viene utilizzato digitando il relativo codice di servizio (default # per speed dial di sistema, #0 per speed dial personali) seguito da un numero breve precedentemente configurato.
+Il KalliopePBX provvederà quindi a contattare il numero telefonico corrispondente allo speed dial anteponendo, nel caso in cui il contatto non sia di tipo interno, il prefisso chiamate in uscita (definito nel pannello PBX -> Impostazioni Generali).
+
+Configurazione del servizio
++++++++++
+
+Il servizio può essere abilitato / disabilitato nel pannello PBX -> Servizi in chiamata
+Il codice del servizio può essere modificato nel pannello PBX -> Servizi in chiamata
+La configurazione degli speed dial può essere effettuata modificando la scheda del contatto nella rubrica condivisa (per speed dial di sistema) oppure nella rubrica personale.
+Per quanto riguarda i contatti della rubrica condivisa possono essere associati speed dial solo ai contatti della rubrica locale e non a quelli delle rubriche remote.
+
+Interoperabilità
++++++++++
+
+Per effettuare chiamate rapide è possibile anche utilizzare direttamente i tasti funzione di tipo Speed Dial messi a disposizione dai telefoni.
+In questo caso il valore dello speed dial dovrà includere (a differenza di quanto avviene con gli speed dial gestiti tramite KalliopePBX) il prefisso chiamate in uscita (definito nel pannello PBX -> Impostazioni Generali).
 
 
 
@@ -815,18 +834,124 @@ Speed Dial
 Trasferimento di chiamata con offerta - conferenza a 3
 -----
 
+Descrizione del servizio
++++++++++++
+Questo servizio consente ad un utente (trasferente) di consultare un terzo soggetto prima di trasferirgli la comunicazione con l'altro utente coinvolto nella chiamata (trasferito). Quando viene utilizzata questa modalità di trasferimento il trasferente può in ogni momento riprendere il controllo della comunicazione.
+Nel caso in cui il destinatario del trasferimento non riesca a rispondere alla chiamata (perché occupato, assente o non registrato) viene applicata l'azione di trabocco su trasferimento definita per l'interno nel relativo pannello Interni.
+Inoltre una volta avviata la consultazione del terzo utente può commutare tra i due utenti mediante un codice rapido o convertire il trasferimento in una conferenza a tre.
 
+Operativamente il trasferimento con offerta viene effettuato digitando il relativo codice di servizio in chiamata (default *4).
+Il KalliopePBX richiederà quindi tramite prompt vocale di digitare il numero dell'interno a cui inoltrare la chiamata.
+L'acquisizione delle cifre dell'interno può essere terminata con il tasto # altrimenti viene automaticamente terminata dopo un timeout (2 sec).
+In questa fase il centralino riprodurrà una musica di attesa verso il telefono del trasferito (definita dal servizio Music on Hold).
+Durante la consultazione del terzo utente (anche se non ha ancora risposto o se viene avviata un azione di trabocco) il trasferente può in qualsiasi momento annullare il trasferimento utilizzando lo specifico codice (default *0).
 
+Una volta che il consultato ha risposto ed è stato messo in comunicazione con il trasferente possono invece verificarsi le seguenti situazioni:
 
+- il trasferente decide di annullare il trasferimento tramite lo specifico codice (default *0)
+- il trasferente commuta tra il trasferito e il consultato con il codice relativo (default *9)
+- il trasferente converte il trasferimento in una conferenza a tre mediante il codice relativo (default *3)
+- il destinatario del trasferimento lo rifiuta (riaggancia). In questo caso la comunicazione originale viene automaticamente ripristinata
+- il destinatario del trasferimento lo accetta. In questo caso è il trasferente a riagganciare e viene stabilita la comunicazione tra trasferito e destinatario del trasferimento
 
+Come tutti i servizi in chiamata il trasferimento diretto richiede che non sia stato attivato il Direct Media sulla chiamata in corso.
+Nel caso in cui il Direct Media sia attivo è necessario utilizzare le procedure messe a disposizione dallo specifico modello di telefono.
+In questo caso però le azioni di trabocco su trasferimento non vengono applicate.
 
+Configurazione del servizio
+++++++++
+Il servizio può essere abilitato / disabilitato nel pannello PBX -> Servizi in chiamata
+
+I codici del servizio possono essere modificati nel pannello PBX -> Servizi in chiamata
 
 
 
 Trasferimento di chiamata senza offerta
 -----
+Descrizione del servizio
+++++++++++
+Questo servizio consente ad un utente (trasferente) di trasferire direttamente ad un terzo soggetto la comunicazione con l'altro utente coinvolto nella chiamata (trasferito).
+Quando viene utilizzata questa modalità di trasferimento il trasferente perde il controllo della chiamata non appena avvia la procedura di trasferimento.
+Nel caso in cui il destinatario del trasferimento non riesca a rispondere alla chiamata (perché occupato, assente o non registrato) viene applicata l'azione di trabocco su trasferimento definita per l'interno nel relativo pannello Interni.
 
+La configurazione di **default** prevede come azione di trabocco il ritorno al trasferente. In questo caso la chiamata viene ripresentata al trasferente aggiungendo al numero chiamante il prefisso R: ad indicazione che si tratta di una chiamata ritornata da un trasferimento.
+
+Come tutti i servizi in chiamata il trasferimento diretto richiede che non sia stato attivato il Direct Media sulla chiamata in corso.
+Nel caso in cui il Direct Media sia attivo è necessario utilizzare il tasto funzione messo a disposizione dallo specifico modello di telefono.
+
+Operativamente il trasferimento diretto viene effettuato digitando il relativo codice di servizio in chiamata (default #4).
+Il KalliopePBX richiederà quindi tramite prompt vocale di digitare il numero dell'interno a cui inoltrare la chiamata.
+L'acquisizione delle cifre dell'interno può essere terminata con il tasto # altrimenti viene automaticamente terminata dopo un timeout (2 sec).
+In questa fase il centralino riprodurrà una musica di attesa verso il telefono del trasferito (definita dal servizio Music on Hold).
+Quando il destinatario del trasferimento risponde viene messo direttamente in comunicazione con il trasferito.
+Configurazione del servizio
+Il servizio può essere abilitato / disabilitato nel pannello PBX -> Servizi in chiamata
+
+Il codice del servizio può essere modificato nel pannello PBX -> Servizi in chiamata
 
 
 
 Voicemail
+------
+
+Descrizione funzionale
+++++++++
+
+Questo servizio consente ad un utente del KalliopePBX di ricevere messaggi vocali anche quando non è in grado di rispondere ad una chiamata ( ad es. in caso di non risposta, occupato o non disponibile).
+Le caselle vocali sono associate agli interni. L’abilitazione della casella vocale dell’interno, non indica che effettivamente le chiamate destinate a quell’interno verranno inviate alla casella vocale ma solo che l’utente ne ha una associata.
+L’effettivo inoltro della chiamata alla casella vocale è dato dalla configurazione delle azioni di trabocco per quell’interno (o da altre regole di instradamento / trabocco dirette verso la casella vocale).
+Una volta che il file è stato ricevuto nella casella vocale l’inoltro della notifica e della registrazione può avvenire con diverse politiche:
+
+- Accensione di un LED sul telefono che indichi la presenza di un messaggio in casella vocale (MWI – Message Waiting Indicator)
+- Invio tramite e-mail della notifica di ricezione di un messaggio in casella vocale
+- Invio tramite e-mail del messaggio ricevuto nella casella vocale
+
+Operativamente l’utente che accede ad una casella vocale per lasciare un messaggio ascolta una “voce guida” composta da due parti distinte:
+
+- un messaggio provvisorio di saluto che corrisponde al file audio: "l'interno XXX al momento non è disponile/è occupato" (a seconda della causa di inoltro alla casella vocale).
+- un messaggio d'istruzione che corrisponde alla voce: "si prega di lasciare un messaggio dopo il segnale acustico, al termine riagganciare o premere tasto #".
+
+Al termine del messaggio della voce guida, il chiamante può registrare il proprio messaggio.
+
+**Nota**: Il sistema non registra messaggi di durata inferiore ai 3 secondi.
+L’utente che vuole invece ascoltare i messaggi contenuti nella propria casella vocale deve invece digitare il codice di servizio della casella vocale (default 801) seguito dal proprio numero di interno. A questo punto il KPBX richiederà all’utente di inserire la “Password “. La password da inserire è un valore numerico e corrisponde al PIN dei servizi dell’interno.
+Nel caso in cui non venga inserito il numero di interno il KPBX provvederà tramite la voce guida a richiedere di “digitare il proprio numero di interno”.
+Una volta terminata l’autenticazione, la voce guida presenterà le opzioni che consentono di ascoltare, cancellare o archiviare i messaggi vocali presenti.
+La consultazione della casella vocale può essere effettuata anche direttamente dal KCTI Mobile (link a manuale KCTI Mobile). In questo caso se è abilitato l’invio della registrazione via e-mail non deve essere selezionata la voce “Cancella da Kalliope i messaggi vocali inoltrati”.
+
+Configurazione del servizio
++++++++
+
+Il servizio può essere abilitato / disabilitato nel pannello PBX -> Piano di numerazione
+Il codice del servizio (default 801) può essere modificato nel pannello PBX -> Piano di numerazione
+L’abilitazione di un interno all’utilizzo della casella vocale e la configurazione della casella vocale stessa viene effettuata direttamente nel pannello PBX -> Interni
+
+In questo pannello, inserendo una relativa mail, è possibile abilitare la notifica dei nuovi messaggi in casella vocale tramite mail, inoltrare i messaggi vocali come file allegati e cancellare da Kalliope i messaggi vocali inoltrati.
+E’ inoltre possibile attivare / configurare la casella vocale tramite l’import del file di provisioning degli interni. In questo caso le colonne da compilare nel file di provisioning sono le seguenti:
+
+- voicemailEmailAddress: indirizzo mail
+- notifyEnabled: Notifica nuovi messaggi in casella vocale tramite mail
+- attachEnabled: Inoltra i messaggio vocali come allegati
+- deleteEnabled: Cancella da Kalliope i messaggi vocali inoltrati
+- voicemailEnabled: Abilita la casella vocale
+
+Per quanto riguarda la personalizzazione della voce guida, la prima parte è modificabile attraverso il telefono, contattando il codice di servizio della voicemail e seguendo le istruzioni impartite dalla “voce guida.
+Il KalliopePBX dopo aver effettuato l’autenticazione dell’utente richiede di , premere zero per accedere alle opzioni di casella di posta e quindi di premere 4 per registrare il proprio messaggio provvisorio di saluto (N.B. è possibile anche registrare un messaggio vuoto di un secondo senza voce se non si vuole sentire nulla).
+La prima parte è modificabile attraverso il telefono, chiamando 801 (o relativo numero modificato dal piano di numerazione) e seguendo le istruzioni (chiederà prima la casella vocale (ovvero l'interno), poi la password (della casella vocale), successivamente premere zero per le opzioni di casella di posta e infine premere 4 per registrare il proprio messaggio provvisorio di saluto (N.B. è possibile anche registrare un messaggio vuoto di un secondo senza voce se non si vuole sentire nulla). La seconda parte del messaggio al momento non è possibile cancellarlo o modificarla.
+
+**Nota**: Abbiamo inserito nella nostra roadmap la possibilità di modificare anche il messaggio d'istruzione. Daremo info dell'uscita nei nostri changelog sul Wiki KalliopePBX (link) e aggiorneremo di conseguenza questo paragrafo.
+
+
+Esempio di configurazione
+++++++++
+La casella vocale viene abilitata / configurata nel pannello di configurazione dell’interno.
+La casella vocale, una volta abilitata, è pronta per essere utilizzata come azione di failover per il relativo interno.
+
+
+Interoperabilità con dispositivi di terze parti
+++++++++++
+
+È possibile configurare una function key per l’accesso diretto alla casella vocale. Tale funzione si ottiene semplicemente configurando un tasto del telefono come “Speed dial” e avente come valore il numero della casella vocale + interno (ad es. in caso di numero di casella vocale 801 e interno 840 il valore sarà 801840).
+Una volta digitato il relativo tasto il telefono comporrà il numero descritto nel campo valore e di conseguenza una voce guida chiederà direttamente la password per l’accesso alla casella vocale.
+Un esempio su un telefono Yealink T28P è mostrato in figura:
+
