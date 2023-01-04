@@ -5,8 +5,8 @@ Audioconferenza
 -----
 
 .. note::
-   Il servizio di audioconferenza è stato profondamente modificato a partire dalla versione di firmware 4.7.12, in cui è stato introdotta la modalità "dial-out" e la      disponibilità di un pannello web di supervisione e monitoraggio della stanza di conferenza in tempo reale, in grado di mostrare lo stato dei partecipanti alla          conferenza ed effettuare alcune operazioni di gestione (espulsione o invito di partecipanti, disattivazione dell'audio proveniente da uno o più partecipanti, ecc.)
-   
+   Il servizio di audioconferenza è stato profondamente modificato a partire dalla versione di firmware 4.7.12, in cui è stato introdotta la modalità "dial-out" e la disponibilità di un pannello web di supervisione e monitoraggio della stanza di conferenza in tempo reale, in grado di mostrare lo stato dei partecipanti alla conferenza ed effettuare alcune operazioni di gestione (espulsione o invito di partecipanti, disattivazione dell'audio proveniente da uno o più partecipanti, ecc.)
+
    
 Il servizio di audioconferenza disponibile su KallipePBX permette di configurare più stanze con differenti caratteristiche, gestibili e monitorabili in modo autonomo da singoli utenti (anche non amministratori) della centrale.
 
