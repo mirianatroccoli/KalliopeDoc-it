@@ -7,7 +7,7 @@ Call Hold and Music on Hold
 Per mettere la chiamata corrente in attesa, si opera sul corrispondente tasto funzione presente sul terminale telefonico; in base al modello specifico il tasto può essere un tasto fisico dedicato (normalmente indicato con “Hold”) oppure essere uno dei tasti dinamici.
 
 
-Call Pickup
+Call Pickup (esplicito e con invito)
 -------
 
 Descrizione del servizio
@@ -143,8 +143,204 @@ Il formato accettato per gli header è normalmente quello suggerito nel pannello
 Nel caso di problemi è necessario verificare con il proprio provider la configurazione richiesta.
 Per evitare che questi header vengano sovrascritti è inoltre necessario impostare la modalità invio COLP a disabilitato (sempre nella configurazione del trunk di uscita).
 
+Call Pickup di Gruppo (esplicito e con invito)
+----
+
+Descrizione del servizio
+++++++
+Questo servizio consente ad un utente del centralino di prelevare la chiamata diretta ad un qualsiasi interno appartenenente ad un gruppo di prelievo su cui è autorizzato.
+Per ogni utente è possibile definire sia i gruppi a cui appartiene sia su quali gruppi può effettuare il prelievo.
+Nel caso in cui ci siano più chiamate in ingresso il prelievo viene effettuato sull'ultima chiamata ricevuta da uno qualsiasi dei gruppi su cui l'utente è autorizzato al prelievo.
+Il prelievo di chiamata di gruppo si applica a tutte le chiamate destinate all'interno, anche quelle ricevute in quanto membro di un gruppo di chiamata o di una coda.
+Il KalliopePBX mette a disposizione due modalità di prelievo:
+
+- diretto: l'utente che effettua il prelievo non ha alcuna informazione sul chiamante originale
+- con invito: l'utente che effettua il prelievo verifica il chiamante originale prima di decidere se completare o meno il trasferimento
+
+Operativamente il prelievo di gruppo viene effettuato digitando il codice di prelievo di chiamata diretto (default *9).
+L'utente che ha effettuato il prelievo viene messo direttamente in comunicazione con il chiamante originale.
+Nel caso di prelievo con invito invece il prelievo avviene digitando il codice di prelievo di chiamata diretto (default #9).
+L'utente che sta effettuando il prelievo riceve prima un segnale di riaggancio e successivamente una chiamata in ingresso che mostra come chiamante il chiamante della chiamata che si intende prelevare.
+A questo punto l'utente che sta effettuando il prelievo può decidere se completare il trasferimento (rispondendo alla chiamata) o meno (rifiutando la chiamata).
+Solo nel momento in cui il trasferimento viene completato il destinatario originale smette di squillare.
+
+Configurazione del servizio
+++++
+Il servizio può essere abilitato / disabilitato nel pannello PBX -> Piano di numerazione
+Il codice del servizio può essere modificato nel pannello PBX -> Piano di numerazione
+I gruppi di appartenenza e quelli di autorizzazione al prelievo sono definibili nel pannello dell'interno e configurabili anche mediante i template degli interni.
+
+Interoperabilità con dispositivi di terze parti
+++++
+Nel caso in cui si voglia utilizzare questo servizio può essere molto utile avere a disposizione un tasto che consenta di effettuare la chiamata rapida al codice di servizio.
+
+Esempi di configurazione
+++++
+**Su SNOM** -> Operando tramite la web gui di configurazione configurare Function keys con:
+
+.. code-block:: console
+
+   Account: selezionare dalla tendina l’account che stiamo utilizzando (se c’è un solo account configurato sul telefono è il primo della lista)
+   Type: Speed Dial
+   Value: *9
+   
+In alternativa modificando direttamente il file di configurazione o il template in questo modo:
+
+.. code-block:: console
+
+   <fkey idx="%%id%%" context="%%line_id%%" label="" perm="">speed *9</fkey>
+
+dove %%id%% è l’identificativo del tasto da configurare e %%line_id%% è l’identificativo dell’account associato (il valore è 1 se sul telefono è presente un solo account).
+
+Esempio:
+
+.. code-block:: console
+   <fkey idx="0" context="1" label="PRELIEVO GRUPPO" perm="">speed *9</fkey>
+
+**Su YEALINK** -> Operando tramite la web gui di configurazione configurare DSS Key con:
+
+.. code-block:: console
+   Type: Speed Dial
+   Value: *9
+   Line: La linea associata all’account che stiamo utilizzando (Line 1 se sul telefono è presente un solo account)
+   Extension:
+
+Oppure modificando direttamente il file di configurazione o il template in questo modo:
+
+.. code-block:: console
+
+   memorykey.%%id%%.line=%%line_id%%
+   memorykey.%%id%%.value=*9
+   memorykey.%%id%%.type=13
+
+Dove %%id%% è l’identificativo del tasto da configurare e %%line_id%% è l’identificativo dell’account associato il valore è 1 se sul telefono è presente un solo account).
+
+Esempio:
+
+.. code-block:: console
+   memorykey.1.line = 1
+   memorykey.1.value = *9
+   memorykey.1.type = 13
+   
+ 
+Nel caso si intenda configurare il prelievo con invito è necessario sostituire il codice di prelievo di gruppo diretto (*9) con quello di prelievo con invito (#9).
+
+Code di attesa (ACD)
+----
 
 
+Descrizione del servizio
+++++
+Il servizio ACD (Automatic Code Distribution), noto anche come servizio “code d’attesa”, consente di offrire un’accoglienza telefonica professionale impegnando l’attesa di chi chiama fintantoché non si libera un operatore. La chiamata in ingresso viene presa in carico dalla centrale che presenta al chiamante una serie di informazioni tramite file audio, musica d’attesa e mette in fila i chiamanti per distribuirli sui vari operatori della coda (o membri) sulla base di alcune politiche d’impegno che si possono configurare all’interno di ogni singola coda. Le “Code” sono un meccanismo analogo ai Gruppi di Chiamata, dai quali si differenziano per la possibilità di definire in maniera molto più raffinata la strategia di squillo e soprattutto per la modalità di smistamento delle chiamate in ingresso, che vengono accodate e servite con una politica FIFO (First In First Out) verso i membri della coda. Ad ogni coda può essere associato un numero arbitrario di membri (account), che serviranno le chiamate ad essa indirizzate. È importante ricordare che un operatore può essere impegnato su più code contemporaneamente e in caso di concomitanza di chiamate in attesa su più code, il servizio presenterà all’operatore la chiamata proveniente dalla coda a priorità più elevata.
+
+Configurazione del servizio
++++++
+*jpg*
+Per accedere al servizio basta cliccare su “PBX” > “Code e gruppi di chiamata”. Ci troveremo così nella pagina dedicata alla lista delle code configurate con i parametri principali. Premendo su “Aggiungi una nuova coda”, possiamo passare alla configurazione della nuova coda.
+
+*jpg*
+
+Sono presenti i seguenti campi:
+
+- Abilitato: pulsante che permette di selezionare la coda come attiva/non attiva
+- Nome: campo che permette di inserire il nome che intendiamo dare alla coda (es. “Assistenza”)
+- Priorità: valore numerico che permette di definire quale coda deve avere la priorità sulle altre, maggiore sarà il valore, più alta sarà la priorità
+- Prefisso aggiunto al CLID: il prefisso viene aggiunto all’identificativo del chiamante (CLID) e consente di indicare sul display del terminale telefonico la coda di provenienza della chiamata (es. “ASS” per “Assistenza”)
+- Controllo orario: è possibile scegliere i controlli orari già precedentemente configurati
+
+Membri
++++++
+Si definisce la lista degli operatori assegnati a questa coda. Per aggiungerli basta cliccare sul pulsante “Aggiungi membro”, è possibile scegliere tra i vari interni e di ciascuno selezionarne l’account. Se l’interno ha più account assegnati si può scegliere su quale account (terminale) andare a impegnare l’interno. La penalità è un valore che può essere assegnato a ogni operatore: più basso è il valore, maggiore sarà la possibilità di essere ingaggiato dal motore di accodamento. Più bassa è la penalità, più l’operatore è un “titolare” del servizio di quella coda.
+
+*jpg*
+
+Perché funzioni la distinzione basata sulle penalità è necessario che la strategia di squillo (campo presente nei “Parametri della coda”) sia di tipo ringall, cioè devono squillare tutti gli operatori (non c’è una distribuzione mirata sul singolo operatore). Quindi soltanto gli operatori disponibili con la più bassa penalità andranno ad essere impegnati. Si prenda ad esempio la seguente lista di membri di una coda:
+
+*jpg*
+
+Qualora la politica di impegno degli operatori sia impostata su “RingAll” solo gli operatori disponibili con la più bassa penalità squilleranno. Nel caso specifico di questo esempio, se l’interno 100 non dovesse essere già occupato, non registrato o in pausa, squillerà solo lui. Altrimenti squillerebbero contemporaneamente gli interni 102 e 101. Solo se anche questi ultimi fossero occupati, non registrati o in pausa squillerebbe l’interno 103. NOTA IMPORTANTE: qualora un operatore con la penalità minore non dovesse rispondere, sebbene disponibile, il motore di accodamento non passerà la chiamata agli operatori con penalità immediatamente superiore ma continuerà a far squillare l’operatore con penalità minore. Nell’esempio specifico se l’interno 100 risultasse disponibile la coda farebbe squillare sempre lui fintantoché non dovesse rispondere, senza scalare sugli interni 102 e 101 a penalità superiore.
+
+
+Parametri della coda
++++++
+*jpg*
+
+- **Abilita pausa automatica**: funzionalità che mette automaticamente in pausa un operatore che non risponde a una chiamata a coda. Il funzionamento di questa opzione varia a seconda della strategia di squillo che si va a scegliere. Nel caso di ringall non è influente: la pausa automatica non viene attivata. Il concetto di pausa automatica viene introdotto per le funzionalità callcenter che permettono alla centrale di definire i ruoli di supervisore e operatore di coda. Qualora un utente fosse un operatore di coda ha, tra le possibilità, quella di mettersi “in pausa”. “In pausa” si intende cioè un utente registrato, disponibile e libero a livello telefonico, ma che comunque non può essere ingaggiato dalla coda. Lo stato di pausa/non pausa è tracciato all’interno dei registri della centrale, in modo da controllare il tempo di pausa dell’operatore. La messa in pausa è gestita tramite dei codici che abbiamo visto nella sezione del “Piano di enumerazione” e digitando i codici – personalizzabili – è possibile mettersi in pausa o togliersi dalla pausa.
+- **Strategia di squillo**: menu a tendina che consente di definire le politiche di impegno degli operatori sulla coda, quindi il modo in cui il sistema distribuisce le chiamate entranti nella coda ai vari operatori. Scelte del menù a tendina:
+   - **Tutti gli operatori (ringall)**: la chiamata arriva contemporaneamente a tutti gli operatori liberi della coda, tenendo in considerazione i valori delle penalità
+   - **Lineare (linear)**: la chiamata viene inoltrata al primo operatore libero secondo la sequenza con la quale sono stati definiti i membri della coda (dall’alto verso il basso) ignorando il concetto di penalità che vale solo per ringall
+   - **Meno recente (leastrecent)**: assegna la chiamata agli interni che da più tempo non rispondono alla chiamata. Il motore di accodamento della centrale tiene conto dell’ultima volta che l’operatore ha servito una chiamata della coda e, di conseguenza, lo assegna esclusivamente a quello che da più tempo non ha risposto
+   - **Fewestcalls**: assegna la chiamata all’operatore che ha risposto a un numero inferiore di chiamate che viene calcolato sul giorno corrente, salvo riavvii della centrale
+   - **Ciclica con memoria (RRMemory)**: distribuisce le chiamate con modalità round robin tra gli operatori disponibili e ricorda l’ultimo che ha cercato di chiamare
+   - **Ciclica con ordinamento (RROrdered)**: come RRMemory, ma viene rispettato l’ordine degli operatori indicato nel file di configurazione
+   - **Casuale (random)**: assegna la chiamata in modo aleatorio tra gli operatori disponibili
+
+- **Durata dello squillo per operatore (sec.)**: indica per quanti secondi dovrà squillare il terminale dell’operatore ingaggiato (es. 15 sec). Durante questi secondi, se cambiano le condizioni (un altro operatore si libera e ci troviamo in una politica di ringall) la coda non presenta la chiamata all’operatore che si è appena liberato nel frattempo, ma andrà a includerlo nel pull degli operatori chiamabili solo alla scadenza del timeout di squillo successivo
+- **Alla scadenza del timeout di squillo di tutti gli operatori, riprova dopo**: l’operatore ingaggiato squilla per un certo numero di secondi, ci sarà un’attesa di es. 5 secondi e poi andrà a scegliere il prossimo operatore secondo la strategia di squillo selezionata; squillerà nuovamente per 15 sec. Durante i 5 secondi il chiamante è in coda e non squilla nessun operatore.
+- **Intervallo di riposo**: indica il tempo (sec.) per il quale l’operatore che ha appena concluso il servizio di telefonata (relativa alla coda), non verrà impegnato dalla coda
+- **Alla risposta, riproduci questo messaggio all’operatore**: opzione che permette di selezionare un file audio precedentemente caricato. Nel momento in cui l’operatore risponde alla chiamata, prima di essere messo in comunicazione col chiamante, ascolterà un file audio che gli ricorderà da quale coda è proveniente quella chiamata. Questo tipo di opzione è utile per i callcenter multiservizio che rispondono per conto di terzi, per l’operatore – a volte – è funzionale presentarsi al chiamante
+- **Notifica all’operatore il tempo di attesa del chiamante**: scelta che permette di comunicare all’operatore da quanto tempo il chiamante è in attesa
+- **Avvio di chiamata agli operatori già impegnati in conversazione**: consente di attivare un’opzione qualora una coda fosse particolarmente importante, come per esempio relativa a un servizio ad alta priorità. Nell’ingaggio degli operatori si ignora il fatto che l’operatore ha il suo account già in conversazione, quindi la chiamata viene presentata comunque
+- **Massimo tempo di attesa (sec.)**: parametro che monitora il tempo massimo di attesa oltre il quale scatenare un’azione di trabocco (vedi sotto)
+- **Massimo numero di utenti permessi nella coda**: parametro che monitora il numero massimo di utenti permessi nella coda oltre il quale scatenare un’azione di trabocco (vedi sotto). (es. inserendo 0 non ci sono limitazioni)
+- **Trabocco**: posso eseguire un file audio e poi un’azione di trabocco che è possibile scegliere nel menù a tendina
+
+Trabocco immediato per le nuove chiamate
+++++
+Qualora un chiamante entrasse in una delle possibilità elencate nell’immagine sottostante, è possibile innescare immediatamente un trabocco, anche se non è stato raggiunto il tempo massimo di attesa e il numero massimo di utenti nella coda.
+
+*jpg*
+Trabocco immediato per le chiamate in coda
+++++++
+Trabocco immediato per le chiamate già in coda da tot tempo e nel caso si verificassero le possibilità elencate nell’immagine sottostante
+
+
+Utenti della coda
+++++
+- **Messaggi di benvenuto**: è possibile selezionare un file audio precedentemente caricato
+- **Classe di musica d’attesa**: il chiamante, dopo il messaggio di benvenuto, può ascoltare una musica di attesa (caricata precedentemente) o il normale tono di squillo
+- **Annuncia la posizione in coda**: opzione che permette la comunicazione al chiamante della propria posizione in coda
+- **Frequenza annuncio di posizione in coda (sec.)**: inserimento di una cifra che indica ogni quanti secondi aggiornare il chiamante del suo posizionamento in coda
+- **Annuncia il tempo di attesa stimato**: calcolato sulla base delle statistiche del motore di accodamento, è possibile scegliere se annunciarlo ogni tot di secondi come la frequenza di annuncio della posizione in coda, solo una volta, o non annunciarlo.
+
+Questo messaggio si innesca soltanto qualora il tempo di attesa medio sia superiore ai due minuti
+
+Annuncio periodico personalizzato
+++++
+Strumento adottato, ad esempio, per comunicare al chiamante determinate procedure. È utilizzato per offrire informazioni più frequenti in richiesta a una determinata coda
+
+- **Abilita l’annuncio periodico**: è possibile selezionare l’abilitazione dell’annuncio
+- **File audio per l’annuncio periodico**: è possibile selezionare un file audio precedentemente caricato
+- **Intervallo di riproduzione dell’annuncio periodico (sec.)**: inserimento del tempo (in sec.) dopo cui partirà ciclicamente il messaggio periodico
+
+Messaggio su richiesta
+++++++
+
+- **Abilita la riproduzione su richiesta dell’operatore**: è possibile selezionare l’abilitazione del messaggio su richiesta
+- **File audio per la riproduzione su richiesta**: è possibile selezionare un file audio precedentemente caricato
+- **Sequenza da digitare per l’avvio dell’annuncio su richiesta**: sequenza che dovrà digitare l’operatore in conversazione su questa coda per scatenare il file audio caricato. (Es. l’operatore fa ascoltare determinate condizioni al cliente tramite la digitazione di un codice personalizzabile)
+
+
+Richiamata su occupato
+++++++
+Servizio abilitato nel caso in cui sulla centrale viene assegnata la licenza callcenter. Consente al chiamante in attesa di non restare fisicamente al telefono per tutto il tempo prima di essere preso in carico da un operatore, ma si dà la possibilità – premendo il tasto 5 – di restare virtualmente in coda. Viene eseguito un IVR di sistema che chiede al chiamante se desidera essere ricontattato sull’attuale numero o se vuole essere richiamato su un altro numero (da specificare). L’utente rimane virtualmente in coda e la sua posizione non cambia, al suo turno la centrale chiama l’operatore disponibile che comunicherà alla centrale di innescare la richiamata verso l’utente che si era prenotato.
+
+- **Abilitato**: è possibile può selezionare la richiamata su occupato
+- **Classe di instradamento in uscita**: es. Italia no cellulari, se si inserisce un numero di cellulare il numero non verrà richiamato
+- **Identità in uscita**: è una chiamata dalla centrale verso fuori, è possibile trattare il numero in uscita come se il chiamante fosse un interno già configurato
+
+Integrazione con CTI
+++++++
+E’ possibile fruire di specifiche funzionalità messe a disposizione da ACD direttamente dai software Kalliope CTI e Kalliope Attendant Console quali ad esempio aggiunta dinamica degli operatori, metter in pausa gli operatori, accedere al supervisor pannel.
+Si consideri il seguente esempio:
+
+- attivare la licenza del modulo call center da Impostazioni di Sistema -> Licenze
+- nel caso di versione multitenant, assegnare la licenza al tenant desiderato
+- assegnare il ruolo di Supervisore all’utente preposto
+
+All’apertura del software Kalliope CTI si avrà a disposizione:
+- Un nuovo tab che consente di visualizzare le code a cui appartiene ed eventualmente mettersi in pausa.
+- Nel caso di ruolo di supervisore è possibile accedere al Super visor panel
 
 
 
