@@ -98,6 +98,55 @@ Esempio:
 Nel caso si intenda configurare il prelievo con invito è necessario sostituire il codice di prelievo diretto (**) con quello di prelievo con invito (#*).
 
 
+Calling Line Identification Restriction (CLIR)
+----
+
+Descrizione del servizio
++++++++
+Questo servizio consente ad un utente di nascondere la propria identità telefonica quando effettua una chiamata.
+In questo modo anche se il chiamato ha un terminale abilitato al servizio CLIP (Calling Line Identification Presentation) non sarà in grado di risalire al numero telefonico del chiamante.
+
+L'oscuramento del numero chiamante non è sempre possibile ed è comunque soggetto a restrizioni normative.
+Le chiamate verso i servizi di emergenza ignorano l'abilitazione del CLIR (attraverso il servizio Calling Line Identification Restriction Override (CLIRO) e per alcune tipologie di chiamate (ad es. marketing / commerciale) non è consentito nascondere l'identità chiamante.
+
+Questo servizio si applica sia alle chiamate tra interni che per le chiamate in uscita.
+Nel caso di chiamate in uscita per il corretto funzionamento deve essere verificata la corretta configurazione del gateway di uscita e/o la modalità con cui il VoIP provider supporta il servizo CLIR.
+
+Il servizio è attivabile/disattivabile per chiamata ed è possibile definire il comportamento di default di ogni interno.
+Operativamente l'oscuramento del proprio numero chiamante avviene digitando il codice "Imposta" del servizio CLIR (default *671) seguito dal numero chiamato.
+Nel caso in cui invece si voglia mostrare il proprio numero chiamante è necessario digitare il codice "Rimuovi" del servizio CLIR (default *670) seguito dal numero chiamato.
+
+Configurazione del servizio
+++++
+Per utilizzare il servizio è necessario abilitarlo nel Piano di numerazione ed eventualmente modificare il codice da utilizzare.
+L'abilitazione all'utilizzo del servizio e il comportamento di default deve essere specificato per ogni interno (anche tramite template interni).
+Le configurazioni per interno oltre al comportamento di default nel caso di chiamate tra interni e verso l'esterno includono anche la possibilità di nascondere l'identità chiamante nel caso in cui il dispositivo chiamante invii il SIP Header Privacy: id.
+
+Interoperabilità
+++++
+Quando viene abilitato il servizio CLIR la segnalazione SIP viene modificata come segue:
+
+- viene sostituito la user part del From URI con anonymous (ad es. sip:anonymous@<ip_address_telefono>:<porta_telefono>)
+- viene sostituito la user part del Contact Header con anonymous (ad es. sip:anonymous@<ip_address_registrar>:<porta_registrar>)
+- viene aggiunto l'header SIP Privacy: id
+
+Per le chiamate tra interni non sono necessarie ulteriori configurazioni mentre per le chiamate in uscita possono esere necessarie alcune modifiche in base alla tipologia di linea di uscita.
+
+- VoIP Provider
+
+
+Nel caso in cui il servizio CLIR sia abilitato è necessario comunque inviare al provider l'identità del numero chiamante.
+Se questo non avviene di norma il provider rifiuterà la chiamata in uscita.
+Questa informazione può essere inviata tramite P-Asserted-Identity Header o Remote-Party Header.
+L'invio di questi header deve essere abilitato nella configurazione del trunk di uscita (Gateway e Domini VoIP -> Trunk).
+Il formato accettato per gli header è normalmente quello suggerito nel pannello di configurazione.
+Nel caso di problemi è necessario verificare con il proprio provider la configurazione richiesta.
+Per evitare che questi header vengano sovrascritti è inoltre necessario impostare la modalità invio COLP a disabilitato (sempre nella configurazione del trunk di uscita).
+
+
+
+
+
 
 
 
