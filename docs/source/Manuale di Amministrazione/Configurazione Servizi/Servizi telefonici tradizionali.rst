@@ -479,3 +479,73 @@ Come destinazione di inoltro della chiamata è possibile scegliere tra:
 - un'API esterna
 
 La modifica di queste impostazioni viene effettuata cliccando sull’icona della matita sulla destra; il pannello di modifica elenca le regole di inoltro personalizzate che sono definite, ne permette la modifica, cancellazione e creazione. Si noti che le regole vengono automaticamente ordinate in fase di salvataggio (numericamente), ponendo come prime quelle esatte e successivamente quelle a range e a prefisso.
+
+Controlli orari e interruttori
+--------
+
+Descrizione del servizio
++++++
+I controlli orari sono un meccanismo per gestire l’instradamento delle chiamate su base temporale e manuale.
+
+- **Su base temporale** perché si basano sulla definizione di fasce orarie riscontrate in sequenza, una dopo l’altra, per ciascuna delle quali è possibile definire la riproduzione di un particolare messaggio audio e il successivo inoltro della chiamata verso una specifica destinazione.
+- **Su base manuale** perché i controlli orari possono utilizzare gli interruttori che sono un elemento particolare della centrale, un flag a due stati (acceso/spento), comandabile tramite un codice digitabile da telefono.
+Normalmente, nelle soluzioni dei centralini telefonici tradizionali spesso si parlava di servizio giorno/notte, ovvero quel servizio che offriva un messaggio di cortesia negli orari di chiusura dell’ufficio, in questo caso il servizio del controllo orario permette di fare molte più scelte. È una entità di transito che può essere collegata in diversi punti del flusso di chiamata, dal momento che i controlli orari possono comparire nel menù a tendina di selezione di inoltro della chiamata al verificarsi di determinati eventi.
+
+Configurazione degli interruttori
++++++++
+Iniziamo configurando per prima cosa gli interruttori tramite **PBX > Interruttori**
+
+*jpg*
+L’interruttore può avere due stati, **acceso/spento**, è un servizio comandabile tramite la digitazione di un codice inserito da telefono o programmato su un tasto funzione di un terminale – dal momento che la centrale espone un servizio Busy Lamp Field con la visualizzazione dello stato – per commutare un interruttore e monitorare tramite il campo “lampade” se l’interruttore è acceso/spento.
+Ci troviamo sulla pagina della Lista interruttori, cliccando su “Aggiungi interruttore” possiamo configurarlo.
+
+- **Abilitato**: Abilitare o disabilitare un interruttore senza perderne la configurazione
+- **Nome**: Identificativo dell'interruttore
+- **Numero**: ID numerico dell'interruttore da utilizzare con il codice di abilitazione / disabilitazione / commutazione
+
+Controllo di accesso dell’interruttore
++++++++
+Ciascun interruttore prevede una ACL su base interni per il pilotaggio e quindi un’eventuale autenticazione
+
+- **Interno**: Selezionare l'interno abilitato alla modifica dello stato dell'interruttore
+- **Tipo di PIN**: Selezionare la modalità di autenticazione dell'interno, che può essere “Nessuno / Personalizzato / PIN dei servizi dell'interno”
+- **Valore del PIN**: Inserire PIN personalizzato, solo se il valore precedente è impostato su Personalizzato
+
+In PBX > Piano di Numerazione troviamo la pagina per attivare/disattivare/commutare gli interruttori.
+Es. Per commutare basta digitare sul terminale telefonico:
+
+- *51*1 per andare a cambiare lo stato dell’interruttore 1, dove 1 è l’id dell’interruttore
+- *5111, per forzarne l’apertura, dove 1 è l’id dell’interruttore
+- *5101 per forzarne la chiusura, dove 1 è l’id dell’interruttore
+
+Mel caso in cui l’interruttore fosse spento e si provasse a digitare il codice di disabilitazione, resterebbe comunque spento. Qualora fosse stato impostato un PIN per la gestione degli interruttori, a seguito della digitazione di questo codice, verrà richiesto l’inserimento del PIN o della password affinché l’azione sull’interruttore venga completata correttamente.
+
+Configurazione dei controlli orari
++++++
+*jpg*
+
+Procediamo andando su PBX > Controlli orari e cliccando su “Aggiungi controllo orario”
+
+- **Abilitato**: Consente di disabilitare un controllo orario senza perderne la configurazione
+- **Nome**: Identificativo del controllo orario
+- **Abilita backdoor**: codice che consente di aggirare il controllo orario, inserendolo verrà applicata alla chiamata in ingresso l’instradamento previsto dallo scenario fuori dalle fasce orarie, ovvero “Trabocco fuori dalle fasce orarie”
+- **Codice backdoor**: Consente di definire il codice di backdoor da utilizzare
+
+Qualora venisse digitato il codice backdoor verrà forzato l’inoltro del trabocco fuori dalle fasce orarie. Questo servizio serve per impostare un controllo orario per apertura/chiusura di alcuni uffici ed è utile in caso si voglia lasciare ai dipendenti o ai soggetti con privilegi particolari, la possibilità di aggirare le limitazioni del controllo orario, digitando il codice. Ad esempio per entrare in comunicazione con un ufficio della propria azienda, indipendentemente dal fatto che verso il pubblico quell’ufficio risulta chiuso.
+
+Fasce orarie
++++++++
+Si possono indicare le fasce orarie di apertura o quelle di chiusura dell’azienda. Definiamo delle fasce orarie standard, durante le fasce orarie si possono prendere tutte le chiamate e girarle al trabocco durante le fasce orarie che presenta nel menu a tendina le varie scelte. Il menu a tendina presenta anche la voce “Ritorna al livello superiore” che permette di tornare indietro rispetto all’entità che ci ha portati su questo controllo orario. Vedi gruppi/code: i gruppi di chiamata fornivano la possibilità di definire un controllo orario, cioè una politica di accesso a servizio. Qualora inserissimo questo particolare controllo orario all’interno della configurazione di un gruppo o di una coda, per consentirgli di continuare l’accesso alla coda a cui è associato, dovremmo selezionare questa voce. Questo permette di usare lo stesso controllo orario in più gruppi e code.
+
+**Situazioni particolari: festività**
+Si può stabilire durante un determinato giorno, di procedere con azioni diverse. Per esempio, possiamo sovrascrivere il trabocco che abbiamo configurato come standard e configurarne uno differente. La disposizione grafica delle informazioni ha un senso importante: le scelte vengono fatte dall’alto verso il basso, quindi in alto vanno inserite le regole più particolari e poi in basso le più generali.
+
+**Trabocco fuori dalle fasce orarie**: Azione di trabocco fuori dalle fasce orarie
+
+Interruttori
++++++++++
+
+Permettono di aggiungere il servizio giorno/notte manuale. Selezionando un interruttore precedentemente creato, come nell’esempio “Forza chiusura ufficio”, se dovesse risultare acceso e quindi volessi forzare la chiusura dell’ufficio dovrei mandare il file audio di chiusura e un’azione, es. “Riaggancia”. Se fosse chiuso e non volessimo forzare la chiusura, potremmo selezionare “Continua”, cioè si procede con l’interruttore successivo. Selezionando “Forza apertura ufficio”, verrà forzata l’apertura dell’ufficio indipendentemente dall’orario con cui abbiamo configurato il controllo orario. Se l’interruttore risulterà acceso, verrà eseguita la stessa azione configurata nel trabocco durante le fasce orarie. Qualora nessuno dei due interruttori sia acceso e comporti una forzatura, il controllo orario si comporterà sulla base della configurazione delle fasce orarie che abbiamo definito. Il codice backdoor interviene solo sul comportamento delle fasce orarie, se c’è una forzatura manuale di apertura/chiusura, il codice di backdoor non funziona.
+
+
+
