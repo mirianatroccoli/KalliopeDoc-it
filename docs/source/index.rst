@@ -41,6 +41,7 @@ Manuale di Amministrazione
 .. toctree::
 
    Manuale di Amministrazione
+   Configurazione Servizi
    
 
 Privacy Admin
