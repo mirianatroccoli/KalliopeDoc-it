@@ -777,13 +777,12 @@ Esempio:
    memorykey.%%id%%.value=<interno>
    memorykey.%%id%%.type=16
    
-Dove %%id%% è l’identificativo del tasto da configurare
-
-e %%line_id%% è l’identificativo dell’account associato il valore è 1 se sul telefono è presente un solo account)
+Dove %%id%% è l’identificativo del tasto da configurare e %%line_id%% è l’identificativo dell’account associato il valore è 1 se sul telefono è presente un solo account)
 
 Esempio:
 
 .. code-block:: console
+
    memorykey.1.line = 1
    memorykey.1.value = 890
    memorykey.1.type = 16
