@@ -549,3 +549,55 @@ Permettono di aggiungere il servizio giorno/notte manuale. Selezionando un inter
 
 
 
+Gruppi di chiamata
+----
+
+Descrizione del servizio
++++++++
+Il servizio dei Gruppi di chiamata è un servizio di accoglienza della telefonata che serve a offrire al chiamante una sequenza ordinata di priorità di interni, a seconda della quale la chiamata andrà distribuita a uno o più interni in parallelo. Il gruppo di chiamata è un accorpamento di interni, distribuiti su diverse priorità a squillo contemporaneo, che individua dei reparti di un ufficio.
+
+Configurazione del servizio
+++++++
+*jpg*
+Procediamo cliccando su "PBX > Code e gruppi di chiamata" dal menu operativo.
+Premendo su “Lista gruppi di chiamata” troviamo la lista dei gruppi già configurati.
+Per passare alla configurazione, clicchiamo su “Aggiungi nuovo gruppo di chiamata”.
+
+La configurazione prevede i seguenti campi:
+
+- **Abilitato**: checkbox per abilitare o meno il gruppo
+- **Nome**: inserire il nome che si preferisce
+- **Prefisso aggiunto al CLID**: prefisso che viene aggiunto all’identificativo del chiamante (CLID) e consente di indicare sul display del terminale telefonico il codice personalizzabile di provenienza di quel determinato gruppo di chiamata (es. “ASS” per “Assistenza”)
+- **Controllo orario**: è possibile definire per ciascun gruppo di chiamata un proprio controllo orario per differenziare i comportamenti a seconda dei giorni, mesi ecc.
+- **Classe di musica d’attesa**: si può scegliere se presentare al chiamante il tono di squillo o una delle classi di musica d’attesa configurate sulla centrale
+- **Trabocco**: al termine della consultazione di tutti i gruppi di priorità è possibile definire un’azione di trabocco, quindi in caso di assenza di risposta di qualsiasi interno appartenente a questo gruppo, è possibile eseguire uno dei file audio che avremo impostato e successivamente effettuare una delle azioni riportate nel menù a tendina
+
+Priorità
++++++
+Clicchiamo su “Aggiungi priorità” per procedere alla configurazione.
+
+- **Durata dello squillo per operatore (sec.)**: valore che definisce la durata dello squillo di questo sottogruppo di priorità 1
+- **Aggiungi interno**: definiamo gli interni appartenenti al gruppo di priorità 1
+
+Aggiungendo un altro gruppo di priorità 2 (tramite “Aggiungi priorità”), sequenzialmente al gruppo 1, nel momento in cui passano i secondi di squillo del primo gruppo, si procede con il secondo.
+
+I gruppi vengono eseguiti in sequenza, qualora nessun sottogruppo rispondesse alla chiamata, essa verrebbe deviata nel trabocco configurato.
+
+Azioni di trabocco relative ai singoli interni coinvolti nei gruppi
++++++
+
+Le azioni di trabocco del singolo interno – qualora la chiamata fosse diretta al gruppo e non al singolo interno – non vengono eseguite. Se l’interno 210 avesse un trabocco configurato sul proprio interno per mancata risposta verso numero esterno, nel momento in cui questo interno squillasse non perché chiamato direttamente, ma perché appartenente al gruppo di chiamata, il suo trabocco non verrebbe preso in considerazione. Allo stesso modo, le impostazioni lato centrale di inoltro incondizionato relative ai singoli interni appartenenti al gruppo non vengono prese in considerazione. Se si configura una deviazione sul terminale impostato con un account di un determinato interno, essa sarà correttamente eseguita perché non gestita dalla centrale, ma dal terminale. Qualora sull’interno fosse configurato il servizio Fork2Mobile – per far squillare il cellulare mobile associato al determinato interno – la chiamata viene fatta in parallelo anche sul mobile associato a quell’interno.
+
+
+In sintesi:
+
+- Le singole azioni di trabocco degli interni NON vengono eseguite
+- L’attivazione del servizio di PBX «inoltro incondizionato» sugli interni NON causa la deviazione della chiamata
+- L’attivazione della deviazione su uno dei terminali di un interno causa la deviazione della chiamata
+- Il servizio Fork2Mobile dei singoli interni afferenti al gruppo viene invece innescata anche quando la chiamata è diretta al gruppo
+
+Per inoltrare una chiamata in ingresso al gruppo di chiamata possono essere utilizzate due modalità:
+
+- definire nel piano di numerazione una selezione personalizzata associata al gruppo di chiamata
+- definire in un gateway o dominio VoIP una numerazione che abbia come destinazione il gruppo di chiamata
+
