@@ -772,5 +772,7 @@ Configurazione servizi
 
 .. toctree::
 
-   Manuale di Amministrazione/Configurazione Servizi
+   Manuale di Amministrazione/Configurazione Servizi/Servizi telefonici tradizionali
+   Manuale di Amministrazione/Configurazione Servizi/Servizi telefonici avanzati
+   Manuale di Amministrazione/Configurazione Servizi/Altri servizi
 
