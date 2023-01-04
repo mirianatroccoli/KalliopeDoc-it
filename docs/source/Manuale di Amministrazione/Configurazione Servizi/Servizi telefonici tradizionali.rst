@@ -382,7 +382,84 @@ Di seguito si riporta una descrizione dei singoli servizi attivabili:
 
 Riportiamo di seguito i valori di default dei servizi attivabili a livello di piano di numerazione.
 
+.. list-table::  
+   :widths: 25 25
+   :header-rows: 1
 
+   * - Descrizione
+     - Selezione (di default)
+   * - Prelievo di chiamata
+     - *9
+   * - Prelievo diretto
+     - **<num.interno>
+   * - Prelievo di chiamata di gruppo con invito
+     - #9
+   * - Prelievo di chiamata diretto con invito
+     - #*<num.interno>
+   * - CLIR (Imposta)
+     - *671
+   * - CLIR (Rimuovi)
+     - *670
+   * - Prenotazione di chiamata - CCBS/CCNR (Imposta)
+     - 841
+   * - Prenotazione di chiamata - CCBS/CCNR (Rimuovi)
+     - 840
+   * - Servizio Eco
+     - 800
+   * - Casella vocale
+     - 801
+   * - Audioconferenza
+     - 802
+   * - Lucchetto elettronico (Blocco)
+     - 850
+   * - Lucchetto elettronico (Sblocco)
+     - 851
+   * - Inoltro incondizionato (Blocco)
+     - 811
+   * - Inoltro incondizionato (Sblocco)
+     - 810
+   * - Fork to mobile (Commuta)
+     - *50*
+   * - Fork to mobile (Abilita)
+     - *501
+   * - Fork to mobile (Disabilita)
+     - *500
+   * - Fork to mobile (Controlla stato)
+     - *509
+   * - Interruttori (Commuta)
+     - *51*<id>
+   * - Interruttori (Abilita)
+     - *511<id>
+   * - Interruttori (Disabilita)
+     - *510<id>
+   * - Direttore-Segretaria (Commuta)
+     - *52*<int.dir>[*<int.segr>]
+   * - Direttore-Segretaria (Imposta)
+     - *521<int.dir>[*<int.segr>]
+   * - Direttore-Segretaria (Rimuovi)
+     - *520<int.dir>[*<int.segr>]
+   * - Gruppi di paging (Login)
+     - *53<id>
+   * - Hot Desking
+     - *401
+   * - Parcheggio di chiamata (Interno)
+     - 888
+   * - Parcheggio di chiamata (Primo slot)
+     - 890
+   * - Parcheggio di chiamata (Primo slot)
+     - 899
+   * - Speed Dial personali
+     - #0<speed dial>
+   * - Speed Dial di sistema
+     - #<speed dial>
+   * - Pausa sulle code (Imposta)
+     - *81
+   * - Pausa sulle code (Rimuovi)
+     - *80
+   * - Codice commessa
+     - <cod.commessa>*<dest>
+   * - Ascolto passivo (servizio SPY)
+     - <codice><Interno da ascoltare> Accessibile solo da un interno assegnato ad un ruolo supervisore e utilizzabile solo su interni "operatore". Quando poi si è in chiamata, digitando i codici DTMF 4, 5 o 6 si può modificare la modalità di interazione (4=spy, 5=whisper, 6=barge)- Non esiste un codice di default. Va impostato.
 
 Selezioni personalizzate
 +++++
