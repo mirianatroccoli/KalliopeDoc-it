@@ -551,7 +551,7 @@ E' possibile riordinare le regole una volta definite semplicemente portandosi su
 Nella tabella seguente sono illustrati i parametri che è possibile definire per ogni classe di instradamento in uscita.
 
 .. list-table::  
-   :widths: 25 25 50
+   :widths: 25 25 25
    :header-rows: 1
    
    * - Parametro
@@ -567,7 +567,7 @@ Nella tabella seguente sono illustrati i parametri che è possibile definire per
 **Regole della classe di instradamento in uscita**
 
 .. list-table::  
-   :widths: 25 25 50
+   :widths: 25 25 25
    :header-rows: 1
    
    * - Parametro
@@ -589,7 +589,7 @@ Una regola di instradamento in uscita consiste di due componenti:
 Nella tabella seguente sono illustrati i parametri che è possibile definire per ogni regola di instradamento in uscita.
 
 .. list-table::  
-   :widths: 25 25 50
+   :widths: 25 25 25
    :header-rows: 1
    
    * - Parametro
@@ -605,7 +605,7 @@ Nella tabella seguente sono illustrati i parametri che è possibile definire per
 **Selezioni delle regole di instradamento in uscita**
 
 .. list-table::  
-   :widths: 25 25 50
+   :widths: 25 25 25
    :header-rows: 1
    
    * - Parametro
@@ -618,7 +618,7 @@ Nella tabella seguente sono illustrati i parametri che è possibile definire per
  **Risoluzione ENUM**    
 
 .. list-table::  
-   :widths: 25 25 50
+   :widths: 25 25 25
    :header-rows: 1
    
    * - Parametro
@@ -634,7 +634,7 @@ Nella tabella seguente sono illustrati i parametri che è possibile definire per
 **Linee di uscita**    
 
 .. list-table::  
-   :widths: 25 25 50
+   :widths: 25 25 25
    :header-rows: 1
    
    * - Parametro
@@ -653,7 +653,7 @@ Una impostazione ENUM si compone di due componenti:
 - una lista di regole da applicare nel caso in cui il server ENUM risponda positivamente. Il comportamento potrà essere diverso in base all'hostname restituito nella SIP URI.
 
 .. list-table::  
-   :widths: 25 25 50
+   :widths: 25 25 25
    :header-rows: 1
    
    * - Parametro
@@ -669,7 +669,7 @@ Una impostazione ENUM si compone di due componenti:
 **Domini di ricerca**
 
 .. list-table::  
-   :widths: 25 25 50
+   :widths: 25 25 25
    :header-rows: 1
    
    * - Parametro
@@ -682,7 +682,7 @@ Una impostazione ENUM si compone di due componenti:
 **Regole ENUM**
 
 .. list-table::  
-   :widths: 25 25 50
+   :widths: 25 25 25
    :header-rows: 1
    
    * - Parametro
@@ -691,4 +691,228 @@ Una impostazione ENUM si compone di due componenti:
    * - regola ENUM
      - Consente di definire la regola da utilizzare per instradare la chiamata in uscita nel caso in cui la query DNS su un dominio di ricerca abbia esito positivo. La linea di uscita può coincidere con il dominio ritornato dalla query (chiamata diretta al dominio) oppure è possibile forzare comunque una specifica linea di uscita per l’instradamento on-net (ad esempio nel caso in cui sia necessario utilizzare delle credenziali di autenticazione).
      - Hostname + Linea di uscita / chiamata diretta al dominio.
+     
+Instradamento dinamico
+---------
+
+Questo servizio permette di effettuare l’instradamento di una chiamata in ingresso in base alla risposta ad una API HTTP invocata su un WEB server esterno o al riscontro di uno o più parametri definiti in un file caricato sul PBX.
+La richiesta al server web o il riscontro del file possono essere effettuate passando una serie di parametri numerici da richiedere al chiamante tramite prompt vocali pre-registrati.
+Per un approfondimento sul funzionamento del servizio Instradamento dinamico si può fare riferimento al video tutorial riportato qui a fianco (a partire dal minuto 37:27).
+
+Configurazione del servizio
+++++++++++
+La configurazione del servizio viene effettuata nel pannello Applicazioni PBX -> Instradamento dinamico.
+In fase di configurazione è necessario specificare i seguenti valori:
+
+- Nome: identificativo dell’instradamento.
+- Tipo: richiesta HTTP (Richiesta a WEB server esterno) / Interno (Riscontro su file locale)
+- Controllo Orario: indica il controllo orario da verificare prima di eseguire l’instradamento. Il trabocco in caso si voglia eseguire l’instradamento dinamico deve essere impostato a “Ritorna al livello superiore”.
+- Parametri: per ciascun parametro (numerico) da richiedere al chiamante, è possibile inserire un messaggio vocale (ad esempio con la richiesta di inserimento) e, opzionalmente, è possibile specificare il massimo numero di cifre inseribili.
+
+Se non viene specificato tale valore, il sistema assume che l’utente abbia terminato l’inserimento del parametro dopo un timeout di 5 secondi, o alla pressione del tasto “#”. In caso di mancata digitazione di una qualsiasi cifra, è prevista la ripetizione della richiesta per un massimo di 3 volte. Il massimo numero di parametri in ingresso è 5.
+È infine possibile abilitare la richiesta di conferma, mediante l’apposita checkbox; se abilitata, il sistema ripete all'utente le cifre inserite e chiede di confermare la correttezza dell’inserimento mediante la digitazione del tasto “1”. In caso di assenza di conferma, viene ripetuta la richiesta di inserimento del parametro.
+
+Impostazioni della richiesta
+++++++++++
+
+**Richiesta HTTP**
+Nel caso in cui la richiesta sia di tipo HTTP devono essere specificate le seguenti impostazioni:
+
+- URL: URL a cui deve essere effettuata la richiesta (è supportato sia il protocollo HTTP che HTTPS).
+- Tipo Auth: identifica il tipo di autenticazione utilizzato dal web server, e può assumere uno di questi 3 valori:
+   - NONE: nessuna autenticazione
+   - BASIC: Basic HTTP Authentication; in questo caso è necessario specificare le credenziali di autenticazione (username e password).
+   - Certificato client integrato del PBX (disponibile a partire dal firmware 4.5.9): l'autenticazione della richiesta è effettuata riscontrando l'identità del richiedente mediante certificato client univoco. Tale certificato, integrato in ciascun KalliopePBX, è firmato dalla CA Kalliope ed ha come CN il serial number del PBX (es. CN=KPBX40412345)
+- Tipo Request: indica il metodo della richiesta (sono supportati GET e POST).
+
+Nel caso in cui si utilizzi il metodo POST è possibile specificare il formato del corpo della richiesta ed il relativo Content-Type.
+Il passaggio dei parametri all’API avviene tramite dei placeholder inseriti nell’URL o nel contenuto del POST; i placeholder riconosciuti sono:
+
+- %CALLER_NUM%: indica il numero chiamante
+- %DNID%: indica il numero chiamato
+- %PARAM1%, …, %PARAM5%: indica i 5 parametri richiesti al chiamante tramite un menù vocale interattivo.
+- %UNIQUE_ID%: indica il codice identificativo univoco della chiamata. Tramite tale identificativo è possibile rintracciare la chiamata sul CDR.
+
+A titolo di esempio, nel caso di richiesta GET l’URL potrebbe essere costruito come:
+http://www.myserver.com/api?arg1=%CALLER_NUM%&arg2=%PARAM1%&arg3=%PARAM2%
+
+Nel caso di richiesta di tipo POST, il corpo potrebbe essere:
+
+.. code-block:: console
+
+   <?xml version="1.0"?>
+    <parameters>
+        <caller>%CALLER_NUM%</caller>
+        <param_01>%PARAM1</param_01>
+        <param_02>%PARAM2</param_02>
+    </parameters>
+    
+Interno
+...........
+Nel caso in cui la richiesta sia di tipo interno il file da utilizzare deve essere caricato nella cartella Accesso TFTP tramite il Gestore File.
+Il file può avere estensione .xls/.xlsx/.ods/.csv e contenere o meno le intestazioni di colonna. Nel caso negativo deve essere specificato il mappaggio delle colonne, indicando per ciascun campo l’esatta posizione nel file. A tal scopo è importante ricordare che la numerazione delle colonne parte da 0.
+Il file sorgente deve essere conforme al seguente template:
+
+.. code-block:: console
+
+   | callerNum | calledNum | param1 | param2 | param3 | param4 | param5 | response | newCallerNameFull | newCallerNamePrefix | newCallerNum|} 
+   
+Azioni
++++++
+In questa sezione si configurano le regole di instradamento da attuare in base alla risposta ottenuta dal Web Server esterno o all'esito del riscontro su file.
+
+Richiesta HTTP
+......
+
+Nel caso in cui la richiesta si di tipo HTTP il sistema si aspetta dal server web una risposta di tipo “200 OK”, il cui corpo deve contenere un testo XML come segue:
+
+.. code-block:: console
+
+   <?xml version="1.0"?>
+    <response>
+        <message>
+            <elem>digit:1</elem>
+            <elem>number:200</elem>
+            <elem>alpha:c234</elem>
+            <elem>audio:custom/%TENANT_UUID%/sounds/misc/pluto</elem>
+            <elem>number:201</elem>
+            <elem>digit:123</elem>
+            <elem>audio:custom/misc/pippo</elem>
+        </message>
+        <displayprefix>testo</displayprefix>
+        <value>105</value>
+    </response>
+    
+.. note::
+   La stringa %TENANT_UUID% deve essere sostituita con l'attuale valore del UUID specificato nel widget "Informazioni" sulla Dashboard
+
+I tag <message> e <displayprefix> (disponibile a partire dal firmware 4.3.5) sono opzionali; il tag <message> specifica la componente dinamica del prompt audio eventualmente riprodotto all'interlocutore, mentre il tag <displayprefix> permette di modificare il Display Name della chiamata anteponendo a quello corrente un prefisso costituito dalla stringa specificata all'interno del tag stesso.
+Il tag <value> è invece obbligatorio ed indica la risposta dell’API in base alla quale vengono definite le azioni di instradamento da compiere.
+
+Ciascuna azione di inoltro (quella di default, quella di errore e quelle associate a specifici valori di risposta) è composta da 3 azioni seuqenziali:
+
+- Riproduzione di un file audio statico caricato sul sistema
+- Riproduzione di un contenuto dinamico.
+- Inoltro della chiamata ad una nuova destinazione (o riaggancio)
+
+Il contenuto dinamico da riprodurre è descritto dai tag <elem> contenuti all'interno del tag <message> della risposta. Di seguito si riporta la descrizione del formato dei tag <elem> ammessi ed il relativo contributo al contenuto dinamico: 
+
+
+.. list-table::  
+   :widths: 25 25 25 25 25
+   :header-rows: 1
+   
+   * - <elem>...</elem>
+     - Esempio
+     - Firmware
+     - Descrizione
+     - Esempio di output
+   * - digit:{digit_sequence}
+     - digit:1234
+     - 
+     - Riproduce i singoli digit (numerici, da 0 a 9) che compongono la sequenza {digit_sequence}
+     - Riproduce il messaggio audio "Uno due tre quattro"
+   * - number:{number}
+     - number:1234
+     - 
+     - Riproduce il numero indicato in {number}
+     - Riproduce il messaggio audio "Milleduecentotrentaquattro"
+   * - alpha:{alphanumeric_sequence}
+     - alpha:1a2b3c4d
+     - 
+     - Riproduce i singoli caratteri (alfanumerici) che compongono la stringa {alphanumeric_sequence}
+     - Riproduce il messaggio audio "Uno a due b tre c quattro d"
+   * - audio:{audio_file}
+     - audio:custom/misc/test
+     - 
+     - Riproduce il file audio, presente sul KalliopePBX, identificato dal nome {audio_file} (comprensivo di percorso, come riportato all'interno del pannello "Suoni"->"File audio")
+     - Riproduce il file audio custom/misc/test
+   * - dtmf:{dtmf_sequence},{intertone_pause},{duration}
+     - dtmf:123w*,200,350
+     - 4.5.12+
+     - Riproduce i toni DTMF (in accordo alla modalità specificata per il canale da cui proviene la chiamata) specificati nella sequenza {dtmf_sequence}; ciascun tono ha durata pari a {duration} millisecondi (espresso come numero intero) e intervallati da una pausa di {intertone_pause} (anch'esso espresso in millisecondi). I caratteri ammessi sono i digit DTMF validi (0-9,*#,a-d,A-D) più "w" e "W" per indicare una pausa di 500 o 1000 millisecondi. **NOTA BENE**: la pausa inter-digit viene inserita anche in caso di riproduzione dei silenzi (caratteri "w" e "W").
+     - Invia all'interlocutore una sequenza di toni DTMF (ciascuno di durata 350 millisecondi) così composta: "1", pausa di 200 ms, "2", pausa di 200 ms, "3", pausa di 200 + 500 + 200 ms, "*"
+   * - pause:{duration}
+     - pause:450
+     - 4.5.12+
+     - Inserisce una pausa di durata {duration} millisecondi
+     - Inserisce una pausa di 450 millisecondi
+     
+Regola di instradamento
+........
+In questo punto viene definita l’azione di inoltro da eseguire. In aggiunta alle normali azioni di uscita è prevista anche la possibilità di inoltrare la chiamata al Piano di numerazione, utilizzando come selezione il valore contenuto nella risposta.     
+Interno
+++++++++++
+Nel caso in cui la richiesta sia di tipo interno il sistema verifica le corrispondenze di numero chiamante, numero chiamato e parametri sul file e restituisce il valore della colonna response che sarà utilizzato per stabilire le azioni da compiere.
+Nel caso in cui ci siano più righe che riscontrino i dati di ingresso viene selezionata l’azione corrispondente alla riga con più riscontri effettuati (best match).
+In questo caso non è prevista la riproduzione di un contenuto dinamico e pertanto le azioni da compiere sono costruite come segue:
+
+- Riproduzione di un file audio statico caricato sul sistema
+- Regola di instradamento
+In questo punto viene definita l’azione di inoltro da eseguire. In aggiunta alle normali azioni di uscita è prevista anche la possibilità di inoltrare la chiamata al Piano di numerazione, utilizzando come selezione il valore contenuto nella risposta.
+Nei casi negativi in cui i parametri non siano corretti, o la chiamata provenga da un numero non specificato nel file o non sia specificato il valore delle response, verrà sempre eseguita l’azione di gestione errori.
+E’ inoltre possibile inserendo dei valori nei campi newCallerNameFull, newCallerNamePrefix, newCallerNum modificare il nome e numero chiamante che verranno mostrati sul display del telefono chiamato.
+In particolare se inserisco il newCallerNameFull il nome del chiamante verrà sostituito con questo valore, se inserisco il newCallerNamePrefix questo valore viene anteposto al nome chiamante mentre se inserisco newCallerNum viene sostituito il numero chiamante.
+
+- Gestione errori: Nel caso in cui la richiesta al server WEB restituisca un errore oppure il riscontro sul file non vada a buon fine la chiamata viene gestita come indicato in questa sessione.
+
+
+Esempio instradamento dinamico interno
++++++++++
+
+.. list-table::  
+   :widths: 25 25 25 25 25 25 25 25 25 25 25
+   :header-rows: 1
+   
+   * - callerNum
+     - calledNum
+     - param1
+     - param2
+     - param3
+     - param4
+     - param5
+     - response
+     - newCallerNameFull
+     - newCallerNamePrefix
+     - newCallerNum
+   * - 102
+     -
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - simona
+     - 111
+   * - 103
+     -
+     - 111
+     - 22
+     -
+     -
+     -
+     - 100
+     -
+     -
+     -
+   * -
+     -
+     - 123
+     - 123
+     - 333
+     - 123
+     - 123
+     - 100
+     -
+     -
+     - 321
+
+Dopo aver creato sul Piano di numerazione l’esatta selezione per l’instradamento dinamico, da uno degli interni si effettua la chiamata a tale numero.
+Se la chiamata proviene dal numero 102, il sistema invierà la risposta 200 e verrà eseguita l’azione associata a quella response.
+Se la chiamata proviene dal 103, verranno richiesti tramite un messaggio vocale, i valori dei parametri; se i parametri inseriti sono corretti il sistema invierà la risposta 100 e verrà eseguita l’azione associata a quella response.
+Se la chiamata proviene da altro interno non specificato nel file, verranno richiesti i valori dei parametri e se i parametri inseriti sono corretti il sistema invierà la risposta 100 e verrà eseguita l’azione associata a quella response.
+In tutti gli altri casi viene seguita l’azione definita nella gestione errori.
+
      
