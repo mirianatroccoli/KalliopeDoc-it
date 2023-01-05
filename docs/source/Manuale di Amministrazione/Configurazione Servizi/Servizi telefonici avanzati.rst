@@ -121,3 +121,296 @@ Nella parte bassa del pannello è presente la lista dei partecipanti alla stanza
 
 E' inoltre possibile andare a comandare il "mute" (disabilitazione del microfono) per i partecipanti che si trovano nella stanza, singolarmente o per tutti i partecipanti; nel primo caso la commutazione dello stato del microfono si effettua cliccando sull'icona a forma di microfono presente nella colonna "Azioni", mentre per agire su tutti i partecipanti si utilizzano i due pulsanti presenti sopra la lista dei partecipanti (e che riportano le voci "Disabilita tutti i microfoni" e "Abilita tutti i microfoni").
 
+Blacklist su linee di ingresso
+-----------
+
+.. note::
+
+   Introdotto in Release: 4.5.17
+   
+Descrizione del servizio
+++++++++
+Questo servizio consente di definire un instradamento specifico per le chiamate in ingresso in base alla coppia numero chiamante e numero chiamato.
+Per ogni coppia è possibile stabilire se riprodurre un file audio (anche “in progress”) e definire l’azione di trabocco da effettuare (una qualsiasi delle azioni di instradamento presenti su KPBX).
+Le coppie per cui deve essere applicata la stessa politica di instradamento possono essere raggruppate in blacklist da riutilizzare su diverse linee di ingresso.
+Le blacklist si applicano alle chiamate entranti, pertanto in uno scenario single tenant possono essere agganciate ai gateway ed ai domini VoIP. Nel caso di multitenant le blacklist sono gestite dai singoli amministratori di tenant e vengono agganciate alle linee assegnate.
+Ad ogni linea in ingresso è possibile associare un elenco di blacklist che verranno applicate in cascata dopo l’applicazione delle regole di manipolazione e prima delle regole DID associate alla linea.
+
+Configurazione del servizio
++++++++++
+La configurazione del servizio richiede di definire prima la blacklist e quindi associarla alla linea di ingresso su cui deve essere applicata.
+
+La configurazione della blacklist e delle regole che la compongono viene effettuata nel pannello PBX -> Gateway e domini VoIP -> Lista delle blacklist.
+
+**Nel caso di PBX multitenant la configurazione viene effettuata nel pannello PBX -> Gestione delle linee assegnate -> Lista delle blacklist.**
+
+In questo pannello è possibile creare una nuova blacklist attraverso il pulsante “Aggiungi blacklist” oppure editarne una esistente.
+
+
+I campi principali del form per la definizione della blacklist sono i seguenti:
+
+- Abilitazione
+- Nome
+- Trabocco
+- Regole
+
+Le regole sono ordinabili ma anche l’ordinamento, come le note, ha uno scopo puramente gestionale per raggruppare logicamente delle regole. Avendo tutte la stessa azione di failover, il primo match innesca l’azione.
+
+L’associazione della blacklist alla linea di ingresso viene effettuata su gateway e domini VoIP nel pannello PBX -> Gateway e domini VoIP -> Linee in ingresso / uscita
+Nel caso di PBX multitenant la configurazione viene effettuata nel pannello PBX -> Gestione delle linee assegnate -> Linee assegnate.
+Indipendentemente dallo scenario in cui ci troviamo l’assegnazione viene sempre fatta cliccando su “Aggiungi blacklist” ed aggiungendo tutte le blacklist necessarie.
+
+È possibile disabilitare ogni singola associazione delle blacklist con la linea in ingresso in modo che le regole contenute non vengano valutate.
+È possibile anche modificare l’ordinamento delle blacklist all’interno delle linee in ingresso, in modo da implementare sia meccanismi di blacklist che di whitelist.
+
+
+Campagne di avviso
+---------
+
+.. note::
+   NOTA BENE: Questo servizio è disponibile a partire dalla versione firmware 4.9.4 in poi.
+   
+Descrizione del servizio
++++++++
+Il servizio “Campagne di avviso” presente sul Kalliope PBX, permette di effettuare una sessione di chiamate automatiche verso un gruppo di destinatari, riproducendo a ciascuno un messaggio audio e registrando la conferma di avvenuto ascolto da parte di ciascuno di essi.
+
+A livello generale, il nuovo servizio consente la configurazione, tramite pannello WEB delle campagne di avviso, ciascuna caratterizzata da un insieme di parametri specifici:
+
+- **lista dei partecipanti** (interni ed esterni al PBX)
+- **messaggio da riprodurre**
+- **numero massimo di chiamate esterne contemporanee**
+- **necessità di acquisire o meno le conferme di risposta e di ascolto**
+- **numero di tentativi di chiamata verso ciascun destinatario**
+
+Un utente con gli adeguati diritti può operare sulle campagne configurate per comandarne l’avvio (istantaneo o ritardato), visualizzarne lo stato di esecuzione, comandarne la sospensione o l’interruzione.
+Una campagna terminerà nel momento in cui per ciascuno dei destinatari configurati si verifichi una delle seguenti condizioni:
+
+- il destinatario risponde alla chiamata e fornisce conferma di risposta e/o di ascolto (se richieste); questa condizione indica il “successo” nel contatto del destinatario
+- viene raggiunto il numero massimo di tentativi di chiamata verso quel destinatario, senza che sia soddisfatta la condizione precedente.
+
+Nel caso in cui tutti i destinatari (o il numero minimo richiesto per quella specifica campagna) siano stati contattati con successo, la campagna passa nello stato “Completata”; in caso contrario, al momento dell’esaurimento dei tentativi di chiamata verso tutti i destinatari, la campagna passa nello stato “Incompleta”. In quest’ultimo stato, l’utente può assegnare ulteriori tentativi di chiamata verso uno o più destinatari che non sono stati contattati con successo fino ad allora, oppure marcare come definitivamente chiusa la campagna, portandola nello stato “Terminata”.
+Oltre alla gestione in tempo reale delle singole campagne di esecuzione delle campagne di avviso (con visualizzazione dello stato per ciascun destinatario) è possibile accedere ad un registro storico di esecuzione delle campagne concluse: nel registro di queste esecuzioni sono salvati sia agli eventi relativi all’esecuzione della campagna che tutti i parametri di configurazione di esecuzione della stessa, così da poterli consultare anche in caso di modifica della configurazione della campagna o la sua eventuale cancellazione.
+
+Configurazione del servizio
++++++++
+
+Il servizio delle Campagne di avviso viene configurato nel pannello **“Applicazioni PBX” -> “Campagne di avviso”**. La visibilità del pannello e dei relativi tab è condizionata ai permessi associati al ruolo dell’utente.
+Il pannello delle Campagne di avviso prevede tre tab:
+
+- **Lista Modelli e Lista Campagne** (associate all’abilitazione “Gestione delle Campagne di Avviso”)
+- **Impostazioni generali** (associate all’abilitazione “Gestione delle Impostazioni generali delle Campagne di avviso”)
+
+Nel pannello “Impostazioni generali” è possibile configurare i limiti globali del servizio, in termini di numero massimo di campagne attive simultaneamente, e di numero massimo di chiamate contemporanee (a interni, a esterni, e complessive) tra tutte le campagne attive ad un certo momento. I parametri di configurazione sono:
+
+- **Numero massimo di campagne simultanee attive**: indica il numero massimo di campagne che possono essere contemporaneamente nello stato “Attiva”.
+Il parallelismo riguarda l’effettiva esecuzione delle chiamate delle campagne, per cui ad esempio con grado di parallelismo 1 è possibile avviare una campagna anche in caso di una altra campagna già in esecuzione. Le campagne saranno ordinate in base all’attributo “priorità”, ed in caso di parità in base all’ora di avvio, e il sistema effettuerà le chiamate scegliendo i destinatari dalla campagna a priorità maggiore (entro i vincoli di contemporaneità di chiamata globali e di singola campagna). Il valore vuoto indica illimitato.
+- **Contemporaneità massima chiamate totali/interne/esterne**: questi tre valori determinano il numero massimo di chiamate contemporanee che il sistema può effettuare tra tutte le campagne attive. Il valore vuoto indica nessun limite. **NOTA**: La somma dei limiti impostati per le chiamate interne ed esterne può eccedere il limite totale, ma comunque il numero di chiamate effettivamente in esecuzione non lo potrà superare (Es. con i valori 10/8/6, possono esserci al più 8 chiamate interne, 6 chiamate esterne, ma complessivamente non più di 10 chiamate; se quindi ad un dato momento sono in esecuzione 7 chiamate interne, potranno essere attive al massimo 3 chiamate esterne)
+
+Ogni volta che una chiamata di una campagna termina (con successo o meno), oppure quando viene attivata una nuova campagna, lo scheduler delle chiamate (che si occupa di determinare se è possibile effettuare una nuova chiamata e verso quale destinatario tra tutti quelli possibili per le varie campagne) opera utilizzando il valore corrente di tali limiti.
+
+Per poter avviare una Campagna, è necessario che prima venga definito un Modello di campagna, a cui sono associati un insieme di parametri che determinano il comportamento delle campagne attivate a partire da quel modello, e quindi venga avviata (o programmata ad una certa data/ora nel futuro) la Campagna a partire da quel modello. Da uno stesso modello possono essere avviate più campagne, in tempi diversi, modificando per ciascuna di esse un sottoinsieme dei parametri di configurazione ereditati dal modello, come il file audio da riprodurre o l’elenco dei destinatari.
+
+
+La prima operazione da fare per attivare una Campagna è quindi creare un Modello, dal pannello “Lista Modelli”, cliccando sull’azione “Aggiungi nuovo modello di campagna”.
+Il pannello di creazione (o modifica) di un Modello di Campagna permette la configurazione dei seguenti parametri:
+
+- **Abilitato**: check-box che indica se il Modello è abilitato. Se un Modello è disabilitato non possono essere avviate o pianificate Campagne che lo utilizzano
+- **Nome**: nome della Campagna. Ammette caratteri alfanumerici, spazi, trattini, underscore. Questo attributo viene utilizzato come Display-Name per le chiamate effettuate dalla Campagna verso i destinatari
+- **Numero chiamante**: è il numero chiamante utilizzato dal sistema per effettuare le chiamate della campagna. Viene utilizzato sia per le chiamate ad altri interni che per le chiamate a numeri esterni. Nel caso di chiamate esterne il numero chiamante effettivo sarà derivato da questo in base alle regole di manipolazione configurate per la linea di uscita che sarà impegnata.
+- **Classe di instradamento in uscita**: determina l’instradamento delle chiamate verso i destinatari esterni. Nel caso in cui la classe non permetta di chiamare uno o più dei destinatari configurati, le relative chiamate falliranno ma non viene effettuato un controllo preventivo.
+- **Priorità**: questo valore viene utilizzato dallo scheduler di generazione delle chiamate nel momento in cui si libera lo spazio per una nuova chiamata se sono presenti 2 o più campagne attive.
+- **File audio**: selezione del file audio da riprodurre a ciascun destinatario.
+- **Soglia di completamento**: questo parametro indica il numero di destinatari che è sufficiente contattare con successo per considerare la campagna completa.
+- **Numero di tentativi di chiamata**: questo parametro indica il numero massimo di tentativi di chiamata (senza successo) che possono essere effettuati verso il destinatario. Al raggiungimento di tale numero di chiamate senza che il destinatario abbia risposto e dato conferma (di risposta o ascolto, se richieste), il sistema non effettuerà più nuovi tentativi di chiamata verso questo destinatario, che risulterà quindi “non contattato” in modo definitivo. È facoltà dell’utente che gestisce la campagna di poter aggiungere nuovi tentativi di chiamata verso quei destinatari per i quali sia stato esaurito questo limite. Questo valore non può essere illimitato (default 5).
+- **Timeout per chiamata**: il timeout di squillo (in secondi) per ciascuna chiamata effettuata dalla campagna
+- **Richiedi conferma di risposta**: questa check-box indica se il sistema deve richiedere al destinatario la digitazione del tasto 1 per confermare che abbia effettivamente risposto, prima di effettuare la riproduzione del messaggio. Questa impostazione vale sia per i destinatari interni che esterni, ed assicura che la chiamata non sia andata ad un risponditore o casella vocale.
+- **Richiesta conferma ascolto**: questa check-box indica se il sistema deve richiedere al destinatario la digitazione del tasto 9 al termine dell’ascolto del messaggio, a conferma dell’effettivo ascolto e comprensione di questo. La mancata conferma o la pressione di un tasto diverso da quello indicato causa la ripetizione del messaggio. Se la chiamata viene abbattuta senza conferma di ascolto, il sistema considererà il destinatario come “non contattato”, e se il destinatario ha ancora tentativi residui (perché non ha raggiunto il numero massimo di tentativi di chiamata configurati per la campagna) potrà essere nuovamente chiamato in seguito, in base alle politiche di scheduling del servizio.
+- **Contemporaneità massima chiamate interne/esterne/totali**: questi 3 valori determinano il numero massimo di chiamate che questa campagna può effettuare complessivamente, verso destinatari interni e verso destinatari esterni. Un valore “null” indica nessun limite. La somma dei limiti impostati per le interne e le esterne può eccedere il limite totale, ma comunque il numero di chiamate effettivamente in esecuzione non lo potrà superare.
+- **Elenco destinatari**: questo elenco viene popolato con destinatari interni o esterni. Nel caso di contatti inseriti manualmente, oltre al numero si possono specificare un nome ed un indirizzo mail (per l’invio del messaggio). L’elenco è ordinabile; lo scheduler delle chiamate utilizzerà tale ordinamento in fase di selezione della prossima chiamata da effettuare, a parità degli altri parametri.
+
+
+Una volta creato il modello questo apparirà nel pannello “Lista Modelli”, da cui l’utente abilitato può effettuare le seguenti operazioni:
+
+- **Creare un numero arbitrario di Modelli di Campagne**
+- **Cancellare uno o più Modelli di Campagna esistenti** selezionando l’icona Cestino. Nel caso di un Modello da cui siano state avviate o programmate una o più Campagne, la cancellazione è permessa, in quanto tutti i parametri necessari all’esecuzione della campagna di avviso sono stati già copiati dal modello nella configurazione operativa di quella campagna. All’utente viene comunque indicata l’esistenza di campagne in corso o schedulate associate a tale Modello, mediante pop-up di conferma cancellazione.
+- **Clonare un Modello esistente per crearne una nuova**, che ne eredita le impostazioni
+- **Modificare la configurazione di un Modello di Campagna** precedentemente creata; nel caso di una Campagna per la quale esistano una o più istanze in esecuzione o schedulata, la modifica è comunque permessa a seguito dell’indicazione mediante il pop-up di conferma.
+- **Visualizzare la lista dei destinatari** della Campagna.
+
+Avvio e gestione di una campagna di avviso
+++++++++
+Dopo aver configurato un modello di campagna di avviso, l’utente può comandare l’avvio di una campagna, immediato o differito nel tempo.
+La creazione della Campagna si effettua cliccando sull’icona “Avvia” nella colonna “Azioni” della Lista Modelli. Viene aperto un pannello intermedio “Avvio nuova campagna di avviso” in cui è possibile assegnare un nome alla specifica campagna, effettuare l’eventuale modifica (rispetto al modello di origine) del file audio da riprodurre e dell’elenco dei destinatari.
+Infine, è possibile definire la programmazione della campagna secondo tre modalità:
+
+- **Immediata**: la campagna viene avviata immediatamente alla pressione del pulsante “Avvia”
+- **Ritardata**: selezionando il tempo (in minuti) dopo il quale la campagna viene avviata
+- **Orario programmato**: specificando una data ed ora a cui la campagna verrà avviata
+
+
+Alla conferma, selezionando premendo sul tasto “Avvia”, la nuova campagna (avviata o programmata) compare nel pannello “Lista Campagne”.
+Questo pannello costituisce un registro delle campagne passate ed anche di quelle correnti, tramite il quale è possibile visualizzare lo stato istantaneo della campagna, il grado di avanzamento delle chiamate, oltre ad alcuni parametri di configurazione. La vista delle campagne mostra le seguenti informazioni:
+
+- Come parametri di configurazione sono mostrati: Nome, Modello, numero chiamante, priorità, timeout di squillo, tentativi massimi per destinatario, valore della soglia di completamento, richiesta di risposta e conferma di ascolto, contemporaneità.
+- Programmazione Avvio: l’ora prevista di inizio della campagna
+- Destinatari totali: il numero totale dei destinatari della campagna
+- Destinatari contattati con successo: Destinatari che hanno risposto alla campagna secondo le impostazioni della campagna stessa
+- Chiamate in corso: numero delle chiamate attualmente in corso per quella campagna
+- Stato: indica lo stato in cui si trova la campagna e può essere uno dei seguenti:
+   - Programmata: al momento dell’attivazione. Da questo stato passa nello stato “In esecuzione” in caso di avvio immediato, o al momento previsto dalla schedulazione se avviata in modalità differita
+   - In esecuzione (o Attiva): quando vengono eseguite le chiamate verso i destinatari di questa campagna.
+   - Sospesa: attivabile dall’utente premendo il pulsante “Sospendi”. In questo stato non vengono generate nuove chiamate per i destinatari appartenenti a questa campagna; le chiamate in corso non vengono interrotte.
+   - Bloccata: quando si eccede il grado di parallelismo previsto per le campagne
+   - Incompleta: quando sono state eseguite tutte le chiamate possibili verso i destinatari ma almeno uno di questi non è stato contattato con successo. Nel caso in cui un destinatario passi dallo stato “Fallito” allo stato “Idle” (perché un utente gli ha assegnato nuovi tentativi di chiamata) allora la campagna torna in stato “Attiva” assegnando nuovi tentativi di chiamata per uno o più destinatari. In alternativa l’utente può chiuderla definitivamente portandola nello stato “Terminata” cliccando sull’icona “STOP”
+   - Terminata: quando la campagna è finita, anche con alcuni destinatari non contattati in via definitiva, e non possono essere più eseguite chiamate verso i suoi destinatari. L’utente, per una campagna Incompleta, può mettere la campagna in questo stato usando il tasto corrispondente.
+   - Completata: Si arriva in questo stato in modo automatico, nel momento in cui tutti i destinatari della campagna siano stati contattati con successo
+   
+   
+Oltre a questo pannello di summary delle campagne presente un “Pannello di stato della campagna” che raccoglie tutte le informazioni relative allo stato ed allo storico della campagna.
+In questo pannello (a cui si accede cliccando sull’icona della lente di ingrandimento) viene visualizzato anche l’elenco dei destinatari e per ciascuno di essi lo stato corrente: ultima volta che è stato chiamato, esito, numero di tentativi di chiamata, timestamp di ultima risposta e di ascolto, l’elenco dei tentativi di chiamata con i relativi eventi e timestamp. All’interno di questo pannello è possibile per l’utente comandare azioni relative alla campagna (sospendi e termina) e al destinatario (interrompi tentativi di chiamata, assegna ulteriori N tentativi, …).
+Nel pannello sono visibili i cambi di stato di un destinatario, che sono pilotati dall’avvio e termine delle chiamate dirette ad esso, e possono causare il cambio di stato della campagna a cui appartengono:
+
+- **Idle**: inattivo, disponibile ad essere chiamato (se la campagna si trova in stato “Attiva”)
+- **Attivo**: è in corso una chiamata
+- **Contattato**: è stato contattato con successo e sono state date le conferme richieste (risposta e ascolto, se previste)
+- **Fallito**: è stato fatto un numero di tentativi di chiamata pari al massimo previsto, senza che sia stato contattato con successo. Da questo stato l’utente può assegnare altri tentativi di chiamata a quel destinatario, che torna quindi nuovamente nello stato “Idle”.
+
+
+Logica di scheduling delle chiamate
+++++++++
+La logica con cui il sistema decide l’esecuzione di una nuova chiamata verso un destinatario appartenente ad una certa campagna dipende da numerosi parametri:
+
+- Contemporaneità massima delle campagne
+- Contemporaneità massima delle chiamate complessive (totali/interne/esterne)
+- Contemporaneità massima delle chiamate per campagna (totali/interne/esterne)
+- Priorità delle campagne
+- Timestamp di avvio di ciascuna campagna
+- Timestamp dell’ultimo tentativo di chiamata verso ciascun destinatario (con esito negativo)
+
+Le campagne attive ad un dato momento vengono ordinate in base alla priorità, ed in caso di parità viene data precedenza alla campagna con timestamp di avvio precedente.
+Partendo dalla campagna a massima priorità, il sistema genera tante chiamate fino al raggiungimento delle contemporaneità massime (della campagna e complessive). Vengono chiamati per primi i destinatari che non sono stati chiamati in precedenza, secondo l’ordine con cui sono elencati nella configurazione della campagna. Nel caso in cui si sia raggiunto un limite di contemporaneità, ad esempio per le interne, il sistema continuerà a selezionare destinatari da quella campagna, scegliendolo solo da quelli esterni. Quando si esauriscono i destinatari che non sono mai stati chiamati, se c’è ancora posto per ulteriori chiamate per quella stessa campagna, il sistema passa a richiamare i destinatari già chiamati in precedenza, partendo da quelli che sono stati chiamati più lontano nel tempo. Nel momento in cui non sia possibile selezionare un nuovo destinatario da questa campagna lo scheduler ripete la valutazione sulla seconda campagna (per priorità/tempo di avvio), e così via fino al raggiungimento dei limiti complessivi di chiamata o all’esaurimento di destinatari disponibili.
+Ogni volta che una chiamata termina, oppure ogni volta che viene avviata una nuova campagna, oppure quando vengono modificati i limiti globali del servizio, viene eseguito di nuovo l’algoritmo di scheduling per determinare se è possibile effettuare una o più nuove chiamate.
+
+Fast Transfer
+-----
+
+Descrizione Funzionale
++++++++
+Il servizio di Fast Transfer consente ad un interno di trasferire la chiamata in corso ad un numero mobile precedentemente associato all’interno stesso. Questa funzione può essere utilizzata ad esempio per proseguire sul telefono cellulare una conversazione anche se si ha necessità di lasciare la propria postazione di lavoro.
+
+Quando viene attivato questo servizio il KalliopePBX effettua una chiamata verso il numero cellulare impostato e una volta stabilita la comunicazione effettua il bridging della chiamata originale in ingresso con la nuova chiamata verso il cellulare. La comunicazione resta pertanto sempre ancorata sul centralino.
+
+E’ quindi possibile anche ritornare in comunicazione sul proprio interno (analogamente al primo trasferimento il KalliopePBX contatta dapprima l’interno e quindi interconnette i canali di chiamata).
+
+Operativamente l’utente che vuole trasferire la chiamata verso il proprio cellulare e viceversa deve semplicemente digitare il codice di trasferimento rapido (default **). Non appena l’utente risponde sul dispositivo destinatario del trasferimento la chiamata verso il dispositivo originale viene abbattuta e la comunicazione prosegue sul nuovo dispositivo.
+
+Configurazione
+++++++++
+Per l’abilitazione globale del servizio di Fast Transfer è necessario attivare nel pannello Servizi in chiamata il Codice trasferimento rapido (da/verso mobile) ed eventualmente modificare il codice da utilizzare.
+
+Per abilitare il servizio per lo specifico interno è invece sufficiente inserire il numero mobile nel pannello di definizione dell’interno.
+
+Fork to Mobile
+----
+
+Descrizione Funzionale
+++++++++
+Il servizio Fork2Mobile consente di inoltrare la chiamata diretta ad un interno anche ad un numero mobile precedentemente associato all’interno stesso. Questa funzione può essere utilizzata per ricevere le chiamate anche quando si è lontani dalla propria postazione di lavoro. Il sevizio funziona per chiamate dirette e per le chiamate a gruppi ma non funziona per le chiamate alle code.
+
+Quando viene attivato questo servizio il KalliopePBX inoltra la chiamata in ingresso non solo agli account associati all’interno ma anche verso un numero cellulare predefinito. Una volta stabilita la comunicazione verso l’utenza mobile il KalliopePBX richiede dapprima conferma che si tratti effettivamente della risposta di un utente (potrebbe trattarsi di un servizio di casella vocale o richiamata) e quindi effettua il bridging della chiamata originale in ingresso con la nuova chiamata verso il cellulare. Le chiamate verso gli altri dispositivi smettono di squillare non appena uno dei terminali risponde. La chiamata verso il numero mobile segue le regole di instradamento in uscita associate all’interno ed il numero presentato coinciderà sempre con quello che utilizza l’interno quando comunica verso la rete telefonica pubblica. La chiamata verso il mobile non contiene pertanto alcuna informazione in merito al chiamante originale.
+
+Se però sul telefono è attiva e connessa l’applicazione KalliopeCTI Mobile, il KalliopePBX invia il numero chiamante originale all'applicazione che la notifica all'utente. In questo modo l’utente può decidere se rispondere dopo aver verificato chi lo sta contattando.
+
+Le differenza tra questo servizio e il servizio di Inoltro Incondizionato su utenza mobile sono due:
+
+- Nel servizio Fork2Mobile il numero di cellulare associato all’interno è preconfigurato e non può essere modificato in fase di attivazione del servizio
+- Nel servizio Fork2Mobile tutti gli account dell'utente squillano contemporaneamente all'utenza mobile fino a quando uno dei terminali non risponde mentre nell'Inoltro Incondizionato la chiamata viene deviata esclusivamente al cellulare.
+
+Operativamente l’attivazione/disattivazione del servizio Fork2Mobile può essere effettuata in 3 modalità:
+- **Da telefono**: il servizio viene attivato digitando il codice di attivazione (default *501). Il KalliopePBX conferma l’attivazione del servizio riproducendo il file audio “Salvato”. Analogamente la disattivazione avviene digitando il codice relativo (default *500). In questo caso il KalliopePBX conferma la disattivazione con il messaggio “Grazie”. Esistono anche dei codici che consentono di commutare lo stato (default *50*) e verificare lo stato del servizio (default *509). Questi codici possono essere utilizzati esclusivamente da un dispositivo associato all’interno su cui deve essere effettuata l’attivazione / disattivazione.
+- **Da KalliopeCTI Desktop (in tutte le modalità)**: se il servizio Fork2Mobile è attivo per l’interno, sotto la casella di composizione del numero appare l’icona Kcti *jpg*. Cliccando sull'icona il servizio viene attivato e l’icona diventa Kcti *jpg*. La disattivazione viene effettuata cliccando nuovamente sull'icona. Posizionando il puntatore del mouse sull'icona è anche possibile visualizzare il numero mobile utilizzato dal servizio.
+- **Da KalliopeCTI Mobile**: l’attivazione viene effettuata cliccando sul simbolo della ruota dentata jpg* nell'angolo in basso a destra e quindi cliccando sull'icona Mobile jpg* che identifica il Servizio Fork2Mobile. Quando il servizio è attivo l’icona si modifica *jpg*. Per disattivare il servizio è sufficiente cliccare nuovamente sull'icona. Se il servizio è disattivato per l’interno cliccando sull'icona non cambierà lo stato dell’icona stessa.
+
+Quando è attivo il servizio e l'utente risponde sul telefono cellulare, viene riprodotto al chiamato il seguente messaggio audio “premere 1 per accettare la chiamata”.
+
+Se l'utente digita 1 viene messo in comunicazione con il chiamante e le altre chiamate vengono cancellate.
+
+Se l'utente digita un altro numero la chiamata verso il cellulare viene conclusa e gli altri terminali continuano a squillare.
+
+Nel caso in cui l'utente non digiti nulla (come nel caso in cui la chiamata sia trasferita alla casella vocale dell’operatore mobile) dopo un timeout di 15 secondi la chiamata viene riagganciata.
+
+Configurazione del servizio
++++++++++
+
+Il servizio Fork2Mobile è sempre attivo a livello globale. Per abilitare il servizio per lo specifico interno è però necessario inserire il numero mobile nel pannello dell’interno.
+
+L’abilitazione dei codici di attivazione / disattivazione da telefono e l’eventuale modifica sono gestiti nel Piano di Numerazione.
+
+
+Interoperabilità con dispositivi di terze parti
+++++++++++
+Quando l’attivazione / disattivazione del servizio viene effettuata da telefono può essere molto utile avere a disposizione un tasto (con campo lampade) che consenta di verificare lo stato del servizio ed eventualmente commutarne lo stato.
+
+Per quanto riguarda il monitoraggio, il KalliopePBX invia dei messaggi SIP NOTIFY per comunicare i cambi di stato del servizio. Il telefono dovrà inviare una SIP SUBSCRIBE per richiedere l’invio delle informazioni di stato.
+
+Questa operazione è normalmente effettuata configurando un tasto funzione di tipo BLF. L’oggetto da monitorare è forkm<interno>. Sullo stesso tasto viene anche automaticamente impostata la chiamata al codice di commutazione (default *50*) per attivare / disattivare il servizio.
+
+Esempi di configurazione
+++++++
+**Su SNOM**
+
+- Operando tramite la web gui di configurazione configurare Function keys con
+
+.. code-block:: console
+
+   Account: selezionare dalla tendina l’account che stiamo utilizzando (se c’è un solo account configurato sul telefono è il primo della lista)
+   Type: BLF
+   value: forkm<interno>
+   
+- Oppure modificando direttamente il file di configurazione o il template in questo modo:
+
+.. code-block:: console
+
+   <fkey idx="%%id%%" context="%%line_id%%" label="" perm="">blf sip:forkm<interno>@%%KPBX_IP_ADDRESS%%;user=phone</fkey>
+   
+Dove %%id%% è l’identificativo del tasto da configurare E %%line_id%% è l’identificativo dell’account associato (il valore è 1 se sul telefono è presente un solo account)
+
+Esempio:
+
+.. code-block:: console
+
+   <fkey idx="0" context="1" label="forking2mobile 105" perm="">blf sip:forkm105@192.168.23.112</fkey>
+   
+**Su YEALINK**
+
+- Operando tramite la web gui di configurazione configurare DSS Key con:
+
+.. code-block:: console
+   
+   Type BLF
+   Value: forkm<interno>
+   Line: La linea associata all’account che stiamo utilizzando (Line 1 se sul telefono è presente un solo account)
+
+- Oppure modificando direttamente il file di configurazione o il template in questo modo:
+
+.. code-block:: console
+
+   memorykey.%%id%%.line=%%line_id%%>
+   memorykey.%%id%%.value=forkm<interno>
+   memorykey.%%id%%.type=16
+   
+Dove %%id%% è l’identificativo del tasto da configurare
+
+e %%line_id%% è l’identificativo dell’account associato il valore è 1 se sul telefono è presente un solo account)
+
+Esempio:
+
+.. code-block:: console
+
+   memorykey.2.line = 1
+   memorykey.2.value = forkm105
+   memorykey.2.type = 16
+   memorykey.2.pickup_value = %NULL%
+   memorykey.2.xml_phonebook = %NULL%
+
+
