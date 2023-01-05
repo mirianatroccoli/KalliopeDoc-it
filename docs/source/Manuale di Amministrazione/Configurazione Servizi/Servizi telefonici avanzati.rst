@@ -1234,3 +1234,90 @@ Esempio:
    memorykey.1.value = bs109*105
    memorykey.1.type = 16
    memorykey.1.pickup_value = %NULL%
+
+
+Servizio paging
+-------
+
+.. note::
+   Introdotto in Release: 4.3.1
+   
+Descrizione del servizio
++++++++++
+
+Il servizio Paging permette di inviare un messaggio audio dal vivo o preregistrato a più destinazioni contemporaneamente, eventualmente specificando ai terminali di destinazione di rispondere in modo automatico. Questo servizio è comunemente utilizzato per effettuare annunci informativi o di emergenza.
+
+Il servizio Paging disponibile in KalliopePBX permette di definire un numero arbitrario di "Gruppi di paging". Ciascuno di essi è indipendente dagli altri, ed è completamente configurabile in termini di autorizzazioni, scelta delle destinazioni, della modalità operativa e dei messaggi da riprodurre.
+
+Operativamente, un interno effettua una chiamata ad una selezione costituita da un prefisso associato al servizio Paging (definito insieme all'abilitazione del servizio stesso nel Piano di Numerazione, impostato per default a *53) seguito dal numero specifico del gruppo di Paging (definito nel pannello di configurazione del gruppo stesso). In caso sia necessaria autenticazione, il PBX riproduce un prompt vocale ("Password") all'utente, che deve inserire un PIN numerico, seguito dal tasto #. In caso di autenticazione avvenuta con successo (in base al PIN specificato nella configurazione del gruppo per quell'interno chiamante) viene avviato il gruppo di Paging, in accordo alla modalità configurata, come dettagliato nella sezione seguente.
+
+Configurazione del servizio
+++++++++
+L'aggiunta o la modifica di un Gruppo di Paging viene effettuata dal pannello omonimo, raggiungibile dal menu "Applicazioni PBX".
+
+Nella seguente tabella sono descritti i parametri di configurazione di ciascun gruppo sono:
+
+.. list-table::  
+   :widths: 25 25 25
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Nome
+     - Identificativo assegnato al gruppo di Paging
+     - Alfanumerico
+   * - Numero
+     - Selezione del servizio di Paging
+     - Numerico
+   * - Identificativo chiamante
+     - Display Name per le chiamate verso i terminali di destinazione
+     - Alfanumerico
+   * - Modalità
+     - Modalità di funzionamento del gruppo di Paging
+     - Live/Unattended
+   * - File audio
+     - File audio contenente un messaggio preregistrato che viene riprodotto ai terminali di destinazione del gruppo. Viene utilizzato in modo differente nel caso di modalità Live o Unattended
+     - 
+   * - Numero di ripetizioni
+     - Numero di volte che il messaggio preregistrato deve essere riprodotto prima che il PBX termini automaticamente la chiamata(configurabile solo nella modalità "Unattended")
+     - Numerico(0 indica che il messaggio deve essere riprodotto in ciclo continuo)
+   * - Metodo di risposta automatica
+     - Header da aggiungere alle chiamate effettuate verso i terminali di destinazione al fine di specificare la richiesta di risposta automatica
+     - Configurazione manuale/Call-Info/Header Alert-Info
+     
+**Account**     
+
+.. list-table::  
+   :widths: 25 25 25
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Interno
+     - Terminali di destinazione del Paging	
+     - 
+   * - Account
+     - Account SIP associato all'interno
+     - 
+     
+**Controllo di accesso**     
+
+.. list-table::  
+   :widths: 25 25 25
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore 
+   * - Interno
+     - Interno chiamante
+     - "Qualsiasi interno"/Interno
+   * - Tipo di PIN
+     - Modalità di autenticazione richiesta
+     - Nessuno/Personalizzato/ PIN dei servizi proprio di ciascun interno abilitato.
+   * - Valore del Pin
+     - 
+     - Alfanumerico
+  
