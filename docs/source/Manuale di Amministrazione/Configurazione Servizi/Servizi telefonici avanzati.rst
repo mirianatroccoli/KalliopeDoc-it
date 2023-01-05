@@ -168,7 +168,7 @@ Campagne di avviso
 ---------
 
 .. note::
-   NOTA BENE: Questo servizio è disponibile a partire dalla versione firmware 4.9.4 in poi.
+   Questo servizio è disponibile a partire dalla versione firmware 4.9.4 in poi.
    
 Descrizione del servizio
 +++++++
@@ -327,6 +327,7 @@ Le differenza tra questo servizio e il servizio di Inoltro Incondizionato su ute
 - Nel servizio Fork2Mobile tutti gli account dell'utente squillano contemporaneamente all'utenza mobile fino a quando uno dei terminali non risponde mentre nell'Inoltro Incondizionato la chiamata viene deviata esclusivamente al cellulare.
 
 Operativamente l’attivazione/disattivazione del servizio Fork2Mobile può essere effettuata in 3 modalità:
+
 - **Da telefono**: il servizio viene attivato digitando il codice di attivazione (default *501). Il KalliopePBX conferma l’attivazione del servizio riproducendo il file audio “Salvato”. Analogamente la disattivazione avviene digitando il codice relativo (default *500). In questo caso il KalliopePBX conferma la disattivazione con il messaggio “Grazie”. Esistono anche dei codici che consentono di commutare lo stato (default *50*) e verificare lo stato del servizio (default *509). Questi codici possono essere utilizzati esclusivamente da un dispositivo associato all’interno su cui deve essere effettuata l’attivazione / disattivazione.
 - **Da KalliopeCTI Desktop (in tutte le modalità)**: se il servizio Fork2Mobile è attivo per l’interno, sotto la casella di composizione del numero appare l’icona Kcti *jpg*. Cliccando sull'icona il servizio viene attivato e l’icona diventa Kcti *jpg*. La disattivazione viene effettuata cliccando nuovamente sull'icona. Posizionando il puntatore del mouse sull'icona è anche possibile visualizzare il numero mobile utilizzato dal servizio.
 - **Da KalliopeCTI Mobile**: l’attivazione viene effettuata cliccando sul simbolo della ruota dentata jpg* nell'angolo in basso a destra e quindi cliccando sull'icona Mobile jpg* che identifica il Servizio Fork2Mobile. Quando il servizio è attivo l’icona si modifica *jpg*. Per disattivare il servizio è sufficiente cliccare nuovamente sull'icona. Se il servizio è disattivato per l’interno cliccando sull'icona non cambierà lo stato dell’icona stessa.
@@ -413,4 +414,122 @@ Esempio:
    memorykey.2.pickup_value = %NULL%
    memorykey.2.xml_phonebook = %NULL%
 
+Gruppi chiusi di interni
+--------
 
+.. note::
+   Introdotto in Release: 4.5.5
+
+Descrizione Funzionale
++++++
+Questo servizio consente all’amministratore del PBX di restringere la possibilità di chiamare uno o più interni solamente ad un elenco di interni abilitati.
+Se un interno appartiene ad un gruppo chiuso potrà essere contattato solamente dagli utenti autorizzati alla chiamata su quel gruppo.
+
+Configurazione del servizio
++++++++++
+La configurazione del servizio viene effettuata direttamente nel pannello di configurazione dell’interno nella sezione Gruppi Chiusi di Interni. In questa sezione è possibile impostare per l’interno l’appartenenza ad uno o più gruppi e l’autorizzazione ad effettuare chiamate su uno o più gruppi.
+
+Esempio
+++++++
+Impostare per l’interno 101 l’appartenenza al gruppo 1 e l’autorizzazione alla chiamata per i gruppi 1 e 2.
+Impostare invece per l’interno 102 l’appartenenza al gruppo 2 e l’autorizzazione alla chiamata solo per il gruppo 2.
+Effettuando una chiamata da 101 a 102 questa viene correttamente instaurata.
+Se invece si effettua la chiamata da 102 a 101 la chiamata non viene instaurata poichè 102 non è autorizzato alla chiamata su un gruppo di interni a cui appartiene 101.
+
+
+Hot desking
+--------
+
+
+Descrizione del servizio
++++++++++
+Il servizio di Hot Desking consente di associare l'identità telefonica di un utente configurato sul KalliopePBX ad un qualsiasi dispositivo abilitato al servizio.
+In questo modo l'utente potrà ricevere le chiamate dirette alla propria extension, mantenere le proprietà telefoniche (ad es. numero chiamante, regole di instradamento, politiche di trabocco) ed un unico registro chiamate indipendentemente dal terminale utilizzato.
+L'accesso al servizio avviene tramite una procedura di login autenticata dal PIN dei servizi dell'utente.
+Nel caso in cui l'utente risulti già loggato in Hot Desking su un altro terminale questo viene immediatamente scollegato mentre tutti i terminali associati staticamente all'utente mantengono invece il proprio stato di registrazione.
+Le chiamate in ingresso saranno pertanto presentate contemporaneamente a tutti i terminali statici e ad un unico terminale di Hot Desking.
+Il livello di occupato e il numero di chiamate contemporanee per ogni utente è definito nel pannello Interni nel quale vengono specificate le proprietà telefoniche dell'utente.
+Operativamente l'attivazione del servizio di Hot Desking avviene effettuando una chiamata al proprio numero di interno da un terminale a cui non è associato alcun interno.
+Il KalliopePBX richiede quindi tramite prompt vocale la "Password". L'utente deve quindi inserire il proprio PIN dei servizi seguito dal tasto # (se il tasto # non viene premuto il sistema invia comunque il comando dopo 5 secondi dalla digitazione dell'ultimo tasto). Il sistema conferma l'accesso riproducendo il file audio "Login effettuato". Al termine di questa operazione viene effettuata la riconfigurazione dinamica del telefono e sul display del telefono compaiono i dati dell’utente.
+La disattivazione del servizio avviene digitando il codice di Logout del servizio di Hot Desking (default *400).
+
+Requisiti per l’attivazione del servizio
+++++++++
+Per attivare il servizio di Hot Desking su un terminale è necessario che la configurazione sia interamente gestita mediante Auto-Provisioning e che il terminale supporti il meccanismo di aggiornamento della configurazione tramite SIP NOTIFY.
+Questo meccanismo è messo a disposizione da diversi produttori di telefoni (Snom, Yealink, Gigaset, Polycom, etc.).
+Per l'elenco completo dei telefoni certificati e delle relative versioni firmware consultare la sezione Interoperabilità con dispositivi di terze parti.
+
+Configurazione del servizio
++++++++++
+La configurazione del servizio Hot Desking interessa vari punti dell’interfaccia web di KalliopePBX.
+La configurazione principale si effettua tramite il pannello omonimo, raggiungibile dal menu “Applicazioni PBX”, ma sono interessati anche i pannelli di configurazione degli interni (e dei template) ed il piano di numerazione
+Prima di configurare il servizio è necessario, come operazione preliminare, andare a inserire i device (comprensivi di modello, indirizzo MAC e indirizzamento IP) nel pannello di provisioning, senza assegnargli un account SIP. Può essere omesso anche il template da assegnare perché verrà configurato nel pannello Hot Desking.
+Dal pannello Hot Desking si assegna ai dispositivi desiderati (scelti tra quelli definiti nel pannello provisioning ma per i quali non sia associato un SIP account) la modalità di utilizzo Hot Desking. Il sistema genera in automatico un account SIP dedicato allo specifico terminale (hotdesk-<mac>), utilizzato nella configurazione “a vuoto” del terminale per permettere l’esecuzione della chiamata per il login.
+A ciascun interno abilitato all’utilizzo del servizio Hot Desking deve essere abilitato il corrispondente flag di configurazione (eventualmente via template); in questo modo viene generato in automatico un SIP account dedicato (hotdesk-<interno>) che sarà utilizzato per generare la configurazione del terminale da usare in seguito al login. A questo account deve essere associato anche un template di SIP account.
+NOTA: Il flag di abilitazione Hot Desking ed il template di SIP account sono parametri di configurazione presenti nel template dell’interno e sovrascrivibili.
+
+
+Descrizione pannello Hot Desking
+.........
+I parametri di configurazione per l’abilitazione dei dispositivi al servizio di Hot Desking sono:
+
+- **Il dispositivo di provisioning**: il terminale definito nel pannello di provisioning per il quale si vuole abilitare il servizio di Hot Desking
+- **Il template di provisioning**: il template da utilizzare per generare il file di provisioning del terminale
+- **Il template dell'account SIP**: il template SIP da utilizzare per l’account SIP generato automaticamente ed utilizzato nella configurazione “a vuoto” del terminale.
+
+Abilitazione degli interni
+..........
+L’abilitazione degli interni all’utilizzo del servizio di Hot Desking può essere configurata sui template degli interni (quindi ereditata da tutti gli interni che fanno uso del template), oppure sui singoli interni tramite il meccanismo di override dei valori del template assegnato.
+I parametri di configurazione per l’abilitazione all’utilizzo dell’Hot Desking nel pannello dei template degli interni sono:
+
+- **Il flag abilita all'utilizzo dell'hot desking**: autoesplicativo
+- **Il template SIP da assegnare all'account hot desk**: il template SIP da utilizzare per l’account SIP generato automaticamente ed utilizzato in seguito al login dell’utente sul terminale di Hot Desking.
+Gli stessi due parametri sono presenti nel pannello degli interni con i relativi flag di override rispetto a quanto configurato nel template.
+
+Abilitazione del servizio
+.........
+Per poter utilizzare la funzionalità è necessario abilitare il servizio Hot Desking dal pannello Piano di numerazione.
+
+Interoperabilità con dispositivi di terze parti
+++++++++
+Il servizio è stato testato con terminali SNOM e Yealink secondo la seguente tabella di compatibilità:
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+   
+   * - Marca
+     - Serie/Modello
+     - Firmware
+   * - Snom
+     - D3x5
+     - 8.9.3.40
+   * - Snom
+     - D745
+     - 8.9.3.40
+   * - Snom
+     - D765 / D725 / D715 / D710
+     - 8.7.5.35
+   * - Snom
+     - 3xx
+     - 8.7.5.35
+   * - Snom
+     - 7xx
+     - 8.7.5.35
+   * - Snom
+     - 8xx
+     - 8.7.5.35
+   * - Yealink
+     - T19P / T20P / T21P / T22P / T26P / T28P / T32G / T38G / VP530
+     - v70
+   * - Yealink
+     - T19P E2 / T21P E2 / T23P / T23G / T27P / T29G / T40P / T41P / T42G / T46G / T48G / VP-T49G
+     - v80
+
+
+Altri modelli sono in fase di testing e qualora risultassero compatibili verranno aggiunti alla tabella precedente.
+Per i telefoni Yealink, al fine di evitare il reboot del telefono al momento della riprogrammazione, è necessario aggiungere la seguente riga di configurazione al template:
+
+.. code-block:: console
+
+   sip.notify_reboot_enable = 0
