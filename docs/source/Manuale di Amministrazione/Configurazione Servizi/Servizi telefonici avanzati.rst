@@ -915,4 +915,65 @@ Se la chiamata proviene dal 103, verranno richiesti tramite un messaggio vocale,
 Se la chiamata proviene da altro interno non specificato nel file, verranno richiesti i valori dei parametri e se i parametri inseriti sono corretti il sistema invierà la risposta 100 e verrà eseguita l’azione associata a quella response.
 In tutti gli altri casi viene seguita l’azione definita nella gestione errori.
 
-     
+Menu IVR multilivello
+---------
+
+Descrizione del Servizio
++++++++
+Il Risponditore Automatico Vocale Interattivo consente al chiamante, in base alla digitazione di selezione di DTMF, di essere instradato verso un determinato servizio.
+
+Configurazione del servizio
+++++++++
+Al sottomenu Menu IVR vi si accede tramite il menu Applicazioni PBX.
+
+*jpg*
+È possibile creare un numero arbitrario di menu IVR che possono essere in cascata o indipendenti.
+
+*jpg*
+- La casella **Nome** può essere riempita semplicemente con il nome del Menu IVR che preferiamo.
+- Nel caso in cui si vogliano creare più menu IVR in cascata si può scegliere di visualizzare l’albero IVR con il menu che configuriamo come radice dell’albero stesso, per farlo basta spuntare la casella **Visualizza un albero IVR con questo menu come radice**.
+- La funzionalità **Riproduci i messaggi “in progress”** permette di eseguire il messaggio audio gratuito (innescato dal messaggio SIP 183 Session Progress) che precede l’invio del SIP message 200 OK, il quale a sua volta innesca l’inizio della chiamata e la fatturazione. Questa funzionalità è consigliata soprattutto per le aziende in possesso di un numero verde associato al risponditore automatico poiché l’azienda stessa paga il costo di chiamata ed in questo modo può risparmiare dei preziosi secondi per ogni telefonata ricevuta. La disponibilità ad accettare il messaggio Session Progress SIP 183 dipende dall’operatore a cui è agganciata la centrale e normalmente ha una durata massima di 59 secondi.
+- La voce **File audio** permette di selezionare la traccia preregistrata contenente le opzioni che il cliente può scegliere tramite il tastierino numerico.
+- in **Ripetizioni** possiamo scegliere il numero di volte in cui il file audio verrà eseguito, non è possibile scegliere 0 perché vorrebbe dire non eseguire il file audio di descrizione del menu.
+- **Timeout (sec.)** indica l’attesa di selezione al termine del messaggio audio. Il sistema resta quindi in attesa per il numero di secondi indicati prima di effettuare una seconda ripetizione (se esiste) oppure scatenare l’azione predefinita (campo sottostante).
+
+Azione predefinita
++++++++
+L’azione predefinita è preimpostata come Inoltra a: riaggancia, ma esiste un’ampia scelta nel menu a tendina. Questa azione è utile all’utente che per qualche motivo non ha selezionato alcuna voce, di conseguenza possiamo scegliere se far riprodurre un file audio in cui si fa presente la mancata selezione del menu e si può inoltrare ad una delle voci presenti nella lista in cascata.
+
+Selezioni
+++++++++
+Nella voce Selezioni si può associare al numero che verrà selezionato dall’utente tramite tastierino numerico, l’inoltro ad una specifica voce presente nel menu a tendina. Esempi:
+
+- **Riaggancia**: la chiamata, dopo le ripetizioni dell’audio, viene terminata.
+- **Numero esterno**: la chiamata viene indirizzata ad un numero esterno che può essere un cellulare o un numero comunque non appartenente all’interno del centralino.
+
+Si può scegliere la classe d’uscita/CLID che serve per identificare il numero di telefono dell’utente chiamante.
+
+- **Interno**: la chiamata viene trasferita ad un numero interno che si può scegliere tramite la casella a destra.
+- **Gruppo di chiamata**: permette di distribuire la chiamata a più di interno, quindi consente di ricercare un interno disponibile per rispondere ad una chiamata in ingresso. Vedi la pagina Gruppi di chiamata.
+- **Gruppo di chiamata (salta controllo orario)**: il controllo orario sul gruppo di chiamata può essere semplicemente ignorato tramite questa opzione.
+- **Coda**: le chiamate in arrivo non vanno ad impegnare direttamente una o più destinazioni, ma vengono inserite in una coda di attesa. La chiamata viene tolta dalla coda quando ci sono operatori disponibili per servire il cliente. Vedi la pagina Code di attesa.
+- **Coda (salta controllo orario)**: il controllo orario sulle code può essere semplicemente ignorato tramite questa opzione.
+- **Controllo orario**: meccanismo che serve per gestire l’instradamento delle chiamate su base temporale e/o manuale. La procedura su base temporale consiste nel definire delle fasce orarie che vengono riscontrate in ordine: se la data e l’ora corrente cadono all’interno di una di queste, viene eseguita l’azione di inoltro corrispondente, altrimenti viene eseguita un’azione generale che vale per gli altri periodi della giornata. La modalità manuale fa sì che si abbiano degli interruttori (acceso o spento) comandabili tramite codice digitabile da telefono e/o tasto BLF. Vedi la pagina Controllo orario.
+- **Menu IVR**: permette di selezionare un Menu IVR precedentemente creato per collegarlo a quello attuale e creare così un menu a cascata.
+- **Casella vocale**: consente ad un utente di ricevere messaggi vocali anche quando non è in grado di rispondere ad una chiamata (per esempio se occupato o non disponibile). Vedi la pagina Casella Vocale.
+- **Servizio audio conferenza**: è possibile accedere ad un servizio di audio conferenza in cui possono essere collegate persone interne o esterne all’azienda. Si può scegliere se richiedere il numero della stanza (PIN) oppure indirizzare direttamente verso la stanza desiderata.
+- **Instradamento dinamico**: permette di effettuare la gestione della chiamata sia tramite invocazione di un web service esterno (come l'applicazione originaria) che riscontrando i parametri su un file XLS/CSV caricato sul PBX. Vedi la pagina Instradamento Dinamico.
+- **Istanza FAX**: permette di selezionare un’istanza FAX che corrisponde concettualmente ad un fax fisico al quale possono accedere uno o più utenti. Vedi la pagina Fax.
+- **Piano di numerazione – selezione personalizzata** permette di inserire una selezione che è già stata configurata in precedenza nel piano di numerazione.
+- **Piano di numerazione – chiedi selezione** permette di far scegliere al chiamante quale interno raggiungere, in questo modo verrà riprodotto un file audio in cui si richiederà al chiamante di digitare il numero di selezione desiderato.
+- **Permetti digitazione del numero di selezione**: permette al chiamante di digitare un numero del piano di numerazione qualora lo sapesse già, senza dover ascoltare le varie possibilità offerte dal menu. La digitazione del numero di selezione in questo caso prevederà più cifre e di conseguenza il servizio IVR rimarrà in attesa del completamento della composizione per evitare di indirizzare il cliente alla selezione sbagliata.
+
+Sottomenu IVR (in cascata)
++++++++
+Per creare un menu IVR in cascata bisogna necessariamente creare un altro menu procedendo nello stesso modo. Prima di farlo, si salva il menu IVR precedentemente creato tramite il pulsante Salva in basso, in questo modo ci si troverà nella schermata principale. Per aggiungere un altro menu, premere su Aggiungi menu IVR.
+
+
+Dopo aver configurato e salvato il secondo menu si possono trovare entrambi nella schermata principale.
+
+
+Per procedere a creare un menu in cascata, modificando il Menu principale si seleziona l’opzione inoltra a: Menu IVR e si sceglie nell’ultima casella a destra, il menu secondario.
+
+Tornando nella pagina principale si può vedere graficamente il collegamento tra i due menu selezionando la Vista ad albero.
+
