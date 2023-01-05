@@ -1,7 +1,7 @@
 Altri servizi 
 ====
 
-ALta affidabilità
+Alta affidabilità
 -------------
 
 Descrizione del Servizio
