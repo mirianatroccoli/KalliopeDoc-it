@@ -982,3 +982,258 @@ Per procedere a creare un menu in cascata, modificando il Menu principale si sel
 
 Tornando nella pagina principale si può vedere graficamente il collegamento tra i due menu selezionando la Vista ad albero.
 
+
+Lucchetto elettronico
+-------
+
+Descrizione del servizio
++++++++
+
+Il servizio Lucchetto Elettronico consente di bloccare le chiamate effettuate da un dispositivo verso specifiche numerazioni esterne. Le chiamate verso altri interni (anche remoti) o servizi del PBX sono sempre accessibili anche da interni con lucchetto bloccato.
+
+Quando il lucchetto è bloccato possono essere effettuate solo le chiamate abilitate nella classe di instradamento definita “ristretta” mentre nello stato di sblocco l’interno può effettuare tutte le chiamate previste dalla classe di instradamento “standard”.
+
+Lo sblocco del lucchetto può essere effettuato con diverse modalità e la durata dello sblocco dipende dalla politica prescelta.
+
+La configurazione del servizio di Lucchetto Elettronico viene effettuata per interno quindi tutti gli account (dispositivi) associati all'utente condividono lo stato del Lucchetto Elettronico.
+
+Le modalità di sblocco previste sono le seguenti:
+
+- **Aperto**: lo stato del lucchetto è sempre sbloccato e quindi viene sempre applicata la classe di instradamento standard
+- **Codice**: lo sblocco viene effettuato utilizzando il codice sblocco lucchetto elettronico definito nel Piano di Numerazione (default 850). Il blocco viene effettuato utilizzando il codice blocco lucchetto elettronico definito nel Piano di Numerazione (default 851)
+- **Password**: lo sblocco viene effettuato utilizzando il codice sblocco lucchetto elettronico definito nel Piano di Numerazione (default 850) e il PIN dell’interno associato al dispositivo da cui si sta effettuando la chiamata. Il blocco viene effettuato utilizzando il codice blocco lucchetto elettronico definito nel Piano di Numerazione (default 851) e inserendo dopo il prompt vocale il PIN dell’interno associato al dispositivo da cui si sta effettuando la chiamata.
+
+Le politiche di sblocco previste sono le seguenti:
+
+- **Per chiamata** – Il lucchetto deve essere sbloccato prima di effettuare ogni chiamata
+- **Blocca automaticamente dopo il numero di minuti sottoindicato** – Il lucchetto viene bloccato automaticamente allo scadere dell’intervallo indicato
+- **Sbloccato finché l’utente lo blocca nuovamente** – Il lucchetto una volta sbloccato deve essere bloccato esplicitamente dall'utente
+
+Operativamente l’utente che deve effettuare una chiamata su un dispositivo associato ad un interno bloccato effettua le seguenti operazioni:
+
+1. Chiama il servizio di sblocco lucchetto elettronico (default 850)
+2. Nel caso in cui la modalità sia password il PBX richiede l’inserimento del PIN dell’interno tramite prompt vocale “Password”
+3. L’utente digita il proprio PIN seguito dal tasto#
+4. Il PBX conferma lo sblocco con il messaggio audio “Salvato”
+5. In caso di errore il PBX risponde con il messaggio audio “Login Errato” e riaggancia
+
+Per bloccare nuovamente l’interno (nel caso la politica non preveda una chiusura automatica) l’utente effettua le seguenti operazioni:
+
+1. Chiama il servizio di blocco lucchetto elettronico (default 851)
+2. Il PBX conferma lo sblocco con il messaggio audio “Grazie”
+
+Configurazione del servizio
+++++++
+
+Per la configurazione del lucchetto elettronico è necessario definire preventivamente le classi di instradamento in uscita che devono essere applicate in condizioni di lucchetto bloccato e sbloccato.
+
+Successivamente nel pannello Interni devono essere configurati i seguenti parametri :
+
+- Classe di instradamento in uscita standard
+- Classe di instradamento in uscita ristretta
+- Modalità di sblocco
+- Politica di sblocco
+- Durata dello sblocco (sec)
+
+
+Esempi
+++++
+
+- Chiamate internazionali solo con PIN (da abilitare per chiamata): in questo caso viene definita una classe ristretta che consente di effettuare tutte le chiamate tranne le internazionali ed una classe standard che consente anche le chiamate con prefisso internazionale. La modalità di sblocco è password e la politica per chiamata.
+- Chiamate da telefoni non presidiati solo con codice (sblocco 30 min): in questo caso viene definita una classe ristretta che consente di effettuare solo chiamate di emergenza ed una classe standard che consente di effettuare tutte le chiamate. La modalità di sblocco è codice e la politica blocca automaticamente dopo 30 sec.
+
+
+Prenotazione su occupato (CCBS)
+---------
+
+Descrizione funzionale
+++++++++++
+Questo servizio consente di prenotare la richiamata ad un interno che l'utente ha provato a contattare ma è risultato occupato.
+Il servizio funziona esclusivamente quando sia chiamante che chiamato sono un interno.
+
+Operativamente l'utente che vuole prenotare la richiamata digita il codice di prenotazione richiamata su occupato (default disabilitato) entro 20 secondi dal termine della chiamata verso l'utente occupato.
+Il KPBX conferma la prenotazione riproducendo il prompt vocale "Salvato".
+Quando l'utente occupato si libera il KalliopePBX chiama l'utente che ha fatto la prenotazione (sul display del telefono chiamante viene visualizzata l'etichetta c2c seguita dall'interno su ci è stata prenita la chiamata) e non appena questo risponde fa partire la chiamata verso l'altro utente.
+
+Nel caso in cui l'utente voglia annullare la prenotazione digita il codice di annullamento prenotazione richiamata su occupato (default disabilitato).
+Anche in questo caso il KPBX conferma l'annullamento della prenotazione riproducendo il prompt vocale "Salvato".
+
+La prenotazione di richiamata ha una validità di 1 ora.
+Nel caso in cui venga effettuata una nuova prenotazione prima della scadenza della precedente, la vecchia viene automaticamente annullata (è possibile mantenere una sola prenotazione attiva per interno).
+
+
+Configurazione
+++++++++
+Il servizio può essere abilitato / disabilitato nel pannello PBX -> Piano di numerazione
+Il codice del servizio può essere modificato nel pannello PBX -> Piano di numerazione
+
+Interoperabilità
+++++++++
+Quando si utilizza il servizio CCBS può essere utile avere a disposizione un tasto che consenta di effettuare la prenotazione e uno che consenta di annullarla.
+Questa operazione è normalmente effettuata configurando due tasti funzione di tipo Speed Dial con valore pari rispettivamente al codice di prenotazione e annullamento prenotazione.
+
+Servizio Direttore-Segretaria
+++++++++++
+
+Descrizione del servizio
+++++++++++
+Questo servizio consente ad una o più utenze (segretarie) di intercettare le chiamate dirette ad un altro interno (direttore). Solamente le segretarie (ed opzionalmente i direttori configurati in altri gruppi) potranno contattare direttamente il direttore sul proprio interno.
+
+Le segretarie avranno quindi il compito di rispondere alle chiamate dirette all’interno del direttore, verificare la disponibilità del direttore ed eventualmente trasferire la chiamata.
+
+Il servizio può essere abilitato / disabilitato sia a livello di gruppo (su tutte le segretarie) che per la specifica segretaria. Nella pratica di solito il direttore quando attiva il servizio lo imposta per tutte le segretarie, mentre la singola segretaria può decidere di entrare o uscire dal servizio. Anche se il direttore non ha attivato il servizio, la segretaria può attivarlo per il proprio interno.
+
+Operativamente l’attivazione/disattivazione del servizio Direttore-Segretaria può essere effettuata mediante digitazione di codici da telefono. Il servizio viene attivato a livello di gruppo digitando il codice di attivazione (default *521) seguito dall'interno del direttore. Il KalliopePBX conferma l’attivazione del servizio riproducendo il file audio “Salvato”. L’attivazione per la specifica segretaria viene invece effettuata aggiungendo al codice globale * seguito dall'interno della segretaria. Anche in questo caso il KalliopePBX conferma l’attivazione riproducendo il file audio “Salvato”.
+
+Analogamente la disattivazione a livello di gruppo avviene digitando il codice relativo (default *520) seguito dall'interno del direttore. Il KalliopePBX conferma la disattivazione riproducendo il file audio “Salvato”. La disattivazione per la specifica segretaria viene invece effettuata aggiungendo al codice globale * seguito dall'interno della segretaria. Anche in questo caso il KalliopePBX conferma la disattivazione riproducendo il file audio “Salvato”.
+
+Esiste anche un codice di commutazione dello stato del servizio (default *52*). Analogamente al caso di attivazione / disattivazione il codice deve essere seguito dall'interno del direttore per la commutazione dello stato del servizio per tutto il gruppo. La commutazione dello stato del servizio per la specifica segretaria viene invece effettuata aggiungendo al codice globale * seguito dall'interno della segretaria. In entrambi i casi il KalliopePBX conferma la commutazione riproducendo il file audio “Salvato”.
+
+Questi codici possono essere utilizzati esclusivamente da un dispositivo associato ad un interno che appartiene al Gruppo Direttore-Segretaria.
+
+Configurazione del servizio
+++++++++++
+L'abilitazione globale del servizio e la scelta del codice di servizio associato viene effettuata nel pannello PBX-> Piano di numerazione ed eventualmente modificare il codice da utilizzare.
+
+La configurazione dei gruppi Direttori-Segretaria viene effettuata nel pannello Gruppi Direttore-Segretaria. I parametri da configurare per i gruppi sono i seguenti:
+
+.. list-table::  
+   :widths: 25 25 25
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Abilitato
+     - Consente di disabilitare un gruppo direttore/segretaria senza perderne la configurazione	
+     - Si / No
+   * - Nome
+     - Identificativo del gruppo direttore / segretaria
+     - Alfa-numerico
+   * - Permetti chiamate da altri direttori
+     - Se questa opzione è abilitata gli interni dichiarati come direttori in altri gruppi direttore-segretaria possono contattare direttamente il direttore evitando il filtro delle segretarie
+     - Si / No
+   * - Seleziona il direttore
+     - Interno le cui chiamate verranno deviate sulle segretarie
+     - Interno
+   * - Aggiungi segretaria
+     - Consente di definire la lista degli interni su cui verranno deviate le chiamate del direttore.
+     - Interno
+     
+Trabocchi
+++++++++
+Qui sono definite le azioni di failover nel caso in cui per le chiamate deviate sulle segretarie si verifichi una delle cause di trabocco. Per questo servizio è prevista l’azione di failover supplementare “Inoltra al direttore”.
+
+.. list-table::  
+   :widths: 25 25 25
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Interno
+     - Azione di trabocco su chiamate provenienti da un interno (anche remoto)
+     - 
+   * - Esterno
+     - Azione di trabocco sulle chiamate provenienti dall'esterno
+     - 
+   * - Trasferimento
+     - Azione di trabocco sui trasferimenti di chiamata
+     - 
+   * - Timeout (sec.)
+     - Tempo alla scadenza del quale viene eseguita l’azione di trabocco configurata in caso di nessuna risposta (nessuna segretaria risponde entro il timeout)
+     - Numerico
+   * - Nessuna risposta
+     - La chiamata è considerata senza risposta alla scadenza del timeout
+     - Inoltra al direttore / Riaggancia / Selezione personalizzata /
+Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
+   * - Occupato
+     - Tutti gli interni delle segretarie risultano occupati. L’interno è considerato occupato se è stato raggiunto il Busy Level impostato per l’interno oppure se il terminale invia il SIP Response 486 Busy Here
+     - Inoltra al direttore / Riaggancia / Selezione personalizzata /
+Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
+   * - Non Disponibile
+     - Tutti gli interni delle segretarie risultano non disponibili. L’interno è considerato non disponibile se il terminale non è registrato o non è raggiungibile a livello IP oppure se il terminale invia il SIP Response 480 Temporarily Unavailable
+     - Inoltra al direttore / Riaggancia / Selezione personalizzata /
+Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
+
+
+Interoperabilità con dispositivi di terze parti
+++++++++++++
+
+Quando l’attivazione / disattivazione del servizio viene effettuata da telefono può essere molto utile avere a disposizione un tasto (con campo lampade) che consenta di verificare lo stato del servizio.
+
+Per quanto riguarda il monitoraggio, il KalliopePBX invia dei messaggi SIP NOTIFY per comunicare i cambi di stato del servizio. Il telefono dovrà inviare una SIP SUBSCRIBE per richiedere l’invio delle informazioni di stato.
+
+Questa operazione è normalmente effettuata configurando un tasto funzione di tipo BLF.
+
+L’oggetto da monitorare è *bs<interno_direttore>* se vogliamo monitorare lo stato a livello di gruppo e **bs<interno_direttore>*<interno_segretaria>** per monitorare lo stato del servizio per la segretaria sullo specifico gruppo. Lo stato a livello di gruppo risulta attivo nel caso in cui il servizio sia attivo per almeno una segretaria.
+
+Oltre a monitorare lo stato del servizio è possibile effettuarne la commutazione cliccando sul tasto funzione corrispondente.
+
+Tipicamente il tasto con il controllo a livello di gruppo viene abilitato sul telefono del direttore mentre i tasti con il controllo specifico per interno sul telefono della segretaria corrispondente.
+
+In ogni caso i tasti sono configurabili su tutti i membri del gruppo per soddisfare esigenze specifiche (ad es. il direttore potrebbe richiedere di voler impostare lo stato del servizio delle specifiche segretarie oppure lo stato a livello di gruppo può essere impostato da una segretaria).
+
+Esempi di configurazione
+++++++++
+
+**Su SNOM**
+
+- Operando tramite la web gui di configurazione configurare Function keys con
+
+.. code-block:: console
+
+   Account: selezionare dalla tendina l’account che stiamo utilizzando (se c’è un solo account configurato sul telefono è il primo della lista)
+   Type: BLF
+   value: bs<interno_direttore> / bs<interno_direttore>*<interno_segretaria>
+   
+- Oppure modificando direttamente il file di configurazione o il template in questo modo:
+
+.. code-block:: console
+
+   <fkey idx="%%id%%" context="%%line_id%%" label="" perm="">blf sip:bs<interno_direttore>@%%KPBX_IP_ADDRESS%%;user=phone</fkey>
+
+oppure
+
+.. code-block:: console
+
+   <fkey idx="%%id%%" context="%%line_id%%" label="" perm="">blf sip:bs<interno_direttore>*<interno_segretaria>@%%KPBX_IP_ADDRESS%%;user=phone</fkey>
+   
+Dove %%id%% è l’identificativo del tasto da configurare E %%line_id%% è l’identificativo dell’account associato (il valore è 1 se sul telefono è presente un solo account)
+
+Esempio:
+
+.. code-block:: console
+
+   <fkey idx="0" context="1" label="DirSeg 109" perm="">blf sip:bs109*105@192.168.23.112</fkey>
+   
+**Su YEALINK**
+
+- Operando tramite la web gui di configurazione configurare DSS Key con:
+
+.. code-block:: console
+   
+   Type BLF
+   Value: bs<interno_direttore> / bs<interno_direttore>*<interno_segretaria>
+   Line: La linea associata all’account che stiamo utilizzando (Line 1 se sul telefono è presente un solo account)
+
+- Oppure modificando direttamente il file di configurazione o il template in questo modo:
+
+.. code-block:: console
+
+   memorykey.%%id%%.line=%%line_id%%>
+   memorykey.%%id%%.value=bs<interno_direttore> / bs<interno_direttore>*<interno_segretaria>
+   memorykey.%%id%%.type=16
+   
+Dove %%id%% è l’identificativo del tasto da configurare
+
+e %%line_id%% è l’identificativo dell’account associato il valore è 1 se sul telefono è presente un solo account)
+
+Esempio:
+
+.. code-block:: console
+
+   memorykey.1.line = 1
+   memorykey.1.value = bs109*105
+   memorykey.1.type = 16
+   memorykey.1.pickup_value = %NULL%
