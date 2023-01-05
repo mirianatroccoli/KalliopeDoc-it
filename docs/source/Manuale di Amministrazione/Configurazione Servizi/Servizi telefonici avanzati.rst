@@ -1145,16 +1145,13 @@ Qui sono definite le azioni di failover nel caso in cui per le chiamate deviate 
      - Numerico
    * - Nessuna risposta
      - La chiamata è considerata senza risposta alla scadenza del timeout
-     - Inoltra al direttore / Riaggancia / Selezione personalizzata /
-Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
+     - Inoltra al direttore / Riaggancia / Selezione personalizzata / Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
    * - Occupato
      - Tutti gli interni delle segretarie risultano occupati. L’interno è considerato occupato se è stato raggiunto il Busy Level impostato per l’interno oppure se il terminale invia il SIP Response 486 Busy Here
-     - Inoltra al direttore / Riaggancia / Selezione personalizzata /
-Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
+     - Inoltra al direttore / Riaggancia / Selezione personalizzata / Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
    * - Non Disponibile
      - Tutti gli interni delle segretarie risultano non disponibili. L’interno è considerato non disponibile se il terminale non è registrato o non è raggiungibile a livello IP oppure se il terminale invia il SIP Response 480 Temporarily Unavailable
-     - Inoltra al direttore / Riaggancia / Selezione personalizzata /
-Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
+     - Inoltra al direttore / Riaggancia / Selezione personalizzata / Chiedi selezione / Numero esterno / Interno / Gruppo / Coda / Controllo orario / IVR / Casella vocale / Stanza MeetMe
 
 
 Interoperabilità con dispositivi di terze parti
