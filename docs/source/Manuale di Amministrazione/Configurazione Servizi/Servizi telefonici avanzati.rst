@@ -533,3 +533,162 @@ Per i telefoni Yealink, al fine di evitare il reboot del telefono al momento del
 .. code-block:: console
 
    sip.notify_reboot_enable = 0
+   
+Instradamento avanzato (ACR)
+-------
+
+In questa sezione sono raccolte tutte le configurazioni necessarie a definire le modalità con cui vengono effettuate le chiamate verso numerazioni esterne al PBX.
+
+Classi di instradamento in uscita
+++++++
+
+Una classe di instradamento in uscita consiste in un insieme di regole di instradamento in uscita da verificare per stabilire la politica di instradamento da applicare alla chiamata effettuata da un interno e diretta a numerazioni esterne al PBX. Il match delle regole viene eseguito nell'ordine in cui sono visualizzate sulla WEB GUI (dall'alto verso il basso).
+
+Se il match è valido la corrispondente azione viene eseguita e non vengono esaminate ulteriori regole. Per questo motivo è fondamentale che le regole siano disposte dalla più particolare alla più generale. Sarebbe quindi errato disporre per prima una regola generale che, ad esempio, permette di chiamare tutti i numeri senza distinzioni, poiché questo porterebbe all’annullamento di tutte le altre che potenzialmente contengono particolari caratteristiche di differenziazione.
+
+E' possibile riordinare le regole una volta definite semplicemente portandosi sull'icona (aggiungere figura) e spostandosi mantenendo premuto il tasto sinistro del mouse.
+
+Nella tabella seguente sono illustrati i parametri che è possibile definire per ogni classe di instradamento in uscita.
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Abilitato
+     - Consente di disabilitare una classe di instradamento in uscita senza perderne la configurazione
+     - Si / No
+   * - Nome
+     - Identificativo della classe di instradamento in uscita
+     - Alfa-numerico
+
+**Regole della classe di instradamento in uscita**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Aggiungi regola
+     - Consente di selezionare le regole di instradamento in uscita configurate ed inserirle nell'ordine in cui devono essere riscontrate dal PBX
+     - Regola di instradamento in uscita
+     
+     
+Regole di instradamento in uscita
+++++++++
+
+Una regola di instradamento in uscita consiste di due componenti:
+
+- un insieme di condizioni da verificare sul numero chiamato. La verifica può essere fatta su un numero telefonico specifico (Selezione Esatta) su un prefisso telefonico (Prefisso) oppure la regola può essere convalidata per qualsiasi numero chiamato (Qualsiasi)
+- una lista di linee di uscita che costituiscono la sequenza con cui il PBX prova ad instradare la chiamata. Nel caso di errore su una linea di uscita, il PBX tenta automaticamente di instradare la chiamata sulla successiva. Le condizioni di errore corrispondono a messaggi SIP di tipo 5xx o 6xx oppure alla scadenza del timeout SIP (di default 32 secondi). Quindi se ad es. il PBX riceve il SIP Message 486 Busy Here non effettua alcun tentativo ulteriore di instradamento della chiamata.
+
+Nella tabella seguente sono illustrati i parametri che è possibile definire per ogni regola di instradamento in uscita.
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Abilitato
+     - Consente di disabilitare una regola di instradamento in uscita senza perderne la configurazione
+     - Si / No
+   * - Nome
+     - Identificativo della regola di instradamento in uscita
+     - Alfa-numerico
+   
+**Selezioni delle regole di instradamento in uscita**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Aggiungi selezione
+     - Definisce la modalità con cui viene effettuato il match del numero chiamato	  
+     - Prefisso / Esatta / Qualsiasi
+     
+ **Risoluzione ENUM**    
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Abilita risoluzione ENUM
+     - Consente di abilitare la risoluzione ENUM per la specifica regola
+     - Si / No
+   * - Aggiungi impostazione ENUM
+     - Consente di definire quali domini di ricerca (definiti nelle impostazioni ENUM) devono essere verificati
+     - Impostazioni ENUM
+     
+**Linee di uscita**    
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore    
+   * - Aggiungi linea in uscita
+     - Consente di creare la lista di linee da utilizzare in sequenza per le selezioni verificate.
+     - Linee uscenti
+     
+     
+Impostazioni ENUM
++++++++++
+Una impostazione ENUM si compone di due componenti:
+
+- un insieme di domini di ricerca su cui vengono effettuate le query DNS
+- una lista di regole da applicare nel caso in cui il server ENUM risponda positivamente. Il comportamento potrà essere diverso in base all'hostname restituito nella SIP URI.
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore    
+   * - Abilitato
+     - Consente di disabilitare una impostazione ENUM senza perderne la configurazione
+     - Si / No
+   * - Nome
+     - Identificativo della impostazione ENUM
+     - Alfa-numerico
+
+**Domini di ricerca**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore  
+   * - Aggiungi dominio di ricerca
+     - Consente di definire quali domini di ricerca devono essere verificati per questa impostazione
+     - Nome di dominio
+     
+**Regole ENUM**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+   
+   * - Parametro
+     - Descrizione
+     - Valore   
+   * - regola ENUM
+     - Consente di definire la regola da utilizzare per instradare la chiamata in uscita nel caso in cui la query DNS su un dominio di ricerca abbia esito positivo. La linea di uscita può coincidere con il dominio ritornato dalla query (chiamata diretta al dominio) oppure è possibile forzare comunque una specifica linea di uscita per l’instradamento on-net (ad esempio nel caso in cui sia necessario utilizzare delle credenziali di autenticazione).
+     - Hostname + Linea di uscita / chiamata diretta al dominio.
+     
