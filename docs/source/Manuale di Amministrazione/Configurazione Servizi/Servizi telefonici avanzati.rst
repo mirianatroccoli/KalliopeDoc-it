@@ -701,11 +701,12 @@ Per un approfondimento sul funzionamento del servizio Instradamento dinamico si 
 
 Configurazione del servizio
 ++++++++++
+
 La configurazione del servizio viene effettuata nel pannello Applicazioni PBX -> Instradamento dinamico.
 In fase di configurazione è necessario specificare i seguenti valori:
 
 - Nome: identificativo dell’instradamento.
-- Tipo: richiesta HTTP (Richiesta a WEB server esterno) / Interno (Riscontro su file locale)
+- Tipo: richiesta HTTP (Richiesta a WEB server esterno) / (Riscontro su file locale)
 - Controllo Orario: indica il controllo orario da verificare prima di eseguire l’instradamento. Il trabocco in caso si voglia eseguire l’instradamento dinamico deve essere impostato a “Ritorna al livello superiore”.
 - Parametri: per ciascun parametro (numerico) da richiedere al chiamante, è possibile inserire un messaggio vocale (ad esempio con la richiesta di inserimento) e, opzionalmente, è possibile specificare il massimo numero di cifre inseribili.
 
@@ -749,6 +750,7 @@ Nel caso di richiesta di tipo POST, il corpo potrebbe essere:
     
 Interno
 ...........
+
 Nel caso in cui la richiesta sia di tipo interno il file da utilizzare deve essere caricato nella cartella Accesso TFTP tramite il Gestore File.
 Il file può avere estensione .xls/.xlsx/.ods/.csv e contenere o meno le intestazioni di colonna. Nel caso negativo deve essere specificato il mappaggio delle colonne, indicando per ciascun campo l’esatta posizione nel file. A tal scopo è importante ricordare che la numerazione delle colonne parte da 0.
 Il file sorgente deve essere conforme al seguente template:
@@ -841,8 +843,10 @@ Il contenuto dinamico da riprodurre è descritto dai tag <elem> contenuti all'in
 Regola di instradamento
 ........
 In questo punto viene definita l’azione di inoltro da eseguire. In aggiunta alle normali azioni di uscita è prevista anche la possibilità di inoltrare la chiamata al Piano di numerazione, utilizzando come selezione il valore contenuto nella risposta.     
+
 Interno
-++++++++++
+++++++
+
 Nel caso in cui la richiesta sia di tipo interno il sistema verifica le corrispondenze di numero chiamante, numero chiamato e parametri sul file e restituisce il valore della colonna response che sarà utilizzato per stabilire le azioni da compiere.
 Nel caso in cui ci siano più righe che riscontrino i dati di ingresso viene selezionata l’azione corrispondente alla riga con più riscontri effettuati (best match).
 In questo caso non è prevista la riproduzione di un contenuto dinamico e pertanto le azioni da compiere sono costruite come segue:
@@ -930,6 +934,7 @@ Al sottomenu Menu IVR vi si accede tramite il menu Applicazioni PBX.
 È possibile creare un numero arbitrario di menu IVR che possono essere in cascata o indipendenti.
 
 *jpg*
+
 - La casella **Nome** può essere riempita semplicemente con il nome del Menu IVR che preferiamo.
 - Nel caso in cui si vogliano creare più menu IVR in cascata si può scegliere di visualizzare l’albero IVR con il menu che configuriamo come radice dell’albero stesso, per farlo basta spuntare la casella **Visualizza un albero IVR con questo menu come radice**.
 - La funzionalità **Riproduci i messaggi “in progress”** permette di eseguire il messaggio audio gratuito (innescato dal messaggio SIP 183 Session Progress) che precede l’invio del SIP message 200 OK, il quale a sua volta innesca l’inizio della chiamata e la fatturazione. Questa funzionalità è consigliata soprattutto per le aziende in possesso di un numero verde associato al risponditore automatico poiché l’azienda stessa paga il costo di chiamata ed in questo modo può risparmiare dei preziosi secondi per ogni telefonata ricevuta. La disponibilità ad accettare il messaggio Session Progress SIP 183 dipende dall’operatore a cui è agganciata la centrale e normalmente ha una durata massima di 59 secondi.
