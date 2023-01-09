@@ -1152,12 +1152,72 @@ Il messaggio AMI da far inviare diventa quindi (sono comunque supportate entramb
 
 
 
+Modalità operativa ridotta
+---------
+
+Descrizione del servizio
++++++++++++
+Questo servizio consente all'amministratore del KPBX di definire delle modalità operative ristrette in cui è possibile limitare alcune tipologie di chiamate pur mantenendo inalterata la configurazione telefonica (interni/account, instradamento, linee di uscita).
+Al momento sono previste tre diverse modalità operative:
+
+- Completa: consente la piena operatività del PBX senza alcun blocco sulle chiamate. Questa è la modalità di default di KalliopePBX.
+- Limitata: blocco chiamate uscenti: consente le chiamate tra interni e verso i numeri di servizio del KPBX e verso i numeri definiti nella whitelist. Tutte le altre chiamate uscenti sono bloccate.
+- Disabilitata: tutte le funzionalità telefoniche sono disabilitate (registrazione account, chiamate tra interni, etc.).
+
+In ambiente multitenant la modalità operativa è configurabile per tenant ma esclusivamente dal pbxadmin.
+
+Configurazione del servizio
++++++++++++++
+La modalità operativa può essere configurata nel pannello PBX --> Modalità operativa
+
+Whitelist
+.......
+In caso di modalità limitata deve essere specificata la whitelist se si vogliono consentire chiamate in uscita verso specifiche numerazioni (ad es. chiamate di emergenza).
+La configurazione della whitelist viene effettuata nel pannello PBX --> Whitelist
 
 
 
+Monitoraggio servizi
+--------
+
+Descrizione del servizio+
+++++++++++++
+Per accedere al servizio di Monitoraggio Servizi basta seguire il percorso “Monitoraggio > Monitoraggio Servizi”.
+Nella pagina è possibile visualizzare e filtrare i seguenti elementi per affinare la ricerca:
+
+.. list-table::  
+ :widths: 25 25
+ :header-rows: 1
+
+ * - Parametro
+   - Valore
+ * - Interno
+   - Alfanumerico
+ * - Nome
+   - Alfanumerico
+ * - Cognome
+   - Alfanumerico
+ * - CFIM
+   - Qualsiasi valore/OFF/ON
+ * - CFBS
+   - Qualsiasi valore/OFF/ON
+ * - CFNA
+   - Qualsiasi valore/OFF/ON
+ * - CFUN
+   - Qualsiasi valore/OFF/ON
+ * - DND
+   - Qualsiasi valore/OFF/ON
+ * - Fork2Mobile
+   - Qualsiasi valore/OFF/ON
+ * - Busylevel
+   - Alfanumerico
+
+Per quanto riguarda il busylevel, tramite l’icona di modifica Modifica.JPG è possibile "Abilitare il livello di occupato" per un determinato interno selezionato:
+
+*jpg*
 
 
-
-
+Notifica eventi
+----------
 
 
