@@ -1221,3 +1221,192 @@ Notifica eventi
 ----------
 
 
+Registro delle chiamate
+------------
+
+
+
+
+
+Richieste di Provisioning
+-----------
+
+Descrizione del servizio
+++++++++
+Per visualizzare le richieste di provisioning, è necessario seguire il percorso “Registri > Richieste di provisioning”.
+
+All’interno di questa sezione sono registrate le richieste di provisioning che provengono dai telefoni.
+
+È possibile visualizzare:
+
+- Giorno del mese della richiesta
+- Timestamp
+- Indirizzo IP
+- Protocollo
+- Identità del certificato
+- User Agent
+- Percorso richiesto
+- Indirizzo MAC richiedente
+- Percorso locale
+- Codice di stato HTTP
+
+Rubrica telefonica
+----------
+
+Servizi in chiamata
+------------
+
+Questa sezione dell'interfaccia Kalliope permette di configurare i codici relativi ai servizi in chiamata.
+
+L'unico servizio per il quale non è possibile personalizzare il codice è la cancellazione di un trasferimento con offerta, di default è *0.
+
+I restanti codici sono liberamente configurabili e si riferiscono ai servizi riportati nella seguente tabella.
+
+.. list-table::  
+ :widths: 25 25
+ :header-rows: 1
+
+ * - Servizio
+   - Default
+ * - Trasferimento con offerta
+   - *4 Trasferimento, *0 Annulla trasferimento, *9 Shuttle, *3 Converti in una conferenza a tre
+ * - Trasferimento diretto
+   - #4
+ * - Parcheggio chiamata
+   - #8
+ * - Trasferimento rapido
+   - **
+ * - Registrazione chiamata su richiesta
+   - *1
+ * - Codice riaggancio chiamata
+   - *0
+
+Statistiche di utilizzo
+------------
+
+Descrizione del servizio
++++++++++
+
+Il servizio è raggiungibile tramite “Registri > Statistiche di utilizzo”.
+
+Le statistiche di utilizzo sono uno strumento utile per visualizzare l’andamento – annuale e/o mensile – dell’utilizzo della centrale PBX. La pagina fornisce una visione del modo in cui crescono le occupazioni a livello di PBX.
+
+Sono visualizzati i Tenant definiti con il Nome, Dominio e UUID. Il primo numero rappresenta il numero di interni configurati sul Tenant, il secondo è il numero di istanze FAX e il terzo è il numero di camere hotel che sono state create.
+
+La visualizzazione può essere ridimensionata anche al mese corrente e al mese precedente con la visualizzazione dei singoli giorni del mese.
+
+
+È inoltre possibile esportare i dati nei seguenti formati:
+
+- XLSX
+- CSV
+- JSON
+- XML
+
+Supporto SNMP
+----------
+Descrizione del servizio
++++++++++++
+Funzionamento del protocollo
+..........
+SNMP è lo standard per la gestione ed il monitoraggio di rete. È quindi un protocollo che serve per il monitoraggio dello stato di una macchina, nello specifico, per acquisire da un server di monitoraggio esterno al Kalliope parametri di stato legati al carico della CPU, occupazione di memoria, spazio disco, chiamate contemporanee. È un protocollo standard disponibile su Kalliope, sulla centrale si rendono disponibili gli OID (oggetti sottoposti a monitoraggio). Si usano quelli definiti nel MIB 2 standard, dove ci sono gli identificativi degli oggetti resi disponibili tramite l’agent. Il server è il sistema di monitoraggio che interroga, mentre l’agent SNMP è il servizio che serve per esporre i dati a un client che ne faccia richiesta. L’SNMP prevede che il client faccia una richiesta all’agent per sapere il valore dell’OID e l’agent restituisce il valore.
+
+I dati all’interno dell’agent sono organizzati sottoforma di albero. I dati indicano per esempio la versione del firmware primario, secondario, informazioni riguardo i servizi telefonici, la dimensione della memoria virtuale occupata dal processo, il numero totale di tentativi di autenticazione fallita da parte di client SIP.
+
+Gli oggetti sono definiti come indice di una foglia sotto ad un padre: c’è una struttura ad albero che permette di accedere, specificando l’indirizzo del percorso tra i sottoalberi fino alla foglia, quale è l’oggetto che si vuole monitorare. L’SNMP prevede:
+
+- Manager
+- Agent
+- Protocollo
+
+La rappresentazione di un OIP avviene come sequenza di numeri, es: 1.3.6.1.2.1.4.6 è il percorso all’interno dell’albero e ciascun punto del percorso ha una sua corrispondenza testuale.
+
+Configurazione del servizio
++++++++++
+Per attivare il sopporto NSMP basta andare su “Impostazioni di sistema > Impostazioni SNMP” e premere sulla spunta “Abilitato”.
+
+Impostazioni di sistema
+.........
+Le seguenti informazioni sono obbligatorie e se non vengono inserite, il servizio SNMP non può avviarsi.
+
+- **sysName**: è un particolare OID sotto l’albero system (che è il primo figlio ed è indicato come 1.3.1.2.1.1), sysName è il nome della macchina ed è 1.3.6.1.2.1.1.5.0 (lo 0 in fondo poiché è di tipo scalare).
+- **sysLocation**: è la location fisica, funge come una sorta di inventario
+- **sysContac**t: indirizzo mail del referente da contattare se c’è un’anomalia in quel determinato nodo
+Nelle impostazioni definite c’è l’albero delle MIB 2 e le host-resources (1.3.6.1.25) che sono i due che si espongono su Kalliope. Vengono anche esposte le MIB proprietarie e il software può leggere tutto l’albero poiché lo scansiona interamente ed è compito dell’agent restituire i valori. Il file delle MIB serve per permettere al software che fa monitoraggio di sapere la singola foglia che conosce solo per numero che cosa sia.
+Per gli esempi di configurazione è stato utilizzato il client iReasoning MI Browser che può fare interrogazioni SNMP e mostra l’organizzazione dei sottoalberi.
+
+Impostazioni di accesso SNMP
+...........
+
+- **Indirizzo IP di ascolto**: es. di default 0.0.0.0 significa che ascolta su tutte le interfacce della centrale. Ma, se abbiamo un pbx con più interfacce di rete, alcune pubbliche e alcune private, e si vuole che il servizio SNMP sia accessibile solo da una di queste interfacce, si può mettere l’indirizzo IP dell’interfaccia su cui si vuole che sia attivo il servizio. Si può quindi fare un bind del servizio sull’IP inserito, questo deve essere uno degli IP che la centrale ha (una delle sue interfacce o quello dell’Alta Affidabilità nel caso di un cluster). Nell’ultimo caso, nel caso di AA, è bene che venga fatto monitoraggio esplicito non puntano l’IP della risorsa ma i singoli IP dei due nodi.
+- **Porta di ascolto**: 161 è la porta standard poiché SNMP utilizza il protocollo di traporto UDP.
+- **Community v1/v2**: sono le versioni base di SNMP supportate dai sistemi di monitoraggio, non è ancora abilitato il supporto SNMP v3. Il valore predefinito che viene usato è “public”
+- **ACL**: Access Control List, è una restrizione a quale indirizzo IP deve avere il client per l’interrogazione. Se arriva una richiesta SNMP fuori dall’ACL, questa viene rifiutata.
+
+.. warning::
+   
+   Non è consigliato ACL 0.0.0.0/0, è sempre bene restringere l’accesso solo agli IP autorizzati
+   
+Impostazioni delle trap
+...........
+Le trap sono un meccanismo di tipo reattivo che gli agent SNMP hanno per notificare il verificarsi di eventi. Kalliope non ha aggiunto tra specifiche al sistema e sono presenti quelle base:
+
+- 0: ColdStart
+- 1: WarmStart
+- 2: linkDOwn
+- 3: linkUp
+- 4: authenticationFailure
+- 5: egpNeighbortLoss
+- 6: enterpreseSpecific
+
+Indicazioni sulla configurazione delle TRAP:
+
+- Metodo di invio delle TRAP: specificare se si vuole mandare la trap in versione 1 o 2
+- Indirizzo IP di destinazione delle TRAP: indicare indirizzo IP del server di monitoraggio a cui inviare le TRAP
+- Porta di destinazione delle TRAP: es. 162 è la standard
+
+Sulla dashboard viene indicata l’esecuzione del servizio SNMP tramite il pallino verde e lo stato “Attivo”.
+
+È possibile fare un’interrogazione dell’agent su Kalliope tramite un qualunque client SNMP (in questo caso si utilizza il già sopracitato iReasoning MIB Browser). Bisogna indicare l’indirizzo IP a cui collegarsi e poi impostare
+
+- Agent NSMP Version: i valori di default con cui fare la richiesta, ovvero si può scegliere se farla in versione 1 o 2
+- Agent Read Community: qual è la community di lettura per poter avere accesso ai dati
+- Agent Port: si può indicare la porta standard, 161
+- Agent Write Community: non è abilitata la possibilità di fare scrittura tramite SNMP
+
+Dopo aver effettuato l'interrogazione è possibile leggere il contenuto dell’albero che è presente su Kalliope. La lettura può essere fatta oggetto per oggetto: Il sottoalbero system presente le seguenti informazioni tra cui il sysContact, il sysName e il sysLocation.
+
+Il pannello interfaces restituisce le varie interfacce presenti e per ciascuna indica lo stato operativa e i byte scambiati in ingresso e uscita, questo permette ai sistemi di monitoraggio di far vedere il grafico dell’occupazione:
+
+
+Esempio del kpbxNode:
+
+*jpg*
+
+.. note::
+   Il contatore delle autenticazioni fallite (evidenziato in blu) è un dato importante poiché nel momento in cui dovesse arrivare un burst di autenticazioni fallite, probabilmente si tratterebbe di un attacco proveniente dall’esterno.
+
+
+KalliopePBX espone delle MIB che consentono il monitoraggio del funzionamento dell’apparato tramite il protocollo di comunicazione standard SNMP.
+Le MIB SNMP consultabili su Kalliope sono:
+
+MIB-II standard (RFC 1213) – Questa MIB definisce gli oggetti per la gestione e il monitoraggio di un apparato in una rete TCP/IP, in particolare su Kalliope sono implementati i seguenti sottoalberi: system, interfaces, at, ip, icmp, tcp, udp, transmission, snmp OID: 1.3.6.1.2.1.1/2/3/4/5/6/7/10/11
+https://datatracker.ietf.org/doc/rfc1213/
+
+Host Resource MIB (RFC 2790) - Questa MIB definisce un insieme di oggetti contenenti la configurazione di host (server/computer) collegati ad una rete TCP/IP indipendentemente dal sistema operativo, dai servizi di rete e dalle applicazioni software installate. OID: 1.3.6.1.2.1.25
+https://datatracker.ietf.org/doc/rfc2790/
+
+UCD-SNMP-MIB – Questa MIB definisce gli oggetti per il monitoraggio delle performance di un host (ad es. CPU /RAM / occupazione dischi). OID: 1.3.6.1.4.1.2021
+http://www.net-snmp.org/mibs/UCD-SNMP-MIB.txt
+
+Kalliope MIB: questa MIB proprietaria fornisce informazioni aggiuntive sulla configurazione e il funzionamento dei servizi implementati sul nodo Kalliope come ad es. numero di account configurati o registrati, chiamate contemporanee, numero totale di chiamate. OID:1.3.6.1.4.1.33732
+Scarica i file di definizioni delle MIB:
+
+Media:Definizioni MIB.zip
+
+
+
+
+
+
+
