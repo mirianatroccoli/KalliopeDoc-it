@@ -699,6 +699,209 @@ Per aggiungere un filesystem, premere su “Aggiungi nuovo filesystem remoto” 
 - Password
 
    
-   
-   
-   
+Gestione dei tenant
+---------
+
+Descrizione del servizio
++++++++++
+Nella pagina di gestione dei tenant è possibile visualizzare la lista dei tenant e dei gruppi di tenant.
+
+Configurazione del servizio
+++++++++
+
+Per raggiungere il servizio di “Gestione dei tenant” basta cliccare su “Impostazioni di sistema > Gestione dei tenant”.
+Sbloccando il lucchetto in alto a destra per entrare in modalità di modifica, è possibile creare un nuovo tenant.
+
+
+Lista dei tenant
++++++++++
+Per creare un nuovo tenant è necessario cliccare su “Crea nuovo tenant”. Sono presenti i seguenti campi da compilare e/o selezionare:
+
+- **Modalità operativa**: può essere completa (può fare e ricevere chiamate), limitata con blocco chiamate uscenti (impedisce di effettuare chiamate in uscita, ad eccezione delle chiamate ai numeri della whitelist) e disabilitata (viene inibito il funzionamento di quel determinato tenant).
+- **Nome**
+- **Dominio**: nome del dominio che funge da componente degli username dopo la “@” (es. admin@dominio)
+- **Password**: dell’admin di tenant che si può inizializzare alla creazione del tenant
+- **Url del logo personalizzato**: è possibile far in modo che quando un utente del tenant entra nell'interfaccia web della centrale, veda un logo personalizzato in alto a sinistra.
+- **Email del referente**: email del referente per l’invio della notifica di creazione del tenant
+- **Gruppo di tenant (default group / nuovo gruppo)**: è utile per raggruppare più tenant amministrativamente distinti (ciascuno con il proprio admin) in una confederazione.
+
+La configurazione dei gruppi di tenant è spiegata al paragrafo successivo.
+
+- **Prefisso degli account SIP**: assicurazione dell’univocità degli account SIP, ovvero tutti gli account SIP di un determinato tenant avranno lo stesso prefisso.
+
+Infatti, per evitare che ci possa essere una collisione, cioè che due admin di tenant creino lo stesso account SIP, a ciascun tenant viene assegnato un prefisso (una stringa alfanumerica di 6 caratteri) in modo che tutti gli account SIP di un certo tenant condividano lo stesso prefix. I caratteri del prefisso vengono generati casualmente, ma è possibile personalizzarli.
+
+**N.B.** Questa è la differenza principale che c’è tra tenant di default (quello che si trova preimpostato sulla centrale) e gli altri. Infatti il primo, che nasce da una macchina monotenant, possiede gli account che mancano di prefix.
+
+Es. Se si possiede un account x, definito nel tenant di default, per continuare a utilizzarlo, si riconfigura il telefono per assegnare un prefisso al tenant default oppure si corre il rischio di tenere l'account senza prefix.
+
+- **Numero massimo di account** (-1 è illimitato)
+- **Numero massimo di interni** (-1 è illimitato)
+- **Limite chiamate contemporanee** (-1 è illimitato): interessa il limite di chiamate esterne
+- **Quota di archiviazione locale** (in MB): quota di storage interno alla macchina che può essere usata dal tenant per registrare file audio custom o messaggi della segreteria telefonica
+- **Provisioning fallback abilitato**
+
+Una volta configurato è possibile accedere al proprio tenant di cui si è amministratori.
+
+Lista dei gruppi di tenant
+++++++++
+In questa sezione è possibile creare un nuovo gruppo di tenant o modificarlo. Il gruppo di tenant serve quindi per raggruppare più tenant di più virtual pbx – amministrativamente distinti – in un gruppo. Quindi è possibile, dopo averli messi nello stesso gruppo, fare una condivisione del piano di numerazione e fare in modo che i tenant comunichino direttamente tra interni.
+
+- **Nome**: nome del gruppo di tenant
+- **I tenant in questo gruppo condividono le sezioni**: opzione spuntabile o meno
+- **Tenant appartenenti a questo gruppo**: elenco dei tenant che appartengono a quel determinato gruppo.
+
+Interni remoti
++++++++++
+Nel piano di numerazione le selezioni impostate che sono servite dal tenant selezionato vengono definite sotto alla sezione “interni remoti”.
+
+- **Tipo di selezione** (selezione esatta, intervallo di selezione, selezione a prefisso)
+- **Valore della selezione**
+- **Tipo di destinazione**
+- **Valore della destinazione**
+
+
+Gestione delle sedi
+------
+
+Descrizione del servizio
++++++++++
+Le sedi possono essere configurate a livello di PBX admin. Una sede si definisce in base agli indirizzi IP con i quali si presentano i telefoni che appartengono a quella determinata sede.
+
+Configurazione del servizio
+++++++++++
+Per configurare il servizio di gestione delle sedi, è sufficiente seguire il percorso “Impostazioni di sistema > Gestione delle sedi”.
+Per creare una nuova sede basta cliccare su “Crea nuova sede”.
+La scheda deve essere riempita delle seguenti informazioni:
+
+- **Nome**: nome della sede
+- **Limite chiamate totali**: numero massimo di chiamate totali che si permettono su questa sede
+- **Chiamate intra sede**: possono essere escluse dal conteggio/incluse nel conteggio
+- **Subnet**: ip di registrazione del telefono che appartiene a una determinata sede
+
+
+Nel conteggio delle chiamate totali ci sono le chiamate dei telefoni che vanno verso l’esterno oppure verso servizi della centrale, o verso un risponditore ecc. Bisogna quindi comunicare alla centrale se un’eventuale chiamata tra due interni di questa sede si deve imputare nel conto delle chiamate che occupano il flusso oppure no. Questo dipende dalla comunicazione tra i telefoni, ovvero se comunicano in direct media oppure no. Se una chiamata tra due telefoni della stessa sede non è in direct media, occupa due flussi all’interno della connettività.
+
+Per quanto riguarda le chiamate intra sede, se non si è sicuri di avere un direct media applicato su tutte le chiamate interne, si dovranno includere nel conteggio. Se invece le chiamate interne alla sede lavorano in direct media, si possono escludere dal conteggio.
+
+**N.B.** Le chiamate intra sede sono diverse da quelle tra interni.
+Con “Escluse dal conteggio” quindi, le chiamate intra sede andranno in direct media.
+
+Esempio di un caso specifico: Nel caso in cui più tenant insistono fisicamente dietro la stessa connettività di accesso, i telefoni dei vari tenant si presenteranno alla centrale con lo stesso IP. Si può quindi partizionare questa capacità per suddividerla tra i vari tenant che insistono su una determinata sede. Nel caso semplice ci sarà un unico tenant per cui si assegnano:
+
+- **Tenant**
+- **Limite chiamate uscenti**: numero che deve essere minore del limite chiamate totali e che rappresenta il numero massimo che sarà impegnato da chiamate esterne
+- **Limite chiamate totali** (che insistono sulla sede)
+- **Chiamate intra sede**
+
+
+Gestione file audio
+---------
+
+Descrizione del Servizio
+++++++
+
+Il servizio di Gestione File Audio comprende il caricamento e la personalizzazione dei file audio da eseguire durante l’erogazione di determinati servizi.
+
+Configurazione File Audio
++++++++++
+Seguendo il percorso Suoni > File Audio, ci troveremo nella pagina in cui è presente la lista dei file audio che si trovano sulla centrale e per ciascuno è possibile personalizzare:
+
+- La riproduzione:
+   - Riproduzione nel browser: il file viene riprodotto direttamente nel browser
+   - Download: il file viene scaricato localmente
+   - Riproduzione su un dispositivo: si può scegliere su quale interno e quale account riprodurlo. Premendo “Riproduci” squillerà l’interno scelto e si potrà ascoltare tramite la cornetta il file audio
+- La sostituzione:
+   - Caricare un nuovo file audio: è possibile selezionarlo localmente
+   - Registrare un nuovo file audio: è possibile registrare un nuovo file audio usando un terminale telefonico. Si sceglie quindi l’interno e l’account sul quale verremo richiamati dalla centrale, quest’ultima ci fornirà delle istruzioni per la corretta registrazione del file
+- L’eliminazione dei file audio che non ci servono più
+
+
+I primi 3 file che visualizziamo sono builtin, cioè file messi a disposizione della centrale:
+
+1. builtin/rec-start: file di avviso dell’inizio della registrazione, nel caso di abilitazione di recording dell’audio delle telefonate
+2. builtin/rec-stop: avvisa la fine della registrazione dell’audio della telefonata
+3. builtin/spu-start: messaggio audio che notifica a un operatore di un callcenter (qualora fosse attiva la licenza) che un supervisor sta iniziando l’ascolto passivo di quella telefonata
+
+Carica nuovo file audio
++++++++++++
+È possibile caricare un nuovo file audio
+
+- Percorso di destinazione esistente: il percorso è una cartella che consente di identificare in modo più semplice delle tipologie di file
+- Nuovo percorso di destinazione: è possibile inserire il nuovo percorso
+- File: è possibile scegliere un file audio (.wav e .mp3)
+
+I file saranno disponibili nella “Lista dei file audio”.
+
+Registra nuovo file audio
+++++++++++
+
+- Nome del file
+- Percorso di destinazione esistente
+- Nuovo percorso di destinazione
+- Dispositivo di registrazione: interno e account da usare per la registrazione del file audio
+
+C’è una limitazione per la dimensione del file che non può superare i 5MB di dimensione.
+
+Configurazione Classi di musica di attesa
++++++++++++
+Per configurare le classi di musica d'attesa procediamo andando su Suoni > Classi di musica di attesa.
+
+La musica d’attesa è la riproduzione di file audio che viene utilizzata per molti servizi tra i quali le code di attesa o durante i trasferimenti di chiamata da un interno all’altro. La centrale ha a disposizione 5 classi di musica di attesa preconfigurate, ma è possibile creare un numero arbitrario di nuove classi di musica d’attesa.
+
+
+Nuova classe di musica di attesa
+........
+
+- Nome
+- Abilita riproduzione random: opzione che permette di eseguire in modo casuale i file audio inseriti nella playlist, che altrimenti verrebbero normalmente eseguiti dall’alto verso il basso
+
+
+Modifica classe di musica di attesa
+..........
+
+- Carica nuovi file audio: è possibile caricare una serie di file audio
+
+
+Configurazione Impostazioni Audio
+++++++++++
+Per configurare le impostazioni Audio procediamo andando su Suoni > Impostazioni audio.
+
+- Lingua del file audio di sistema: è possibile cambiare la lingua
+- Classe di musica di attesa predefinita: è possibile visualizzare la lista di playlist precaricate o che aggiungeremo in seguito
+- Servizio di ascolto passivo: indica la scelta del file audio da usare di default per il servizio di ascolto passivo
+
+Configurazione Lingue personalizzate
+++++++++++
+Per il Singletenant Admin e il Multitenant PBX Admin è disponibile la funzione “Lingue personalizzate”.
+
+Per arrivare al servizio basta premere su “Suoni > Lingue personalizzate”.
+
+In questo pannello è possibile definire delle varianti partendo da una base front audio in una determinata lingua.
+
+Infatti nella scheda di personalizzazione si può inserire:
+
+- Nome
+- Language pack di base
+- Variante
+
+A livello di impostazioni audio è possibile scegliere quindi una lingua custom che eredita tutti i prompt audio della lingua base che si è scelta. Infatti, cliccando sull’elenco della lingua custom creata, sono mostrati tutti i file audio che costituiscono il language pack della lingua di base selezionata. È possibile modificare lo speaker o cambiare il contenuto dei file caricando un file audio che va a sostituire quello standard. Tutto ciò che non viene sostituito, viene ereditato dalla lingua primaria scelta.
+
+Carica archivio con i file audio
+++++++++
+È possibile caricare uno zip contenente i file audio, questi vengono automaticamente riallocati su quelli precedenti.
+
+
+
+Impostazioni SIP
+---------
+
+
+
+
+
+
+
+
+
+
