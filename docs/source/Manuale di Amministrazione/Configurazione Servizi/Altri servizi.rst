@@ -896,6 +896,260 @@ Carica archivio con i file audio
 Impostazioni SIP
 ---------
 
+Descrizione del servizio
+++++++++++
+Il pannello delle impostazioni SIP contiene le specifiche dei setting del motore telefonico. Il protocollo SIP regola la comunicazione tra la centrale e i telefoni e tra la centrale e gli altri gateway.
+
+
+Configurazione del servizio
++++++++++++
+Il pannello è raggiungibile dal menu “PBX > Impostazioni SIP”. Nel caso di un sistema multitenant, il pannello è ad uso del pbx admin perché anche in un nodo multitenant lo stack SIP che gira sulla macchina è unico e condivide le impostazioni tra tutti i tenant. I tenant però possono eseguire in maniera autonoma la configurazione dei propri interni / gruppi / code / account.
+
+- **Abilita controllo pedante dei messaggi SIP**: questa abilitazione fa sì che venga effettuato un controllo più rigoroso della correttezza formale dei messaggi SIP inviati alla centrale e, nel caso in cui questo controllo formale indichi delle malformazioni all’interno del pacchetto SIP, lo scarta.
+È una misura di sicurezza che serve ad evitare che arrivino alla centrale dei pacchetti SIP malformati che creano malfunzionamenti o attacchi alla macchina stessa. Nel caso in cui ci si interfaccia con dei provider (gateway, telefoni) che creano dei messaggi SIP non formattati del tutto correttamente, può essere utile disabilitare il flag. In questo caso, viene rilassato il parsing dei messaggi e viene reso accettabile.
+
+- **Modalità DTMF**: toni che possono essere spediti durante una telefonata per mandare comandi o informazioni all’altro interlocutore. Esistono tre modalità previste dallo standard SIP con cui poter inviare e riconoscere i DTMF spediti dall'interlocutore o da mandare all’interlocutore.
+   - **RFC 2833**: si può considerare affiancata alla 4733 che richiama ed estende la 2833.
+Questa modalità prevede che i toni DTMF sono inviati come pacchetti di tipo RTP event all’interno del flusso RTP di una chiamata. I toni DTMF fanno lo stesso percorso del flusso audio, ma non vengono inviati sotto forma di toni, ma di pacchetti RTP event. Questi messaggi RTP event sono inviati mandando un primo pacchetto (inizio del tono) e successivamente, con periodicità tipica del VoIP, ne viene mandato un altro che allunga la durata del tono. Il contenuto di questi messaggi RTP event è il numero dei tasti premuti e i simboli *#.
+
+Esempio:
+
+Si può visualizzare il tono DTMF inviato in modalità RFC 2833 da parte della centrale 10.0.20.100 verso il pbx:
+
+*jpg*
+
+Questo RTP che arriva viene poi ribaltato dalla centrale all’interlocutore.
+
+Il pacchetto audio è spedito verso un flusso che ha una porta sorgente e destinazione che contiene il flusso RTP. Nel momento in cui la centrale manda un DTMF in modalità RTP event all’interno dello stesso flusso, non cambiano gli estremi delle porte (sono gli stessi del pacchetto audio), ma cambia il payload type.
+
+*jpg*
+
+Nel secondo caso il payload type è il 101 perché l’RTP event cambia il payload type. Kalliope usa di default, per l’invio dei DTMF, il 101.
+
+Il payload diventa un’informazione esplicita del tasto che viene premuto, il volume e la durata in campioni.
+
+L’UDP, in caso di centrale che abbia più di una interfaccia di rete, fa sì che il servizio VoIP venga attivato su tutte le interfacce della centrale. Si può aggiungere una seconda interfaccia di rete, o aggiungere dei Tag VLAN.
+
+*jpg*
+
+La durata è un dato utile perché nel caso in cui la centrale dovesse convertire questo DTMF, nel momento in cui lo spedisce all’interlocutore in un formato diverso dall’RFC 233, dovrebbe riprodurlo per una durata corrispondente. L’impostazione settata in questo pannello vale per tutti gli account SIP definiti nel pannello “Interni e account” ed è usata come impostazione di default per tutte le linee di ingresso e di uscita.
+
+A differenza degli account, nel pannello non c’è la possibilità di andare a cambiare i DTMF: quando si manda un DTMF verso un account lo si manda con le impostazioni SIP e lo stesso si verifica quando un account SIP manda un DTMF. Invece, nel pannello delle linee di ingresso e di uscita si può cambiare la modalità DTMF o lasciarla come di default.
+
+*jpg*
+
+Questa modalità è spesso indicata come AVB (Attribute Value Pair) su altri apparati.
+
+- SIP INFO: è una modalità che non manda messaggi RTP o RTP event, ma un messaggio SIP di tipo info. L’info è un tipo di messaggio SIP che contiene come payload contiene il tasto e la durata, viene trasmesso una sola volta e ha un percorso di rete che segue quello della segnalazione SIP che è diverso dal percorso che effettua il flusso RTP.
+- In banda: i toni DTMF digitati sono mandati sotto forma di toni audio all’interno del flusso RTP.
+Infatti, se si analizzano le tracce che contengono toni DTMF si trovano solo RTP e non si può distinguere se siano toni o meno. Il problema della trasmissione DTMF sotto toni audio è che se vengono utilizzati dei codec diversi dal G.711, questi introducono una compressione nell’audio e una deformazione dei toni. Mentre una conversazione risulta comprensibile, il riconoscimento di questi toni potrebbe fallire.
+
+*jpg*
+
+Quindi, l’utilizzo della modalità DTMF “in banda” è scoraggiato perché se il flusso RTP subisce un degrado per perdite o congestione, i toni, anche usando G.711 vengono deformati e possono non venire riconosciuti. Quindi l’utilizzo dei DTMF in audio è raccomandato solo in associazione ad un codec compresso PCM a-low o PCM u-low, ma può comunque essere soggetto a errori.
+
+La modalità più utilizzata è la RFC 2833.
+
+I successivi due campi sono due attributi che impattano sia gli account SIP che le linee di ingresso e uscita, come nel caso della modalità DTMF, anche i seguenti due sono modificabili rispetto al valore di default nelle linee di ingresso e di uscita.
+
+- **Abilita accettazione RPID (Remote Party ID)**: abilita accettazione COLP (nominato così nelle linee di ingresso e uscita).
+L’abilitazione fa in modo che si estragga l’identità del chiamante non solo dal FROM che manda, ma dagli header PAI, RPID ecc. Si tratta di un header SIP che trasporta un’informazione aggiuntiva che identifica il chiamante. Durante una chiamata, ci sono dei casi in cui l’identificativo della persona con cui si parla possa cambiare nel tempo. La funzionalità del COLP fa in modo che la centrale notifichi che l’interlocutore è cambiato, ci sono dei casi in cui è necessario fornire questa informazione all’interlocutore, e altri in cui non lo è. Questo flag fa sì che si accetti dai telefoni collegati alla centrale, l’identificativo chiamante presente nell’header RPID o PAI (P-Asserted-Identity).
+
+N.B. A livello di uscita si raccomanda che la voce sia disabilitata poiché non si vuole che la centrale modifichi l’identificativo della linea connessa.
+
+- **Send rpid mode**: Modalità invio COLP (nominato così nelle linee di ingresso e uscita).
+Ha tre opzioni: disabilitato / remote party ID / P-Asserted-Identity. In questo caso, l’impostazione che viene utilizzata verso i telefoni e che si raccomanda è l’invio del PAI. Questo flag fa sì che la centrale avverta che l’interlocutore con cui si comunica è cambiato, manda un messaggio che aggiorna l’informazione tramite l’header PAI. L’informazione di cambio interlocutore è utile verso i telefoni, ma normalmente su una linea di uscita deve essere disabilitato.
+
+.. note::
+   Se si va a fare un trunk verso un’altra centrale in cui configuro interni remoti, in questo caso la linea non è un trunk di uscita verso un operatore, ma è l’interconnessione con un’altra centrale sulla quale è utile attivare la modalità di aggiornamento del COLP.
+
+I tre campi successivi servono per impostare i parametri di qualità del servizio in uscita dalla centrale. Sono presenti i valori esadecimali del TOS e i codici di priorità che nella rete servono per decidere in caso di congestione, quali pacchetti far viaggiare con priorità rispetto agli altri. Quindi, garantisce che flussi audio e video abbiano trattamento privilegiato rispetto all’invio della mail.
+
+- TOS SIP
+- TOS Audio
+- TOS Video
+
+Questi valori possono essere cambiati se la rete in cui si trova a operare la centrale richiede che siano usati diversi valori di TOS per l’audio, la segnalazione e/o il video.
+
+- **Abilita Video**: per abilitare a livello globale il supporto alle videochiamate
+- **Bitrate massimo per le chiamate video**: attributo che vale solo per le chiamate video e determina il bitrate massimo che la centrale accetta e offre per le videochiamate, di default è 384 Kbps per non occupare troppa banda. Spesso i valori possono essere alzati per aumentare la qualità.
+- **Abilita supporto alla cifratura RTP (SRTP)**: abilita a livello di centrale la possibilità di attivare l’encryption dei flussi RTP che normalmente viaggiano in chiaro (chiunque riesca a intercettare il flusso RTP della chiamata può ascoltarne il contenuto).
+
+SRPT è un protocollo che si basa sul preventivo scambio di chiavi tra chiamante e chiamato, il flusso è cifrato con un cifratore a chiave simmetrica. La chiave viene scambiata in fase di setup della chiamata e, se non si usa un protocollo di trasporto della segnalazione sicuro come TLS e si usa invece TCP o UDP, si può leggere in chiaro sul messaggio SIP. L’attivazione dell’SRPT ha senso se è accoppiata a un protocollo di segnalazione di tipo sicuro come TLS.
+
+.. warning::
+   L’abilitazione dell’SRTP nelle impostazioni SIP non abilita automaticamente l’effettivo utilizzo dell’SRTP, ma abilita il modulo da supporto SRPT. È necessario abilitarlo nel pannello degli “Interni e account”. Qui, è presente la spunta “Abilita SRPT”: in questo modo può essere ereditato da tutti gli account che usano quel determinato template.
+
+I due campi successivi non sono necessari da configurare, se non quando si vuole esporre il servizio tramite WebRtc (tramite Web Socket) ed è necessario specificare un server STUN per acquisire l’informazione necessari aa far chiudere correttamente segnalazione e media.
+
+.. note::
+   STUN è un protocollo che serve per distribuire l’informazione dell’IP pubblico utilizzato da un client che si trova dietro un NAT. Viene usato dai client web rtc (telefono web) per fare in modo che la centrale sappia qual è l’indirizzo IP a cui spedire i flussi media. Va di pari passo con l’abilitazione del trasporto (protocollo per le segnalazioni SIP) tramite Web Socket e, una volta attivato il Web Socket Sicuro, c’è necessità di specificare un server STUN, che la centrale usa pere imparare quali sono le porte che utilizzerà per la segnalazione e per il media.
+
+- Indirizzo del server STUN
+- Posta del server STUN
+
+NAT Helper
++++++++
+Questa sezione è particolarmente importante per rendere la centrale disponibile in accesso dal pubblico.
+
+- Host esterno: indirizzo IP pubblico
+- Periodo di aggiornamento dell’host esterno (sec.)
+- Porta UDP esterna
+- Porta TCP esterna
+- Porta TLS esterna
+- Reti locali
+
+Per tutti i messaggi inviati alle reti marcate come locali usa il proprio indirizzo privato come da routing, mentre ciò che è fuori dalle reti locali usa l’indirizzo IP che specificate nell’host esterno.
+
+Codec video predefiniti
+..........
+Per abilitare il supporto alle videochiamate si spunta la sopracitata casella “Abilita video” e selezionare quali codec video sono supportati dalla centrale.
+
+Codec audio
+.........
+Anche per l’audio si può selezionare quali codec sono supportati dalle centrale.
+
+
+Impostazioni SSL
+-------
+
+Descrizione del Servizio
+++++++++++
+La sezione impostazioni SSL (Secure Sockets Layer) contiene la gestione delle CA (Certification Authority) affidabili.
+
+Configurazione del Servizio
+++++++++++
+Per raggiungere la sezione delle impostazioni SSL, è sufficiente seguire il percorso "Impostazioni di sistema > Impostazioni SSL" come mostrato nella figura a destra.
+
+Gestione delle CA affidabili
+.........
+In questa sezione è presente la lista delle Certification Autority dei vendor dei telefoni che la centrale ritiene valide per autenticare un certificato client.
+
+Difficilmente il certificato del server viene emesso direttamente da una delle CA presenti nel telefono, poiché sono CA di tipo no root. Spesso i certificati sono emessi da CA intermedie.
+
+.. note::
+   È importante ricordare la corretta sequenza della catena: CA root > CA intermedia > certificati server
+
+
+La CA root emette un certificato per una CA intermedia e quest’ultima emette i certificati server. Bisogna quindi caricare il certificato server composto da certificato vero e proprio e chiave privata e le CA intermedie che servono per costruire la catena di trust fino alla CA root.
+
+I certificati devono essere messi insieme dentro un unico file .pem. Il telefono quindi fornisce il certificato client, il certificato viene validato dal pbx usando le CA affidabili presenti nel pannello.
+
+Se il certificato viene ritenuto valido e sia il CN (common name) che il MAC address coincidono col file che sta richiedendo, allora tutto corrisponde, la sessione si chiude e può partire il download del file di provisioning.
+
+Mentre sui browser sono spesso precaricate CA intermedie, nei telefoni, per ragioni di occupazione di memoria ci sono solo le CA root. Se carichiamo sulla macchina solo il certificato server firmato da una intermedia (firmata da una CA root), ma il server passa al telefono solo il proprio certificato e non quello intermedio, questo non è ritenuto valido dal telefono.
+
+È necessario quindi caricare sia la CA intermedia che il certificato server.
+
+
+Gestione del certificato del server
+..........
+In questa sezione è possibile caricare il certificato del server in un singolo file .pem.
+
+Di default, su tutti i Kalliope, è presente un certificato self assigned che è emesso da una CA autogenerata e interna alla centrale.
+
+È possibile creare un nuovo certificato CSR (Certificate Signing Request), premendo su "Crea nuovo CSR" e inserendo:
+
+i dettagli del nuovo certificato e le identità aggiuntive:
+
+- Stato
+- Provincia
+- Località
+- Ente
+- Reparto
+- Nome comune
+- E-mail
+
+
+Gestione dell'autorità di certificazione locale
+.............
+In questa sezione si possono osservare i dettagli del certificato di root e la lista dei certificati emessi.
+
+È anche possibile:
+
+- Emettere un nuovo certificato premendo su "Emetti nuovo certificato" e inserendo i dettagli del nuovo certificato e le identità aggiuntive:
+   - Installa come un certificato del server
+   - Stato
+   - Provincia
+   - Località
+   - Ente
+   - Reparto
+   - Nome comune
+   - E-mail
+- Scaricare il certificato di root della CA locale (.pem)
+- Scaricare il certificato di root della CA locale (.der)
+- Eliminare l'autorità di certificazione locale
+
+Inoltro su PBX isolato
+----------
+
+.. note::
+   **Informazioni**
+   - Firmware: 4.5.9 e superiori
+   - Disponibile in sistema single-tenant e multi-tenant (livello admin di tenant)
+   
+Descrizione funzionale
+++++++++
+Questo servizio permette di specificare una destinazione di inoltro di tutte le chiamate in ingresso al PBX (o al tenant, in sistemi multi-tenant) nel caso in cui tutti gli account SIP associati agli interni siano irraggiungibili.
+
+Questo servizio è particolarmente utile negli scenari in cui il PBX è installato in remoto rispetto ai terminali (ad esempio installazione in data center remoto, e telefoni presenti in sede cliente); nel caso in cui la sede del cliente diventi isolata rispetto alla centrale, tutte le chiamate in entrata potranno essere inoltrate ad una destinazione di backup (ad esempio un numero di cellulare, o un messaggio di cortesia).
+
+In ambiente multitenant, l'attivazione del servizio e la configurazione della destinazione di inoltro sono configurabili in modo differenziato ed indipendente per ciascun tenant, direttamente dall'admin del tenant stesso.
+
+Configurazione del servizio
++++++++++
+La configurazione del servizio viene effettuata nel pannello PBX -> Impostazioni Generali, nella sezione "Comportamento in caso tutti gli account siano non registrati".
+
+Oltre alla checkbox di abilitazione del servizio, è presente il tradizionale modulo di selezione dell'azione di inoltro, con il quale è possibile specificare un eventuale file audio da riprodurre al chiamante, e l'azione da compiere sulla chiamata in ingresso (selezionabile da menu a tendina). Nel caso di inoltro della chiamata ad un numero esterno (di raggiungibilità di emergenza) è necessario specificare (oltre al numero di destinazione, senza l'eventuale prefisso di selezione linea esterna) anche l'identità (che determinerà il numero chiamante presentato in uscita) e la classe di abilitazione che KalliopePBX utilizzerà per effettuare la chiamata.
+
+
+Interfacciamento tramite AMI con software di terze parti
+-----------
+
+L'Asterisk Manager Interface presente su KalliopePBX consente l'interfacciamento con software di terze parti.
+Il pannello mostrato a destra permette di definire le credenziali di autenticazione (username e password), insieme ad una ACL composta da uno o più indirizzi/subnet IP. L'utente configurato dispone dei diritti di lettura “call” e di scrittura “call,originate”.
+
+Abilitando l'interfaccia AMI da GUI Kalliope è, quindi, possibile interfacciare sistemi esterni con il KalliopePBX per effettuare operazioni di click-to-call.
+
+La sintassi standard per effettuare il c2c via AMI (dall'interno %interno% verso la destinazione %toNum%, comprensivo di prefisso di uscita se esterno) su KalliopePBXv4 è la seguente, in cui vengono impostate alcune variabili di canale:
+
+.. code-block:: console
+
+   Action: Originate
+   Async: true
+   Channel: Local/%interno%@c2c
+   Context: from_c2c
+   Exten: %toNum%
+   CallerId: %callerId%
+   Timeout: %timeout%
+   Priority: 1
+   Variable: C2C_SRC=%interno%
+   Variable: C2C_DST=%toNum%
+   Variable: __TENANT_UUID=%tenantUid%
+
+Dove:
+
+- **%callerId%** = in formato "%displayname%" <%numero%> ( noi impostiamo "c2c: %toNum%" <%toNum%>)
+- **%timeout%** = numero di millisecondi di squillo per accettare la chiamata sul terminale del chiamante (noi impostiamo 10000)
+- **%tenantUid%** = l'UUID del tenant utilizzato. In caso di PBX monotenant va indicato comunque, è riportato sul pannello dei settings AMI (nei firmware 4.2.x) o nel widget della dashboard (nei firmware 4.3.x)
+
+Nel caso del TSP Xtelsio Tapi for asterisk (frequentemente utilizzato per l'integrazione dell'applicativo Estos ProCall con sistemi Asterisk) non è possibile (alla data odierna) impostare queste variabili nella chiamata AMI, per cui è stato sviluppato un meccanismo che si basa su dei contesti wrapper per impostare a dialplan le variabili necessarie.
+
+Il messaggio AMI da far inviare diventa quindi (sono comunque supportate entrambe le modalità):
+
+.. code-block:: console
+
+   Action: Originate
+   Async: true
+   Channel: Local/%interno%@c2c_%tenantUid%
+   Context: from_c2c_%tenantUid%
+   Exten: %toNum%
+   CallerId: "c2c: %toNum%" <%interno%>
+   Timeout: %timeout%
+   Priority: 1
+
+
+
 
 
 
