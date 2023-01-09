@@ -69,6 +69,195 @@ Stato alta affidabilità nodo attivo
 - **Commuta nodo attivo**: forzare la commutazione delle risorse sull’altro nodo
 
 
+Attività pianificate
+---------
+
+Gestione attività pianificate
+++++++++
+Tramite questo servizio (disponibile a partire dal firmware 4.5.8) è possibile definire delle attività che verranno eseguite automaticamente da KalliopePBX secondo una politica di pianificazione definita dall’utente.
+Le tipologie di attività definibili sono le seguenti:
+
+- Invio CDR Call Center
+- Invio CDR (disponibile a partire dal firmware 4.7.0)
+
+
+Definizione di una nuova attività pianificata
++++++++++
+Il pannello per la definizione delle attività pianificate è raggiungibile attraverso il seguente percorso: menù Operativo → monitoraggio → attività pianificate.
+Per aggiungere una nuova attività pianificata fare click sulla voce “Pianifica nuova attività” Nuova attivita call center.png in alto a sinistra del pannello, dopo aver selezionato dal relativo menu a tendina la tipologia di attività che si vuole pianificare.
+
+Come creare una nuova attività pianificata di invio CDR Call Center
++++++++++
+
+.. note::
+
+   La possibilità di poter definire attività pianificate di tipo “Invio CDR Call Center” è vincolata alla presenza della licenza Call Center sul PBX.
+
+Dopo aver selezionato dal menu a tendina la voce “Invio CDR Call Center” e fatto click sulla voce “Pianifica nuova attività”, comparirà un form come quello rappresentato di seguito.
+
+I parametri da configurare sono i seguenti:
+
+**Impostazioni generali**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Nome
+     - Il nome da assegnare all’attività pianificata. Il nome inserito comparirà nell’oggetto e corpo delle mail inviate al termine dell’esecuzione dell’attività
+     - Alfa-numerico
+  * - Abilitato
+    - Abilitare o disabilitare l'esecuzione dell'attività pianificata. Le attività pianificate disabilitate possono essere eseguite solo manualmente
+    - Si / No
+  * - Tipo di pianificazione
+    - Selezionare il periodo di esecuzione automatica dell'attività pianificata
+    - Giornaliera / Settimanale / Mensile
+  * -  Orario di pianificazione
+    - Permette di indicare l'orario in cui ogni giorno l'attività pianificata sarà eseguita ed il risultato inviato via email ai destinatari impostati
+    - Ora e minuti
+  * - Giorno della settimana
+    - Disponibile solo nel caso in cui il tipo di pianificazione sia "Settimanale". Permette di indicare il giorno della settimana nel quale l'attività pianificata sarà eseguita (all'ora impostata) ed il risultato inviato via email ai destinatari impostati
+    - Giorno della settimana
+  * - Giorno del mese
+    - Disponibile solo nel caso in cui il tipo di pianificazione sia "Mensile". Permette di indicare il giorno del mese nel quale l'attività pianificata sarà eseguita (all'ora impostata) ed il risultato inviato via email ai destinatari impostati
+    - Data
+
+**Impostazioni dell'Invio CDR Call Center**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Intervallo
+     - Selezionare l'intervallo di tempo sulla base del quale si desidera esportare il CDR Call Center
+     - Giorno corrente / Giorno precedente / Settimana corrente / Settimana precedente / Mese corrente / Mese precedente
+   * - Formato del file
+     - Selezionare il formato del file nel quale il CDR Call Center deve essere esportato	
+     - XLSX / XLSX (dettagliato) / CSV / CSV (dettagliato) / JSON / XML
+   * - Esporta eventi operatore
+     - Se selezionato aggiunge al CDR Call Center esportato tutti gli eventi degli operatori. Questa impostazione è selezionabile solamente se si è scelto un formato di file di tipo "dettagliato".
+     - Si / No
+   * - Comprimi se la dimensione supera questo valore in MB (0 = comprimi sempre)
+     - Indicare una dimensione massima accettabile (in MB) del file generato dal processo di esportazione CDR Call Center, superata la quale il file verrà compresso in formato zip prima di allegarlo alla email. Se si indica il valore 0 il file viene compresso sempre, indipendentemente dalla sua dimensione.
+     - Numerico
+   * - Notifica a tutti i supervisori
+     - Indicare se il CDR Call Center esportato debba essere inviato per email a tutti gli utenti che abbiano assegnato il ruolo di supervisore ed abbiano un indirizzo email configurato
+     - Si / No
+   * - Destinatari
+     - In congiunzione o in alternativa alla notifica ai supervisori, è possibile specificare un numero arbitrario di destinatari ai quali inviare il CDR Call Center esportato
+     - Alfanumerico
+
+.. note::
+
+   Deve essere sempre presente almeno un destinatario oppure deve essere selezionata la notifica ai supervisori, altrimenti il form mostra un opportuno messaggio di errore e la definizione dell'attività pianificata non potrà essere salvata.
+   
+
+Come creare una nuova attività pianificata di invio CDR
++++++++
+Dopo aver selezionato dal menu a tendina la voce “Invio CDR” e fatto click sulla voce “Pianifica nuova attività”, comparirà un form come quello rappresentato di seguito.
+
+I parametri da configurare sono i seguenti:
+
+**Impostazioni generali**
+
+.. list-table::  
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Parametro
+     - Descrizione
+     - Valore
+   * - Nome
+     - Il nome da assegnare all’attività pianificata. Il nome inserito comparirà nell’oggetto e corpo delle mail inviate al termine dell’esecuzione dell’attività
+     - Alfa-numerico
+   * - Abilitato
+     - Abilitare o disabilitare l'esecuzione dell'attività pianificata. Le attività pianificate disabilitate possono essere eseguite solo manualmente
+     - Si / No
+   * - Tipo di pianificazione
+     - Selezionare il periodo di esecuzione automatica dell'attività pianificata
+     - Giornaliera / Settimanale / Mensile
+   * - Orario di pianificazione
+     - Permette di indicare l'orario in cui ogni giorno l'attività pianificata sarà eseguita ed il risultato inviato via email ai destinatari impostati
+     - Ora e minuti
+   * - Giorno della settimana
+     - Disponibile solo nel caso in cui il tipo di pianificazione sia "Settimanale". Permette di indicare il giorno della settimana nel quale l'attività pianificata sarà eseguita (all'ora impostata) ed il risultato inviato via email ai destinatari impostati
+     - Giorno della settimana
+   * - Giorno del mese
+     - Disponibile solo nel caso in cui il tipo di pianificazione sia "Mensile". Permette di indicare il giorno del mese nel quale l'attività pianificata sarà eseguita (all'ora impostata) ed il risultato inviato via email ai destinatari impostati
+     - Data
+     
+ **Impostazioni dell'Invio CDR**
+ 
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Intervallo
+   - Selezionare l'intervallo di tempo sulla base del quale si desidera esportare il CDR
+   - Giorno corrente / Giorno precedente / Settimana corrente / Settimana precedente / Mese corrente / Mese precedente
+ * - Formato del file
+   - Selezionare il formato del file nel quale il CDR deve essere esportato
+   - XLSX / XLSX (dettagliato) / CSV / CSV (dettagliato) / JSON / XML
+ * - Comprimi se la dimensione supera questo valore in MB (0 = comprimi sempre)
+   - Indicare una dimensione massima accettabile (in MB) del file generato dal processo di esportazione CDR, superata la quale il file verrà compresso in formato zip prima di allegarlo alla email. Se si indica il valore 0 il file viene compresso sempre, indipendentemente dalla sua dimensione.
+   - Numerico
+ * - Destinatari
+   - È possibile specificare un numero arbitrario di destinatari ai quali inviare il CDR esportato, deve però essere sempre presente almeno un destinatario
+   - Alfanumerico
+   
+Esecuzione manuale delle attività pianificate
++++++++
+
+Tra le azioni disponibili per le attività pianificate definiti c'è la possibilità di eseguirle su richiesta senza dover attendere la pianificazione impostata. Per avviare l'attività in background basta fare click sul pulsante con il simbolo Play.png.
+
+Al termine della richiesta si viene avvisati con un messaggio che la generazione del report è stata avviata.
+
+
+Audit Log
+---------
+
+Descrizione del servizio
++++++++++
+L’Audit Log è un registro che contiene tutte le modifiche da configurazione eseguite, marcate con l’utente che ha effettuato la modifica.
+
+Le modifiche non sono immediatamente irreversibili, ma è possibile visualizzare che cosa è stato modificato e, in caso, andare a ripristinarlo.
+
+Conoscere l’utente che ha effettuato le modifiche è importante, l’utente “admin” non è l’unico in grado di eseguire modifiche alla configurazione, ma si possono creare ruoli personalizzabili e assegnare degli utenti a questi specifici ruoli. In questo modo si delega parte della configurazione della centrale a del personale del cliente. Quindi tutte le modifiche effettuate dal cliente saranno marcate con il nome utente a lui assegnato. Clicca sul link di seguito per un approfondimento sugli utenti e ruoli.
+
+*jpg*
+
+Per raggiungere il servizio basta seguire il percorso del menu "Registri > Audit Log".
+
+L’Audit Log contiene i registri delle modifiche ordinati per mese ed è possibile esportare il registro in vari formati: XLSX, CSV, JSON, XML.
+È presente il filtro “Seleziona colonne visualizzate” per mirare la ricerca a specifiche sezioni presenti.
+
+Infatti, l’Audit Log permette di visualizzare:
+
+- **Id di transazione**
+- **Giorno del mese**: è possibile selezionare una data specifica
+- **Timestamp**
+- **Nome utente**: nome dell’utente che ha effettuato la modifica
+- **Indirizzo IP**
+- **Azione**
+- **Tipo oggetto**
+- **Descrizione**
+
+
+
+
+
+
+
+
 
 
 
