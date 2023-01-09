@@ -252,16 +252,361 @@ Infatti, l’Audit Log permette di visualizzare:
 - **Descrizione**
 
 
+Auto-Provisioning
+------------
+
+Descrizione del servizio
++++++++
+Il servizio Auto Provisioning consente di generare e trasferire sui telefoni il file di configurazione necessario al corretto funzionamento del dispositivo. Questo file contiene anche le informazioni relative allo specifico account / interno associato al telefono stesso.
+
+Configurazione del servizio
++++++++
+In questa sezione sono raccolte tutte le configurazioni necessarie ad effettuare l’auto-provisioning di un dispositivo telefonico.
+È inoltre possibile consultare l'elenco dispositivi built-in per l'auto-provisioning
+
+Lista dei dispositivi
++++++++++
+
+Questo pannello contiene l’elenco di tutti i dispositivi per cui è stata configurata la generazione del file di provisioning associato.
+Per ogni dispositivo è possibile configurare i parametri riportati nella seguente tabella.
+
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Abilitato
+   - Consente di disabilitare la generazione del file di provisioning associato al dispositivo
+   - Si / No
+
+**Modello del dispositivo**
+
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Marca
+   - Elenco dei produttori per cui è stato definito almeno un modello di dispositivo
+   - Marca
+ * - Modello
+   - Elenco dei dispositivi associati al produttore selezionato
+   - Modello
+ * - Template
+   - Elenco dei template associati al modello selezionato
+   - Template
 
 
+**Redirection Server**
+
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Redirection Server per il provisioning
+   - Elenco dei redirection server definiti per il produttore selezionato
+   - Redirection Server
+ * - Provisionato sul redirection server
+   - Campo in sola lettura indica se il provisiong sul redirection server è stato effettuato con successo
+   - Si / No
 
 
+**Configurazione del dispositivo**
 
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
 
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Indirizzo MAC
+   - Indirizzo MAC del dispositivo (sono accettati i formati AABBCCDDEEFF, AA:BB:CC:DD:EE:FF, AA-BB-CC-DD-EE-FF)
+   - MAC Address
+ * - Note
+   - Campo libero contenente annotazioni sul dispositivo
+   - Stringa
+ * - Abilita DHCP
+   - Imposta il valore del placeholder %%IPADDRMODE%% ad on / off per questo dispositivo. Il placeholder potrà essere utilizzato nel template per generare il file di configurazione con la con le impostazioni di rete richieste.
+   - Si / No
+ * - Indirizzo IP
+   - Imposta il valore del placeholder %%IPADDR%% per questo dispositivo. Il placeholder potrà essere utilizzato nel template per generare il file di configurazione con le impostazioni di rete richieste.
+   - IP Address
+ * - Maschera di sottorete
+   - Imposta il valore del placeholder %%IPNETMASK%% per questo dispositivo. Il placeholder potrà essere utilizzato nel template per generare il file di con le impostazioni di rete richieste.
+   - Subnet Mask
+ * - Gateway
+   - Imposta il valore del placeholder %%IPGATEWAY%% per questo dispositivo. Il placeholder potrà essere utilizzato nel template per generare il file di configurazione con le impostazioni di rete richieste.
+   - IP Address
+ * - DNS1
+   - Imposta il valore del placeholder %%IPDNS1%% per questo dispositivo. Il placeholder potrà essere utilizzato nel template per generare il file di configurazione con le impostazioni di rete richieste.
+   - IP Address
+ * - DNS2
+   - Imposta il valore del placeholder %%IPDNS2%% per questo dispositivo. Il placeholder potrà essere utilizzato nel template per generare il file di configurazione con le impostazioni di rete richieste.
+   - IP Address
+ * - Nome utente
+   - Imposta il valore del placeholder %%PHONEUSERNAME%% per questo dispositivo. Il placeholder potrà essere utilizzato nel template per impostare le credenziali di accesso al telefono. Questo stesso valore sarà utilizzato da KalliopePBX per il pilotaggio del telefono quando viene associato al dispositivo un applicativo KalliopeCTI PRO.
+   - Stringa
+ * - Password
+   - Imposta il valore del placeholder %%PHONEPASSWORD%% per questo dispositivo. Il placeholder potrà essere utilizzato nel template per impostare le credenziali di accesso al telefono. Questo stesso valore sarà utilizzato da KalliopePBX per il pilotaggio del telefono quando viene associato al dispositivo un applicativo KalliopeCTI PRO.
+   - Stringa
 
+**Controllo remoto**
 
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
 
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Indirizzo
+   - Se definito, specifica l'indirizzo IP a cui è raggiungibile (da parte del PBX) l'interfaccia web del telefono (in HTTP) al fine di poterne effettuare il controllo remoto (tramite l'applicativo KalliopeCTI Pro). Se vuoto, il PBX utilizzerà l'indirizzo IP da cui l'account associato a questo device è registrato a livello SIP
+   - Indirizzo IP
+ * - Porta
+   - Come il campo precedente, ma relativo alla porta su cui l'interfaccia web del telefono è visibile da parte del PBX.
+   - Intero (range 1-65535)
 
+**Utilizzatore del dispositivo**
 
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
 
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Account
+   - Account e corrispondente interno associati al dispositivo (i placeholder dinamici sono calcolati a partire da questa associazione). Se non viene associato l’account il file di configurazione non viene generato e il dispositivo è inserito come Disabilitato.
+   - Account
 
+**Lista dei template**
+
+Questo pannello contiene l’elenco di tutti i template definiti sul KPBX.
+E’ obbligatorio definire un template per ogni modello di telefono per cui si desidera generare un file di provisioning.
+
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Nome
+   - Nome del template
+   - Stringa
+ * - Marca del dispositivo
+   - Elenco dei produttori per cui è stato definito almeno un modello di dispositivo
+   - Marca
+ * - Modello del dispositivo
+   - Elenco dei dispositivi associati al produttore selezionato
+   - Modello
+   
+**Contenuto del template**
+
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Template
+   - Questo campo libero deve contenere il template da utilizzare per la generazione del file di provisioning
+   - Testo
+
+Lista dei modelli di dispositivo
++++++++++
+
+Questo pannello contiene l’elenco di tutti i modelli di dispositivo definiti sul KPBX. Alcuni modelli di dispositivo sono distribuiti con il firmware del KPBX. Altri modelli possono essere aggiunti dall’utente per generare file di configurazione per modelli/produttori non esplicitamente supportati.
+
+E’ inoltre possibile definire delle regole che consentono di creare dei file di provisioning con nomi arbitrari. Il nome del file può essere composto da un prefisso, indirizzo MAC (in diversi formati) e un suffisso.
+
+Per ogni modello di dispositivo è possibile definire i parametri riportati nella seguente tabella.
+
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Nome
+   - Nome del modello di dispositivo
+   - Stringa
+   
+   
+**Marca del dispositivo**
+
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Scegli Marca
+   - Consente di selezionare una marca esistente o crearne una nuova selezionando la voce Nuova Marca
+   - Marca
+ * - Nome Marca
+   - Nel caso di Nuova Marca contiene il nome da associare
+   - Stringa
+ * - Nome
+   - Nome del modello di dispositivo
+   - Stringa
+   
+**Regola di generazione del nome del file di provisioning**
+
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Scegli regola
+   - Consente di selezionare una regola esistente o crearne una nuova selezionando la voce Nuova Regola
+   - Marca
+ * - Nome regola
+   - Nel caso di Nuova Regola contiene il nome da associare
+   - Stringa
+ * - Prefisso
+   - Prefisso da aggiungere al nome file
+   - Stringa
+ * - Formato indirizzo MAC
+   - Consente di selezionare il formato del MAC address da inserire nel nome file da una lista
+   - Formato MAC Address
+ * - Suffisso
+   - Suffisso da aggiungere al nome file
+   - Stringa
+   
+   
+Lista dei placeholder personalizzati
+++++++++++++++
+
+Questo pannello contiene l’elenco di tutti i placeholder definiti dall’utente sul KPBX in aggiunti a quelli presenti di default. I placeholder custom hanno un formato del tipo %%_PLACEHOLDER%% e possono essere utilizzati all’interno dei template.
+E’ possibile definire due tipi di placeholder:
+
+- Statico: viene utilizzato per non modificare tutti i template in cui viene utilizzato uno specifico valore.
+- Dinamico: viene utilizzato per aggiornare dinamicamente alcuni valori associati al KPBX e non allo specifico utente. In questo momento gli unici placeholder dinamici disponibili sono quelli relativi agli IP address associati alle diverse interfacce di rete / VLAN.
+  
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Placeholder
+   - Identificativo del placeholder. Il placeholder da utilizzare è %%_PLACEHOLDER%%
+   - Stringa
+ * - Tipo
+   - Consente di definire il tipo di placeholder
+   - Statico/dinamico
+ * - Valore
+   - Nel caso di placeholder statico viene inserito il valore da sostituire in generazione, nel caso di placeholder dinamico l’attributo del KPBX da utilizzare per la sostituzione.
+   - Stringa / Attributo KPBX
+   
+Lista dei redirection server
+++++++
+
+Questo pannello contiene l’elenco di tutti i redirection server configurati dall’utente sul KPBX. Attualmente è supportata l’integrazione con i redirection server dei seguenti produttori:
+
+- SNOM (https://sraps.snom.com/)
+- Yealink (https://ymcs.yealink.com/)
+
+.. note::
+
+   In virtù di alcune limitazioni delle API messe a disposizione da Yealink / Escene la procedura di configurazione è differente nel caso di utilizzo del redirection server SNOM rispetto a quello degli altri due produttori. In particolare, nel caso di Yealink / Escene è necessario definire preventivamente un server accedendo alla WEB GUI di gestione del servizio RPS. Il nome di questo server verrà riferito in fase di configurazione del redirection server.
+
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Marca del dispositivo
+   - Marca del dispositivo per cui si sta definendo il redirection server
+   - Snom / Yealink / Escene
+   
+   
+**Credenziali**
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Username
+   - Utente per l’autenticazione sul server RPS del produttore
+   - Stringa
+ * - Password
+   - Password per l’autenticazione sul server RPS del produttore
+   - Stringa
+
+**Impostazioni**
+  
+.. list-table::  
+ :widths: 25 25 50
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Abilitato
+   - Consente di disabilitare il redirection server senza perderne la configurazione
+   - Si / No
+ * - Nome
+   - Nome del redirection server da creare (se SNOM) o da utilizzare (nel caso Yealink / Escene)
+   - Stringa
+ * - Indirizzo di provisioning
+   - Nel caso SNOM URL a cui viene effettuata la redirezione (ad es. https://192.168.0.100/provisioning/ )
+   - Stringa
+   
+   
+   
+   
+Template
++++++++
+La generazione del file di configurazione per uno specifico dispositivo viene effettuata a partire da un template associato alla marca/modello di telefono che si intende utilizzare.
+Il formato del template dipende dalla marca/modello del telefono utilizzato ma anche eventualmente dalla versione del firmware installata sul dispositivo.
+Nella definizione del template è possibile utilizzare dei placeholder che il KalliopePBX sostituirà automaticamente in fase di generazione del file.
+Questi placeholder includono:
+
+- Attributi del KalliopePBX (ad es. porta SIP UDP/TCP del centralino)
+- Attributi dell’account/interno associato al telefono (ad es. credenziali SIP, nome, cognome, etc.)
+- Attributi del telefono (ad es. parametri di rete, credenziali di accesso, etc.)
+
+Una volta definito il template è necessario specificare il MAC address del dispositivo per il quale si intende generare il file di configurazione e l’account/interno da associare al dispositivo.
+I file generati devono quindi essere trasferiti ai telefoni. Il KalliopePBX mette a disposizione i seguenti protocolli per il trasferimento dei file:
+
+- **TFTP**: i file sono disponibili direttamente nella root del TFTP server nel caso di KalliopePBX monotenant. Nel caso di KalliopePBX multitenant deve essere aggiunto al path il Tenant UUID (link) (ad es. un possibile comando potrebbe essere get <tenant_uuid>/snom370-0004167898B1.htm.)
+- **HTTP / HTTPS**: i file sono pubblicati al seguente URL http(s)://<ip_address>/provisioning/ nel caso di KalliopePBX monotenant. Nel caso di KalliopePBX multitenant deve essere aggiunto al path il Tenant UUID (link) (http(s)://<ip_address>/provisioning/<tenant_uuid>/)
+
+Tutti i file generati sono visualizzabili anche nel Gestore File.
+Per indicare al telefono quale protocollo deve essere utilizzato per scaricare il file di configurazione oltre all’indirizzo IP (ed eventuale path) del server di provisioning esistono diverse modalità la cui configurazione e ordine di esecuzione dipende dal modello di telefono utilizzato. Le modalità comunemente disponibili sono le seguenti:
+
+- **SIP PnP**: il telefono all’avvio invia un messaggio SIP SUBSCRIBE ad un indirizzo multicast. Se sul KalliopePBX il servizio SIP PnP è abilitato il PBX risponde con una SIP NOTIFY contenente l’IP address del TFTP server da utilizzare. Questa modalità non è utilizzabile nel caso di KalliopePBX multitenant.
+- **Redirection Server**: il telefono all’avvio prova a contattare il Redirection Server del produttore. Se il MAC Address del telefono è stato inserito il telefono viene rediretto al server indicato per il download del file di configurazione. In questa modalità è possibile utilizzare uno qualsiasi dei protocolli disponibili (in base al parametro configurato sul redirection server).
+- **DHCP OPTION 66**: nel caso in cui in fase di assegnazione dell’indirizzo IP il DHCP Server comunichi al telefono anche la DHCP Option 66 contenente l’URL da contattare (incluso il protocollo da utilizzare), il telefono utilizzerà questa informazione per effettuare il download del file di configurazione.
+- **Manuale**: è possibile avviare la configurazione anche manualmente dal telefono o dalla WEB GUI inserendo il protocollo da utilizzare e l’IP address (oltre eventualmente al path).
+
+   
+   
+   
+ 
+   
+   
+   
+   
+   
+   
