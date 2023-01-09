@@ -539,6 +539,7 @@ Questo pannello contiene l’elenco di tutti i redirection server configurati da
    
    
 **Credenziali**
+
 .. list-table::  
  :widths: 25 25 50
  :header-rows: 1
@@ -601,11 +602,102 @@ Per indicare al telefono quale protocollo deve essere utilizzato per scaricare i
 - **Manuale**: è possibile avviare la configurazione anche manualmente dal telefono o dalla WEB GUI inserendo il protocollo da utilizzare e l’IP address (oltre eventualmente al path).
 
    
-   
-   
+Cattura
+-------
+
+Il tool di cattura permette di acquisire le tracce dei pacchetti in ingresso / uscita dalle interfacce di rete di KalliopePBX applicando, eventualmente, un filtro di selezione basato su:
+
+- Tipo di protocollo (tutti o una combinazione di ICMP/UDP/TCP)
+- Indirizzo IP (sorgente o destinatario)
+- Porta sorgente o di destinazione
+
+Una volta impostati i filtri desiderati, è sufficiente cliccare sul pulsante Inizia la cattura. Il pulsante Termina la cattura permette di interrompere la cattura che, in ogni caso, si arresta automaticamente al raggiungimento di un file di dimensione pari a 10 MB.
+
+Al termine della cattura, è possibile scaricare il file pcap sul proprio PC cliccando sul pulsante Scarica oppure eliminarlo cliccando sul pulsante Elimina. Avviando una nuova cattura, questa va a sovrascrivere quella precedente. Anche il riavvio del PBX provoca la cancellazione del file pcap.
+
+
+Chiamate attive
+---------
+
+Descrizione del servizio
++++++++
+Il sottomenu “chiamate attive” del servizio di Monitoraggio è raggiungibile cliccando su "Monitoraggio > Chiamate attive", come mostrato nell'immagine a destra.
+
+La pagina mostra il pannello dove è disponibile la lista delle chiamate attive, filtrata in base a:
+
+.. list-table::  
+ :widths: 25 25
+ :header-rows: 1
+
+ * - Sorgente
+   - Destinazione
+ * - Linked ID	
+   - 
+ * - Canale
+   - Canale
+ * - Stato
+   - Stato
+ * - ID chiamante
+   - ID del chiamato
+ * - Nome chiamante
+   - Nome del chiamato
+ * - Numero chiamato	
+   - 
+ * - Data di creazione
+   - Data di creazione
+ * - Tempo di attività
+   - Tempo di attività
+ * - Data di connessione
+   - Data di connessione
+ * - Tempo di attività dalla connessione
+   - Tempo di attività dalla connessione
  
    
-   
+Eventi PBX
+--------
+
+Descrizione del servizio
+++++++++++++
+
+Nella pagina degli Eventi PBX sono visualizzate tutte le notifiche relative agli eventi che si verificano al momento dell’accesso alla centrale.
+
+Per raggiungere il servizio basta seguire il percorso "Registri > Eventi PBX". È possibile visualizzare, per ogni evento:
+
+- ID
+- Tipo evento
+- Giorno del mese
+- Timestamp
+- Severity
+- Parametri
+
+È inoltre possibile esportare i dati nei seguenti formati:
+
+- XLSX
+- CSV
+- JSON
+- XML
+
+ 
+Gestione dei filesystem remoti
+-------
+
+Descrizione del servizio
++++++++++++
+Per raggiungere il servizio basta seguire il percorso "Impostazioni di sistema > Gestione dei filesystem remoti".
+
+Nella seguente pagina è contenuta la lista dei filesystem remoti, ovvero i file contenuti su un eventuale computer remoto.
+
+Configurazione del servizio
++++++++++
+Per aggiungere un filesystem, premere su “Aggiungi nuovo filesystem remoto” La configurazione del nuovo filesystem consente di inserire:
+
+- Protocollo (CIFS/NFS)
+- Nome
+- Indirizzo del server
+- Condivisione
+- Nome utente
+- Password
+
    
    
    
