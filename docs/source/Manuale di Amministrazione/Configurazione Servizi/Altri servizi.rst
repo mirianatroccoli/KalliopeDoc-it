@@ -1084,7 +1084,9 @@ Inoltro su PBX isolato
 ----------
 
 .. note::
+   
    **Informazioni**
+   
    - Firmware: 4.5.9 e superiori
    - Disponibile in sistema single-tenant e multi-tenant (livello admin di tenant)
    
