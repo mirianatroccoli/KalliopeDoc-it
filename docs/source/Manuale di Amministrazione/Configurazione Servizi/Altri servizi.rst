@@ -1108,8 +1108,13 @@ Oltre alla checkbox di abilitazione del servizio, è presente il tradizionale mo
 Interfacciamento tramite AMI con software di terze parti
 -----------
 
+Descrizione del servizio
+++++++++++
 L'Asterisk Manager Interface presente su KalliopePBX consente l'interfacciamento con software di terze parti.
 Il pannello mostrato a destra permette di definire le credenziali di autenticazione (username e password), insieme ad una ACL composta da uno o più indirizzi/subnet IP. L'utente configurato dispone dei diritti di lettura “call” e di scrittura “call,originate”.
+
+Configurazione del servizio
++++++++++
 
 Abilitando l'interfaccia AMI da GUI Kalliope è, quindi, possibile interfacciare sistemi esterni con il KalliopePBX per effettuare operazioni di click-to-call.
 
