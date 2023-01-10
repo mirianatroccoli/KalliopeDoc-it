@@ -1224,6 +1224,266 @@ Per quanto riguarda il busylevel, tramite l’icona di modifica Modifica.JPG è 
 
 Notifica eventi
 ----------
+Descrizione del servizio
+++++++++++
+
+Tramite questo servizio è possibile monitorare gli eventi selezionati ricevendo delle notifiche.
+
+Per ogni evento selezionato dall’utente è possibile associare delle azioni di notifica, come l’invio di una mail o la chiamata ad un Web Service.
+
+Configurazione del servizio
+++++++++
+Nella sessione Monitoraggio → Notifiche è possibile gestire la funzionalità di notifica.
+
+Notification Action List
+........
+In Notification Action List è possibile aggiungere una nuova notification selezionando l’azione di Email o WebService.
+
+Email
+......
+Selezionando Add New Email Notification Action è possibile definire il destinatario della mail di notifica dell’evento e le informazioni che vogliamo trasmettere. Nella tabella seguente sono illustrati i parametri che è possibile definire per l’Email Notification.
+
+.. list-table::  
+ :widths: 25 25 25
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Abilitato
+   - Consente di disabilitare l’Email Notification
+   - Si / No
+ * - Nome
+   - Identificativo della notifica
+   - Alfanumerico
+
+**Email Settings**
+
+.. list-table::  
+ :widths: 25 25 25
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Destinatari
+   - Indirizzo email del destinatario della notifica
+   - Alfanumerico
+ * - Soggetto
+   - Oggetti della mail di notifica
+   - Alfanumerico
+ * - Body
+   - Testo dell’email contenente placeholder sia di default che specifici dell’ evento	  - Alfanumerico
+
+I parametri generici sono elencati nella seguente tabella:
+
+.. list-table::  
+ :widths: 25 25
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+ * - %event_id%
+   - sequenziale dell'evento
+ * - %event_name%
+   - identificativo dell'evento
+ * - %event_description%
+   - descrizione testuale dell'evento
+ * - %event_severity%
+   - criticità dell'evento (numerica, da 4 a 0 corrispondenti ai livelli DEBUG|INFO|WARNING|CRITICAL|FATAL
+ * - %event_timestamp%
+   - epoch di occorrenza dell'evento
+   
+I parametri specifici di evento sono invece elencati nella nel pannello Notification; questi paramentri possono essere riportati in tre formati diversi: JSON, XML e AVP.
+
+Il set completo dei parametri relativi ad un evento è ottenibile con il placeholder: %call_params[<format>]%
+
+
+Web Service
+
+Selezionando Add New WebService Notification Action è necessario inserire il nome della notification che partirà al verificarsi dell’evento, tra le impostazioni generali.
+
+Nella tabella seguente sono illustrati i parametri che è possibile definire per la WebService Notification.
+
+
+.. list-table::  
+ :widths: 25 25 25
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Abilitato
+   - Consente di disabilitare la WebService Notification
+   - Si / No
+ * - Nome
+   - Identificativo della notifica
+   - Alfanumerico
+
+**WebService Settings**
+
+.. list-table::  
+ :widths: 25 25 25
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - URL
+   - URL di Notifica
+   - Alfanumerico
+ * - Tipo Auth
+   - Tipo di Autenticazione
+   - None/ Basic
+ * - Auth username
+   - Username per autenticazione (solo in caso Auth)
+   - Alfanumerico
+ * - Auth password
+   - Password per autenticazione (solo in caso Auth)
+   - Alfanumerico
+ * - Tipo Request
+   - Tipo della richiesta
+   - Get/Post
+ * - Request content
+   - Contenuto della richiesta (solo Post)
+   - Placeholder
+
+Al verificarsi dell’evento arriverà una segnalazione al WebService esterno che gestirà le informazioni ricevute.
+
+Notification List
+............
+Nella sezione Notification List, selezionando Add new notification è possibile selezionare l’evento per cui ottenere la notifica.
+
+Nella tabella seguente sono elencati gli eventi che possono essere monitorati e a cui può essere associata una notifica.
+
+
+.. list-table::  
+ :widths: 25 25
+ :header-rows: 1
+
+ * - Evento
+   - Descrizione
+ * - ademco.*.* / alarmreceiver.*.*
+   - Eventi specifici utilizzati dal modulo opzionale KalliopeLift per interfacciarsi con i combinatori telefonici degli ascensori
+ * - cti.client.background
+   - Un client CTI (sistema operativo mobile) è stato messo in backrground
+ * - cti.client.login
+   - Un client CTI ha effettuato il login
+ * - cti.client.login-failed
+   - Un client CTI ha fallito un login
+ * - cti.client.logoff
+   - Un client CTI ha effettuato il logout
+ * - mobile-app.call.incoming
+   - Chiamata in arrivo all'account dell'app mobile
+ * - mobile-app.call.timeout
+   - La chiamata all'account dell'app mobile è scaduta
+ * - mobile-app.status.not-logged
+   - L'applicazione mobile non è registrata
+ * - mobile-app.wake-up.registered
+   - L'app mobile si è attivata
+ * - mobile-app.wake-up.sent
+   - Notifica di sveglia inviata all'account dell'app mobile
+ * - mobile-app.wake-up.timeout
+   - L'applicazione mobile non si attiva entro 5 secondi dall'invio della notifica
+ * - pbx.account.incomingcall
+   - Una chiamata per un interno inoltrata all'account
+ * - pbx.account.startcall
+   - Tentativo di chiamata all'account avviato
+ * - pbx.account.unavailable
+   - Tentativo di chiamata all'account non iniziato perché l'account non è disponibile
+ * - pbx.call.end
+   - Una chiamata finisce
+ * - pbx.call.start
+   - Una chiamata inizia
+ * - pbx.dynamic-routing.enter
+   - Una chiamata è entrata nel servizio di Instradamento dinamico
+ * - pbx.dynamic-routing.input
+   - Un nuovo parametro è stato inserito dal chiamante nell'instradamento dinamico
+ * - pbx.extension.answercall
+   - Chiamata all'interno risposta da uno degli account associati
+ * - pbx.extension.failedcall
+   - Chiamata all'interno fallita
+ * - pbx.extension.incomingcall
+   - Chiamata all'interno in arrivo
+ * - pbx.extension.missedcall
+   - Un interno ha perso una chiamata; l'evento viene innescato solo se nelle azioni di trabocco di quell'interno è spuntata la voce "genera evento"
+ * - pbx.queue.enqueue
+   - Chiamata in attesa
+ * - pbx.queue.enter
+   - Una chiamata arriva al servizio di coda
+ * - pbx.queue.ringmember
+   - Una chiamata viene presentata ad un operatore di coda
+ * - pbx.queue.ringnoanswer
+   - Un operatore selezionato non ha gestito la chiamata; la chiamata è ancora in coda e andrà ad altri operatori, se ci sono e non è scaduto il tempo massimo di attesa
+ * - pbx.queue.servedcall
+   - Una chiamata nella coda è stata servita, ovvero risposta da un operatore
+ * - pbx.queue.unservedcall
+   - Una chiamata nella coda non è stata servita globalmente; rappresenta quindi l'esito finale della chiamata che non è stata servita da nessun operatore
+ * - pbx.queuemember.added
+   - Un operatore di coda aggiunto
+ * - pbx.queue.enqueue
+   - Una chiamata entra nel servizio di coda; la coda è aperta
+ * - pbx.queuemember.pause
+   - Un operatore di coda è entrato in pausa
+ * - pbx.queuemember.unpause
+   - Un operatore di coda è uscito dalla pausa
+ * - pbx.spy.start
+   - Avviata la spia di supervisore
+ * - pbx.spy.stop
+   - Interrotta la spia di supervisore
+ * - pbx.queuemember.removed
+   - Un operatore di coda è rimosso
+ * - pbx.wake-up.unanswered
+   - Il servizio sveglia non ha avuto risposta dalla camera
+ * - pbx.user.create
+   - È stato creato un nuovo utente di Kalliope
+ * - pbx.user.password-change
+   - È stata cambiata la password di un utente di Kalliope
+ * - storage.quota.exceeded
+   - È stata superata la quota di archiviazione riservata ad un determinato tenant
+ * - storage.quota.restored
+   - L'occupazione di archiviazione di un determinato tenant è tornata sotto la quota riservata
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Registro delle chiamate
