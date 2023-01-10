@@ -1444,22 +1444,96 @@ Nella tabella seguente sono elencati gli eventi che possono essere monitorati e 
  * - storage.quota.restored
    - L'occupazione di archiviazione di un determinato tenant è tornata sotto la quota riservata
 
+Nella tabella seguente sono illustrati i parametri che è possibile definire per la notifica.
+
+.. list-table::  
+ :widths: 25 25 25
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Abilitato
+   - Consente di disabilitare la notifica
+   - Si / No
+ * - Nome
+   - Identificativo della notifica
+   - Alfa-numerico
 
 
+**Events**
+
+.. list-table::  
+ :widths: 25 25 25
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Event
+   - Tipo di eventi per cui si vuole ricevere notifica
+   - Da elenco
+ * - Severity
+   - Severity dell'evento
+   - Fatal/Critical/Warning/Info/Debug
 
 
+**Notification Action**
 
 
+.. list-table::  
+ :widths: 25 25 25
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Valore
+ * - Notification Action
+   - Associazione ad una NotificationAction
+   - Da elenco
+
+Esempio pratico
+++++++++++
+Per maggiore chiarezza facciamo un esempio. Per l’evento “Coda non Servita” , se effettuiamo una chiamata da 103 a 201 a cui è associata la coda QueueTest e dopo 5 secondi il chiamante abbandona il servizio, possiamo richiedere nella mail informazioni circa
+
+l’id dell’evento
+il nome dell’evento
+nome della coda, il tempo di attesa
+il motivo per cui la coda non è stata servita
+semplicemente inserendo nel body i placeholder appositi.
+
+Nella Notification List indicheremo come evento “pbx.queue.unservedcall” associando la Notification Action precedentemente creata.
+
+Riceveremo quindi una mail con le seguenti informazioni:
 
 
+.. code-block:: console
 
+   Unserved
+   1511212918.0
+   1
+   Default
+   103
+   201
+   5
+   CANCELLED 
 
+Oppure possiamo ottenere la seguente risposta inserendo il placeholder:
 
+.. code-block:: console
 
+   %call_params[<JASON>]% :      
+    {"reason":"CANCELED","queue_id":"1","uniqueid":"1511212918.0","called_num":"201","caller_num":"103","queue_name":"QueueTest","waiting_time":"5"} 
 
+   %call_params[<XML>]%
 
+   > <?xml version="1.0"?>
 
+   > <response><reason>CANCELED</reason><queue_id>1</queue_id><uniqueid>1511212918.0</uniqueid><called_num>201</called_num><caller_num>103</caller_num><queue_name>QueueTest</queue_name><waiting_time>5</waiting_time></response> 
 
+   > %call_params[AVP]%:
+
+   > reason=CANCELED&queue_id=1&uniqueid=1511212918.0&called_num=201&caller_num=103&queue_name=QueueTest&waiting_time=5
 
 
 
