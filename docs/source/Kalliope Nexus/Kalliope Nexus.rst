@@ -1,5 +1,7 @@
+Analytics
+======
 
-.. toctree::
 
-   Analytics
-   Missed Calls
+
+Missed Calls
+=======
