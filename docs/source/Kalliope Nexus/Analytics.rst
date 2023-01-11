@@ -166,13 +166,13 @@ Tabelle
   * -
     - Quantità / Media tempo lavorato / Media tempo conversazione / Media tempo squillo / Media tempo risposta
     - Quantità / Tempo lavorato / Media tempo lavorato / Media tempo conversazione / Media tempo squillo / Media tempo risposta
-   - Quantità / Tempo lavorato / Media tempo lavorato / Media tempo conversazione / Media tempo squillo / Media tempo risposta
-   - Quantità / Tempo lavorato / Media tempo lavorato / Media tempo conversazione / Media tempo squillo / Media tempo risposta
-   - Quantità / Media tempo squillo 
-   - Quantità / Media tempo squillo 
-   - Quantità / Media tempo squillo
-   - Quantità / Media tempo squillo
-   - Quantità / Media tempo squillo 
+    - Quantità / Tempo lavorato / Media tempo lavorato / Media tempo conversazione / Media tempo squillo / Media tempo risposta
+    - Quantità / Tempo lavorato / Media tempo lavorato / Media tempo conversazione / Media tempo squillo / Media tempo risposta
+    - Quantità / Media tempo squillo 
+    - Quantità / Media tempo squillo 
+    - Quantità / Media tempo squillo
+    - Quantità / Media tempo squillo
+    - Quantità / Media tempo squillo 
 
 
 
