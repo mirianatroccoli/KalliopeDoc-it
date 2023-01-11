@@ -1612,8 +1612,8 @@ Le chiamate vengono elencate di default dalla più recente alla più vecchia, e 
    - Per le chiamate uscenti o tra interni indica l'account SIP sorgente della chiamata
    - src_peer_name
  * - IP/porta di origine
-    - Per le chiamate uscenti o tra interni indica l'indirizzo IP e la porta sorgente della chiamata
-    - src_ip_port
+   - Per le chiamate uscenti o tra interni indica l'indirizzo IP e la porta sorgente della chiamata
+   - src_ip_port
    
 
 
