@@ -1576,7 +1576,7 @@ Le chiamate vengono elencate di default dalla più recente alla più vecchia, e 
    - Orario di inizio della chiamata
    - start_datetime
  * - Risposta canale
-   - Orario dell'apertura del canale media della chiamata, ovvero della risposta da parte del PBX. Nel caso delle chiamate uscenti coincide con l'"orario di risposta"	
+   - Orario dell'apertura del canale media della chiamata, ovvero della risposta da parte del PBX. Nel caso delle chiamate uscenti coincide con l'"orario di risposta"
    - channel_up_datetime
  * - Orario di risposta
    - Orario della risposta della chiamata. Per le chiamate entranti indica più precisamente l'orario di risposta di un interno. Per le chiamate uscenti coincide con l'orario di "Risposta canale"
@@ -1594,8 +1594,10 @@ Le chiamate vengono elencate di default dalla più recente alla più vecchia, e 
    - Flag che identifica se il numero chiamante è anonimizzato (si/no)
    - anonymous (0/1)
  * - Chiamato
-   - Numero e identificativo (se presente in rubrica) del chiamato. Nel caso delle chiamate entranti identifica il numero pubblico composto dal chiamante	caller
-Nome del gateway	Indica il gateway o la rerminazione utilizzata (nel caso di chiamate in uscita o ingresso)
+   - Numero e identificativo (se presente in rubrica) del chiamato. Nel caso delle chiamate entranti identifica il numero pubblico composto dal chiamante
+   - caller
+ * - Nome del gateway
+   - Indica il gateway o la rerminazione utilizzata (nel caso di chiamate in uscita o ingresso)
    - gateway_name
  * - Codice di fatturazione
    - Indica il codice (o "tag") assegnato alla chiamata. E' possibile assegnare un "tag" ad una particolare chiamata utilizzando il codice telefonico configurabile nel Piano di Numerazione (disponibile solo con la licenza Call Center)
