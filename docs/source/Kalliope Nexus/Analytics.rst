@@ -724,28 +724,536 @@ I filtri che è possibile inserire sono gli stessi elencati precedentemente:
 
 Report Organizzazioni (operatore)
 ++++++++
+
+Questa sezione permette di analizzare l'andamento delle chiamate per ogni organizzazione, riportando report sia grafici che tabellari, in modo tale da ottenere un'analisi prima visiva e successivamente più dettagliata.
+
+Grafici
+...........
+Risp, non risposte gruppi.png
+I grafici in questa sezione sono 3 e mostrano l'andamento delle chiamate in totale o distribuite in un certo lasso di tempo:
+
+- grafico a torta: (sulla destra) rappresenta le chiamate risposte e non risposte, comprese nell'intervallo di tempo definito nei filtri, da parte di tutte le organizzazioni dell'azienda. Esegue una somma totale.
+- grafico settimanale: rappresenta l'andamento delle chiamate nell'arco della settimana. Mostra una curva per le chiamate e il loro stato, mentre riporta una colonna per il numero totale di chiamate.
+
+*jpg*
+
+- grafico orario: mostra l'andamento delle chiamate durante l'arco di una giornata, quindi con una ripartizione oraria. Anche in questo vengono utilizzate le curve per lo stato delle chiamate e la colonna per il numero totale.
+
+Grafico 2 organizz.png
+
+
+In tutti e tre i casi è possibile osservare il numero di chiamate dettagliato semplicemente scorrendo con il mouse sopra al grafico. È anche possibile togliere o reinserire nella visualizzazione una o più informazioni, cliccando sul nome o sul pallino colorato del dato nella legenda.
+
+Tabelle
+.........
+Nella tabella sottostante vengono riportati, suddivisi per organizzazioni, i dettagli delle chiamate, comprendendo informazioni come lo stato, con tutte le informazioni correlate e le exit cause, ovvero il motivo per cui una chiamata è terminata. Prima di tutto, nella parte superiore della tabella, sono presenti dei totali dei dati nella tabella, ovvero:
+
+- la quantità totale
+- il tempo totale lavorato
+- il tempo totale di conversazione
+- la media di tempo lavorato
+- la media di tempo che il telefono ha squillato
+- la media di tempo risposta
+- la media dei tempi di conversazione
+
+Nella parte di sinistra della tabella, prima della griglia contenenti tutti i dati, è visibile il nome dell'organizzazione con associato un piccolo grafico a torta che rappresenta lo stato delle chiamate ricevute e effettuate dagli operatori appartenenti a questa. Subito dopo è presente la quantità totale di chiamate, prima di tutti i dati dettagliati.
+
+Come in ogni tabella, nella parte inferiore si troverà un calcolo totale di ogni colonna.
+
+Come sempre, è possibile esportare la tabella in formato excel tramite apposito tasto "Export XLS", in alto a destra (della tabella).
+
+Filtri
+............
+Come descritto inizialmente, per abilitare i filtri basterà cliccare il tasto "ricerca" in alto a destra con il quale si aprirà una maschera nella quale andranno inseriti tutti i dati necessari:
+
+- data di inizio e fine dell'intervallo di tempo in cui verranno mostrati i dati
+- stato
+- exit cause, ovvero i motivi per cui una chiamata è terminata
+- sorgente
+- destinazione
+- organizzazione (possono esserne inserite più di una)
+- operatore
+Filtri organizz.png
+
+
+Dopo aver inserito tutti i dati desiderati, cliccare su "cerca" per abilitare i filtri, altrimenti su "reset" per eliminarli.
+
+Widget
+..............
+Per la spiegazione sulla creazione, organizzazione e gestione dei Widget, cliccare qui.
+
+Report Organizzazioni Operatore
++++++++++++++
+Ogni organizzazione è composta da diversi operatori, ognuno in possesso di diversi account. Questa sezione permette di tenere sotto controllo l'andamento delle chiamate per ognuno di questi, visualizzando una tabella per ogni organizzazione, dove ogni riga appartiene ad un account di un operatore.
+
+Tabelle
+..............
+Nella tabella saranno presenti informazioni riguardanti le chiamate totali, chiamate risposte e chiamate non risposte, suddivise per exit cause. Per le chiamate andate a buon fine le informazioni contenute nelle exit cause saranno:
+
+- la quantità
+- il tempo di attesa
+- il tempo di lavoro e di conversazione totale e medio
+- la media del tempo per cui il telefono ha squillato
+- la media del tempo di risposta
+Per quanto riguarda le chiamate non risposte, le informazioni per ogni exit cause sono fondamentalmente tre:
+
+- quantità
+- tempo lavorato medio
+- tempo lavorato totale
+Prima di tutto però, sopra alla tabella è presente una griglia contenente un totale di alcune informazioni, ovvero:
+
+- la quantità totale
+- il tempo totale lavorato
+- il tempo totale di conversazione
+- la media di tempo lavorato
+- la media di tempo che il telefono ha squillato
+- la media di tempo risposta
+- la media dei tempi di conversazione
+Nella parte più di sinistra sono presenti gli operatori (quelli con il colore più scuro) e i loro account (sotto all'operatore e di colore più chiaro). Successivamente, prima di entrare nel dettaglio di ogni exit cause, è presente un totale delle chiamate, sia risposte che non.
+
+Ogni tabella è esportabile in formato excel, individualmente tramite il proprio tasto "Export XLS" situato nella parte alta a destra di ognuna.
+
+Filtri
+.........
+Per migliorare l'esperienza di analisi selezionando solo alcune informazioni da visualizzare o alcuni periodi di tempo specifici, si possono abilitare i filtri. Per fare ciò, cliccare sul tasto "ricerca", con il quale si aprirà una maschera appositamente adibita, e inserire i dati desiderati tra quelli proposti:
+
+- data di inizio e fine dell'intervallo di tempo in cui verranno mostrati i dati
+- stato delle chiamate
+- exit cause
+- sorgente
+- destinazione
+- organizzazione
+- operatore
+Filtri organizzazioni operatori.png
+
+Dopo aver inserito tutti i dati desiderati, cliccare su "cerca" per abilitare i filtri, altrimenti su "reset" per eliminarli.
+
+
 Report Tempi di Attesa per Code (in ingresso)
 ++++++++
+In questa sezione è possibile osservare il resoconto del numero delle chiamate suddivise per tempi di attesa, tramite visualizzazione grafica e tabella, di code specificate tramite la maschera filtri.
+
+Grafici
+.............
+Nel grafico si osserva il numero esatto di chiamate per tempo di attesa della coda specificata. Si può notare come i tempi di attesa in secondi aumentino procedendo verso la destra del grafico, partendo da un intervallo che va da 0 a 10 secondi, arrivando ad un massimo di oltre 120. L'altezza di ogni grafico rappresenta il numero delle chiamate all'interno di un range.
+
+Grafico 1 tempoattesacode.png
+
+Tabelle
+..........
+Nella tabella sottostante sono riportati gli stessi dati, ovvero la quantità di chiamate per tempo medio di attesa. In aggiunta, è presente una percentuale di precisione nella risposta, basata sul rapporto tra la quantità di chiamate in un range di tempo di attesa e la quantità totale. Il totale è visibile nella parte più a destra della tabella.
+
+La tabella è esportabile tramite apposito tasto "Export XLS" in alto a destra.
+
+Tabella1 tempoattesacode.png
+
+Filtri
+..........
+La particolarità di questa sezione è la possibilità di visualizzare il numero di chiamate per tempo di attesa, di ogni coda specificata tramite filtri e per fare ciò bisognerà:
+
+- Cliccare sul tasto "ricerca" in alto a destra
+- Cliccare sulla voce "code"
+- Selezionare una o più code interessate
+- Cliccare il tasto "cerca"
+
+Anche il lasso di tempo in cui vengono rappresentati i dati è variabile tramite filtri. Dopo aver aperto la maschera come descritto in precedenza, sotto le voci "Data >=" e "Data <=" dovranno essere inserite le date di inizio e di fine dell'intervallo di tempo interessato.
+
+Filtr 1 tempoattesacode.png
+
+Se, sotto la voce "code", non verrà inserita nessuna preferenza, verrà visualizzata la somma di tutte le code per ogni intervallo dei tempi di attesa.
+
+Report Tempi di Attesa in Ingresso
++++++++++++
+Nella seguente sezione è possibile osservare un resoconto dei tempi di attesa per le chiamate in ingresso, con una visualizzazione sia grafica che tramite tabella. In entrami i casi sono indicate le quantità di chiamate risposte entro un certo tempo di attesa.
+
+Grafici
+..........
+Come nel precedente grafico, si può osservare come i tempi di attesa in secondi aumentino procedendo verso la destra del grafico, partendo da un intervallo che va da 0 a 10 secondi, arrivando ad un massimo di oltre 120. Scorrendo con il mouse sui grafici sarà possibile visualizzare il numero esatto di chiamate.
+
+Grafico 1 tempoattesaingr.png
+
+Tabelle
+.........
+Nella tabella sottostante sono riportati gli stessi dati della precedente tabella.
+
+Tabella 1 tempoingress.png
+
+La tabella è esportabile tramite l'apposito tasto "Export XLS" in alto a destra.
+
+Filtri
+........
+Cliccano sul tasto "ricerca" in alto a destra della pagina, si aprirà una maschera filtri dove potrà essere inserito un range di tempo in cui verranno visualizzati i dati. Ciò si potrà fare premendo su uno dei due box ed inserire le date di inizio e di fine desiderate.
+
+Filtri tempoingresso.png
+
+Una volta inseriti i dati, premere sul tasto "cerca" per far partire la ricerca filtrata, altrimenti su "reset" per eliminare i filtri inseriti.
+
+Widget
+............
+Per la spiegazione sulla creazione, organizzazione e gestione dei Widget, cliccare qui.
+
+
 Report Tempi di Conversazione
 ++++++++
+
+In questa sezione sono riportati i tempi di conversazione, in secondi, di tutte le chiamate in uscita della centrale telefonica a cui è collegata la piattaforma. I dati sono prima riportati con un grafico a ripartizione giornaliera dove sono rappresentati i tempi di conversazione verso:
+
+- numeri verdi
+- numeri nazionali fissi
+- numeri nazionali cellulari
+- numeri internazionali
+
+Grafici
+........
+Scorrendo con il mouse sui grafici, sarà possibile visualizzare il numero esatto in secondi del tempo di conversazione di un campo preciso tra quelli elencati prima. Sarà anche possibile togliere la visualizzazione a questi tramite la legenda. Per farlo sarà sufficiente cliccare sul pallino colorato dell'informazione che si vuole togliere dalla visualizzazione. Per reinserirla, cliccare nuovamente sul pallino che adesso sarà diventato grigio.
+
+Grafico 1 tempi convers.png
+
+Tabelle
+.........
+Nella parte inferiore della pagina invece, è possibile osservare una tabella contenente i tempi di conversazione rappresentati nel grafico precedente, ma con una ripartizione temporale mensile. Come nel grafico, anche qui è possibile osservare l'andamento dei tempi nei vari numeri (verdi, fissi, cellulari e internazionali). L'ultima riga della tabella racchiude i totali dei tempi di conversazione per ogni categoria presente nella tabella.
+
+Tabella 1 tempi conver.png
+
+Questa può essere esportata in formato XLS tramite l'apposito tasto in alto a destra della tabella.
+
+Filtri
+..........
+Premendo sul tasto ricerca in alto a destra della pagina, si aprirà una maschera filtri sulla quale potrà essere inserito l'intervallo di tempo che verrà rappresentato sul grafico e riportato nella tabella. Basterà inserire la data iniziale e finale, poi premere "cerca". Per eliminare tutti i filtri inseriti, cliccare sul tasto "reset".
+
+Filtri tempi convers.png
+
+Widget
+...........
+Widget Per la spiegazione sulla creazione, organizzazione e gestione dei Widget, cliccare qui.
+
+
+
+
+
 Report Unità Organizzativa (operatore)
 ++++++++
+
+Nel caso ci fosse la necessità di analizzare l'andamento delle chiamate per ogni unità organizzativa, questa sezione lo permette mostrando dei report con grafici e tabelle, in modo da avere una prima analisi visiva tramite grafici e poi una più dettagliata tramite tabelle.
+
+Grafici
+............
+Risp, non risposte gruppi.png
+I grafici in questa sezione sono 3 e mostrano l'andamento delle chiamate in totale o distribuite in un certo lasso di tempo:
+
+- grafico a torta: (sulla destra) rappresenta le chiamate risposte e non risposte, comprese nell'intervallo di tempo definito nei filtri, da parte di tutte le organizzazioni dell'azienda. Esegue una somma totale.
+- grafico settimanale: rappresenta l'andamento delle chiamate nell'arco della settimana. Mostra una curva per le chiamate e il loro stato, mentre riporta una colonna per il numero totale di chiamate.
+Grafico 1 organizz.png
+
+- grafico orario: mostra l'andamento delle chiamate durante l'arco di una giornata, quindi con una ripartizione oraria. Anche in questo vengono utilizzate le curve per lo stato delle chiamate e la colonna per il numero totale.
+Grafico 2 organizz.png
+
+
+In tutti e tre i casi è possibile osservare il numero di chiamate dettagliato semplicemente scorrendo con il mouse sopra al grafico. È anche possibile togliere o reinserire nella visualizzazione una o più informazioni, cliccando sul nome o sul pallino colorato del dato nella legenda.
+
+Tabelle
+...........
+Nella tabella sottostante vengono riportati, suddivisi per unità organizzativa, i dettagli delle chiamate, comprendendo informazioni come lo stato, con tutte le informazioni correlate e le exit cause, ovvero il motivo per cui una chiamata è terminata. Prima di tutto, nella parte superiore della tabella, sono presenti dei totali dei dati nella tabella, ovvero:
+
+- la quantità totale
+- il tempo totale lavorato
+- il tempo totale di conversazione
+- la media di tempo lavorato
+- la media di tempo che il telefono ha squillato
+- la media di tempo risposta
+- la media dei tempi di conversazione
+Tabella1orgunit.png
+
+Tabella2 orgunit.png
+
+Tabella3 orgunit.png
+
+Tabella4 orgunit.png
+
+Nella parte di sinistra della tabella, prima della griglia contenenti tutti i dati, è visibile il nome dell'unità organizzativa con associato un piccolo grafico a torta che rappresenta lo stato delle chiamate per quella specifica unità. Subito dopo è presente la quantità totale di chiamate ricevute ed effettuate, prima di tutti i dati dettagliati.
+
+Come in ogni tabella, nella parte inferiore si troverà un calcolo totale di ogni colonna.
+
+Come sempre, è possibile esportare la tabella in formato excel tramite apposito tasto "Export XLS", in alto a destra (della tabella).
+
+Filtri
+.........
+Come descritto inizialmente, per abilitare i filtri basterà cliccare il tasto "ricerca" in alto a destra con il quale si aprirà una maschera nella quale andranno inseriti tutti i dati necessari:
+
+- data di inizio e fine dell'intervallo di tempo in cui verranno mostrati i dati
+stato
+- exit cause, ovvero i motivi per cui una chiamata è terminata
+- sorgente
+- destinazione
+- unità organizzativa (possono esserne inserite più di una)
+- operatore
+Filtri unita org.png
+
+Dopo aver inserito tutti i dati desiderati, cliccare su "cerca" per abilitare i filtri, altrimenti su "reset" per eliminarli.
+
+Il tasto stampante, sulla destra del tasto "ricerca", permette di stampare la visualizzazione dell'intera pagina, compresi grafici e la tabella.
+
+Report Unità Organizzativa per Operatore
+++++++++++
+Questa sezione permette di tenere sotto controllo l'andamento delle chiamate, non solo suddivise per unità organizzativa, ma anche per singolo operatore e relativi account.
+
+Tabelle
+..........
+Il tutto è contenuto in una tabella (una per ogni unità) dove saranno presenti informazioni riguardanti le chiamate totali, risposte e non risposte suddivise per exit cause. Per le chiamate andate a buon fine le informazioni contenute nelle exit cause saranno:
+
+- la quantità
+- il tempo di attesa
+- il tempo di lavoro e di conversazione totale e medio
+- la media del tempo per cui il telefono ha squillato
+- la media del tempo di risposta
+
+Per quanto riguarda le chiamate non risposte, le informazioni per ogni exit cause sono fondamentalmente tre:
+
+- quantità
+- tempo lavorato medio
+- tempo lavorato totale
+
+Sopra la tabella è presente una griglia contenente un totale di alcune informazioni, ovvero:
+
+- la quantità totale
+- il tempo totale lavorato
+- il tempo totale di conversazione
+- la media di tempo lavorato
+- la media di tempo che il telefono ha squillato
+- la media di tempo risposta
+- la media dei tempi di conversazione
+
+Nella parte più di sinistra sono presenti gli operatori (quelli con il colore più scuro) e i loro account (sotto all'operatore e di colore più chiaro). Successivamente, prima di entrare nel dettaglio di ogni exit cause, è presente un totale delle chiamate, sia risposte che non.
+
+Ogni tabella è esportabile in formato excel, individualmente tramite il proprio tasto "Export XLS" situato nella parte alta a destra di ognuna.
+
+Filtri
+.............
+Per migliorare l'esperienza di analisi selezionando solo alcune informazioni da visualizzare o alcuni periodi di tempo specifici, si possono abilitare i filtri. Per fare ciò, cliccare sul tasto "ricerca", con il quale si aprirà una maschera appositamente adibita, e inserire i dati desiderati tra quelli proposti:
+
+- data di inizio e fine dell'intervallo di tempo in cui verranno mostrati i dati
+- stato delle chiamate
+- exit cause
+- sorgente
+- destinazione
+- unità organizzativa
+- operatore
+Filtri unit oper.png
+
+Dopo aver inserito tutti i dati desiderati, cliccare su "cerca" per abilitare i filtri, altrimenti su "reset" per eliminarli.
+
+Il tasto stampante, sulla destra del tasto "ricerca", permette di stampare la visualizzazione dell'intera pagina, compresi grafici e la tabella.
+
+
 Report Controllo Orario
 ++++++++
+
+Grafici
+...........
+Questo report permette di visualizzare, attraverso due grafici, quante chiamate sono passate nel controllo orario (quelle in verde) e quante non sono passate perché fuori orario (in rosso). Il primo grafico a torta mostra il rapporto tra chiamate passate (OK - verde) e quelle non passate (FAILED - rosso). Il secondo grafico invece, mostra, suddiviso per fascia oraria personalizzabile tramite filtri, le quantità di chiamate passate e non passate dal controllo orario.
+
+Grafico 1 checktime.png
+
+In caso si voglia approfondire il dettaglio di ogni chiamata non passata dal controllo orario, basterà attivare l'opzione in Preferenze di sistema/VoipToCall chiamata "Importa chiamate fallite nel controllo orario". In questo modo, tutte le chiamate che non passeranno il controllo orario, finiranno nel Voip to Call, in cui si potrà, inoltre, osservarne il dettaglio.
+
+
+Filtro per il raggruppamento
+............
+Filtro checktime.png
+
+Nel caso appena mostrato (immagine sopra), il raggruppamento sarà fatto per ore (60 min. per ogni raggruppamento).
+
+
+
 Report Menu IVR
 ++++++++
+Questo report permette di visualizzare le statistiche di fallimento o successo delle chiamate prima di passare al menu IVR. La divisione è effettuata per tipologie di menu IVR che si vogliono analizzare.
+
+Grafici
+.........
+Il primo grafico a torta mostra il rapporto tra chiamate passate (OK - verde) e quelle non passate (FAILED - rosso).
+
+Il secondo grafico invece mostra, suddiviso per fascia oraria personalizzabile tramite filtri, le quantità di chiamate passate e non passate al menu IVR.
+
+CDR IVR.png
+
+Filtri
+..........
+Cliccando sul tasto "ricerca" in alto a destra della sezione è possibile abilitare dei filtri che comprendono:
+
+- Data range
+- IVR
+- Raggruppa grafico (minuti)
+Filtri ivr.JPG
+
+Widget
+.........
+Per la spiegazione sulla creazione, organizzazione e gestione dei Widget, cliccare qui.
+
+
 Report Province
 ++++++++
+Quest report permette di visualizzare i dati relativi alle:
+
+- Chiamate Cellulari – Fissi
+- Chiamate Cellulari – Stato
+- Chiamate Fissi – Stato
+Per Chiamate Cellulari – Stato e Chiamate Fissi – Stato è possibile visualizzare se la chiamata risulta:
+
+- Ok
+- Annullata
+- Senza risposta
+- Non disponibile
+- Occupato
+- Failed
+- ??
+
+Grafici e tabelle
+..........
+Nei grafici in basso vengono mostrate le statistiche relative ai dati sopra indicati e le tabelle disponibili riguardano il numero chiamate cellulari - fissi e fissi - province.
+
+Provincia 1.png
+
+Provincia 2.png
+
+Ogni tabella può essere esportata in formato XLS tramite il tasto in alto a destra presente sulla tabella stessa.
+
+Filtri
+..........
+Cliccando sul tasto "ricerca" in alto a destra della sezione è possibile abilitare dei filtri che comprendono:
+
+- Data range
+- Stato
+- Provincia
+Filtri province.JPG
+
+Widget
+..........
+Per la spiegazione sulla creazione, organizzazione e gestione dei Widget, cliccare qui.
+
+
+
 Report Tempo Abbandono Code
 ++++++++
 
+Questo report mostra il numero di chiamate in coda non risposte dopo il tempo di attesa.
+
+Grafici e tabelle
+............
+Nel grafico si osserva il numero esatto di chiamate non risposte per tempo di attesa della coda specificata prima di abbandonare la chiamata.
+
+Nella tabella in basso vengono indicati i dati sopra indicati per quantità di chiamate e percentuale.
+
+Abbandono code.png
+
+Si può notare come i tempi di attesa in secondi aumentino procedendo verso la destra del grafico, partendo da un intervallo che va da 0 a 10 secondi, arrivando ad un massimo di oltre 120. L'altezza di ogni grafico rappresenta il numero delle chiamate all'interno di un range.
+
+Filtri
+.........
+Cliccando sul tasto "ricerca" in alto a destra della sezione è possibile abilitare dei filtri che comprendono:
+
+- Data range
+- Queue
+Filtri tempo abbandono code.JPG
+
+Widget
+Per la spiegazione sulla creazione, organizzazione e gestione dei Widget, cliccare qui.
+
 Report Tempo Abbandono Ingresso
 ++++++++
+
+Questo report mostra il numero di chiamate in ingresso non risposte dopo il tempo di attesa.
+
+Grafici e tabelle
+..........
+Il primo grafico permette di visualizzare il numero di chiamate non risposte per tempo di attesa prima di abbandonare la chiamata.
+
+Nella tabella in basso vengono indicati i dati sopra indicati per quantità di chiamate e percentuale.
+
+Abbandono ingresso.png
+
+Nel grafico si può osservare come i tempi di attesa in secondi aumentino procedendo verso la destra del grafico, partendo da un intervallo che va da 0 a 10 secondi, arrivando ad un massimo di oltre 120. L'altezza di ogni grafico rappresenta il numero delle chiamate non risposte all'interno di un range. Scorrendo con il mouse sui grafici sarà possibile visualizzare il numero esatto di chiamate non risposte.
+
+Filtri
+...........
+Cliccando sul tasto "ricerca" in alto a destra della sezione è possibile abilitare dei filtri che comprende:
+
+- Data range
+Filtri tempi ingresso abbandono.JPG
+
+Widget
+..........
+Per la spiegazione sulla creazione, organizzazione e gestione dei Widget, cliccare qui.
+
+
 
 VoIP report Call Center
 ----------
 Dashboard
 ++++++++
+
+
+Descrizione del servizio
+...........
+Tramite rappresentazioni grafiche e tabellari, la sezione dashboard del modulo "Voip Report Call Center" consente di visualizzare l'andamento delle chiamate in ingresso provenienti dalle code e delle chiamate locali all'interno del Call Center.
+
+All'apertura della dashboard, le prime informazioni che si possono osservare sono due tabelle con la quantità, la durata totale e la durata media delle chiamate in ingresso e locali.
+
+Tab dashboardcc.png
+
+Grafici
+..........
+I grafici in questa sezione permettono di effettuare un'analisi sul trend delle chiamate, indagando quante di queste vengono risposte (servite) e quante no (non servite). I primi quattro grafici a torta mostrano rispettivamente:
+
+- il rapporto tra chiamate servite e non servite
+- il dettaglio dello stato delle chiamate in uscita dalle code
+- lo stato delle chiamate servite
+- lo stato delle chiamate non risposte
+Grafico dashboard cc.png
+
+Successivamente, sono visibili sei grafici a colonne che rappresentano i trend delle chiamate più in dettaglio:
+
+- il primo mostra il numero delle chiamate in ingresso e locali, comprendendo anche la quantità delle chiamate risposte e non risposte.
+- il secondo mostra il totale e la media della durata delle chiamate in ingresso e locali, giorno per giorno.
+- il terzo riporta la quantità di chiamate ripartite per fascia oraria.
+- il quarto mostra la durata in secondi delle chiamate, ripartite per fascia oraria.
+- il quinto, come il terzo, mostra la quantità di chiamate, ma suddivise per giorno della settimana.
+- l'ultimo grafico mostra la durata in secondi delle chiamate ripartite per giorno della settimana.
+Per tutti i grafici descritti è possibile visualizzare il dettaglio dei dati, scorrendo con il mouse sulla sezione desiderata del grafico. È inoltre possibile togliere la visualizzazione delle informazioni tramite la legenda, cliccando sul nome o sul relativo pallino colorato.
+
+Tabelle
+.........
+Nella parte inferiore della pagina, dopo i grafici, sono presenti delle tabelle contenenti dei dati più dettagliati riguardanti le chiamate sono mostrati: lo stato, il volume delle chiamate e la durata. Le tabelle sono tre: in una sono contenuti i totali giorno per giorno, in un'altra la suddivisione è per fascia oraria, mentre nell'ultima la suddivisione è per giorno della settimana.
+
+Tab 2 dashboard cc.png
+
+Filtri
+..........
+I dati rappresentati sono compresi all'interno di un lasso di tempo indicato tramite filtri. Per variare questo periodo, cliccare sul tasto "ricerca" in alto a destra ed inserire i dati richiesti, ossia:
+
+- data >=, che indica la data iniziale dei dati che verranno estratti dal database
+- data <=, che indica la data massima dei dati che verranno estratti dal DB
+Filtri dashboard cc.png
+
+Widget
+...........
+Per la spiegazione sulla creazione, organizzazione e gestione dei Widget, cliccare qui.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Report Code (caller, data, operatori, ora)
 ++++++++
 Report Operatori
