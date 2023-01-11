@@ -1618,24 +1618,154 @@ Le chiamate vengono elencate di default dalla più recente alla più vecchia, e 
 
 
 
+Percorso chiamate
+++++++++++
+Per ogni singola chiamata è possibile inoltre ricostruire l'intero percorso della chiamata stessa nel piano di numerazione, riportando per ciascun passaggio una riga di dettaglio contenente i seguenti campi:
+
+
+.. list-table::  
+ :widths: 25 25 25
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Campo esportazione
+ * - Numero sorgente
+   - Numero sorgente della chiamata
+   - detail_source_num
+ * - Numero sorgente
+   - Flag che identifica se il numero chiamante è anonimizzato (si/no)
+   - detail_anonymous (0/1)
+ * - Tipo destinazione
+   - La tipologia della destinazione della chiamata (interno, interno remoto, coda, gruppo di chiamata, IVR, linea in uscita, servizio)
+   - detail_destination_type, Vedi qui per i possibili valori
+ * - ID destinazione
+   - Indentificativo del tipo di destinazione; nel caso di destinazione "service" indica il particolare servizio interessato, nel caso di destinazione "local_exten" o "voicemail" indica l'interno destinatario, negli altri casi l'identificativo della particolare destinazione (ad es. l'id del menu IVR o della coda di destinazione)
+   - detail_destination_id
+ * - Nome destinazione
+   - Nel caso di destinazione "local_exten" (interno) riporta il nome associato all'interno destinatario, nel caso di destinazione "queue", "FAX" o "callg" riporta il nome dell'entità destinataria, nel casi di destinazione "obl" (chiamate in uscita) riporta il nome delal linea di uscita utilizzata, nel caso di destinazione "service" riporta ulteriori dettagli sul servizio
+   - detail_destination_name
+ * - Numero destinazione
+   - Indica il numero destinatario nel caso in cui il "Tipo destinazione" sia "local_exten" o "obl" (chiamate in uscita)
+   - detail_destination_num
+ * - Orario di ingresso
+   - Orario (hh:mm:ss) di ingresso della chiamata nella corrispondente riga di dettaglio
+   - detail_enter_datetime
+ * - Orario di accodamento
+   - Orario (hh:mm:ss) di ingresso della chiamata nella coda di attesa (solo se la riga di dettaglio prevede uan destinazione di tipo "queue")
+   - detail_enqueue_datetime
+ * - Orario di risposta
+   - Orario (hh:mm:ss) di risposta della chiamata (solo se la chiamata è stata risposta o è stata destinata in una casella vocale)
+   - detail_answer_datetime
+ * - Orario di uscita
+   - Orario (hh:mm:ss) di uscita della chiamata dalla corrispondente riga di dettaglio
+   - detail_exit_datetime
+ * - Motivo di uscita
+   - Orario (hh:mm:ss) di uscita della chiamata dalla corrispondente riga di dettaglio
+   - detail_exit_cause, Vedi qui per i possibili valori
+ * - Risposto da
+   - Il numero che ha risposto alla corrispondente riga di dettaglio
+   - detail_answered_by
+ * - Tempo di attesa
+   - Indica in secondi il tempo intercorso tra l'orario di ingresso e quello di risposta
+   - detail_waiting_time (secondi)
+ * - Numero sorgente mappato
+   - Per le chiamate uscenti indica il numero sorgente risultato della eventuale manipolazione delle chiamate in uscita
+   - detail_mapped_source_num
+ * - Numero destinazione mappato
+   - Per le chiamate uscenti indica il numero destinatario risultato della eventuale manipolazione delle chiamate in uscita
+   - detail_mapped_dst_num
+ * - Codice di fatturazione
+   - Indica il codice (o "tag") assegnato alla chiamata. E' possibile assegnare un "tag" ad una particolare chiamata utilizzando il codice telefonico configurabile nel Piano di Numerazione (disponibile solo con la licenza Call Center)
+   - detail_account_code
+
+Cliccando sull’intestazione di ciascuna colonna è possibile modificare l’ordinamento rispetto a tale parametro, ed invertire l’ordine (crescente – decrescente).
+
+È possibile filtrare il registro delle chiamate per ciascuno di questi campi, ad esempio restringendo la visualizzazione alle chiamate effettuate da un determinato interno o verso un certo numero, o in un determinato intervallo temporale (impostabile cliccando nel riquadro in corrispondenza delle colonne data e ora).
+
+Infine, cliccando sul pulsante Seleziona colonne visualizzate è possibile definire le voci del registro chiamate che devono essere visualizzate.
+
+
+Elenco dei codici SOURCE/DESTINATION TYPE e DETAIL SOURCE/DESTINATION TYPE
+++++++++++++++
+
+
+**Source/Destination Type:**
+
+- **local_exten** ⇒ interno della centrale
+- **ibl** ⇒ linea in ingresso (inbound line)
+- **obl** ⇒ linea in uscita (outbound line)
+- **service** ⇒ servizio interno della centrale
+- **callg** ⇒ gruppo di chiamata
+- **queue** ⇒ coda di attesa
+- **ivr** ⇒ menu IVR
+- **conference** ⇒ stanza di audioconferenza dialout
+- **fax** ⇒ istanza FAX server
+
+
+**Detail Source/Destination Type:**
+
+- **local_exten** ⇒ interno della centrale
+- **ibl** ⇒ linea in ingresso (inbound line)
+- **obl** ⇒ linea in uscita (outbound line)
+- **service** ⇒ servizio interno della centrale
+- **callg** ⇒ gruppo di chiamata
+- **queue** ⇒ coda di attesa
+- **ivr** ⇒ menu IVR
+- **conference** ⇒ stanza di audioconferenza dialout
+- **fax** ⇒ istanza FAX server
+- **dre** ⇒ instradamento dinamico
+- **checktime** ⇒ controllo orario
+- **voicemail** ⇒ casella vocale
 
 
 
 
+Elenco dei codici EXIT CAUSE e DETAIL EXIT CAUSE
+++++++++++
+
+**Exit cause:**
+
+- **OK** ⇒ chiamata terminata dopo essere stata risposta da un servizio/interno/numesterno
+- **CANCELED** ⇒ chiamata terminata perché annullata dal chiamante prima che venisse risposta da un servizio/interno/numesterno
+- **NOANSWER** ⇒ chiamata terminata senza essere stata risposta da un servizio/interno/numesterno
+- **BUSY** ⇒ chiamata terminata perché il numero chiamato è occupato
+- **FAILED** ⇒ chiamata terminata perché non esiste una regola per instradare la chiamata (nessuna destinazione)
+- **UNAVAILABLE** ⇒ chiamata terminata perché la destinazione non è disponibile (es. telefono di destinazione non registrato)
+- **FORBIDDEN** ⇒ chiamata terminata poiché proveniente da una linea di ingresso sconosciuta
+- **??** ⇒ non è stato possibile risalire al motivo per cui la chiamata è terminata
 
 
+**Detail exit cause:**
 
-
-
-
-
-
-
-
-
-
-
-
+- **CANCELED** ⇒ il chiamante ha terminato la chiamata prima che venisse risposta
+- **NOANSWER** ⇒ la destinazione non ha risposto
+- **BUSY** ⇒ la destinazione è occupata
+- **NCC** ⇒ chiamata alla destinazione terminata dopo essere stata risposta (Normal Clearing Code)
+- **ANSWNOACC** ⇒ chiamata risposta dal mobile ma non accettata (tasto 1 non premuto)
+- **PICKUP** = chiamata in arrivo prelevata da un'altro interno
+- **PARKED** ⇒ chiamata parcheggiata in uno degli slot di parcheggio
+- **UFWD** ⇒ chiamata in arrivo rediretta a causa di un inoltro incondizionato
+- **CFWD** ⇒ chiamata in arrivo rediretta verso un altra destinazione
+- **CFWD2MOBILE** ⇒ chiamata in arrivo rediretta sul mobile associato all'interno chiamato
+- **FORK2MOBILE** ⇒ chiamata in arrivo è stata biforcata verso entrambi l'interno e il numero mobile associato
+- **FASTXFER2MOBILE** ⇒ chiamata in corso trasferita dall'interno al numero mobile associato
+- **FASTXFER2EXTEN** ⇒ chiamata in corso trasferita dal numero mobile all'interno associato
+- **BLINDXFER** ⇒ chiamata trasferita senza offerta
+- **ATXFER_START** ⇒ inizio di un il trasferimento con offerta
+- **ATXFER_REFUSED** ⇒ il trasferimento con offerta verso la destinazione è terminata poiché la destinazione ha rifiutato il trasferimento
+- **ATXFER_BUSY** ⇒ il trasferimento con offerta è terminato perché la destinazione è occupata
+- **ATXFER_UNAVAILABLE** ⇒ il trasferimento con offerta è terminato perché la destinazione è non disponibile
+- **ATXFER_NOANSWER** ⇒ il trasferimento con offerta è terminato perché la destinazione non ha risposto
+- **ATXFER** ⇒ chiamata trasferita con offerta
+- **UNAVAILABLE** ⇒ la chiamata è terminata perché la destinazione è non disponibile
+- **CONGESTION** ⇒ la chiamata alla destinazione è terminata per congestione
+- **DECLINED** ⇒ la chiamata alla destinazione è stata rifiutata a causa di una regola declined sul piano di numerazione
+- **BLOCKED** ⇒ la chiamata alla destinazione è stata bloccata dall'LCR poiché non ci sono linee per instradare la chiamata
+- **FORBIDDEN_NOCLASS** ⇒ la chiamata in uscita è stata bloccata dall'LCR perché non è definita una classe per instradare la chiamata
+- **FORBIDDEN_NORULE** ⇒ la chiamata in uscita è stata bloccata dall'LCR perché non è definita una regola per instradare la chiamata
+- **QUEUE_CALLBACK** ⇒ è stato richiesto un callback su una coda
+- **CLOSED** ⇒ la coda di destinazione è chiusa a causa del controllo orario
 
 
 
