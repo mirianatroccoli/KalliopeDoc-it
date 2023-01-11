@@ -69,7 +69,7 @@ Documentazione API Rest
 Kalliope Nexus
 ==========
 
-  Kalliope Nexus
+  Analytics
 
 
 Aggiornamenti Firmware Changelog e Release Notes
