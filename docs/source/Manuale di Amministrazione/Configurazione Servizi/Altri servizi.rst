@@ -2078,22 +2078,6 @@ I contatti della rubrica remota vengono resi visibili nella rubrica condivisa al
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Servizi in chiamata
 ------------
 
@@ -2244,10 +2228,4 @@ Kalliope MIB: questa MIB proprietaria fornisce informazioni aggiuntive sulla con
 Scarica i file di definizioni delle MIB:
 
 Media:Definizioni MIB.zip
-
-
-
-
-
-
 
