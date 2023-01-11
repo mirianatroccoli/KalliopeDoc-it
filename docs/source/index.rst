@@ -66,6 +66,11 @@ Documentazione API Rest
 
    API Rest.rst
    
+Kalliope Nexus
+==========
+
+  Kalliope Nexus
+
 
 Aggiornamenti Firmware Changelog e Release Notes
 ==========
