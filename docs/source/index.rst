@@ -71,6 +71,7 @@ Kalliope Nexus
 
 .. toctree::
 
+   Kalliope Nexus
    Kalliope Nexus/Analytics.rst
   
 
