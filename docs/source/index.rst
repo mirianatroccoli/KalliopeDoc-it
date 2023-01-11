@@ -69,7 +69,11 @@ Documentazione API Rest
 Kalliope Nexus
 ==========
 
-  Analytics
+.. toctree::
+
+   Kalliope Nexus
+   Analytics
+  
 
 
 Aggiornamenti Firmware Changelog e Release Notes
