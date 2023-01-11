@@ -1538,30 +1538,123 @@ Oppure possiamo ottenere la seguente risposta inserendo il placeholder:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Registro delle chiamate
+Registro delle chiamate (CDR)
 ------------
+
+Descrizione del servizio
++++++++++++
+Questo pannello permette di visualizzare il registro delle chiamate effettuate o ricevute attraverso KalliopePBX.
+Ogni mese viene creato automaticamente un nuovo tab per rendere la consultazione più agevole.
+Tutte le seguenti informazioni sono esportabili tramite API REST oppure in vari formati (Excel, XML, JSON, CSV) cliccando sull'apposito pulsante "Esporta in formato" presente nell'intestazione del pannello.
+Tutte le informazioni contenute nel CDR possono anche essere inviate periodicamente come meglio descritto nell'apposita sezione.
+
+Le chiamate vengono elencate di default dalla più recente alla più vecchia, e riportano:
+
+.. list-table::  
+ :widths: 25 25 25
+ :header-rows: 1
+
+ * - Parametro
+   - Descrizione
+   - Campo esportazione
+ * - UniqueID
+   - Identificativo univoco della chiamata
+   - unique_id
+ * - Tipo sorgente
+   - La tipologia della sorgente della chiamata (interno, linea in ingresso, interno remoto)
+   - source_type, Vedi qui per i possibili valori
+ * - Tipo destinazione
+   - La tipologia della destinazione della chiamata (interno, interno remoto, coda, gruppo di chiamata, IVR, linea in uscita, servizio)
+   - destination_type, Vedi qui per i possibili valori
+ * - Stato
+   - L'esito della chiamata (fallita, occupato, cancellata, non risposta, OK, proibita)
+   - status, Vedi qui per i possibili valori
+ * - Giorno del mese
+   - Data della chiamata (giorno/mese/anno)
+   - La data è inclusa nei successivi timestamp di esportazione
+ * - Inizio
+   - Orario di inizio della chiamata
+   - start_datetime
+ * - Risposta canale
+   - Orario dell'apertura del canale media della chiamata, ovvero della risposta da parte del PBX. Nel caso delle chiamate uscenti coincide con l'"orario di risposta"	
+   - channel_up_datetime
+ * - Orario di risposta
+   - Orario della risposta della chiamata. Per le chiamate entranti indica più precisamente l'orario di risposta di un interno. Per le chiamate uscenti coincide con l'orario di "Risposta canale"
+   - answer_datetime
+ * - Risposto da
+   - Identificativo di chi ha risposto
+   - answered_by
+ * - Fine
+   - Orario di conclusione della chiamata.
+   - end_datetime
+ * - Chiamante
+   - Numero e identificativo (se presente in rubrica) del chiamante
+   - caller e caller_name
+ * - Anonimo
+   - Flag che identifica se il numero chiamante è anonimizzato (si/no)
+   - anonymous (0/1)
+ * - Chiamato
+   - Numero e identificativo (se presente in rubrica) del chiamato. Nel caso delle chiamate entranti identifica il numero pubblico composto dal chiamante	caller
+Nome del gateway	Indica il gateway o la rerminazione utilizzata (nel caso di chiamate in uscita o ingresso)
+   - gateway_name
+ * - Codice di fatturazione
+   - Indica il codice (o "tag") assegnato alla chiamata. E' possibile assegnare un "tag" ad una particolare chiamata utilizzando il codice telefonico configurabile nel Piano di Numerazione (disponibile solo con la licenza Call Center)
+   - account_code
+ * - Durata
+   - Durata complessiva della chiamata espressa in ore, minuti e secondi (hh:mm:ss)
+   - duration
+ * - Tempo di Fatturazione
+   - Durata della chiamata effettiva una volta instaurata (in seguito del messaggio SIP 200 OK) espressa in ore, minuti e secondi (hh:mm:ss)
+   - bill_secs (secondi.millisecondi)
+ * - Peer Name di origine
+   - Per le chiamate uscenti o tra interni indica l'account SIP sorgente della chiamata
+   - src_peer_name
+ * - IP/porta di origine
+    - Per le chiamate uscenti o tra interni indica l'indirizzo IP e la porta sorgente della chiamata
+    - src_ip_port
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
