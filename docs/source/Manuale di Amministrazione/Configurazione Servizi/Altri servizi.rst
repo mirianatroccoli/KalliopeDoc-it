@@ -1768,30 +1768,6 @@ Elenco dei codici EXIT CAUSE e DETAIL EXIT CAUSE
 - **CLOSED** ⇒ la coda di destinazione è chiusa a causa del controllo orario
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Richieste di Provisioning
 -----------
 
@@ -1816,6 +1792,307 @@ All’interno di questa sezione sono registrate le richieste di provisioning che
 
 Rubrica telefonica
 ----------
+Descrizione del servizio
++++++++++++
+La rubrica telefonica permette la visualizzazione dei contatti presenti nella rubrica degli interni e nella rubrica condivisa. La rubrica viene fruita tramite l’interfaccia web o il client CTI, vengono visualizzati i contatti della rubrica e gli interni. Entrando con un utente non admin, ma associato ad un interno, si può avere la gestione di una rubrica utente, accessibile unicamente tramite interfaccia web e tramite client CTI. Tramite CTI desktop si può solo effettuare modifica e aggiunta di contatti alla rubrica personale, quindi, per aggiungere contatti alla rubrica condivisa, bisogna passare all’interfaccia web.
+
+Configurazione del servizio
+++++++++
+Rubrica degli interni
+............
+La rubrica degli interni è popolata dagli interni che hanno una configurazione particolare, ovvero è attivo il parametro “Mostra nella rubrica locale”. Nella configurazione è possibile inserire anche “Ente” e “Reparto” per far sì che questi campi siano popolati all’interno della rubrica. Inoltre, l’interno può avere associato indirizzo e-mail e numero mobile, vedi la configurazione degli interni.
+
+.. note::
+   Un utente non amministratore non visualizza il numero mobile degli altri interni poiché il numero mobile è pensato per essere un numero di raggiungibilità tramite il servizio Fork2Mobile e potrebbe essere personale e non esclusivamente aziendale.
+
+L’utente non amministratore visualizza l’elenco della rubrica degli interni allo stesso modo di quello amministratore, ma possiede una funzionalità in più: al passaggio del mouse sul numero di interno compare la dicitura “Click2Call”. È una funzione per cui, cliccando sul contatto, la centrale fa partire una chiamata verso l’interno e si hanno 10 secondi per rispondere. Al momento della risposta, la centrale fa partire una chiamata verso il numero di destinazione.
+È possibile esportare la rubrica in un formato XLSX, CSV, JSON, XML per poterli utilizzare altrove.
+
+
+Rubrica condivisa
+..........
+La rubrica condivisa contiene i contatti visibili a tutti gli interni della centrale.
+
+La rubrica condivisa viene popolata dall’admin o da altri utenti per delega e contiene una serie di schede che possono essere aggiunte manualmente o importate da file EXCEL.
+Aggiungi nuova scheda.JPG
+Tramite “Aggiungi nuova scheda”, è possibile aggiungere manualmente un contatto tramite l’inserimento di:
+
+- Nome
+- Cognome
+- Ente
+- Reparto
+
+Si può associare alla scheda uno o più recapiti: l’interno, il numero di casa, di lavoro, di cellulare, di cellulare di lavoro, fax, e-mail. A ognuno dei recapiti, tranne l’e-mail, è possibile associare uno Speed-Dial, un codice di selezione veloce che l’utente può digitare per far partire la chiamata a un determinato numero senza doverlo ricordare e/o senza saperlo.
+
+La rubrica contiene quindi i recapiti inseriti, che non sono direttamente chiamabili dalla centrale.
+
+- Se si vuole effettuare la chiamata ad un numero esterno, si deve anteporre il prefisso di impegno di linea esterna (“0”).
+
+L’utente può togliere lo “0” per le chiamate esterne o decidere di usare un diverso prefisso, questo si modifica nel pannello “impostazioni generali”, tramite il box dl “Prefisso chiamate in uscita”. Vedi Impostazioni generali.
+
+- Se si vuole effettuare una chiamata verso un interno, eseguendo il Click2Call – funzionalità per l’utente non amministratore – la centrale chiama l’utente e poi fa partire una chiamata verso l’interno selezionato. Per i numeri non interni, il sistema chiama l’utente e, alla risposta, fa partire la chiamata verso il numero selezionato anteponendo il prefisso “0”.
+
+Passando al client CTI, nella rubrica, i vari recapiti sono segnalati con icone differenti.
+L’aggiunta di una nuova scheda – quindi un nuovo contatto – non è visibile nell’immediato all’interno del client CTI, perché l’aggiornamento della rubrica avviene periodicamente ogni 10 minuti. Se si vuole forzare l’aggiornamento a causa di urgenze, è possibile disconnettersi e poi riconnettersi, in questo modo l’importazione della rubrica è effettuata in automatico all’avvio del client.
+
+Esportazione e importazione
+++++++++++
+L’esportazione della rubrica condivisa può essere effettuata tramite XLSX, CSV, JSON e XML. Esportarla in formato EXCEL (XLSX) è utile perché il file scaricato sarà lo stesso che si può usare per fare una importazione massiva. Su excel i recapiti di un'unica scheda sono rappresentati su righe diverse.
+N.B. Nel popolamento della colonna contactValue, inserire una formazione di tipo “Testo” e non “Generale”, altrimenti non viene incluso lo “0” se si inserisce un numero con quel valore iniziale.
+
+L’opzione “Importazione massiva della rubrica” consente di
+
+- Sostituire la rubrica attuale con quella importata: se non viene spuntata questa opzione viene integrata la rubrica esistente con la nuova
+- Scegliere se gli Speed-Dial nel file includono il prefisso (del piano di numerazione)
+Se si effettua l’importazione non sostituendo la rubrica attuale con quella importata, il campo avvisi evidenzia l’operazione con l’icona *jpg*.
+N.B. Se sono presenti dei contatti in rubrica che hanno lo Speed-Dial, quando si aggiungono nuovi contatti tramite importazione, si devono mettere eventuali Speed-Dial senza prefisso.
+
+
+In base al formato di esportazione, i campi variano nomenclatura:
+
+.. list-table::  
+ :widths: 25 25
+ :header-rows: 1
+
+ * - XLSX e CSV
+   - JSON e XML
+ * - FirstName
+   - firstName
+ * - lastName
+   - lastName
+ * - organization
+   - organization
+ * - organizationalUnit
+   - organizationalUnit
+ * - contactType
+   - typeString
+ * - contactValue
+   -
+ * - speedDial
+   - speedDial
+
+Delegare la possibilità di gestire in “scrittura” la Rubrica condivisa
++++++++++++
+Potrebbe essere necessario che alcuni utenti non amministratori possano modificare la rubrica condivisa. È possibile tramite il meccanismo di ruoli, assegnare ad un utente il permesso di fare modifiche ai contatti della rubrica condivisa. Tramite il pannello “Gestione utenti e ruoli”, nel pannello di “Gestione ruoli” premere su “Aggiungi nuovo ruolo”. Si inseriscono priorità e descrizione, e nell’azione “Gestione della rubrica condivisa” si spunta “Scrittura”.
+
+
+Impostazioni LDAP
++++++++++++++
+Per raggiungere il pannello di impostazioni LDAP basta cliccare su "Rubrica > Impostazioni LDAP"
+
+È possibile fruire della rubrica tramite dei client LDAP. Si può rendere disponibile la rubrica a dei client LDAP esterni: dal telefono, tramite tastierino, si effettua una ricerca nella rubrica della centrale. Si può anche accedere a delle rubriche remote che vengono esposte da altri server LDAP, in modo che siano rese disponibili a utenti Kalliope.
+LDAP (Lightweight Directory Access Protocol) è un protocollo che organizza i dati sotto forma di gerarchia ad albero. Le foglie (object class) dell’albero sono gli oggetti che contengono gli attributi nome, cognome, mail, numeri di telefono, quindi ogni scheda di contatto è considerabile una foglia dell’albero LDAP. In LDAP si possono tenere molte informazioni, per cui quando si definisce il tipo di foglia, bisogna fornire l’object class che deve rappresentare quali sono gli attributi che si possono ottenere da questi oggetti.
+
+L’organizzazione delle informazioni nell’albero LDAP è la seguente:
+**Radice**: dc=root
+**Sottoalberi**: dc=default (dove default è il nome di dominio del mono tenant predefinito)
+Invece, in un nodo multi tenant, ogni volta che si crea un nuovo tenant, viene fuori un nuovo sottoalbero con dc=nome dominio Per ogni tenant ci sono due sottoalberi:
+
+- dc=users
+- dc=phonebook
+
+Quest’ultimo contiene altri sottoalberi
+
+- dc=extension (contiene i contatti della rubrica degli interni)
+- dc=system (contiene la rubrica dei contatti di sistema)
+
+Quando l’utente si logga sul phonebook, ottiene la visibilità di tutto ciò che è contenuto sotto il sottoalbero phonebook del proprio dominio.
+
+Nel pannello ci sono le abilitazioni per i due sottoalberi e nella centrale c’è un server LDAP su cui si può abilitare la pubblicazione dei contatti in modo separato tra la rubrica interni e quelli condivisi. Su LDAP non è possibile esporre i contatti della rubrica personale.
+
+Contatti di Sistema
++++++++++
+Configurare i contatti di sistema sblocca la pubblicazione sul sottoalbero dc=system dei contatti presenti nella rubrica condivisa:
+
+- Albero di pubblicazione dei contatti di sistema: è visualizzato l’albero
+- Abilita pubblicazione dei contatti di sistema: si attiva la pubblicazione dei contatti presenti nella rubrica condivisa
+- Aggiungi il prefisso per le chiamate uscenti: nel momento in cui la centrale pubblica i contatti su LDAP aggiunge a tutti i numeri, ad eccezione di quelli marcati come interni, un prefisso “0” per effettuare le chiamate uscenti. In questo modo il client che accede alla rubrica, ritrova i numeri già pronti (comprensivi dello “0”) per poter essere chiamati
+
+
+Interni
++++++++++
+È possibile abilitare come funzione globale l’esportazione della rubrica degli interni su LDAP.
+
+- Albero di pubblicazione degli interni: è visualizzato l’albero
+- Abilita pubblicazione degli interni: si può trovare consultabile via LDAP la rubrica degli interni
+- Numero di cifre da rimuovere in testa dagli interni: regola standard di pubblicazione degli interni che serve nel caso si volessero esporre i numeri di interno non con il numero del derivato, ma con quello completo geografico.
+- Prefisso da aggiungere agli interni
+
+Salvando la configurazione viene popolato l’albero LDAP con il contenuto della rubrica di sistema e degli interni. È necessario autenticarsi con un utente che abbia il diritto di vedere la rubrica per accedere alla rubrica LDAP. Per consultarla è possibile utilizzare un client LDAP.
+
+
+Configurazione del client LDAP
+++++++++++
+- Indirizzo IP del server e porta
+- Base DN: radice dell’albero che voglio consultare
+- Credenziali di accesso da specificare: username e password di utente autorizzato a leggere l’albero LDAP
+
+Gli utenti di Kalliope, che sono definiti all’interno del pannello “Gestione utenti e ruoli”, sono di default autorizzati ad accedere ad LDAP. Quindi nelle credenziali da specificare si inserisce l’utente tramite una sintassi specifica: cn=utente@dominio, dc=users, dc=dominio, dc=root.
+
+Successivamente, in automatico, il client farà la connessione a LDAP.
+
+.. note::
+   **Autenticazione degli utenti**: Per poter accedere via LDAP gli utenti devono avere un metodo di autenticazione locale, gli utenti con autenticazione sul dominio non possono accedere a LDAP.
+
+*jpg*
+
+.. note::
+   La centrale, non sapendo le password utente, non potrebbe scrivere sui telefoni le password di ciascun singolo utente. Quindi l’utilizzo di credenziali personali per accedere alla rubrica non viene mai eseguito. All’interno della centrale esiste un utente predefinito, phonebook, che ha diritto di accesso e modifica della rubrica condivisa, è un ente di default disabilitato, ma si può abilitare una volta assegnata una password. È necessaria l’abilitazione dell’accesso GUI (per consultare la rubrica e fare le modifiche da web), al contrario, l’accesso API non è necessario.
+
+Una volta effettuata la connessione, se si osserva il sottoalbero dc=extension, si vede che è vuoto. È un dominio, ma non ha foglie. È vuoto perché non è sufficiente applicare la pubblicazione degli interni nelle impostazioni LDAP, ma ciascun interno ha un flag che verifica se deve essere pubblicato sulla rubrica interna e/o sulla rubrica LDAP. Nel template di default dell’interno, la “modalità di pubblicazione LDAP” deve essere abilitata. Sono anche presenti le modalità con cui rendere visibile la presenza dell’interno sulla rubrica LDAP.
+
+- **Secondo la regola di pubblicazione LDAP**: espone il numero dell’interno con una manipolazione per convertirlo in un numero geografico
+- **Presentando il numero telefonico sottoindicato**: espone il numero dell’interno con un numero specificato
+- **Seconda la regola di pubblicazione LDAP applicata all’interno sottoindicato**: assegna un interno fittizio e viene applicata la mascheratura specificata nel pannello LDAP
+
+Se il sottoalbero *dc=system* presenta delle foglie, la rubrica dei contatti di sistema è stata popolata correttamente con tutti gli attributi della scheda.
+
+- givenName
+- sn: surname
+- cn: common name, si costruisce facendo la concatenazione del nome (givenName) e cognome (surname)
+- o: organization
+- ou: organizion unit
+
+
+Gli oggetti che vengono raccolti e descritti sotto un albero LDAP si caratterizzano per avere una catena di object class. Ciascuna object class ha un set di attributi obbligatori o opzionali. Un client LDAP che voglia leggere la rubrica, se attiva un filtro su un object class, può decidere come effettuare una ricerca.
+
+
+Mappatura dei tipi di contatti nella rubrica condivisa in LDAP
+++++++++++
+
+.. list-table::  
+ :widths: 25 25 25 25
+ :header-rows: 1
+
+ * - Attributo XML
+   - Attributo GUI
+   - Attributo LDAP
+   - Presenza
+ * - firstName
+   - Nome
+   - givenName
+   - opzionale
+ * - lastName
+   - Cognome
+   - sn
+   - obbligatoria
+ * -
+   -
+   - cn
+   - obbligatoria
+ * - organization
+   - Ente
+   - o
+   - opzionale
+ * - organizationalUnit
+   - Reparto
+   - ou
+   - opzionale
+ * - Home
+   - Casa
+   - homePhone
+   - opzionale
+ * - Work
+   - Lavoro
+   - telephoneNumber
+   - opzionale
+ * - Mobile
+   - Cellulare
+   - mobile
+   - opzionale
+ * - Work Mobile
+   - Cellulare di lavoro
+   - mobile
+   - opzionale
+ * - Fax
+   - Fax
+   - facsimileTelephoneNumber
+   - opzionale
+ * - Extension
+   - Interno
+   - telephoneNumber
+   - opzionale
+ * - Email
+   - E-mail
+   - mail
+   - opzionale
+
+
+.. warning::
+   tutti i contatti che devono essere pubblicati su LDAP devono avere almeno il cognome.
+   
+.. warning::
+   I client LDAP sui telefoni non sempre supportano tutti gli attributi delle object class. Ogni telefono ha un set di attributi sui quali può effettuare la ricerca ed è in grado di restituire al cliente, tramite display, solo gli attributi che supporta.
+
+Importazione rubriche remote
+++++++++++++
+
+L'importazione delle rubriche remote è raggiungibile cliccando su "Rubrica > Importazione rubriche remote".
+Questa sezione offre la possibilità di importare nella centrale Kalliope i contatti presenti nelle rubriche LDAP.
+Non viene fatta una query in tempo reale tutte le volte che c’è bisogno di consultare la rubrica, ma viene fatta un’importazione completa dei contatti presenti nella rubrica e vengono inseriti dentro il database interno al Kalliope. Questa importazione viene fatta periodicamente. È possibile definirne più di una.
+
+Premendo su "Aggiungi una nuova rubrica remota LDAP" si raggiunge la pagina di creazione della rubrica remota.
+
+Impostazioni del server LDAP
++++++++
+- Nome
+- Indirizzo del server
+- Porta del server
+- Versione: V3 / V2 (obsoleta)
+- RDN: radice del sottoalbero che si vuole consultare
+- Abilita autenticazione
+- Nome utente
+- Password
+
+Impostazioni di ricerca
+++++++++++++
+Si possono filtrare solo i contatti che hanno come ObjectClass person, organizationalPerson, inetOrgPerson
+
+- Tipologia di server remoto: generico/estos MetaDirectory*
+- Includi risultati in (ObjectClass=person)
+- Includi risultati in (ObjectClass=organizationalPerson)
+- Includi risultati in (ObjectClass=inetOrgPerson)
+
+Non è previsto l’accesso tramite SSL.
+*Metadirectory è un software che agisce da aggregatore di rubriche: prende dati da diverse fonti (server LDAP, file di testo, database), li legge e li ripubblica sotto forma di LDAP per essere letti da client LDAP.
+
+
+Impostazioni di importazione
++++++++++++++++
+- Abilita importazione
+- Periodicità d’importazione: ripetuta ogni (tot ore)/ripetuta ogni giorno alle
+- Abilita lookup per le chiamate in ingresso: i contatti presenti in questa rubrica vengono usati per impostare nome e cognome in base al numero chiamante
+- Abilita esportazione verso i client CTI: i client CTI ricevono dalla centrale i contatti presenti nella rubrica LDAP quando si importano
+- Abilita visualizzazione in GUI: il cliente che accede all’interfaccia vede i contatti che sono sulla rubrica remota nella rubrica
+- Importa i contatti come interni: i numeri di telefono che vengono trovati nella rubrica remota vengono inseriti nel database locale d’importazione come extension (interni). Quando poi si vanno a mostrare ai client, verranno trattati come numeri interni. Un eventuale click2call avverrà al numero preciso, senza metterci lo "0".
+
+Impostazioni di pubblicazione
+++++++++++++
+- Abilita pubblicazione su LDAP locale: se si vogliono esportare i contatti che ho importato, quindi per renderli accessibili ai telefoni Questa funzione è utile per aggregare: in questo modo la centrale presenta sia i contatti presenti nella rubrica condivisa, sia nelle rubriche remote.
+- Aggiungi il prefisso per le chiamate uscenti: come nella pubblicazione dei contatti di sistema, si può aggiungere lo “0” per contattare questi numeri come se fossero esterni.
+
+Se si spunta l’opzione sopraindicata “importa i contatti come interni”, lo “0” si omette perché si raggiungono con il numero breve.
+
+I contatti della rubrica remota vengono resi visibili nella rubrica condivisa all’amministratore, agli utenti non amministratori vengono fatti vedere nella rubrica condivisa solo se è presente il flag di “Abilita visualizzazione in GUI”. Ad ogni chiamata in ingresso, la centrale consulta se il numero chiamante è presente in una rubrica. In caso affermativo, va a modificare il display name della chiamata (nome chiamante) per inserire il valore presente nella rubrica e corrispondente a quel numero chiamante. Nel caso di chiamate dirette ad interno, viene usata a priorità la rubrica personale, invece, per chiamata a gruppi o code, viene usata la rubrica condivisa.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Servizi in chiamata
 ------------
