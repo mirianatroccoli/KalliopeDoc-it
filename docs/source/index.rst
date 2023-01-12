@@ -73,7 +73,13 @@ Kalliope Nexus
 
    Kalliope Nexus.rst
    Kalliope Nexus/Analytics.rst
-  
+   Kalliope Nexus/Missed Calls.rst
+   Kalliope Nexus/Ticket.rst
+   Kalliope Nexus/Billing.rst
+   Kalliope Nexus/Trace.rst
+   Kalliope Nexus/Backup.rst
+   Kalliope Nexus/Monitoring.rst
+
 
 
 Aggiornamenti Firmware Changelog e Release Notes
