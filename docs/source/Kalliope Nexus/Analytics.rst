@@ -1241,21 +1241,325 @@ Per la spiegazione sulla creazione, organizzazione e gestione dei Widget, clicca
 
 
 
+Report Code
++++++++++++
+Nella sezione "Report Code", sotto il modulo "Voip report Call Center", si possono osservare i grafici che rappresentano l'andamento delle chiamate del Call Center e una tabella suddivisa per code che mostra il dettaglio.
+
+Grafici
+.........
+Tortagraph code.png
+In questo report è possibile visualizzare tre tipologie di grafici: il primo grafico a torta contiene le informazioni sul numero di chiamate con e senza risposta. Se non viene inserita nessuna coda nei filtri, il grafico farà riferimento a tutte le code.
+
+Oltre al grafico a torta, sono presenti due grafici che contengono i dati delle chiamate risposte, non risposte e totali divise per giorni della settimana e per fascia oraria.
+
+Ciò permette di eseguire un’analisi immediata sull’andamento delle chiamate.
+
+Isto code 1.png
+
+Isto code 2.png
+
+Tabelle
+.........
+Sotto ai grafici riportati precedentemente, è presente una tabella chiamata "Numero chiamate gestite" dove sono raccolti tutti i dati riguardanti le chiamate suddivise per code. Prima dei dati tabulati, sotto il titolo, sono presenti una serie di valori che riportano:
+
+- la quantità totale di chiamate
+- il tempo totale di conversazione
+- la durata media di una chiamata
+- la media del tempo di attesa con il messaggio di benvenuto
+- la media di tempo di accodamento
+- la media del tempo di attesa in coda
+- il tempo medio di attesa
+Tab code cc.png
+
+È anche possibile esportare la tabella in formato excel tramite l'apposito tasto in alto a destra della tabella, "Export XLS".
+
+Nella tabella, ogni riga appartiene ad una coda per permettere di confrontare le stesse informazioni su code differenti. Accanto al nome di ognuna, si trova un piccolo grafico a torta che rappresenta le chiamate risposte e non risposte da parte della coda interessata. Dopo il grafico a torta, seguono diverse informazioni più dettagliate: il totale delle chiamate ricevute dalla coda, il numero di chiamate risposte e non, l’andamento di quelle risposte con i relativi tempi, le chiamate NCC, le chiamate che sono state trasferite, quelle cancellate e quelle non risposte, tutte corredate con informazioni qualitative che riguardano i tempi impiegati.
+
+Grazie ai dati più dettagliati del Call Center, è possibile visualizzare un nuovo stato: Cancelled Nowait, che indica le chiamate che sono state terminate dal cliente prima che il messaggio di benvenuto finisca la riproduzione.
+
+Infine, nella parte inferiore della tabella, sono riportati i totali per ogni colonna.
+
+Filtri
+............
+È inoltre presente una maschera che raggruppa i filtri da utilizzare per migliorare l'analisi dei dati desiderati. Per attivare i filtri, cliccare sul tasto "ricerca" in alto a destra. Si aprirà una maschera con:
+
+- data iniziale e finale dell'intervallo di tempo per cui verranno mostrati i dati
+- queue, ovvero il nome della coda interessata
+- direzione (se si tratta di una chiamata in ingresso o locale)
+- stato
+- exit cause, ossia il modo in cui è terminata la chiamata
+- mostra chiamate in coda vuota: nel caso alcune chiamate siano state registrate con delle code vuote, con questa opzione sarà possibile visualizzarle comunque
+Filtri code cc.png
+
+Una volta selezionati i filtri desiderati, cliccare "cerca" per abilitarli, oppure "reset" per eliminarli.
+
+Widget
+.............
+Per la spiegazione sulla creazione, organizzazione e gestione dei Widget, cliccare qui.
+
+Report Code Caller
++++++++++++
+Questa sezione mostra, in due grafici, l'andamento delle chiamate in ingresso nelle code. Il primo è un grafico a torta che mostra il rapporto tra chiamate risposte e non risposte, mentre il secondo è un grafico a colonne che mostra gli stessi stati, ma con il dettaglio suddiviso per giorni compresi nell'intervallo di tempo inserito tramite filtri.
+
+Caller cc 1.png
+
+In entrambi è possibile visualizzare il dettaglio dei dati, scorrendo con il mouse sulla sezione desiderata del grafico. È inoltre possibile togliere dalla visualizzazione delle informazioni tramite la legenda, cliccando sul nome o sul relativo pallino colorato.
+
+Filtri
+............
+Per poter vedere rappresentate nei grafici solo alcune informazioni, devono essere utilizzati i filtri. Per abilitarli, cliccare sul tasto "ricerca" in alto a destra con cui si aprirà la maschera adibita in cui inserire i dati, quali:
+
+- data iniziale e finale dell'intervallo di tempo per cui riportati i dati
+- nome della coda interessata
+- mostra chiamate in coda vuota: nel caso alcune chiamate siano state registrate con delle code vuote, con questa opzione sarà possibile comprenderle comunque nei grafici
+Filtri caller cc.png
+
+Report Code Data
++++++++++++++
+Questa sezione racchiude le informazioni presenti nella sezione "Report Code", ma le suddivide per giorno, in base al lasso di tempo inserito tramite filtri "data inizio" e "data fine".
+
+Grafici
+...........
+Il primo grafico rappresenta le chiamate totali, con e senza risposta, lungo l’arco di tempo di una settimana. Ciò permette di eseguire una prima analisi generale in maniera semplice e veloce. È anche possibile selezionare solo alcune delle tre informazioni presenti nel grafico, cliccando sul nome di quella che non si vuole visualizzare all’interno della legenda.
+
+Tabelle
+............
+Nella parte bassa della sezione, sotto il grafico, sono presenti le tabelle per ogni coda suddivise per data. Ogni riga corrisponde ad un giorno compreso nel periodo inserito nei filtri ed è suddivisa in colonne che comprendono tutte le informazioni necessarie per eseguire un'analisi precisa sull'andamento delle chiamate per ogni specifica coda. Le informazioni contenute all'interno della tabella comprendono:
+
+.. list-table::  
+   :widths: 25 25 25 25 25 25 25
+   :header-rows: 1
+   
+   * - Quantità totale
+     - Chiamate risposte
+     - Non Risposte
+     - NCC
+     - Cancelled
+     - Cancelled nowait*
+     - No answered
+   * -
+     - Quantità / Media durata della chiamata / Media tempo conversazione / Media tempo risposta operatore
+     -
+     - Quantità / Durata / Media durata della chiamata / Tempo conversazione / Media tempo conversazione / Media tempo accodamento / Media tempo risposta operatore
+     - Quantità / Attesa totale / Attesa media
+     - Quantità / Attesa totale / Attesa media
+     - Quantità / Attesa totale / Attesa media
+* Indica le chiamate che sono state messe giù dal cliente prima che il messaggio di benvenuto termini.
+
+In base alla coda, può essere presente anche una parte aggiuntiva di trasferimento con:
+
+- quantità
+- durata
+- media durata della chiamata
+- tempo conversazione
+- media tempo conversazione
+- media tempo accodamento
+- media tempo risposta operatore
+Ogni tabella può essere esportata in un foglio di excel tramite apposito tasto "Export XLS", in alto a destra.
 
 
 
+Filtri
+............
+Cliccando sul tasto "ricerca" in alto a destra della sezione è possibile abilitare dei filtri che comprendono:
+
+- Data inizio e data fine: per indicare un periodo in cui analizzare i dati
+- Queue: nome della coda da visualizzare
+- Direzione
+- Stato
+- Exit cause: motivo del termine di una chiamata
+- Visualizzazione chiamate in coda vuota: se durante la registrazione delle chiamate sul Call Center, alcune non vengono associate a nessuna coda, queste possono comunque essere visualizzate tramite questa specifica
+Filtri data cc.png
+
+Cliccando su "cerca", i filtri vengono abilitati e viene effettuata una ricerca con questi. Nel caso si volessero eliminare, basterà cliccare sul tasto "reset".
+
+Report Code Operatori
++++++++++++
+In questa sezione, all'interno del modulo "Voip report Call Center", è possibile visualizzare, nel dettaglio, l'andamento delle chiamate per singoli operatori, suddivisi nelle rispettive code. Le informazioni che vengono visualizzate riguardano il numero di chiamate che sono state risposte e il rispettivo esito, ma anche quante non sono state risposte e le motivazioni. In questo modo risulta più semplice eseguire un'analisi su ogni operatore con precisione.
+
+Tabelle
+.........
+Tutti i dati di andamento delle chiamate sono raggruppati in tabelle suddivise per numero di coda, al cui interno si trovano i nomi di ogni operatore che lavora in quella stessa coda con associati (visibili con colori più chiari) i propri account. Le informazioni che contengono sono:
 
 
+.. list-table::  
+   :widths: 25 25 25 25 25 25 25 25 25 25 25
+   :header-rows: 1
+   
+   * - Totale
+     - Risposte
+     - Non Risposte
+     - NCC-Caller
+     - Transfer
+     - Answered Elsewhere
+     - Cancelled
+     - Cancelled nowait
+     - Forward 
+     - Refused
+     - Timeout
+   * - 
+     - Quantità / Media tempo lavorato / Media tempo conversazione / Media tempo squillo / Media tempo risposta
+     - Quantità / Tempo lavorato / Media tempo lavorato / Media tempo conversazione / Media tempo squillo / Media tempo risposta
+     - Quantità / Tempo lavorato / Media tempo lavorato / Media tempo conversazione / Media tempo squillo / Media tempo risposta
+     - Quantità / Tempo lavorato / Media tempo lavorato / Media tempo conversazione / Media tempo squillo / Media tempo risposta
+     - Quantità / Media tempo squillo
+     - Quantità / Media tempo squillo
+     - 
+     - Quantità / Media tempo squillo
+     - Quantità / Media tempo squillo
+     - Quantità / Media tempo squillo
 
+Ad ogni riga corrisponde un operatore con i suoi account corrispondenti. Se venisse inserito un filtro su un singolo operatore, verrebbe visualizzato solamente l'operatore interessato.
 
+Per quanto riguarda le altre code, ognuna possiede una tabella a parte dove verranno visualizzate le stesse informazioni.
 
+In ogni tabella è presente il tasto "Export XLS" in alto a destra, per esportare le tabelle in formato excel (XLS).
 
+Filtri
+.........
+Per rendere l'analisi dei dati più efficace, è possibile utilizzare dei filtri che permetteranno di ricavare, da una ricerca, solo i dati necessari. Per attivarli, basterà cliccare sul tasto "ricerca" in alto a destra e si aprirà una maschera con:
 
+- Data inizio e data fine: per indicare un periodo in cui analizzare i dati
+- Stato: se la chiamata è andata a buon fine o no
+- Exit cause: motivo del termine di una chiamata
+- Queue: nome della coda
+- Operatore
+- Account Operatore
+- Visualizzazione chiamate in coda vuota: se durante la registrazione delle chiamate sul Call Center, alcune non vengono associate a nessuna coda, queste possono comunque essere visualizzate tramite questa specifica
+Filtri cc operatori.png
 
+Cliccando su "cerca", i filtri vengono abilitati e viene effettuata una ricerca con questi. Nel caso si volessero eliminare, basterà cliccare sul tasto "reset".
 
-
-Report Code (caller, data, operatori, ora)
+Report Code Ora
 ++++++++
+Tabelle
+...........
+In questa sezione sono presenti esclusivamente le tabelle divise per fasce orarie, che contengono tutte le informazioni necessarie all'analisi delle chiamate nelle singole code. Le informazioni contenute nelle tabelle comprendono:
+
+Le informazioni contenute nelle tabelle comprendono:
+
+.. list-table::  
+   :widths: 25 25 25 25 25 25 25 25
+   :header-rows: 1
+   
+   * - Quanitità totale
+     - Chiamate risposte
+     - Non Risposte
+     - NCC-Caller
+     - Cancelled
+     - Cancelled nowait
+     - No answered
+     - Trasferimento
+   * - 
+     - Quantità / Media durata della chiamata / Media tempo conversazione / Media tempo risposta operatore
+     -
+     - Quantità / Durata / Media durata della chiamata / Tempo conversazione / Media tempo conversazione / Media tempo accodamento / Media tempo risposta operatore
+     - Quantità / Attesa totale / Attesa media
+     - Quantità / Attesa totale / Attesa media
+     - Quantità / Attesa totale / Attesa media
+     - Quantità / Durata / Media durata della chiamata / Tempo di conversazione / Media tempo di conversazione / Media tempo accodamento / Media tempo risposta operatore
+
+Filtri
+......
+Cliccando sul tasto "ricerca" in alto a destra della sezione è possibile abilitare dei filtri che comprendono:
+
+- Data inizio e data fine: per indicare un periodo in cui analizzare i dati
+- Queue: nome della coda da visualizzare
+- Direzione
+- Stato
+- Exit cause: motivo del termine di una chiamata
+- Visualizzazione chiamate in coda vuota: se durante la registrazione delle chiamate sul Call Center, alcune non vengono associate a nessuna coda, queste possono comunque essere visualizzate tramite questa specifica
+Filtri cc ora.png
+
+Cliccando su "cerca", i filtri vengono abilitati e viene effettuata una ricerca con questi. Nel caso si volessero eliminare, basterà cliccare sul tasto "reset".
+
+Widget
+...........
+Per la spiegazione sulla creazione, organizzazione e gestione dei widget, cliccare qui.  
+
+
+
+
 Report Operatori
 ++++++++
 
+La sezione in questione riporta l'andamento delle chiamate per ogni singolo operatore.
+
+Grafici
+............
+Viene rappresentato graficamente l'andamento totale delle chiamate risposte e non risposte in un grafico a torta dove, scorrendoci sopra con il mouse, è possibile osservare le quantità nel dettaglio.
+
+È possibile togliere dalla visualizzazione un dato tramite la legenda, cliccando sopra al nome o al pallino colorato. Per reinserirlo nella visualizzazione basterà cliccarci nuovamente sopra.
+
+Queste due funzioni, il dettaglio e la visibilità, sono disponibili allo stesso modo anche sugli altri due grafici. Grafici che rappresentano uno l'andamento totale delle chiamate per ripartizione in giorni della settimana, l'altro per fascia oraria. Questi due, oltre al numero di chiamate risposte e non risposte, riportano anche il numero totale delle chiamate, come si può osservare nella foto seguente.
+
+Grafico 1 operatori.png
+
+Tabelle
+............
+Dopo una visualizzazione grafica dell'andamento delle chiamate, questi dati saranno riportati in una tabella suddivisa per operatori, ognuno con le proprie informazioni dettagliate. Prima di riportare i dati di ogni operatore, si possono osservare i dati totali di ogni campo:
+
+- la quantità di chiamate
+- il tempo totale
+- il tempo di conversazione
+- media tempo totale
+- media tempo squillo
+- media tempo risposta
+- media tempo conversazione
+Tab 1 operatori.png
+
+Dopo questa prima parte, la tabella mostra per ogni riga il rispettivo operatore con le esatte informazioni. Sulla sinistra è presente il nome dell'operatore, seguito dalla quantità totale di chiamate gestite da esso. Successivamente vengono riportate le informazioni sulle chiamate risposte e non risposte prima di addentrarsi nel dettaglio di ognuno di questi macro-gruppi.
+
+- Risposte:
+   - NCC-AGENT
+   - NCC-CALLER
+   - NCC
+   - ANSWER
+   - TRANSFER
+   - TRASFERIMENTO
+- Non risposte:
+   - ANSWERED ELSEWHERE
+   - BUSY
+   - CANCELLED
+   - CFWD
+   - CONGESTION
+   - FORWARD
+   - NOANSWER
+   - PICKUP
+   - REFUSED
+   - TIMEOUT
+   - UNAVIABLE
+Ognuno di questi sottogruppi avrà un'ulteriore suddivisione in dettagli. Per le chiamate risposte i dettagli presenti saranno:
+
+- quantità
+- tempo lavorato
+- media tempo lavorato
+- tempo conversazione
+- media tempo squillo
+- media tempo risposta
+- media tempo conversazione
+Per le chiamate non risposte invece:
+
+- quantità
+- tempo lavorato
+- media tempo lavorato
+Alla fine della tabella, nella parte inferiore, saranno riportati i totali di ogni colonna di dettaglio.
+
+Tramite l'apposito tasto situato in alto a destra della tabella, sarà possibile esportarla in formato excel "XLS".
+
+Filtri
+............
+Utilizzando dei filtri, sarà possibile migliorare l'attività di analisi dati focalizzandosi solo su quelli interessati. Per poterli ottenere sarà sufficiente cliccare sul taso "ricerca" in alto a destra con il quale si aprirà una maschera contenente i filtri interessati. Tramite questa inserire i dati negli apposito box:
+
+- data iniziale e finale: verranno compresi solamente i dati presenti in questo lasso di tempo
+- stato: dove dovrà essere indicato lo stato delle chiamate da analizzare
+- exit cause: il motivo per cui la chiamata è terminata
+- operatore: questo per fare in modo di avere un report, anche grafico, esclusivo per l'operatore (o più di uno) selezionato.
+- queue: nome dalla coda da visualizzare
+Filtri operatori call center.png
+
+Cliccando su "cerca", i filtri vengono abilitati e viene effettuata una ricerca con questi. Nel caso si volessero eliminare, basterà cliccare sul tasto "reset".
+
+Widget
+.......................
+Per la spiegazione sulla creazione, organizzazione e gestione dei widget, cliccare qui.
