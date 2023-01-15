@@ -117,29 +117,125 @@ Widget
 Per la spiegazione sulla creazione, organizzazione e gestione dei Widget, cliccare qui.
 
 
-
-
-
-
-
-
 Flush Queue
 --------
+Questa sezione è generalmente abilitata ai soli responsabili.
+
+Permette di visualizzare tutti i numeri di telefono relativi a clienti ancora in gestione (richiamata non ancora andata a buon fine), con la possibilità di eliminarli selezionandoli e cliccando il tasto in basso "flush queue". In questo modo i numeri non saranno più visualizzati neanche tra le Missed Calls.
+
+Nella maschera ogni record visualizzato è completo di :
+
+- num recalled: numero di volte che è stato richiamato
+- call num: numero chiamante
+- last recalled: data dell'ultima volta che il numero è stato richiamato
+- first call: data della prima chiamata
+- last call: data dell'ultima chiamata
+- num calls: numero di volte che ha chiamato
+Flush queue 1.png
+
+Filtri
+++++++++
+La maschera è completa di un filtro che permette di ricercare per :
+
+- Data last recalled >= / <=
+- Data first call >= / <=
+- Data last call >= / <=
+- Num. recalled
+- Ordinamento: ordine per num recalled, last recalled, first call, last call, num calls
+Flush queue filtri.jpg
 
 
+Nella Maschera è possibile selezionare i vari numeri di telefono per i quali non si è riusciti a contattare il cliente. Tramite specifico pulsante situato in fondo alla lista, sotto la voce "num recalled/call num", è possibile eliminarli in modalità massiva dalla maschera “Numeri da richiamare”. In questo modo si elimina la possibilità agli operatori di poterli prenotare per la richiamata successiva.
 
+Maschera flush queue.png
 
+Flush queue butt.png
 
 
 
 Missed Calls
 --------
 
+All'interno del modulo "Missed Calls" troviamo l'omonima sezione dove in una maschera vengono visualizzati tutti i numeri di telefono che necessitano di essere richiamati, mentre nell'altra sono visibili tutte le chiamate prenotate dall'utente che visualizza la pagina.
+
+Struttura
++++++++++++
+La maschera è suddivisa in 2 sezioni:
+
+1. “Numeri da richiamare”: contiene l’elenco di tutti i numeri che devono essere chiamati completi di:
+
+- date firstcall: data della prima chiamata
+- date lastcall: data dell'ultima chiamata
+- calls: numero di chiamate eseguite
+- recalled: numero di volte che è stato richiamato
+- date lastrecall: data dell'ultima richiamata
+- call num: numero da richiamare
+- queue: nome della coda in cui si trovava il cliente quando non è stato risposto
+Un operatore, tramite il pulsante con il simbolo "+" in verde, può prenotare una specifica chiamata, ovvero l’attività di richiamata di quel determinato numero. Tale azione sposterà il numero dalla sezione “Numeri da richiamare” alla sezione “Chiamate prenotate”. I numeri presenti nella sezione “Chiamate prenotate” saranno visibili solo all’operatore che ha prenotato la chiamata.
+
+Ulteriormente, l'indicatore sulla sinistra del "+" per la prenotazione, indica la potenziale disponibilità alla richiamata del cliente. Il meccanismo è basato su un calcolo effettuato rispetto all'ora dell'ultima chiamata e al range di minuti attorno ad essa per cui il cliente potrebbe essere disponibile. Questo range di tempo è modificabile in "Preferenze di Sistema/VoipToCall" nel modulo "Administration" (icona dell'ingranaggio in alto a destra).
+
+Missed calls 1.png
+
+2. “Chiamate prenotate”: contiene l’elenco di tutti i numeri prenotati dallo specifico operatore loggato a sistema, complete di:
+
+- date prenotazione: data in cui è stata effettuata la prenotazione da parte dell'operatore
+- date firstcall: data della prima chiamata
+- date lastcall: data dell'ultima chiamata
+- calls: numero di chiamate eseguite
+- recalled: numero di volte che è stato richiamato
+- date lastrecall: data dell'ultima richiamata
+- call num: numero da richiamare
+- queue: nome della coda in cui si trovava il cliente quando non è stato risposto
+L’operatore di Call Center che si è prenotato la chiamata, potrà subito effettuarla cliccando semplicemente sul numero da chiamare (call num). Questa funzione è conosciuta come Click2Call (C2C). Tramite lo specifico pulsante con simbolo "-" in rosso invece, l'operatore ha la possibilità di annullare la prenotazione della chiamata e quindi di riemetterla in visibilità nella sezione “Numeri da richiamare” a disposizione di tutti gli operatori di Call Center.
+
+Missed calls 2.png
+
+È possibile visualizzare il dettaglio di tutte le chiamate ricevute ed eseguite da e verso quello specifico cliente. Nella sezione “Chiamate prenotate” è presente la sopracitata funzionalità C2C che permette all’operatore di comporre la chiamata premendo sul numero di telefono presente nel record. Uno specifico indicatore colorato consiglierà la richiamata se l’orario attuale rientra nel range del periodo da richiamare, settato nei parametri di sistema. E’ possibile attivare anche uno specifico LINK per l’apertura tramite parametro di pagine WEB preconfigurate (es. pagina CRM con Parametro numero chiamante).
+
+Nel momento in cui l’operatore fa partire la chiamata, il sistema nasconde il record e ne permette la rivisualizzazione solamente se la chiamata non è andata a buon fine verso il cliente. Nel caso in cui un altro operatore - non quello prenotato - effettua la chiamata e questa non verrà risposta, il record verrà comunque nascosto. Una chiamata si intende come "andata a buon fine" quando risulterà risposta dal cliente e avrà un tempo minimo di conversazione superiore a 5 secondi.
 
 
+Per importare correttamente le chiamate in trabocco nella sezione "missed calls", bisogna prima configurare un instradamento dinamico nella centrale Kalliope. Durante la creazione di questa verranno richiesti dei parametri, tra cui l'url che richiamerà la centrale, e il file xml. Nel link inserire il seguente:
 
+.. code-block:: console
 
+   https://nome_azienda.kalliopenexus.cloud/voipToCall/kalliopeToCall/insert/
+   
+(sostituire "nome_azienda.kalliopenexus" con il link del Kalliope Nexus in possesso).
 
+Come file XML invece, inserire il seguente instradamento dinaminco su Kalliope per richiamare ed importare la chiamata nel voip to call:
+
+.. code-block:: console
+
+   <?xml version="1.0"?>
+   <parameters>
+   <unique_id>%UNIQUE_ID%</unique_id>
+   <caller>%CALLER_NUM%</caller>
+   <called>%DNID%</called>
+   <servicecode>%PARAM1%</servicecode>
+   <param1>NOME_DELLA_CODA</param1>
+   <param2>queue</param2>
+   <param3>%PARAM3%</param3>
+   <param4>%PARAM4%</param4>
+   <param5>%PARAM5%</param5>
+   </parameters>
+   
+   
+Filtri
++++++++++++
+Premendo il pulsante "Ricerca" in alto a destra, è possibile aggiungere un filtro sulle code, in modo da visualizzare solo le chiamate perse effettuate verso una determinata coda. È possibile filtrare tramite:
+
+- Type: Tipo di chiamata
+- Name: Nome
+- Source: Sorgente della chiamata
+- Caller: Chiamante
+- Account Code: Codice Account
+- Data first call >= / <=: Data della prima chiamata
+- Data last call >= / <=: Data dell'ultima chiamata
+Filtri missed callss.jpg
+
+Una volta terminato l'inserimento dati, cliccare sul tasto "cerca" per abilitare i filtri desiderati, altrimenti cliccare "reset" per cancellarli.
 
 
 
@@ -147,21 +243,95 @@ Missed Calls
 Report
 --------
 
+La sezione "Report" consiste nella dashboard messa a disposizione dei responsabili del Call Center che in tempo reale possono avere a disposizione tutti i parametri per monitorare l’attività del Call Center. I dati sono suddivisi nelle due sezioni Report di oggi e Backlog da gestire:
 
+- Report Di Oggi:
 
+  - Telefonate totali
+  - Clienti totali
+  - Clienti gestiti
+  - Clienti non gestiti
+  - Richieste totali
+  - Richieste richiamate + backlog
+  - Media Bill Secs
+  - Media richiamata
+  - Richieste da gestire
+  - Percentuale di richieste da gestire
+  - Richieste non prenotate da gestire
+  - Percentuale di richieste non prenotate da gestire
+  - Clienti non contattati
+Report1 missed calls.png
 
+Il pulsante "export all" in basso a destra permette di esportare in formato excel i dati presenti a video, anche come storico.
 
+- Backlog da gestire:
+
+  - Telefonate da gestire
+  - Richieste da gestire
+  - Clienti da gestire
+  - Richieste richiamate oggi
+  - Richieste non prenotate da gestire
+  - Percentuale di richieste non prenotate da gestire
 
 
 
 Report Code Caller
 --------
 
+Grafici
+++++++++
+In questa sezione è possibile osservare una rappresentazione grafica, prima tramite grafico a torta e poi tramite istogramma, dell'andamento generale delle chiamate nel periodo di tempo selezionato e nelle code precisate. L'istogramma presenta una ripartizione giornaliera per la rappresentazione.
 
+Come negli altri grafici di questa piattaforma, è possibile osservare la quantità delle chiamate sia risposte che non, semplicemente scorrendo con il mouse sopra il grafico interessato. È sempre possibile togliere dei dati dalla visualizzazione cliccando sul nome o sul pallino colorato, nella legenda.
 
+Rcc rgafico.png
 
+Tabelle
+++++++++
+Nella parte sottostante ai grafici sono presenti delle tabelle per ogni coda, contenenti informazioni più specifiche riguardo l'andamento delle chiamate con i caller, ovvero i clienti che hanno chiamato. Le informazioni contenute in ogni tabella sono suddivise per data e comprendono:
+
+- numero di telefonate risposte
+- numero di telefonate non risposte
+- i numeri totali che hanno chiamato
+- il totale dei numeri che sono stati risposti
+- il totale dei numeri che non sono stati risposti
+- la quantità di numeri che sono stati richiamati ed hanno risposto
+- la quantità di numeri che sono stati richiamati, ma non hanno risposto
+- la quantità di numeri non richiamati
+Rcc tab.png
+
+Filtri
+++++++++++
+Per velocizzare la ricerca di determinate informazioni in precisi periodi di tempo, vengono utilizzati i filtri. Questi si possono trovare all'interno di una maschera visibile premendo sul tasto "ricerca" in alto a destra della pagina. I filtri che potranno essere utilizzati sono:
+
+- data di inizio e di fine di un intervallo di tempo per la visualizzazione di dati (mostra i dati presenti nel database da un giorno ad un altro)
+- queue, ovvero la possibilità di inserire una o più code che si vogliono visualizzare
+Filtri rcc.png
+
+Una volta inseriti tutti i dati, cliccare sul tasto "cerca" per abilitare i filtri inseriti, altrimenti cliccare su "reset" per eliminarli.
+
+Per stampare la visualizzazione della pagina, cliccare sul tasto a forma di stampante in alto a destra, a fianco del tasto "ricerca".
 
 
 
 Report Storico
 --------
+In  questa sezione del modulo "Missed Calls" è possibile visualizzare due grafici.
+
+Nel primo grafico è rappresentato il numero di clienti che, in un determinato giorno, hanno chiamato ma non sono stati risposti e che quindi sono finiti nel Voip to Call. Di questa quantità, è visibile in verde il numero di clienti richiamati e in rosso quelli che non sono stati ancora richiamati (e che sono ancora visibili quindi nel Voip to Call).
+
+Grafico 1 storico.png
+
+Il secondo grafico invece riporta solamente il numero di telefonate che: sono arrivate alla centrale, non sono state risposte e che sono quindi finite nel Voip to Call (sia che si tratti di clienti richiamati che non).
+
+Grafico 2 storico.png
+
+Filtri
+++++++++
+È presente, premendo sul tasto "ricerca" in alto a destra, una maschera filtri con:
+
+- range di tempo: data di inizio e di fine in cui rappresentare i dati
+- numero di clienti chiamanti
+Filtri rep storico.JPG
+
+
