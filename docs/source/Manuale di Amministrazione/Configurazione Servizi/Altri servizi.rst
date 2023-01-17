@@ -1687,8 +1687,7 @@ Infine, cliccando sul pulsante Seleziona colonne visualizzate è possibile defin
 
 
 Elenco dei codici SOURCE/DESTINATION TYPE e DETAIL SOURCE/DESTINATION TYPE
-++++++++++++++
-
+===========
 
 **Source/Destination Type:**
 
