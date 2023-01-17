@@ -1562,7 +1562,7 @@ Le chiamate vengono elencate di default dalla più recente alla più vecchia, e 
    - unique_id
  * - Tipo sorgente
    - La tipologia della sorgente della chiamata (interno, linea in ingresso, interno remoto)
-   - source_type, Vedi qui per i possibili valori
+   - source_type, Vedi :ref:`qui<Elenco dei codici SOURCE/DESTINATION TYPE e DETAIL SOURCE/DESTINATION TYPE>` per i possibili valori
  * - Tipo destinazione
    - La tipologia della destinazione della chiamata (interno, interno remoto, coda, gruppo di chiamata, IVR, linea in uscita, servizio)
    - destination_type, Vedi qui per i possibili valori
