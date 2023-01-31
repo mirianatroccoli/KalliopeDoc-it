@@ -6,15 +6,16 @@ Concetti base
 
 Caratteristiche di base
 -----
-SIPv2 (UDP, TCP, TLS and WebSocket; RTP e SRTP)
-Codec audio supportati (con transcoding) : G.711 (A.law, u.law), G.726, GSM, G.722 (wideband), G.729, Opus
-Codec video supportati (passthrough, no transcoding): VP8 H.264, H.263+, H.263, H.261
-Supporto Fax (audio o T.38 passthrough)
-Busy Lamp Field
-Supporto ENUM
-Controllo accessi sugli IP per gli interni (ACL)
-Supporto SNMP (v1/v2c) in lettura (demone Net-SNMP)
-Supporto LDAP (sia client che server)
+
+- SIPv2 (UDP, TCP, TLS and WebSocket; RTP e SRTP)
+- Codec audio supportati (con transcoding) : G.711 (A.law, u.law), G.726, GSM, G.722 (wideband), G.729, Opus
+- Codec video supportati (passthrough, no transcoding): VP8 H.264, H.263+, H.263, H.261
+- Supporto Fax (audio o T.38 passthrough)
+- Busy Lamp Field
+- Supporto ENUM
+- Controllo accessi sugli IP per gli interni (ACL)
+- Supporto SNMP (v1/v2c) in lettura (demone Net-SNMP)
+- Supporto LDAP (sia client che server)
 
 Interni e account SIP
 ---------
