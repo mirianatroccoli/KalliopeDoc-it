@@ -3,8 +3,8 @@
 # -- Project information
 
 project = 'Kalliope'
-copyright = '2021, Graziella'
-author = 'Graziella'
+copyright = '2023, Kalliope'
+author = 'NetResults'
 
 release = '0.1'
 version = '0.1.0'
