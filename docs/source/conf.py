@@ -31,9 +31,6 @@ templates_path = ['_templates']
 
 html_theme = 'sphinx_rtd_theme'
 
-.wy-nav-content {
-    max-width: none;
-}
 
 
 # -- Options for EPUB output
