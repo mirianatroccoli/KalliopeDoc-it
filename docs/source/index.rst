@@ -3,11 +3,6 @@
   :alt: immagine
   
     
-.. raw:: html
-
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 50%; height: auto;">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 80%; height: 80%;"></iframe>
-    </div>    
     
 Benvenuti nella documentazione tecnica Kalliope
 ==========================
