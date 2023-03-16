@@ -10,8 +10,10 @@
 
 .. raw:: html
 
-    <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/806304997?h=fc0179a6af&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:50%;height:50%;" title="Prima installazione centralino import interni e account.mp4"></iframe>
-    </div>
+  <div style="padding:56.25% 0 0 0;position:relative;">
+    <iframe src="https://player.vimeo.com/video/806304997?h=fc0179a6af&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;max-width:50%;" title="Prima installazione centralino import interni e account.mp4">
+    </iframe>
+  </div>
     
     
     
