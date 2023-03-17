@@ -6,6 +6,14 @@ Add-on
 Kalliope FAX
 ------------
 
+    
+.. raw:: html
+
+  <div style="padding:56.25% 0 0 0;position:relative;">
+    <iframe src="https://player.vimeo.com/video/526217255?h=7ac2c2814a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;max-width:50%;" title="Tutorial Kalliope: demo Modulo Hotel">
+    </iframe>
+  </div>
+
 Descrizione del servizio
 +++++++++++
 Il servizio FAX consente agli utenti Kalliope di inviare / ricevere fax dal proprio portale utente sulla WEB GUI o via e-mail.
